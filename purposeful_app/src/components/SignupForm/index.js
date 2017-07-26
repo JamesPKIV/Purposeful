@@ -14,7 +14,7 @@ class SignupForm extends Component {
           <label labelFor="email">Email</label>
           <input type="email" id="email" required />
 
-          <input type="submit" value="Join our mailing list!" />
+          <input type="button" value="Join our mailing list!" onClick={() => this.props.onClick()} />
             
         </form>
 

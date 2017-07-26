@@ -16,7 +16,7 @@
   margin-left: 10px;
 }
 
-#signupForm input[type=text], input[type=email]{
+#signupForm input[type=text], input[type=email] {
     width: 100%;
     padding: 10px 10px;
     margin: 8px 0px;
@@ -25,19 +25,14 @@
     background-color: lightgrey;
 }
 
-#signupForm input[type=text]:select, input[type=email]:select{
-    width: 100%;
-    padding: 10px 10px;
-    margin: 8px 0px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+#signupForm input[type=text]:focus, input[type=email]:focus {
     background-color: white;
 }
 
 
-input[type=submit] {
+input[type=button] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #0000A0;
     color: white;    
     border: none;
     padding: 10px 10px;
@@ -46,6 +41,6 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
-    background-color: #45A049;
+input[type=button]:hover {
+    background-color:#0000F0;
 }
