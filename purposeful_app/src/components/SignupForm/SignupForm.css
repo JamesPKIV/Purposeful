@@ -16,6 +16,11 @@
   margin-left: 10px;
 }
 
+caption {
+  margin-bottom: 20px;
+  display: block;
+  text-align: center;
+}
 #signupForm input[type=text], input[type=email] {
     width: 100%;
     padding: 10px 10px;

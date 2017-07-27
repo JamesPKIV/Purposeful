@@ -2,17 +2,28 @@ import React, { Component } from 'react';
 import './SignupForm.css';
 
 class SignupForm extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.props.handleChange(e);
+  }
+
   render() {
     return (
         <form id="signupForm">
-          <label labelFor="firstName">First Name</label>
-          <input type="text" id="firstName" autofocus required />
+          <caption>Sign up here to stay up to date with Purposeful.
+          </caption>
+          <label htmlFor="firstName">First Name</label>
+          <input type="text" name="first" onChange={this.handleChange} autoFocus required />
           
-          <label labelFor="lastName">Last Name</label>
-          <input type="text" id="lastName" required />
+          <label htmlFor="lastName">Last Name</label>
+          <input type="text" name="last" onChange={this.handleChange} required />
 
-          <label labelFor="email">Email</label>
-          <input type="email" id="email" required />
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" onChange={this.handleChange} required />
 
           <input type="button" value="Join our mailing list!" onClick={() => this.props.onClick()} />
             
