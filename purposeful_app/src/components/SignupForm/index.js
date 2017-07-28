@@ -14,8 +14,7 @@ class SignupForm extends Component {
   render() {
     return (
         <form id="signupForm">
-          <caption>Sign up here to stay up to date with Purposeful.
-          </caption>
+          <p>Sign up for our mailing list to keep up to date with Purposeful. </p>
           <label htmlFor="firstName">First Name</label>
           <input type="text" name="first" onChange={this.handleChange} autoFocus required />
           

@@ -41,18 +41,6 @@ class App extends Component {
 
     this.dbRootRef = dbRootRef;
     this.mailingListRef = mailingListRef;
-
-      /* set up firebase mailing list count listener */
-    mailingListRef.on("child_added", snap => {
-      /* store in local state the number of entries in Firebase mailing list */
-      let newList = this.state.mList;
-      newList.push(snap.value);
-
-      this.setState({
-        mList: newList
-      });
-    }).bind(this);
-
   }
 
   /*remove the DB update event listener */
@@ -80,7 +68,7 @@ class App extends Component {
     };
 
     let newUidRef = this.mailingListRef.push();
-    /* send data to Firebase mailing list. entry stored at next available UID */
+    /* send data to Firebase mailing list. entry stored at auto generated UID */
     let p1 = new Promise ( (resolve, reject) => {
 
       newUidRef.set(newEntry);
@@ -108,13 +96,14 @@ class App extends Component {
   
 
   render() {
-    /* conditionally render form content depending if youve signed up or not */
+
+    /* conditionally render form content depending on wether youve signed up or not */
     let signupContent = null;
     
     signupContent = this.state.isSignedUp ? 
-        <SignupThanks onClick={this.handleFormReset} /> : 
-        <SignupForm className="Signup-Form" handleChange={this.handleInputChange} onClick={this.handleClick} /> ;
-        
+        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> : 
+        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick} /> ;
+
 
     /* actual DOM rendering */
     return (
