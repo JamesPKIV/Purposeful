@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import SignupForm from '../SignupForm';
-import SignupThanks from '../SignupThanks';
+import NavBar from '../NavBar/NavBar.js';
+import SignupContent from '../SignupContent/SignupContent.js';
+import BelieveContent from '../BelieveContent/BelieveContent.js';
+import DoContent from '../DoContent/DoContent.js';
+import ContactContent from '../ContactContent/ContactContent.js';
+
 import * as firebase from 'firebase';
 
 
@@ -20,107 +25,56 @@ firebase.initializeApp(config);
 
 
 class App extends Component {
+
   constructor () {
     super();
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFormReset = this.handleFormReset.bind(this);
     this.state = {
-      first: '',
-      last: '',
-      email: '',
-      mList: [],
-      isSignedUp: false,
+      mailingListRef: null,
     };
   }
+
 
   /* called once app is rendered. set up refs to the Firebase mailing list*/
   componentWillMount() {
     const dbRootRef = firebase.database().ref();
-    const mailingListRef = dbRootRef.child('mailing_list');
+    const mlRef = dbRootRef.child('mailing_list');
 
     this.dbRootRef = dbRootRef;
-    this.mailingListRef = mailingListRef;
+    this.setState({ mailingListRef: mlRef });
   }
+
 
   /*remove the DB update event listener */
   componentWillUnmount(){
     this.dbRootRef.off();
   }
 
-  /* updates the state when the user changes any input in the form */
-  handleInputChange(event) {
-
-    const inputName = event.target.name;
-    const inputVal = event.target.value;
-
-    this.setState({
-      [inputName]: inputVal
-    });
-  }
-
-  /* submits the form data to the Firebase mailing list */
-  handleClick() {
-    let newEntry = {
-      "first": this.state.first,
-      "last": this.state.last,
-      "email": this.state.email
-    };
-
-    let newUidRef = this.mailingListRef.push();
-    /* send data to Firebase mailing list. entry stored at auto generated UID */
-    let p1 = new Promise ( (resolve, reject) => {
-
-      newUidRef.set(newEntry);
-      resolve("Sucess!");
-    });
-
-    p1.then( msg => {
-      alert("You have sucessfully joined our mailing list!");
-      this.setState({isSignedUp: true});
-    });
-    
-
-  }
-
-  /* clear the form data and show form */
-  handleFormReset() {
-    this.setState({
-      first: '',
-      last: '',
-      email: '',
-      isSignedUp: false
-    });
-
-  }
-  
 
   render() {
-
-    /* conditionally render form content depending on wether youve signed up or not */
-    let signupContent = null;
-    
-    signupContent = this.state.isSignedUp ? 
-        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> : 
-        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick} /> ;
-
-
     /* actual DOM rendering */
     return (
-      <section className="App">
+      <Router>
+        <section className="App">
 
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>Welcome to Purposeful!</h1>
-          <h4>Democratizing the web through the free sharing of knowledge and great ideas.
-          </h4>
-        </header>
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1>Welcome to Purposeful!</h1>
+            <h4>Democratizing the web through the free sharing of knowledge and great ideas.
+            </h4>
+          </header>
 
-        <article>
-            {signupContent}
-        </article>
-      
-      </section>
+          <NavBar />
+
+          <article>
+            <Route exact path="/" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
+            <Route path="/mailingList" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
+            <Route path="/whatWeDo" render={() => <DoContent />} />
+            <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
+            <Route path="/contact" render={() => <ContactContent />} />
+          </article>
+        
+        </section>
+      </Router>
     );
   }
 }

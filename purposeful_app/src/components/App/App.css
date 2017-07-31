@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
   margin: auto;
@@ -7,9 +11,6 @@
   background: radial-gradient(darkgrey, green);
 }
 
-* {
-  box-sizing: border-box;
-}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
