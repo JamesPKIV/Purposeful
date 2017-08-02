@@ -1,3 +1,7 @@
+#welcomeHeading h1 {
+  font-size: larger;
+}
+
 #signupForm {
   margin: auto;
   margin-top: 30px;
@@ -10,6 +14,7 @@
   border-radius: 10px; 
   text-align: left;
   background-color: white;
+  color: black;
 }
 
 #signupForm label{

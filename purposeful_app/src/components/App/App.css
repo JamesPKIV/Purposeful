@@ -1,24 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
   margin: auto;
   padding: 20 20 20 20;
   height: 100%;
+  color: white;
   background: radial-gradient(darkgrey, green);
 }
 
-* {
-  box-sizing: border-box;
-}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
 
 .App-header {
-  height: 225px;
   padding: 20px;
-  color: white;
-  font-size: large;
 }
 
 @keyframes App-logo-spin {
