@@ -13,23 +13,31 @@ class SignupForm extends Component {
 
   render() {
     return (
-        <form id="signupForm">
-          <p>Sign up for our mailing list to keep up to date with Purposeful. </p>
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" name="first" onChange={this.handleChange} autoFocus required />
-          
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" name="last" onChange={this.handleChange} required />
+      <article>
 
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" onChange={this.handleChange} required />
+        <section id="welcomeHeading">
+          <h1>Welcome to Purposeful!</h1>
+          <h4>Democratizing the web through the free sharing of knowledge and great ideas. </h4> 
+        </section>
 
-          <input type="button" value="Join our mailing list!" onClick={() => this.props.onClick()} />
+        <section>
+          <form id="signupForm">
+            <p>Sign up for our mailing list to keep up to date with Purposeful. </p>
+
+            <input type="text" name="first" placeholder="First Name" onChange={this.handleChange} autoFocus required />
             
-        </form>
+            <input type="text" name="last" placeholder="Last Name" onChange={this.handleChange} required />
 
+            <input type="email" name="email" placeholder="Email" onChange={this.handleChange} required />
+
+            <input type="button" value="Join our mailing list!" onClick={() => this.props.onClick()} />
+              
+          </form>   
+        </section>
+      </article>
     );
-  }
+  }// end of render()
+
 }
 
 export default SignupForm;

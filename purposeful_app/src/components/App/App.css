@@ -17,10 +17,7 @@
 }
 
 .App-header {
-  height: 225px;
   padding: 20px;
-  color: white;
-  font-size: large;
 }
 
 @keyframes App-logo-spin {

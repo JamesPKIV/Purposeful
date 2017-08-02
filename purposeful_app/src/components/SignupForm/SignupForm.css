@@ -1,3 +1,7 @@
+#welcomeHeading h1 {
+  font-size: larger;
+}
+
 #signupForm {
   margin: auto;
   margin-top: 30px;

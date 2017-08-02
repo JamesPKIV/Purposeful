@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, HashRouter as Router } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
@@ -34,19 +34,13 @@ class App extends Component {
   }
 
 
-  /* called once app is rendered. set up refs to the Firebase mailing list*/
+  /* called once app is rendered. set up refs to the Firebase mailing list */
   componentWillMount() {
     const dbRootRef = firebase.database().ref();
     const mlRef = dbRootRef.child('mailing_list');
 
     this.dbRootRef = dbRootRef;
     this.setState({ mailingListRef: mlRef });
-  }
-
-
-  /*remove the DB update event listener */
-  componentWillUnmount(){
-    this.dbRootRef.off();
   }
 
 
@@ -58,20 +52,17 @@ class App extends Component {
 
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1>Welcome to Purposeful!</h1>
-            <h4>Democratizing the web through the free sharing of knowledge and great ideas.
-            </h4>
           </header>
 
           <NavBar />
 
-          <article>
-            <Route exact path="/" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
-            <Route path="/mailingList" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
-            <Route path="/whatWeDo" render={() => <DoContent />} />
-            <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
-            <Route path="/contact" render={() => <ContactContent />} />
-          </article>
+          
+          <Route exact path="/" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
+          <Route path="/mailingList" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
+          <Route path="/whatWeDo" render={() => <DoContent />} />
+          <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
+          <Route path="/contact" render={() => <ContactContent />} />
+          
         
         </section>
       </Router>
