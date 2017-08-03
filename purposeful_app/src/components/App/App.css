@@ -33,7 +33,7 @@
     text-align: center;
     margin: auto;
     padding: 20 20 20 20;
-    height: 100%;
+    height: 100vh;
     color: white;
     background: radial-gradient(darkgrey, green);
   }
