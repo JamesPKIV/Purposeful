@@ -71,10 +71,14 @@ class SignupContent extends Component {
 		/* conditionally render form content depending on wether youve signed up or not */
 		return (
 			<article >
-				{ this.state.isSignedUp ? 
+				{
+					this.state.isSignedUp ? 
 			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> : 
-			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick} />
+			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick}
+			        	isFormShowing={this.props.isFormShowing} />
+			        	
 			    }
+			   
 			</article>
         );
 	}
