@@ -13,7 +13,7 @@ class SignupForm extends Component {
 
   render() {
 
-   
+
 
     return (
       <article>
@@ -21,19 +21,19 @@ class SignupForm extends Component {
         <section>
         { this.props.isFormShowing ?
             <form id="signupForm">
-              <p>Sign up for our mailing list to keep up to date with Purposeful. </p>
+              <p>  Sign up for our mailing list to keep up to date with Purposeful. </p>
 
-              <input type="text" name="first" placeholder="First Name" onChange={this.handleChange} autoFocus required />  
+              <input type="text" name="first" placeholder="First Name" onChange={this.handleChange} autoFocus required />
               <input type="text" name="last" placeholder="Last Name" onChange={this.handleChange} required />
               <input type="email" name="email" placeholder="Email" onChange={this.handleChange} required />
-              <input type="button" value="Join our mailing list!" onClick={() => this.props.onClick()} />
-            </form>    
+              <input type="button" value="Join our mailing list!" onClick={() => this.props.onClick()}/>
+            </form>
           :
-            <h4>Democratizing the web through the free sharing of knowledge and great ideas. </h4> 
+            <h4>Democratizing the web through the free sharing of knowledge and great ideas. </h4>
         }
         </section>
-          
-        
+
+
       </article>
     );
   }// end of render()
