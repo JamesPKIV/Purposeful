@@ -30,7 +30,10 @@ class App extends Component {
     super();
     this.state = {
       mailingListRef: null,
+      isFormShowing: false,
     };
+    this.handleFormShow = this.handleFormShow.bind(this);
+      
   }
 
 
@@ -43,6 +46,12 @@ class App extends Component {
     this.setState({ mailingListRef: mlRef });
   }
 
+  /* show the form if the user wants to sign up */
+  handleFormShow() {
+    this.setState({
+      isFormShowing: true,
+    });
+  }
 
   render() {
     /* actual DOM rendering */
@@ -52,17 +61,28 @@ class App extends Component {
 
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
+        
+            <h1>Welcome to Purposeful!</h1>
+            
           </header>
 
-          <NavBar />
-
-          
-          <Route exact path="/" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
-          <Route path="/mailingList" render={() => <SignupContent mlRef={this.state.mailingListRef}/> } />
-          <Route path="/whatWeDo" render={() => <DoContent />} />
-          <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
-          <Route path="/contact" render={() => <ContactContent />} />
-          
+          <section className="App-main">
+            <NavBar />
+            { 
+              !this.state.isFormShowing &&
+              <button id="show-form" onClick={this.handleFormShow} >Mailing List</button>
+            }
+            
+            
+            <Route exact path="/" render={() => <SignupContent mlRef={this.state.mailingListRef} 
+              isFormShowing={this.state.isFormShowing} /> } />
+            <Route path="/mailingList" render={() => <SignupContent mlRef={this.state.mailingListRef} 
+              isFormShowing={this.state.isFormShowing} /> } />
+            <Route path="/whatWeDo" render={() => <DoContent />} />
+            <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
+            <Route path="/contact" render={() => <ContactContent />} />
+         
+          </section>
         
         </section>
       </Router>
