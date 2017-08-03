@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import './DoContent.css';
+
 import FaCaretRight from 'react-icons/lib/fa/caret-right'
+
 class DoContent extends Component {
 	render () {
 		return (
