@@ -40,7 +40,7 @@ class ContactContent extends Component {
 					</div>
 				</div>
 				<div id = "whoEntry">
-					<img src={diana} className="Diana_pic" alt="Picture of Diana"/>
+					<img src={diana} className="Diana_pic" alt="of Diana"/>
 					<div id = "one">
 						<p>
 							<b> Diana Gonzalez Santillan:</b> diana@bepurposeful.co
