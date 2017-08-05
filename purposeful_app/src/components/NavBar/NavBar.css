@@ -21,7 +21,7 @@
 	}
 
 	li .active {
-		background-color: rgba(255,255,255,.60);
+		background-color: rgba(255,0,255,.60);
 	}
 	 li :not(active) {
 	 	background-color: initial;
@@ -29,14 +29,19 @@
 
 	li a {
 		display: block;
-	    color: white;
+	    color: black;
 	    text-align: center;
 	    text-decoration: none;
-	    padding: 10px 20px;
+		padding: 10px 20px;
+		font-family: 'Arvo', serif;
 	}
 
 	.menuIcon {
 		display: none;
+	}
+
+	.icon{
+		font-size: 1.5em;
 	}
 }
 
@@ -63,7 +68,7 @@
 	}
 
 	li .active {
-		background-color: rgba(255,255,255,.50);
+		background-color: rgba(255,0,255,.50);
 	}
 	 li :not(active) {
 	 	background-color: inherit;
@@ -71,13 +76,18 @@
 
 	li a {
 		display: block;
-	    color: white;
+	    color: black;
 	    text-align: center;
 	    text-decoration: none;
-	    padding: 10px 20px;
+		padding: 10px 20px;
+		font-family: 'Arvo', serif;
 	}
 
 	.menuIcon {
 		display: none;
+	}
+	
+	.icon{
+		font-size: 1.5em;
 	}
 }

@@ -10,7 +10,7 @@
   min-width: 100%;
   min-height: 100vh;
   color: white;
-  background: radial-gradient(darkgrey, green);
+  background: #e46ded;
 }
 
 .App-logo {
@@ -25,16 +25,22 @@
     padding: 5%;
     height: 100%;
     color: white;
-    background: radial-gradient(darkgrey, green);
     background-attachment: fixed;
   }
 
   .App-logo {
     height: 15vh;
+    
   }
 
   .App-header {
     padding: 5%;
+  }
+
+  .p-title{
+    font-size: 48px;
+    letter-spacing: 2px;
+    font-family: 'Arvo', serif;
   }
 }
 
@@ -42,14 +48,25 @@
 /* Larger than smartphone screen */
 @media screen and (min-width:700px) {
 
+  .App {
+    margin: auto;
+  }
 
   .App-logo {
     height: 80px;
+    display: none;
   }
 
   .App-header {
     padding: 20px;
   }
+
+  .p-title{
+    font-size: 48px;
+    letter-spacing: 2px;
+    font-family: 'Arvo', serif;
+  }
+
 }
 
 @keyframes App-logo-spin {
