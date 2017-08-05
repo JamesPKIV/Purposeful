@@ -6,8 +6,6 @@ class BelieveContent extends Component {
 	render () {
 		return (
 			<article>
-
-				<h1>What We Believe</h1>
 				<section>
 					<h3>Our Motivation</h3>
 					<p id="content">

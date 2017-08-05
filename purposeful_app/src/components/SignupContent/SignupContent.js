@@ -40,7 +40,7 @@ class SignupContent extends Component {
 		};
 
 		let newUidRef = this.props.mlRef.push();
-		
+
 		/* send data to Firebase mailing list. entry stored at auto generated UID */
 		let p1 = new Promise ( (resolve, reject) => {
 			newUidRef.set(newEntry);
@@ -72,13 +72,13 @@ class SignupContent extends Component {
 		return (
 			<article >
 				{
-					this.state.isSignedUp ? 
-			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> : 
+					this.state.isSignedUp ?
+			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> :
 			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick}
 			        	isFormShowing={this.props.isFormShowing} />
-			        	
+
 			    }
-			   
+
 			</article>
         );
 	}
