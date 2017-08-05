@@ -11,7 +11,7 @@
     width: 100%;
     height: 100%;
     color: white;
-    background: radial-gradient(darkgrey, green);
+    background: #e46ded;
     background-attachment: fixed;
     overflow: hidden;
   }
@@ -19,10 +19,17 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 15vh;
+    
   }
 
   .App-header {
     padding: 5%;
+  }
+
+  .p-title{
+    font-size: 48px;
+    letter-spacing: 2px;
+    font-family: 'Arvo', serif;
   }
 }
 
@@ -35,17 +42,25 @@
     padding: 20 20 20 20;
     height: 100vh;
     color: white;
-    background: radial-gradient(darkgrey, green);
+    background: #e46ded;
   }
 
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
+    display: none;
   }
 
   .App-header {
     padding: 20px;
   }
+
+  .p-title{
+    font-size: 48px;
+    letter-spacing: 2px;
+    font-family: 'Arvo', serif;
+  }
+
 }
 
 @keyframes App-logo-spin {

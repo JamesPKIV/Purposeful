@@ -61,13 +61,11 @@ class App extends Component {
 
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-        
-            <h1>Welcome to Purposeful!</h1>
-            
           </header>
 
           <section className="App-main">
             <NavBar />
+            <h1 className="p-title">Purposeful</h1>
             { 
               !this.state.isFormShowing &&
               <button id="show-form" onClick={this.handleFormShow} >Mailing List</button>
