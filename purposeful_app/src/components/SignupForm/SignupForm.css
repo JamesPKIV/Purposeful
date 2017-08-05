@@ -34,7 +34,7 @@
   }
 
 
-  #signupForm input[type=button] {
+  #signupForm input[type=button],input[type=submit] {
       width: 95%;
       background-color: #0000A0;
       color: white;    
@@ -42,7 +42,7 @@
       cursor: pointer;
   }
 
-  input[type=button]:hover {
+  input[type=button]:hover, input[type=submit]:hover {
       background-color:#0000F0;
   }
 }
@@ -82,7 +82,7 @@
   }
 
 
-  input[type=button] {
+  input[type=button],input[type=submit]  {
       width: 100%;
       background-color: #0000A0;
       color: white;    
@@ -93,7 +93,7 @@
       cursor: pointer;
   }
 
-  input[type=button]:hover {
+  input[type=button]:hover,input[type=submit]:hover {
       background-color:#0000F0;
   }
 }
