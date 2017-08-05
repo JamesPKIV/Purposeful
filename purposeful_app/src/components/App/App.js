@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, HashRouter as Router } from 'react-router-dom';
+import { Route, Redirect, HashRouter as Router } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
@@ -74,8 +74,7 @@ class App extends Component {
             }
             
             
-            <Route exact path="/" render={() => <SignupContent mlRef={this.state.mailingListRef} 
-              isFormShowing={this.state.isFormShowing} /> } />
+            <Route exact path="/" render={() => <Redirect to="/mailingList" />} />
             <Route path="/mailingList" render={() => <SignupContent mlRef={this.state.mailingListRef} 
               isFormShowing={this.state.isFormShowing} /> } />
             <Route path="/whatWeDo" render={() => <DoContent />} />

@@ -17,7 +17,7 @@ class SignupForm extends Component {
     //prevent form reset
     event.preventDefault();
     //if form is valid, send it
-    if (event.target.checkValidity() == true) {
+    if (event.target.checkValidity() === true) {
       this.props.onClick();
     }
   }
@@ -31,7 +31,7 @@ class SignupForm extends Component {
 
         <section>
         { this.props.isFormShowing ?
-            <form id="signupForm" onSubmit={this.handleSubmit}>
+            <form id="signupForm" onSubmit={this.handleSubmit} >
               <p>  Sign up for our mailing list to keep up to date with Purposeful. </p>
 
               <input type="text" name="first" placeholder="First Name" onChange={this.handleChange} autoFocus required />
