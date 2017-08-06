@@ -1,12 +1,26 @@
+li:hover {
+	background-color: #629a06 50%;
+}
+
+li .active {
+	background-color: none;
+}
+ li :not(active) {
+ 	background-color: none;
+ }
 
 
-@media screen and (max-width:600px) {
+
+@media screen and (max-width:700px) {
    
 
 	ul {
+		width: 90%;
 	    list-style: none;
-	    background: linear-gradient(to right, rgba(255,255,255,.1), rgba(255,255,255,.25), rgba(255,255,255,.25), rgba(255,255,255,.1));
-		margin: 0% 2%;
+	    background: none;/*linear-gradient(to right, rgba(255,255,255,.1), rgba(255,255,255,.35), rgba(255,255,255,.35), rgba(255,255,255,.1));
+		*/
+		display: block;
+		margin: auto;
 		padding: 0;
 		text-align: center;
 	}
@@ -16,28 +30,15 @@
 		margin: auto;
 	}
 
-	li:hover {
-		background-color: rgba(255,255,255,.10);
-	}
-
-	li .active {
-		background-color: rgba(255,0,255,.60);
-	}
-	 li :not(active) {
-	 	background-color: initial;
-	 }
+	
 
 	li a {
 		display: block;
-	    color: black;
+	    color: white;
 	    text-align: center;
 	    text-decoration: none;
 		padding: 10px 20px;
 		font-family: 'Arvo', serif;
-	}
-
-	.menuIcon {
-		display: none;
 	}
 
 	.icon{
@@ -46,15 +47,16 @@
 }
 
 
-@media screen and (min-width:600px) {
+@media screen and (min-width:700px) {
 	nav {
 		margin: 20 20;
+		display: block;
 	}
 
 	ul {
+
 	    list-style: none;
-	    background: linear-gradient(to right, rgba(255,255,255,.1), rgba(255,255,255,.25), rgba(255,255,255,.25), rgba(255,255,255,.1));
-		margin: 10 10;
+	    margin: 10 10;
 		padding: 10 10;
 
 	}
@@ -62,17 +64,6 @@
 	li {
 		display: inline-block;
 	}
-
-	li:hover {
-		background-color: rgba(255,255,255,.30);
-	}
-
-	li .active {
-		background-color: rgba(255,0,255,.50);
-	}
-	 li :not(active) {
-	 	background-color: inherit;
-	 }
 
 	li a {
 		display: block;

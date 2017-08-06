@@ -14,8 +14,8 @@ class NavBar extends Component {
 		  <ul>
 		    <li><NavLink to="/mailingList">Mailing list <FaEnvelopeO className="icon"/> </NavLink></li>
 		    <li><NavLink to="/whatWeBelieve">What We Believe <FaSunO className="icon"/> </NavLink></li>
-		    <li><NavLink to="/whatWeDo">What We Do <FaStarO className="icon" /> </NavLink></li>
-		    <li><NavLink to="/contact">Who We Are and Contact <FaGroup className="icon"/></NavLink></li>
+		    <li><NavLink to="/whatWeDo">What We're Doing <FaStarO className="icon" /> </NavLink></li>
+		    <li><NavLink to="/contact">Who We Are <FaGroup className="icon"/></NavLink></li>
 		  </ul>
 	  </nav>
 	);

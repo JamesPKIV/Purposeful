@@ -33,7 +33,7 @@ class App extends Component {
       isFormShowing: false,
     };
     this.handleFormShow = this.handleFormShow.bind(this);
-      
+    this.handleFormHide = this.handleFormHide.bind(this);
   }
 
 
@@ -46,11 +46,22 @@ class App extends Component {
     this.setState({ mailingListRef: mlRef });
   }
 
+  handleFormHide() {
+    this.setState({
+      isFormShowing: false,
+    });
+  }
+
   /* show the form if the user wants to sign up */
-  handleFormShow() {
+  handleFormShow(history) {
+    /* navigate to mailingList page if not there already*/
+    if (history.location.pathname !== '/mailingList') {
+      history.push('/mailingList');
+    }
     this.setState({
       isFormShowing: true,
     });
+
   }
 
   render() {
@@ -61,6 +72,9 @@ class App extends Component {
 
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
+        
+            
+            
           </header>
 
           <section className="App-main">
@@ -68,13 +82,16 @@ class App extends Component {
             <h1 className="p-title">Purposeful</h1>
             { 
               !this.state.isFormShowing &&
-              <button id="show-form" onClick={this.handleFormShow} >Mailing List</button>
+              <Route render={ ({ history}) => (
+                <button id="show-form" onClick={() => this.handleFormShow(history)}>Mailing List </button>
+              )} /> 
             }
             
             
             <Route exact path="/" render={() => <Redirect to="/mailingList" />} />
-            <Route path="/mailingList" render={() => <SignupContent mlRef={this.state.mailingListRef} 
-              isFormShowing={this.state.isFormShowing} /> } />
+            <Route path="/mailingList" render={() => 
+              <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide} 
+                isFormShowing={this.state.isFormShowing} /> } />
             <Route path="/whatWeDo" render={() => <DoContent />} />
             <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
             <Route path="/contact" render={() => <ContactContent />} />
