@@ -51,8 +51,6 @@
 
 @media screen and (min-width:600px) {
 
-/* Larger than smartphone screen */
-@media screen and (min-width:700px) {
 
   .App {
     margin: auto;
