@@ -28,7 +28,10 @@
    .App {
     padding: 5%;
     color: white;
+    background-color: #86C67C;
     background-attachment: fixed;
+    overflow: hidden;
+
   }
 
   .App-logo {
@@ -45,29 +48,47 @@
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
   }
+
 }
 
 
-/* Larger than smartphone screen */
-@media screen and (min-width:700px) {
+@media screen and (min-width:600px) {
+
 
   .App {
     margin: auto;
+    padding: 20 20 20 20;
+    height: 100vh;
+    color: white;
+    background-color:#86C67C;
   }
 
   .App-logo {
     height: 80px;
   }
-
-  .App-header {
-    padding: 20px;
-  }
-
   .p-title{
     font-size: 48px;
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
+    margin-bottom: 20px;
   }
+
+  .learn-div{
+    width: 100%;
+  }
+
+  .learn-btn{
+    background-color: #236B8E;
+    font-size: 16px;
+    padding: 10px;
+    width: 20%;
+  }
+  
+  .learn-btn:hover{
+    color: black;
+    background-color: #3299CC;
+  }
+
 
 }
 

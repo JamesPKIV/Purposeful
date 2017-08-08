@@ -1,63 +1,63 @@
 import React, { Component } from 'react';
 import './ContactContent.css';
-import diana from './diana_pic.jpg';
+
+// importing icons
+import Linkedin from 'react-icons/lib/fa/linkedin-square';
+import Github from 'react-icons/lib/fa/github';
+
+// importing images 
+import oscar from './oscar.png';
+import james from './james2.jpg';
+import diana from './diana.jpg';
+// https://github.com/JamesPKIV
+// https://github.com/digonsan
+
+
 
 class ContactContent extends Component {
-
 	render () {
 		return (
-			<section>
-				<h3>Who we are</h3>
-				<p id = "content">
-					We are a group of friends who met at the University of California,
-					Santa Cruz. We all majored in Computer Science and were affiliated
-					 with College Ten, which has the theme of Social Justice and Community.
-				</p>
-				<div id = "whoEntry">
-					<p id= "two">
-						Oscar picture would go here
-					</p>
-					<div id = "one">
-						<p>
-							<b> Oscar Parra:</b> oscar@bepurposeful.co
-						</p>
-						<p>
-							Oscar ...
-						</p>
-					</div>
-				</div>
-				<div id = "whoEntry">
-					<p id= "two">
-						James picture would go here
-					</p>
-					<div id = "one">
-						<p>
-							<b> James Kennedy:</b> james@bepurposeful.co
-						</p>
-						<p>
-							James ...
-						</p>
-					</div>
-				</div>
-				<div id = "whoEntry">
-					<img src={diana} className="Diana_pic" alt="of Diana"/>
-					<div id = "one">
-						<p>
-							<b> Diana Gonzalez Santillan:</b> diana@bepurposeful.co
-						</p>
-						<p>
-							Diana just graduated from College Ten with a major in Computer Science,
-							a minor in Mathematics, and the College Ten Service Award. Ever since
-							she was in high school she has been passionate about defending human
-							rights and also about learning the wonders of computer science. She
-							believes that access to education and mentorship, as well as providing
-							opportunities to develop meaningful and interdisciplinary projects will
-							take us closer to a more fair and tolerant world.
-						</p>
-					</div>
-				</div>
-
-			</section>
+			<div className="div-about">
+				<h2 className="hd-leader">Purposeful Leadership</h2>
+				<ul className="ul-about">
+					<li>
+						<figure>
+							<img className="about-pic" src={oscar}/> 
+							<figcaption className="about">
+								<span className="name"> Oscar Parra </span> <br/>
+								<span className="role-desc">Co-Founder &  Project Lead </span>
+								<br/>
+								<Github src="https://github.com/ogparra" className="icon" />
+								<Linkedin src="https://www.linkedin.com/in/ogparra/" className="icon" />
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<img className="about-pic" src={james}/> 
+							<figcaption className="about">
+								<span className="name"> James Kennedy </span><br/>
+								<span className="role-desc">Co-Founder &  Lead Software Engineer </span>
+								<br/>
+								<Github src="https://github.com/JamesPKIV" className="icon" />
+								<Linkedin src="https://www.linkedin.com/in/jpkiv/" className="icon" />
+							</figcaption>
+						</figure>
+					</li>
+					<li>
+						<figure>
+							<img className="about-pic" src={diana}/> 
+							<figcaption className="about">
+								<span className="name"> Diana Gonzalez Santillan</span> <br/>
+								<span className="role-desc">Co-Founder & Software Engineer </span>
+								<br/>
+								<Github src="https://github.com/digonsan" className="icon" />
+								<Linkedin src="https://www.linkedin.com/in/diana-gonzalez-santillan-57739187/ " className="icon" />
+							</figcaption>
+						</figure>
+					</li>
+				</ul>
+			</div>
 		);
 	}
 }

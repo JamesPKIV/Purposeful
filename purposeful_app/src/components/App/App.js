@@ -69,22 +69,19 @@ class App extends Component {
     return (
       <Router>
         <section className="App">
-
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-        
-            
-            
-          </header>
-
+      
           <section className="App-main">
             <NavBar />
-            <h1 className="p-title">Purposeful</h1>
+            <h1 className="p-title"> <span className="purposeCSS">Purpose</span>ful</h1>
             { 
               !this.state.isFormShowing &&
+              <div className="learn-div"><button className="learn-btn" id="show-form" onClick={this.handleFormShow} >Learn more</button></div>
+
+              /* 
               <Route render={ ({ history}) => (
                 <button id="show-form" onClick={() => this.handleFormShow(history)}>Mailing List </button>
               )} /> 
+              */
             }
             
             
