@@ -18,7 +18,7 @@ class SignupForm extends Component {
     //prevent form reset
     event.preventDefault();
     //if form is valid, send it
-    if (event.target.checkValidity() == true) {
+    if (event.target.checkValidity() === true) {
       this.props.onClick();
     }
   }
