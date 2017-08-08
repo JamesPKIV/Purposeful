@@ -12,9 +12,6 @@ class SignupThanks extends Component {
 			   Help us spread the word!
 			  </p>
 
-			  <button id='formResetBtn' onClick={() => this.props.onClick()}>
-			    Reset Signup Form 
-			  </button>
 			</section>
 		);
 	}

@@ -39,10 +39,7 @@ class App extends Component {
 
   /* called once app is rendered. set up refs to the Firebase mailing list */
   componentWillMount() {
-    const dbRootRef = firebase.database().ref();
-    const mlRef = dbRootRef.child('mailing_list');
-
-    this.dbRootRef = dbRootRef;
+    const mlRef = firebase.database().ref().child('mailing_list');
     this.setState({ mailingListRef: mlRef });
   }
 
@@ -83,19 +80,18 @@ class App extends Component {
             { 
               !this.state.isFormShowing &&
               <Route render={ ({ history}) => (
-                <button id="show-form" onClick={() => this.handleFormShow(history)}>Mailing List </button>
+                <button id="show-form" onClick={() => this.handleFormShow(history)}>Join our Mailing List! </button>
               )} /> 
             }
             
             
-            <Route exact path="/" render={() => <Redirect to="/mailingList" />} />
+            <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
+            <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
+            <Route path="/whatWeDo" render={() => <DoContent />} />
+            <Route path="/contact" render={() => <ContactContent />} />
             <Route path="/mailingList" render={() => 
               <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide} 
                 isFormShowing={this.state.isFormShowing} /> } />
-            <Route path="/whatWeDo" render={() => <DoContent />} />
-            <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
-            <Route path="/contact" render={() => <ContactContent />} />
-         
           </section>
         
         </section>

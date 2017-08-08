@@ -18,7 +18,7 @@ class SignupForm extends Component {
     event.preventDefault();
     //if form is valid, send it
     if (event.target.checkValidity() === true) {
-      this.props.onClick();
+      this.props.onSubmit();
     }
   }
 
@@ -28,8 +28,6 @@ class SignupForm extends Component {
 
 
   render() {
-
-
 
     return (
       <article>
