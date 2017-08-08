@@ -2,7 +2,7 @@
   font-size: larger;
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:700px) {
   #signupForm {
     margin: auto;
     margin-top: 5%;
@@ -62,7 +62,7 @@
 
 }
 
-@media screen and (min-width:600px) {
+@media screen and (min-width:700px) {
 
   #signupForm {
 

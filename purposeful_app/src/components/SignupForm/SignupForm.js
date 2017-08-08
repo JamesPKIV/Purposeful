@@ -23,6 +23,11 @@ class SignupForm extends Component {
     }
   }
 
+  componentWillUnmount () {
+    this.props.onUnmount();
+  }
+
+
   render() {
 
 

@@ -1,10 +1,23 @@
+li:hover {
+	background-color: #629a06 50%;
+}
+
+li .active {
+	background-color: none;
+}
+ li :not(active) {
+ 	background-color: none;
+ }
 
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:700px) {
+   
 	ul {
-	    list-style: none;
-	    background-color: white;
+		width: 90%;
+	  list-style: none;
+	  background-color: white;
 		margin: 0% 2%;
+
 		padding: 0;
 		padding-top: 20px;
 		text-align: center;
@@ -22,15 +35,11 @@
 
 	li a {
 		display: block;
-	    color: black;
+	    color: white;
 	    text-align: center;
 	    text-decoration: none;
 		padding: 10px 20px;
 		font-family: 'Arvo', serif;
-	}
-
-	.menuIcon {
-		display: none;
 	}
 
 	.icon{
@@ -39,14 +48,14 @@
 }
 
 
-@media screen and (min-width:600px) {
+
+@media screen and (min-width:700px) {
 
 	ul {
 		list-style: none;
 		background-color: #EDEDED;
 		margin: 0;
 		padding: 20px;
-		padding-top: 20px;
 	}
 
 	li {
@@ -60,9 +69,9 @@
 
 	li a {
 		display: block;
-	    color: black;
-	    text-align: center;
-	    text-decoration: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
 		padding: 10px 20px;
 		font-family: 'Arvo', serif;
 	}
