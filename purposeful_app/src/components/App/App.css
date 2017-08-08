@@ -11,13 +11,13 @@
     width: 100%;
     height: 100%;
     color: white;
-    background: #e46ded;
+    background-color: #86C67C;
     background-attachment: fixed;
     overflow: hidden;
+
   }
 
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
     height: 15vh;
     
   }
@@ -31,7 +31,9 @@
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
   }
+
 }
+
 
 @media screen and (min-width:600px) {
 
@@ -42,7 +44,7 @@
     padding: 20 20 20 20;
     height: 100vh;
     color: white;
-    background: #e46ded;
+    background-color:#86C67C;
   }
 
   .App-logo {
@@ -50,16 +52,29 @@
     height: 80px;
     display: none;
   }
-
-  .App-header {
-    padding: 20px;
-  }
-
   .p-title{
     font-size: 48px;
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
+    margin-bottom: 20px;
   }
+
+  .learn-div{
+    width: 100%;
+  }
+
+  .learn-btn{
+    background-color: #236B8E;
+    font-size: 16px;
+    padding: 10px;
+    width: 20%;
+  }
+  
+  .learn-btn:hover{
+    color: black;
+    background-color: #3299CC;
+  }
+
 
 }
 

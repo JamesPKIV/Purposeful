@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './SignupForm.css';
+import FaLightBulb from 'react-icons/lib/fa/lightbulb-o';
 
 class SignupForm extends Component {
   constructor(props) {
@@ -32,15 +33,15 @@ class SignupForm extends Component {
         <section>
         { this.props.isFormShowing ?
             <form id="signupForm" onSubmit={this.handleSubmit}>
-              <p>  Sign up for our mailing list to keep up to date with Purposeful. </p>
+              <p className="sign-up-p">  Sign up for our mailing list to keep up to date with Purposeful. </p>
 
               <input type="text" name="first" placeholder="First Name" onChange={this.handleChange} autoFocus required />
               <input type="text" name="last" placeholder="Last Name" onChange={this.handleChange} required />
               <input type="email" name="email" placeholder="Email" onChange={this.handleChange} required />
-              <input type="submit" value="Join our mailing list!" />
+              <div className="div-input" ><input type="submit" value="Subscribe" /></div>
             </form>
           :
-            <h4>Democratizing the web through the free sharing of knowledge and great ideas. </h4>
+            <h4> </h4>
         }
         </section>
 

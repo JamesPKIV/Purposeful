@@ -59,16 +59,13 @@ class App extends Component {
       <Router>
         <section className="App">
 
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-          </header>
 
           <section className="App-main">
             <NavBar />
-            <h1 className="p-title">Purposeful</h1>
+            <h1 className="p-title"> <span className="purposeCSS">Purpose</span>ful</h1>
             { 
               !this.state.isFormShowing &&
-              <button id="show-form" onClick={this.handleFormShow} >Mailing List</button>
+              <div className="learn-div"><button className="learn-btn" id="show-form" onClick={this.handleFormShow} >Learn more</button></div>
             }
             
             

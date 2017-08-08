@@ -18,3 +18,35 @@
   height: 40%;
   float: right;
 }
+
+.div-about{
+  color: black;
+  background-color: white;
+}
+.hd-leader{
+  padding: 20px 0 10px 0px;
+  margin-bottom: 10px;
+}
+.ul-about{
+  padding-top: 0;
+  background-color: white;
+  color: black;
+}
+
+.about-pic{
+  border-radius: 25px;
+  width: 180px;
+  height: 200px;
+}
+
+.name{
+  font-weight: 900;
+}
+
+.role-desc{
+  font-size: 13px;
+}
+
+.icon{
+  margin-right: 10px;
+}
