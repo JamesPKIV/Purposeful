@@ -1,57 +1,76 @@
 import React, { Component } from 'react';
-import Dimensions from 'react-dimensions';
 import { NavLink } from 'react-router-dom';
 import './NavBar.css';
-import globalClass from './global.js';
-
 import FaAlignJustify from 'react-icons/lib/fa/align-justify'
 
 class NavBar extends Component {
 
-  navBarCode(){
+  constructor() {
+  	super();
+  	this.state = {activeNav: true};
+  	this.navBarCode = this.navBarCode.bind(this);
+  	this.showNav = this.showNav.bind(this);
+  	this.hideNav = this.hideNav.bind(this);
+  	this.toggle = this.toggle.bind(this);
+  }
+  
+  componentWillMount() {
+  	if (this.props.containerWidth >= 700){
+    	this.showNav();
+    } else {
+    	this.hideNav();
+    }
+  }
+
+  showNav() {
+  		this.setState({
+  			activeNav: true
+  		});
+  }
+
+   hideNav() {
+  		this.setState({
+  			activeNav: false
+  		});
+  }
+  
+  toggle() {
+        this.setState ({
+        	activeNav : !this.state.activeNav
+        });
+  }
+
+
+
+  navBarCode() {
     return (
   		<nav>
   		  <ul>
+  		  	<li className="toggleBtn"><button onClick={this.toggle.bind(this)}> <FaAlignJustify /> </button></li>
   		    <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
   		    <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
   		    <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
   		    <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
   		  </ul>
   	  </nav>
-  	);
+  	)
   }
 
   render() {
-     var toRender = (<div/>);
-     if (this.props.containerWidth >= 700){
-       toRender = (<navBarCode />);
-     } else {
-
-       var renderIt = (<div/>);
-console.log(globalClass.activeNav);
-       if (globalClass.activeNav){
-         console.log("isTrue");
-         renderIt =(<navBarCode />);
-       } else {
-         console.log("isFalse");
-         renderIt = (<div/>);
-       }
-
-      function toggle(){
-        globalClass.activeNav = !globalClass.activeNav;
-        this.forceUpdate();
-      };
-console.log(renderIt);
-       toRender =(
-         <div>
-           <button onClick={toggle.bind(this)}>
-             <FaAlignJustify />
-           </button>
-           <div> {renderIt} </div>
-         </div>
-       );
-     }
-	   return <div>{toRender}</div>;
+  	/* desktop version */
+    if (this.props.containerWidth >= 700){
+		return this.navBarCode();
+    } 
+    /* mobile version */
+    else {
+       if (this.state.activeNav){
+       		return this.navBarCode();
+      	} else {
+      		return (
+      			<ul><li className="toggleBtn"><button onClick={this.toggle.bind(this)}> <FaAlignJustify /> </button></li></ul>
+		  	);
+      	}
+	}
   }
 }
 

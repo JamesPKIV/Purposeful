@@ -36,7 +36,7 @@ class SignupForm extends Component {
       <article>
 
         <section>
-        { this.props.isFormShowing ?
+        { this.props.isFormShowing &&
             <form id="signupForm" onSubmit={this.handleSubmit}>
               <p className="sign-up-p">  Sign up for our mailing list to keep up to date with Purposeful. </p>
 
@@ -45,8 +45,6 @@ class SignupForm extends Component {
               <input type="email" name="email" placeholder="Email" onChange={this.handleChange} required />
               <div className="div-input" ><input type="submit" value="Subscribe" /></div>
             </form>
-          :
-            <h4> </h4>
         }
         </section>
 

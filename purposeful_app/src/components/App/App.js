@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect, HashRouter as Router } from 'react-router-dom';
+import Dimensions from 'react-dimensions';
+
 import logo from './logo.svg';
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
@@ -71,7 +73,7 @@ class App extends Component {
         <section className="App">
       
           <section className="App-main">
-            <NavBar />
+            <NavBar containerWidth={this.props.containerWidth}/>
             <h1 className="p-title"> <span className="purposeCSS">Purpose</span>ful</h1>
             { 
               !this.state.isFormShowing && 
@@ -100,4 +102,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Dimensions()(App);

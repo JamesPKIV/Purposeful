@@ -1,7 +1,7 @@
 
 /* Universal settings*/
 li:hover {
-	background-color: #629a06 50%;
+	background-color: rgba(#62, #9a, #06, 50%);
 }
 
 li .active {
@@ -50,6 +50,9 @@ li .active {
 
 /*desktop screens*/
 @media screen and (min-width:700px) {
+	.toggleBtn {
+		display: none;
+	}
 
 	ul {
 		list-style: none;
