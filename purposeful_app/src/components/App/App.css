@@ -9,11 +9,12 @@
   text-align: center;
   min-width: 100%;
   min-height: 100vh;
+  height: 100% !important;
   color: white;
 
   background: /*#ad3434 ;
  /* #1a6e82; */
-  #629a06; 
+  #629a06;
 }
 
 .App-logo {
@@ -31,12 +32,10 @@
     background-color: #86C67C;
     background-attachment: fixed;
     overflow: hidden;
-
   }
 
   .App-logo {
     height: 15vh;
-    
   }
 
   .App-header {
@@ -51,10 +50,8 @@
 
 }
 
-
+/*desktop sized screens*/
 @media screen and (min-width:600px) {
-
-
   .App {
     margin: auto;
     padding: 20 20 20 20;
@@ -83,13 +80,11 @@
     padding: 10px;
     width: 20%;
   }
-  
+
   .learn-btn:hover{
     color: black;
     background-color: #3299CC;
   }
-
-
 }
 
 @keyframes App-logo-spin {
