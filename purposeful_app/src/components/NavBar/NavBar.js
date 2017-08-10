@@ -6,71 +6,86 @@ import FaAlignJustify from 'react-icons/lib/fa/align-justify'
 class NavBar extends Component {
 
   constructor() {
-  	super();
-  	this.state = {activeNav: true};
-  	this.navBarCode = this.navBarCode.bind(this);
-  	this.showNav = this.showNav.bind(this);
-  	this.hideNav = this.hideNav.bind(this);
-  	this.toggle = this.toggle.bind(this);
+    super();
+    this.state = {activeNav: true};
+    this.navBarDesktop = this.navBarDesktop.bind(this);
+    this.navBarMobile = this.navBarMobile.bind(this);
+    this.showNav = this.showNav.bind(this);
+    this.hideNav = this.hideNav.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
   
   componentWillMount() {
-  	if (this.props.containerWidth >= 700){
-    	this.showNav();
+    if (this.props.containerWidth >= 700){
+      this.showNav();
     } else {
-    	this.hideNav();
+      this.hideNav();
     }
   }
 
   showNav() {
-  		this.setState({
-  			activeNav: true
-  		});
+      this.setState({
+        activeNav: true
+      });
   }
 
    hideNav() {
-  		this.setState({
-  			activeNav: false
-  		});
+      this.setState({
+        activeNav: false
+      });
   }
   
   toggle() {
         this.setState ({
-        	activeNav : !this.state.activeNav
+          activeNav : !this.state.activeNav
         });
   }
 
 
 
-  navBarCode() {
+  navBarDesktop() {
     return (
-  		<nav>
-  		  <ul>
-  		  	<li className="toggleBtn"><button onClick={this.toggle.bind(this)}> <FaAlignJustify /> </button></li>
-  		    <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
-  		    <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
-  		    <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
-  		    <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
-  		  </ul>
-  	  </nav>
-  	)
+      <nav className="NavBar">
+        <ul>
+          <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
+          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
+          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
+          <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+        </ul>
+      </nav>
+    )
+  }
+
+  navBarMobile() {
+    return (
+      <nav className="NavBar">
+        <ul>
+          <button className="toggleBtn open" onClick={this.hideNav} >
+          <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
+          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
+          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
+          <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+          </button>
+        </ul>
+      </nav>
+    )
   }
 
   render() {
-  	/* desktop version */
+    /* desktop version */
     if (this.props.containerWidth >= 700){
-		return this.navBarCode();
+    return this.navBarDesktop();
     } 
     /* mobile version */
     else {
        if (this.state.activeNav){
-       		return this.navBarCode();
-      	} else {
-      		return (
-      			<ul><li className="toggleBtn"><button onClick={this.toggle.bind(this)}> <FaAlignJustify /> </button></li></ul>
-		  	);
-      	}
-	}
+          return this.navBarMobile();
+        } else {
+          return (
+            <button className="toggleBtn closed" onClick={this.toggle.bind(this)}> <FaAlignJustify /> </button>
+        );
+        }
+  }
   }
 }
 

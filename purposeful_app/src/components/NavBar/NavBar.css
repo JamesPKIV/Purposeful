@@ -1,13 +1,14 @@
 
 /* Universal settings*/
-li:hover {
+.NavBar li:hover {
 	background-color: rgba(#62, #9a, #06, 50%);
 }
 
-li .active {
+.NavBar li .active {
 	background-color: none;
 }
- li :not(active) {
+
+.NavBar li :not(active) {
  	background-color: none;
  }
 
@@ -15,25 +16,36 @@ li .active {
 /*Smartphone screens*/
 @media screen and (max-width:700px) {
 
-	ul {
+	.toggleBtn.closed {
+		position: absolute;
+		right: 10%;
+	}
+
+	.toggleBtn.open {
+		position: absolute;
+		right: 10%;
+		width:100%;
+	}
+
+	.NavBar ul {
+		position: absolute;
+		right: 10%;
+		z-index: 2;
 		width: 50%;
 	  list-style: none;
 	  background-color: #EDEDED;
 		padding: 0;
+		margin: 0;
 		text-align: center;
 	}
 
-	li {
+	.NavBar li {
 		display: block;
 		margin: auto;
-		padding-right: 10px;
 	}
 
-	 li :not(active) {
-	 	background-color: initial;
-	 }
 
-	li a {
+	.NavBar li a {
 		display: block;
 	    color: black;
 	    text-align: center;
@@ -42,7 +54,7 @@ li .active {
 		font-family: 'Arvo', serif;
 	}
 
-	.icon{
+	.NavBar .icon{
 		font-size: 1.5em;
 	}
 }
@@ -50,27 +62,27 @@ li .active {
 
 /*desktop screens*/
 @media screen and (min-width:700px) {
-	.toggleBtn {
+	.NavBar .toggleBtn {
 		display: none;
 	}
 
-	ul {
+	 .NavBar ul {
 		list-style: none;
 		background-color: #EDEDED;
 		margin: 0;
 		padding: 20px;
 	}
 
-	li {
+	.NavBar li {
 		display: inline-block;
 		padding-right: 10px;
 	}
 
-	 li :not(active) {
+	 .NavBar li :not(active) {
 	 	background-color: inherit;
 	 }
 
-	li a {
+	.NavBar li a {
 		display: block;
     color: black;
     text-align: center;
@@ -79,11 +91,11 @@ li .active {
 		font-family: 'Arvo', serif;
 	}
 
-	.menuIcon {
+	.NavBar .menuIcon {
 		display: none;
 	}
 
-	.icon{
+	.NavBar .icon{
 		font-size: 1.5em;
 	}
 }

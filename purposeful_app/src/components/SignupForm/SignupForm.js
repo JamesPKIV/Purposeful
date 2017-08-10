@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './SignupForm.css';
-import FaLightBulb from 'react-icons/lib/fa/lightbulb-o';
 
 class SignupForm extends Component {
   constructor(props) {

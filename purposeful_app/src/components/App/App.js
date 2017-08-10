@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Redirect, HashRouter as Router } from 'react-router-dom';
 import Dimensions from 'react-dimensions';
 
-import logo from './logo.svg';
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
 import SignupContent from '../SignupContent/SignupContent.js';
@@ -86,7 +85,7 @@ class App extends Component {
             }
             
             
-            <Route exact path="/" render={() => <Redirect to="/mailingList" />} />
+            <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
             <Route path="/mailingList" render={() => 
               <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide} 
                 isFormShowing={this.state.isFormShowing} /> } />
