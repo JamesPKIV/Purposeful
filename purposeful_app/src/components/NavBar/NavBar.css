@@ -1,73 +1,91 @@
-li:hover {
-	background-color: #629a06 50%;
+
+/* Universal settings*/
+.NavBar li:hover {
+	background-color: rgba(#62, #9a, #06, 50%);
 }
 
-li .active {
+.NavBar li .active {
 	background-color: none;
 }
- li :not(active) {
+
+.NavBar li :not(active) {
  	background-color: none;
  }
 
 
+/*Smartphone screens*/
 @media screen and (max-width:700px) {
-   
-	ul {
-		width: 90%;
-	  list-style: none;
-	  background-color: white;
-		margin: 0% 2%;
 
+	.toggleBtn.closed {
+		position: fixed;
+		left: 5%;
+		top: 4%;
+	}
+
+	.toggleBtn.open {
+		position: absolute;
+		left: 5%;
+		top: 4%;
+		width:100%;
+	}
+
+	.NavBar ul {
+		position: fixed;
+		top: 4%;
+		left: 3%;
+		z-index: 2;
+		width: 50%;
+	  list-style: none;
+	  background-color: #EDEDED;
 		padding: 0;
-		padding-top: 20px;
+		margin: 0;
 		text-align: center;
 	}
 
-	li {
+	.NavBar li {
 		display: block;
 		margin: auto;
-		padding-right: 10px;
 	}
 
-	 li :not(active) {
-	 	background-color: initial;
-	 }
 
-	li a {
+	.NavBar li a {
 		display: block;
-	    color: white;
+	    color: black;
 	    text-align: center;
 	    text-decoration: none;
 		padding: 10px 20px;
 		font-family: 'Arvo', serif;
 	}
 
-	.icon{
+	.NavBar .icon{
 		font-size: 1.5em;
 	}
 }
 
 
-
+/*desktop screens*/
 @media screen and (min-width:700px) {
+	.NavBar .toggleBtn {
+		display: none;
+	}
 
-	ul {
+	 .NavBar ul {
 		list-style: none;
 		background-color: #EDEDED;
 		margin: 0;
 		padding: 20px;
 	}
 
-	li {
+	.NavBar li {
 		display: inline-block;
 		padding-right: 10px;
 	}
 
-	 li :not(active) {
+	 .NavBar li :not(active) {
 	 	background-color: inherit;
 	 }
 
-	li a {
+	.NavBar li a {
 		display: block;
     color: black;
     text-align: center;
@@ -76,11 +94,11 @@ li .active {
 		font-family: 'Arvo', serif;
 	}
 
-	.menuIcon {
+	.NavBar .menuIcon {
 		display: none;
 	}
-	
-	.icon{
+
+	.NavBar .icon{
 		font-size: 1.5em;
 	}
 }

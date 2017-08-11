@@ -2,6 +2,22 @@
   box-sizing: border-box;
 }
 
+.learn-div{
+  width: 100%;
+}
+
+.learn-btn{
+  background-color: #236B8E;
+  border: none;
+  color: white;
+  padding: 10px;
+}
+
+.learn-btn:hover{
+  color: black;
+  background-color: #3299CC;
+}
+
 
 /* settings universal to all screen sizes */
 .App {
@@ -9,11 +25,9 @@
   text-align: center;
   min-width: 100%;
   min-height: 100vh;
+  height: 100% !important;
   color: white;
-
-  background: /*#ad3434 ;
- /* #1a6e82; */
-  #629a06; 
+  background: #86C67C;
 }
 
 .App-logo {
@@ -27,16 +41,12 @@
 @media screen and (max-width:700px) {
    .App {
     padding: 5%;
-    color: white;
-    background-color: #86C67C;
     background-attachment: fixed;
     overflow: hidden;
-
   }
 
   .App-logo {
     height: 15vh;
-    
   }
 
   .App-header {
@@ -47,14 +57,17 @@
     font-size: 40px;
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
+    /*position: fixed;*/
+  }
+
+  .learn-btn {
+    min-width: 50%;
   }
 
 }
 
-
-@media screen and (min-width:600px) {
-
-
+/*desktop sized screens*/
+@media screen and (min-width:700px) {
   .App {
     margin: auto;
     padding: 20 20 20 20;
@@ -83,13 +96,11 @@
     padding: 10px;
     width: 20%;
   }
-  
+
   .learn-btn:hover{
     color: black;
     background-color: #3299CC;
   }
-
-
 }
 
 @keyframes App-logo-spin {

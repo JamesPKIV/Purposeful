@@ -2,13 +2,14 @@
   font-size: larger;
 }
 
+
 @media screen and (max-width:700px) {
   #signupForm {
     margin: auto;
     margin-top: 5%;
     padding: 5%;
     width: 90%;  
-    border: 1px solid black;
+    border: 1px solid grey;
     text-align: left;
     background-color: white;
     color: black;
@@ -54,7 +55,7 @@
       text-align: center;
   }
 
-  input[type=button]:hover, input[type=submit]:hover {
+  #signupForm input[type=button]:hover, input[type=submit]:hover {
        color: black;   
       background-color:#C81C2D;
   }
@@ -72,8 +73,7 @@
     margin-bottom: 30px;
     width: 70%;
     max-width: 600px;
-    border: 2px solid black;
-    border-radius: 10px; 
+    border: 2px solid grey;
     text-align: left;
     background-color: white;
     color: black;
@@ -101,7 +101,7 @@
   }
 
 
-  input[type=button],input[type=submit]  {
+  #signupForm input[type=button],input[type=submit]  {
       width: 40%;
       background-color: #C81C2D;
       color: white;    
@@ -117,7 +117,7 @@
       text-align: center;
   }
 
-  input[type=button]:hover,input[type=submit]:hover {
+  #signupForm input[type=button]:hover,input[type=submit]:hover {
      color: black;   
      background-color:#C81C2D;
   }

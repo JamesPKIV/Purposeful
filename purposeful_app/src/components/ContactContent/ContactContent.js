@@ -21,8 +21,8 @@ class ContactContent extends Component {
 				<h2 className="hd-leader">Purposeful Leadership</h2>
 				<ul className="ul-about">
 					<li>
-						<figure>
-							<img className="about-pic" src={oscar}/> 
+						<figure className="whoEntry">
+							<img className="about-pic" alt="Oscar Parra" src={oscar}/> 
 							<figcaption className="about">
 								<span className="name"> Oscar Parra </span> <br/>
 								<span className="role-desc">Co-Founder &  Project Lead </span>
@@ -33,8 +33,8 @@ class ContactContent extends Component {
 						</figure>
 					</li>
 					<li>
-						<figure>
-							<img className="about-pic" src={james}/> 
+						<figure className="whoEntry">
+							<img className="about-pic"  alt="James Kennedy" src={james}/> 
 							<figcaption className="about">
 								<span className="name"> James Kennedy </span><br/>
 								<span className="role-desc">Co-Founder &  Lead Software Engineer </span>
@@ -44,9 +44,9 @@ class ContactContent extends Component {
 							</figcaption>
 						</figure>
 					</li>
-					<li>
-						<figure>
-							<img className="about-pic" src={diana}/> 
+					<li> 
+						<figure className="whoEntry">
+							<img className="about-pic"  alt="Diana Gonzalez Santillan" src={diana}/> 
 							<figcaption className="about">
 								<span className="name"> Diana Gonzalez Santillan</span> <br/>
 								<span className="role-desc">Co-Founder & Software Engineer </span>
