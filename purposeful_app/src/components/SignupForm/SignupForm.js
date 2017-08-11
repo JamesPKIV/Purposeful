@@ -35,17 +35,15 @@ class SignupForm extends Component {
       <article>
 
         <section>
-        { this.props.isFormShowing ?
-            <form id="signupForm" onSubmit={this.handleSubmit} >
-              <p>  Sign up for our mailing list to keep up to date with Purposeful. </p>
+        { this.props.isFormShowing &&
+            <form id="signupForm" onSubmit={this.handleSubmit}>
+              <p className="sign-up-p">  Sign up for our mailing list to keep up to date with Purposeful. </p>
 
               <input type="text" name="first" placeholder="First Name" onChange={this.handleChange} autoFocus required />
               <input type="text" name="last" placeholder="Last Name" onChange={this.handleChange} required />
               <input type="email" name="email" placeholder="Email" onChange={this.handleChange} required />
-              <input type="submit" value="Join our mailing list!" />
+              <div className="div-input" ><input type="submit" value="Subscribe" /></div>
             </form>
-          :
-            <h4>Democratizing the web through the free sharing of knowledge and great ideas. </h4>
         }
         </section>
 

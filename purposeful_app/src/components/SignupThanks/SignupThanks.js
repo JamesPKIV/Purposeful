@@ -6,7 +6,7 @@ class SignupThanks extends Component {
 
 	render () {
 		return (
-			<section>
+			<section className = "thanksSection">
 			  <p>Thanks for signing up{this.props.firstName && <strong> {this.props.firstName}</strong>}! <br/>
 			   We'll keep you up to date about our launch. <br/>
 			   Help us spread the word!

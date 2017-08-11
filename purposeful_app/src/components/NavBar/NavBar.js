@@ -1,24 +1,92 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavBar.css';
-import FaEnvelopeO from 'react-icons/lib/fa/envelope-o'
-import FaGroup from 'react-icons/lib/fa/group'
-import FaSunO from 'react-icons/lib/fa/sun-o'
-import FaStarO from 'react-icons/lib/fa/star-o'
+import FaAlignJustify from 'react-icons/lib/fa/align-justify'
 
 class NavBar extends Component {
 
+  constructor() {
+    super();
+    this.state = {activeNav: true};
+    this.navBarDesktop = this.navBarDesktop.bind(this);
+    this.navBarMobile = this.navBarMobile.bind(this);
+    this.showNav = this.showNav.bind(this);
+    this.hideNav = this.hideNav.bind(this);
+    this.toggle = this.toggle.bind(this);
+  }
+  
+  componentWillMount() {
+    if (this.props.containerWidth >= 700){
+      this.showNav();
+    } else {
+      this.hideNav();
+    }
+  }
+
+  showNav() {
+      this.setState({
+        activeNav: true
+      });
+  }
+
+   hideNav() {
+      this.setState({
+        activeNav: false
+      });
+  }
+  
+  toggle() {
+        this.setState ({
+          activeNav : !this.state.activeNav
+        });
+  }
+
+
+
+  navBarDesktop() {
+    return (
+      <nav className="NavBar">
+        <ul>
+          <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
+          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
+          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
+          <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+        </ul>
+      </nav>
+    )
+  }
+
+  navBarMobile() {
+    return (
+      <nav className="NavBar">
+        <ul>
+          <button className="toggleBtn open" onClick={this.hideNav} >
+          <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
+          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
+          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
+          <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+          </button>
+        </ul>
+      </nav>
+    )
+  }
+
   render() {
-	return (
-		<nav>
-		  <ul>
-		    <li><NavLink to="/mailingList">  <FaEnvelopeO/> Mailing List</NavLink></li>
-		    <li><NavLink to="/whatWeBelieve"> <FaSunO/> What We Believe</NavLink></li>
-		    <li><NavLink to="/whatWeDo"> <FaStarO/> What We're Doing</NavLink></li>
-		    <li><NavLink to="/contact"> <FaGroup/> Who We Are</NavLink></li>
-		  </ul>
-	  </nav>
-	);
+    /* desktop version */
+    if (this.props.containerWidth >= 700){
+    return this.navBarDesktop();
+    } 
+    /* mobile version */
+    else {
+       if (this.state.activeNav){
+          return this.navBarMobile();
+        } else {
+          return (
+            <button className="toggleBtn closed" onClick={this.toggle.bind(this)}> <FaAlignJustify /> </button>
+          );
+        }
+  }
+
   }
 }
 

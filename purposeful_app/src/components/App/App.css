@@ -2,6 +2,22 @@
   box-sizing: border-box;
 }
 
+.learn-div{
+  width: 100%;
+}
+
+.learn-btn{
+  background-color: #236B8E;
+  border: none;
+  color: white;
+  padding: 10px;
+}
+
+.learn-btn:hover{
+  color: black;
+  background-color: #3299CC;
+}
+
 
 /* settings universal to all screen sizes */
 .App {
@@ -9,11 +25,13 @@
   text-align: center;
   min-width: 100%;
   min-height: 100vh;
+  height: 100% !important;
   color: white;
-  background: radial-gradient(darkgrey, green);
+  background: #86C67C;
 }
 
 .App-logo {
+  display: none;
   animation: App-logo-spin infinite 20s linear;
 }
 
@@ -23,10 +41,8 @@
 @media screen and (max-width:700px) {
    .App {
     padding: 5%;
-    height: 100%;
-    color: white;
-    background: radial-gradient(darkgrey, green);
     background-attachment: fixed;
+    overflow: hidden;
   }
 
   .App-logo {
@@ -36,19 +52,53 @@
   .App-header {
     padding: 5%;
   }
+
+  .p-title{
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-family: 'Arvo', serif;
+  }
+
+  .learn-btn {
+    min-width: 50%;
+  }
+
 }
 
-
-/* Larger than smartphone screen */
+/*desktop sized screens*/
 @media screen and (min-width:700px) {
-
+  .App {
+    margin: auto;
+    padding: 20 20 20 20;
+    height: 100vh;
+    color: white;
+    background-color:#86C67C;
+  }
 
   .App-logo {
     height: 80px;
   }
+  .p-title{
+    font-size: 48px;
+    letter-spacing: 2px;
+    font-family: 'Arvo', serif;
+    margin-bottom: 20px;
+  }
 
-  .App-header {
-    padding: 20px;
+  .learn-div{
+    width: 100%;
+  }
+
+  .learn-btn{
+    background-color: #236B8E;
+    font-size: 16px;
+    padding: 10px;
+    width: 20%;
+  }
+
+  .learn-btn:hover{
+    color: black;
+    background-color: #3299CC;
   }
 }
 

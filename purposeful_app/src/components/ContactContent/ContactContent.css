@@ -1,20 +1,109 @@
-#content {
-  margin-left: 20vw;
-  margin-right: 20vw;
+.ul-about{
+  list-style: none;
+  padding: 5%;
 }
 
-#whoEntry {
-  margin-left: 20vw;
-  margin-right: 20vw;
-  text-align: left;
+
+
+@media screen and (max-width: 700px) {
+  .div-about{
+    display: block;
+    margin: 10px auto;
+    color: black;
+    background-color: white;
+  }
+
+  .ul-about{
+    background-color: white;
+    color: black;
+    display: block;
+    margin: auto;
+    width: 100%;
+  }
+
+  .ul-about li {
+  display: block;
+  margin: auto;
 }
 
-#one {
-  width: 35vw;
+  .hd-leader{
+    padding: 20px 10px;
+    margin: 0px;
+    font-weight: 900;
+  }
+
+  .whoEntry {
+    display: block;
+    margin: auto;
+    text-align: center;
+    margin: 20px;
+  }
+
+
+  .about-pic{
+    border-radius: 10%;
+    width: 45vw;
+    height: 50vw;
+    margin: 10px;
+  }
+
+  .name{
+    font-weight: 900;
+    font-size: 1.25em;
+    margin: 10px;
+  }
+
+  .role-desc{
+    margin: 10px;
+    font-size: 1em;
+  }
+
+  .icon{
+    margin: 10px;
+  }
+
 }
 
-.Diana_pic {
-  width: 40%;
-  height: 40%;
-  float: right;
+
+
+@media screen and (min-width: 700px) {
+
+  .div-about{
+    margin: 30px 0px;
+    padding: 20px 0px;
+    color: black;
+    background-color: white;
+  }
+  .hd-leader{
+    padding-top: 20px;
+  }
+  .ul-about{
+    display: block;
+    background-color: white;
+    color: black;
+  }
+
+  .ul-about li{
+    display: inline-block;
+  }
+
+  .about-pic{
+    border-radius: 25px;
+    width: 180px;
+    height: 200px;
+  }
+
+  .name{
+    font-weight: 900;
+  }
+
+  .role-desc{
+    font-size: 13px;
+    margin: 10px;
+  }
+
+  .icon{
+    margin: 10px;
+  }
+
 }

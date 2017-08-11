@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect, HashRouter as Router } from 'react-router-dom';
-import logo from './logo.svg';
+import Dimensions from 'react-dimensions';
+
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
 import SignupContent from '../SignupContent/SignupContent.js';
@@ -69,25 +70,23 @@ class App extends Component {
     return (
       <Router>
         <section className="App">
-
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-        
-            <h1>Welcome to Purposeful!</h1>
-            
-          </header>
-
+      
           <section className="App-main">
-            <NavBar />
+            <NavBar containerWidth={this.props.containerWidth}/>
+            <h1 className="p-title"> <span className="purposeCSS">Purpose</span>ful</h1>
             { 
-              !this.state.isFormShowing &&
-              <Route render={ ({ history}) => (
-                <button id="show-form" onClick={() => this.handleFormShow(history)}>Mailing List </button>
-              )} /> 
+
+              !this.state.isFormShowing && 
+                <Route render={ ({ history}) => (
+                  <div className="learn-div">
+                    <button className="learn-btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
+                  </div>
+                )}/> 
+              
             }
             
             
-            <Route exact path="/" render={() => <Redirect to="/mailingList" />} />
+            <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
             <Route path="/mailingList" render={() => 
               <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide} 
                 isFormShowing={this.state.isFormShowing} /> } />
@@ -103,4 +102,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Dimensions()(App);
