@@ -76,22 +76,22 @@ class NavBar extends Component {
   }
 
   render() {
-    /* desktop version */
-    if (this.props.containerWidth >= 700){
-    return this.navBarDesktop();
+      /* desktop version */
+      if (this.props.containerWidth >= 700){
+      return this.navBarDesktop();
+      }
+      /* mobile version */
+      else {
+        if (this.state.activeNav){
+            return this.navBarMobile();
+          } else {
+            return (
+              <button className="toggleBtn closed" onClick={this.toggle.bind(this)}>
+                <FaAlignJustify />
+              </button>
+          );
+          }
     }
-    /* mobile version */
-    else {
-       if (this.state.activeNav){
-          return this.navBarMobile();
-        } else {
-          return (
-            <button className="toggleBtn closed" onClick={this.toggle.bind(this)}>
-              <FaAlignJustify />
-            </button>
-        );
-        }
-  }
   }
 }
 

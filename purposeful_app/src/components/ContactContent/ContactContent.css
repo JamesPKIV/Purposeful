@@ -75,9 +75,11 @@
     background-color: white;
   }
   .hd-leader{
-    padding-top: 20px;
+    padding-top: 10px;
   }
   .ul-about{
+    padding-top: 10px;
+    padding-bottom: 0px;
     display: block;
     background-color: white;
     color: black;
@@ -103,7 +105,9 @@
   }
 
   .icon{
-    margin: 10px;
+    margin-top: 3px;
+    margin-right: 5px;
+    font-size: 20px;
   }
 
 }
