@@ -80,6 +80,7 @@
     height: 80px;
   }
   .p-title{
+    margin-top: 15px;
     font-size: 48px;
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
