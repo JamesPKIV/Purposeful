@@ -70,31 +70,36 @@ class App extends Component {
     return (
       <Router>
         <section className="App">
-      
+
           <section className="App-main">
-            <NavBar containerWidth={this.props.containerWidth}/>
-            <h1 className="p-title"> <span className="purposeCSS">Purpose</span>ful</h1>
-            { 
-              !this.state.isFormShowing && 
-                <Route render={ ({ history}) => (
-                  <div className="learn-div">
-                    <button className="learn-btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
-                  </div>
-                )}/> 
-              
-            }
-            
-            
-            <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
-            <Route path="/mailingList" render={() => 
-              <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide} 
-                isFormShowing={this.state.isFormShowing} /> } />
-            <Route path="/whatWeDo" render={() => <DoContent />} />
-            <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
-            <Route path="/contact" render={() => <ContactContent />} />
-         
+<div id="rectangle">
+
+            <NavBar className="nav" containerWidth={this.props.containerWidth}/>
+            <h1 className="p-title">
+              <span className="purposeCSS">Purpose</span>ful
+            </h1>
+
+</div>
+
+            <div className="move_in_mobile">
+              {
+                !this.state.isFormShowing &&
+                  <Route render={ ({ history}) => (
+                    <div className="learn-div">
+                      <button className="learn-btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
+                    </div>
+                  )}/>
+              }
+              <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
+              <Route path="/mailingList" render={() =>
+                <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide}
+                  isFormShowing={this.state.isFormShowing} /> } />
+              <Route path="/whatWeDo" render={() => <DoContent />} />
+              <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
+              <Route path="/contact" render={() => <ContactContent />} />
+            </div>
           </section>
-        
+
         </section>
       </Router>
     );
