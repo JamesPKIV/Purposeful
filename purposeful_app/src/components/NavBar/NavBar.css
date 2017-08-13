@@ -19,19 +19,22 @@
 	.toggleBtn.closed {
 		position: fixed;
 		left: 5%;
-		top: 4%;
+		top: auto;
+		margin-top: 5%;
 	}
 
 	.toggleBtn.open {
 		position: absolute;
 		left: 5%;
-		top: 4%;
+		top: auto;
+		margin-top: 10%;
 		width:100%;
 	}
 
 	.NavBar ul {
 		position: fixed;
-		top: 4%;
+		top: auto;
+		margin-top: 5%;
 		left: 3%;
 		z-index: 2;
 		width: 50%;
