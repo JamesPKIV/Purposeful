@@ -42,7 +42,11 @@ class NavBar extends Component {
         });
   }
 
-
+  handleAlways(){
+    this.setState({
+      isFormShowing: true,
+    });
+  }
 
   navBarDesktop() {
     return (
