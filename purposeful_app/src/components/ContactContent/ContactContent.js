@@ -4,17 +4,14 @@ import './ContactContent.css';
 // importing icons
 import Linkedin from 'react-icons/lib/fa/linkedin-square';
 import Github from 'react-icons/lib/fa/github';
-import Chevron from 'react-icons/lib/fa/chevron-up';
-
+import ChevronUP from 'react-icons/lib/fa/chevron-up';
+import ChevronDOWN from 'react-icons/lib/fa/chevron-down';
 // importing images 
 import oscar from './oscar.png';
 import james from './james2.jpg';
 import diana from './diana.jpg';
-import partha from './james3.jpg';
-// https://github.com/JamesPKIV
-// https://github.com/digonsan
-
-
+import partha from './partha-baral.jpg';
+import kevin from './kevin-jesse.jpg';
 
 class ContactContent extends Component {
 
@@ -46,7 +43,7 @@ class ContactContent extends Component {
 	teamDesc() {
 		return (
 		<div className="div-about">
-			<h2 className="hd-leader">Purposeful Leadership</h2>
+			<h2 className="hd-leader">Leadership</h2>
 			<ul className="ul-about">
 				<li>
 					<figure className="whoEntry">
@@ -65,7 +62,7 @@ class ContactContent extends Component {
 						<img className="about-pic" alt="James Kennedy" src={james} />
 						<figcaption className="about">
 							<span className="name"> James Kennedy </span><br />
-							<span className="role-desc">Co-Founder & Lead Software Engineer </span>
+							<span className="role-desc">Co-Founder & Lead Engineer </span>
 							<br />
 							<a href="https://github.com/JamesPKIV"><Github className="icon" /></a>
 							<a href="https://www.linkedin.com/in/jpkiv/" ><Linkedin className="icon" /></a>
@@ -85,9 +82,11 @@ class ContactContent extends Component {
 					</figure>
 				</li>
 			</ul>
-			<button onClick={this.showBoard}>
-				<span><Chevron className="icon" /></span>
-			</button>
+			<div className="chevron-div" onClick={this.showBoard}>
+				<span>Board of Advisors</span>
+				<br/>
+				<span><ChevronUP className="icon " /></span>
+			</div>
 		</div>
 		)
 	}
@@ -95,25 +94,37 @@ class ContactContent extends Component {
 	boardDesc(){
 		return (
 			<div className="div-about">
-			<h2 className="hd-leader">Purposeful Leadership</h2>
+			<h2 className="hd-leader">Board of Advisors</h2>
 			<ul className="ul-about">
 				<li>
 					<figure className="whoEntry">
-						<img className="about-pic" alt="Oscar Parra" src={partha} />
+						<img className="about-pic" alt="Partha Baral" src={partha} />
 						<figcaption className="about">
-							<span className="name"> James Kennedy </span> <br />
+							<span className="name"> Partha Baral </span> <br />
 							<span className="role-desc"> Senior Director VmWare </span>
 							<br />
-							<a href="https://github.com/ogparra"><Github className="icon" /></a>
-							<a href="https://www.linkedin.com/in/ogparra/"><Linkedin className="icon" /></a>
+							<a href="https://www.linkedin.com/in/parthabaral/"><Linkedin className="icon" /></a>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure className="whoEntry">
+						<img className="about-pic" alt="Kevin Jesse" src={kevin} />
+						<figcaption className="about">
+							<span className="name"> Kevin Jesse </span> <br />
+							<span className="role-desc"> Ph.D. CS at UC Davis </span>
+							<br />
+							<a href="https://www.linkedin.com/in/kevinjesse/"><Linkedin className="icon" /></a>
 						</figcaption>
 					</figure>
 				</li>
 
 			</ul>
-			<button onClick={this.showTeam}>
-				<span><Chevron className="icon" /></span>
-			</button>
+			<div className="chevron-div" onClick={this.showTeam}> 
+				<span>Leadership</span>
+				<br/>
+				<span><ChevronDOWN className="icon " /></span>
+			</div>
 		</div>
 		)
 	}
