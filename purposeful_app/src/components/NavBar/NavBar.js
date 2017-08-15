@@ -42,7 +42,11 @@ class NavBar extends Component {
         });
   }
 
-
+  handleAlways(){
+    this.setState({
+      isFormShowing: true,
+    });
+  }
 
   navBarDesktop() {
     return (
@@ -61,13 +65,13 @@ class NavBar extends Component {
     return (
       <nav className="NavBar">
         <ul>
-          <button className="toggleBtn open" onClick={this.hideNav} >
+          <button className="menuBtn open" onClick={this.hideNav} >
             <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
             <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
             <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
             <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
           </button>
-          <button className="toggleBtn closed" onClick={this.toggle.bind(this)}>
+          <button className="toggleBtn open" onClick={this.toggle.bind(this)}>
             <FaClose />
           </button>
         </ul>
