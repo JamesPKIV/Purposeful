@@ -3,7 +3,9 @@
 }
 
 .learn-div{
-  top: inherit;
+  position: fixed;
+  display: block;
+  bottom: 0px;
   width: 100%;
 }
 
@@ -53,18 +55,23 @@
     padding: 5%;
   }
 
+
+  .p-title-div {
+    flex-grow: 1;
+  }
   .p-title{
+
     font-size: 40px;
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
-    position:fixed;
-    margin-top: 2%;
-    margin-bottom: auto;
-    margin-left: 17vw;
+    margin: 2% 5%;
   }
 
   #rectangle {
-    background: black;
+    display: flex;
+    flex-direction: row;
+    background:#6a0d98;
+
     position: fixed;
     width: 100%;
     height: 70px;

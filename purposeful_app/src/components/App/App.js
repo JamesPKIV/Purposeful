@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { Route, Redirect, HashRouter as Router } from 'react-router-dom';
 import Dimensions from 'react-dimensions';
-
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
 import SignupContent from '../SignupContent/SignupContent.js';
 import BelieveContent from '../BelieveContent/BelieveContent.js';
 import DoContent from '../DoContent/DoContent.js';
 import ContactContent from '../ContactContent/ContactContent.js';
-
+import logo from './logo.png';
 import * as firebase from 'firebase';
 
 
 
-// Initialize Firebase
+// Initialize Firebase connection
 var config = {
   apiKey: "AIzaSyBPzk2vEV34o31xN-uJNt8BqMcc9hlVyv4",
   authDomain: "purposeful-718b4.firebaseapp.com",
@@ -71,22 +70,24 @@ class App extends Component {
       <Router>
         <section className="App">
 
-          <section className="App-main">
-<div id="rectangle">
-
-            <NavBar className="nav" containerWidth={this.props.containerWidth}/>
+          <header id="rectangle">
+            <img className="logo" src={logo} alt="logo" />
+            
             <h1 className="p-title">
               <span className="purposeCSS">Purpose</span>ful
             </h1>
+            
+            <NavBar className="nav" containerWidth={this.props.containerWidth}/>
+          </header>
 
-</div>
+          <section className="App-main">
 
             <div className="move_in_mobile">
               {
                 !this.state.isFormShowing &&
                   <Route render={ ({ history}) => (
                     <div className="learn-div">
-                      <button className="learn-btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
+                      <button className="learn-btn btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
                     </div>
                   )}/>
               }

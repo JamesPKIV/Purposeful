@@ -8,9 +8,9 @@ import Chevron from 'react-icons/lib/fa/chevron-up';
 
 // importing images 
 import oscar from './oscar.png';
-import james from './james2.jpg';
+import james from './james3.png';
 import diana from './diana.jpg';
-import partha from './james3.jpg';
+import partha from './james3.png';
 // https://github.com/JamesPKIV
 // https://github.com/digonsan
 
