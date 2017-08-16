@@ -14,7 +14,8 @@
 @media screen and (max-width: 700px) {
 
   .div-about{
-    display: block;
+    display: flex;
+    flex-flow: column wrap;
     margin: 10px auto;
     color: black;
     background-color: white;

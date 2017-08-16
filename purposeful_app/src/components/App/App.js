@@ -57,10 +57,9 @@ class App extends Component {
   show_button(history){
     if (history.location.pathname !== '/mailingList'){
       return (
-        <div className="learn-div">
-          <button className="learn-btn btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
-        </div>
-
+        
+          <button className="learn-btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
+       
       );
     }
   }
@@ -69,40 +68,32 @@ class App extends Component {
     /* actual DOM rendering */
     return (
       <Router>
-        <section className="App">
+        <div className="App">
 
 
-          <header id="rectangle">
+          <header className="head-content">
+            <div id="rectangle">
 
-            <div className="logo-div">
-              <img className="logo" src={logo} alt="logo" />
-            </div>
+              <div className="logo-div">
+                <img className="logo" src={logo} alt="logo" />
+              </div>
 
-            <div className="p-title-div">
-              <h1 className="p-title">
-                <span className="purposeCSS">Purpose</span>ful
-              </h1>
-            </div>
+              <div className="p-title-div">
+                <h1 className="p-title">
+                  <span className="purposeCSS">Purpose</span>ful
+                </h1>
+              </div>
 
-            <div className="nav-div">
-              <NavBar containerWidth={this.props.containerWidth}/>
+              <div className="nav-div">
+                <NavBar containerWidth={this.props.containerWidth}/>
+              </div>
             </div>
 
           </header>
         
 
 
-          <section className="App-main">
-            <div className="move_in_mobile">
-
-              {
-                <Route render={ ({history}) => (
-                  <div>
-
-                  {this.show_button(history)}
-                  </div>
-                )}/>
-              }
+          <section className="main-content">
               <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
               <Route path="/mailingList" render={() =>
                 <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide}
@@ -111,10 +102,20 @@ class App extends Component {
               <Route path="/whatWeDo" render={() => <DoContent />} />
               <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
               <Route path="/contact" render={() => <ContactContent />} />
-            </div>
           </section>
 
-        </section>
+          <div className="learn-div">
+            {
+                  <Route render={ ({history}) => (
+                    <div>
+
+                    {this.show_button(history)}
+                    </div>
+                  )}/>
+                }
+          </div>
+
+        </div>
       </Router>
     );
   }
