@@ -27,7 +27,7 @@ class SignupForm extends Component {
       <article>
 
         <section>
-        { this.props.isFormShowing &&
+        { 
             <form id="signupForm" onSubmit={this.handleSubmit}>
               <p className="sign-up-p">  Sign up for our mailing list to keep up to date with Purposeful. </p>
 

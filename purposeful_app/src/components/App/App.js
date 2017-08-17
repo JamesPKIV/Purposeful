@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, HashRouter as Router } from 'react-router-dom';
 import Dimensions from 'react-dimensions';
-import { Button } from 'react-materialize';
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
 import SignupContent from '../SignupContent/SignupContent.js';
@@ -31,10 +30,10 @@ class App extends Component {
     super();
     this.state = {
       mailingListRef: null,
+      showLearnBtn: true
     };
     this.handleFormShow = this.handleFormShow.bind(this);
-    this.show_button = this.show_button.bind(this);
-  }
+    }
 
 
   /* called once app is rendered. set up refs to the Firebase mailing list */
@@ -52,17 +51,11 @@ class App extends Component {
     if (history.location.pathname !== '/mailingList') {
       history.push('/mailingList');
     }
+    this.setState({
+      showLearnBtn:false
+    });
   }
 
-  show_button(history){
-    if (history.location.pathname !== '/mailingList'){
-      return (
-        
-          <button className="learn-btn" id="show-form" onClick={() => this.handleFormShow(history)} >Learn more</button>
-       
-      );
-    }
-  }
 
   render() {
     /* actual DOM rendering */
@@ -96,24 +89,22 @@ class App extends Component {
           <section className="main-content">
               <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
               <Route path="/mailingList" render={() =>
-                <SignupContent mlRef={this.state.mailingListRef} onFormUnmount={this.handleFormHide}
-                  isFormShowing={true} />
+                <SignupContent mlRef={this.state.mailingListRef} />
               }/>
               <Route path="/whatWeDo" render={() => <DoContent />} />
               <Route path="/whatWeBelieve" render={() => <BelieveContent />} />
               <Route path="/contact" render={() => <ContactContent />} />
           </section>
 
-          <div className="learn-div">
-            {
-                  <Route render={ ({history}) => (
-                    <div>
-
-                    {this.show_button(history)}
-                    </div>
-                  )}/>
-                }
-          </div>
+          {
+              /* React jsx if statement */
+              (this.state.showLearnBtn) &&
+              <div className="learn-div">
+                <Route render={ ({history}) => (
+                  <button className="learn-btn" onClick={() => this.handleFormShow(history)} >Learn more</button>
+                )} />
+              </div>
+          }
 
         </div>
       </Router>
