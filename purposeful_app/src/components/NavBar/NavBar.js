@@ -74,7 +74,9 @@ class NavBar extends Component {
     else {
         return (
           <button className="toggleBtn closed" onClick={this.toggle}>
-            <FaAlignJustify />
+            <div id="toggleBtn-inner">
+              <FaAlignJustify />
+            </div>
           </button>
         );  
     }

@@ -7,8 +7,7 @@
   box-sizing: border-box;
   text-align: center;
 
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
 
   color: white;
   background: #b5d558;
@@ -34,6 +33,7 @@
 @media screen and (max-width:700px) {
 
   .App {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -48,7 +48,7 @@
 
   } 
 
-  #rectangle {
+  #head-rectangle {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -82,7 +82,7 @@
     letter-spacing: 2px;
     font-family: 'Arvo', serif;
     text-align: left;
-
+    padding-right:  10px;
   }
 
  
@@ -91,10 +91,6 @@
     height: inherit;
     flex: 1 1 15%;
     align-self: stretch;
-    background-color: grey;
-    display: flex;
-    align-items: stretch;
-    justify-content: stretch;
   }
 
   .main-content{
@@ -112,7 +108,6 @@
 }
 
 .learn-btn{
-
   background-color: #236B8E;
   padding: 20px;
   margin-top: 5px;
@@ -127,7 +122,9 @@
   .App {
     margin: auto;
     padding: 20 20 20 20;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100% !important;
+
     color: white;
     background-color:#86C67C;
   }

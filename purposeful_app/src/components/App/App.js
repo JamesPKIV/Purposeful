@@ -30,19 +30,25 @@ class App extends Component {
     super();
     this.state = {
       mailingListRef: null,
-      showLearnBtn: true
+      showLearnBtn: true,
+      isMobile: false
     };
     this.handleFormShow = this.handleFormShow.bind(this);
     }
 
 
-  /* called once app is rendered. set up refs to the Firebase mailing list */
+  /* called once app is rendered. set up refs to the Firebase mailing list and determines mobile or desktop view */
   componentWillMount() {
     const dbRootRef = firebase.database().ref();
     const mlRef = dbRootRef.child('mailing_list');
 
     this.dbRootRef = dbRootRef;
     this.setState({ mailingListRef: mlRef });
+
+    if (this.props.containerWidth <= 700) {
+      this.setState({ isMobile: true});
+    }
+
   }
 
   /* show the form if the user wants to sign up */
@@ -65,23 +71,38 @@ class App extends Component {
 
 
           <header className="head-content">
-            <div id="rectangle">
 
-              <div className="logo-div">
-                <img className="logo" src={logo} alt="logo" />
-              </div>
 
-              <div className="p-title-div">
-                <h1 className="p-title">
-                  <span className="purposeCSS">Purpose</span>ful
-                </h1>
-              </div>
+            {/* display different header content on mobile device */
+              this.state.isMobile ?
+                <div id="head-rectangle">
+                  <div className="logo-div">
+                    <img className="logo" src={logo} alt="logo" />
+                  </div>
 
-              <div className="nav-div">
-                <NavBar containerWidth={this.props.containerWidth}/>
-              </div>
-            </div>
+                  <div className="p-title-div">
+                    <h1 className="p-title">
+                      <span className="purposeCSS">Purpose</span>ful
+                    </h1>
+                  </div>
 
+                  <div className="nav-div">
+                    <NavBar containerWidth={this.props.containerWidth}/>
+                  </div>
+                </div>
+
+              :
+                <div className="desktop-head">
+                  <div className="nav-div">
+                        <NavBar containerWidth={this.props.containerWidth}/>
+                  </div>
+                  <div className="p-title-div">
+                        <h1 className="p-title">
+                          <span className="purposeCSS">Purpose</span>ful
+                        </h1>
+                  </div>
+                </div>
+            }
           </header>
         
 
