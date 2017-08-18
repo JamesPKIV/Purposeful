@@ -16,16 +16,11 @@
   
 }
 
-.learn-btn{
+.learn-btn {
   background-color: #236B8E;
   border: none;
   color: white;
   padding: 10px;
-}
-
-.learn-btn:hover, .learn-btn:click{
-  color: black;
-  background-color: #3299CC;
 }
 
 

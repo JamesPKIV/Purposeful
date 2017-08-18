@@ -12,6 +12,7 @@ class NavBar extends Component {
     this.navBarDesktop = this.navBarDesktop.bind(this);
     this.navBarMobile = this.navBarMobile.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.handleMenuSelection = this.handleMenuSelection.bind(this);
   }
 
   componentWillMount() {
@@ -20,16 +21,9 @@ class NavBar extends Component {
     }
   }
 
-  showNav() {
-      this.setState({
-        activeNav: true
-      });
-  }
-
-   hideNav() {
-      this.setState({
-        activeNav: false
-      });
+   handleMenuSelection() {
+      this.toggle();
+      this.props.onClick();
   }
 
   toggle() {
@@ -38,37 +32,37 @@ class NavBar extends Component {
         });
   }
 
-  handleAlways(){
-    this.setState({
-      isFormShowing: true,
-    });
-  }
-
+  
   navBarDesktop() {
     return (
+      <nav className="NavBar">
         <ul>
-          <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
-          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
-          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
-          <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top navEntry">Our Story </NavLink></li>
+          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top navEntry">Our Pillars </NavLink></li>
+          <li><NavLink to="/contact" className="hvr-sweep-to-top navEntry">About us </NavLink></li> 
+          <li className="learnBtn"><NavLink to="/mailingList" className="learnLink">Learn More</NavLink></li>       
         </ul>
+
+        
+      </nav>  
     )
   }
 
   navBarMobile() {
     if (this.state.activeNav){      
         return (
-          <ul>
-            <button className="menuBtn open" onClick={this.toggle} >
-              <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
-              <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
-              <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
-              <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
-            </button>
-            <button className="toggleBtn open" onClick={this.toggle}>
-              <FaClose />
-            </button>
-          </ul>
+          <nav className="NavBar">
+            <ul>
+              <button className="menuBtn open" onClick={this.handleMenuSelection} >
+                <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
+                <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
+                <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+              </button>
+              <button className="toggleBtn open" onClick={this.toggle}>
+                <FaClose />
+              </button>
+            </ul>
+          </nav>
         )
     } 
     else {
@@ -83,16 +77,10 @@ class NavBar extends Component {
   }
 
   render() {
-      return (
-        <nav className="NavBar">
-        {
-          
-          (this.props.containerWidth >= 700) ?
+      return (this.props.containerWidth >= 700) ?
             this.navBarDesktop() :/* desktop version */
-            this.navBarMobile()  /*mobile version */          
-        }
-        </nav>
-      )
+            this.navBarMobile();  /*mobile version */          
+ 
   }
 }
 

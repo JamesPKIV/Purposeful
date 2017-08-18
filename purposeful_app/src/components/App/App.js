@@ -30,10 +30,11 @@ class App extends Component {
     super();
     this.state = {
       mailingListRef: null,
-      showLearnBtn: true,
-      isMobile: false
+      showLearnBtn: true
     };
     this.handleFormShow = this.handleFormShow.bind(this);
+    
+    this.handleLearnShow = this.handleLearnShow.bind(this);
     }
 
 
@@ -44,10 +45,6 @@ class App extends Component {
 
     this.dbRootRef = dbRootRef;
     this.setState({ mailingListRef: mlRef });
-
-    if (this.props.containerWidth <= 700) {
-      this.setState({ isMobile: true});
-    }
 
   }
 
@@ -62,6 +59,11 @@ class App extends Component {
     });
   }
 
+  handleLearnShow() {
+    this.setState({
+      showLearnBtn: true
+    })
+  }
 
   render() {
     /* actual DOM rendering */
@@ -74,7 +76,7 @@ class App extends Component {
 
 
             {/* display different header content on mobile device */
-              this.state.isMobile ?
+              this.props.containerWidth <= 700 ?
                 <div id="head-rectangle">
                   <div className="logo-div">
                     <img className="logo" src={logo} alt="logo" />
@@ -87,7 +89,7 @@ class App extends Component {
                   </div>
 
                   <div className="nav-div">
-                    <NavBar containerWidth={this.props.containerWidth}/>
+                    <NavBar containerWidth={this.props.containerWidth} onClick={() => this.handleLearnShow()}/>
                   </div>
                 </div>
 
@@ -119,7 +121,7 @@ class App extends Component {
 
           {
               /* React jsx if statement */
-              (this.state.showLearnBtn) &&
+              (this.props.containerWidth <= 700) && (this.state.showLearnBtn === true) &&
               <div className="learn-div">
                 <Route render={ ({history}) => (
                   <button className="learn-btn" onClick={() => this.handleFormShow(history)} >Learn more</button>
