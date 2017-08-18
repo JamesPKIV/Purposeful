@@ -11,29 +11,19 @@ class NavBar extends Component {
     this.state = {activeNav: true};
     this.navBarDesktop = this.navBarDesktop.bind(this);
     this.navBarMobile = this.navBarMobile.bind(this);
-    this.showNav = this.showNav.bind(this);
-    this.hideNav = this.hideNav.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.handleMenuSelection = this.handleMenuSelection.bind(this);
   }
 
   componentWillMount() {
-    if (this.props.containerWidth >= 700){
-      this.showNav();
-    } else {
-      this.hideNav();
+    if (this.props.containerWidth <= 700) {
+      this.toggle();
     }
   }
 
-  showNav() {
-      this.setState({
-        activeNav: true
-      });
-  }
-
-   hideNav() {
-      this.setState({
-        activeNav: false
-      });
+   handleMenuSelection() {
+      this.toggle();
+      this.props.onClick();
   }
 
   toggle() {
@@ -42,60 +32,55 @@ class NavBar extends Component {
         });
   }
 
-  handleAlways(){
-    this.setState({
-      isFormShowing: true,
-    });
-  }
-
+  
   navBarDesktop() {
     return (
       <nav className="NavBar">
         <ul>
-          <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
-          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
-          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
-          <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top navEntry">Our Story </NavLink></li>
+          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top navEntry">Our Pillars </NavLink></li>
+          <li><NavLink to="/contact" className="hvr-sweep-to-top navEntry">About us </NavLink></li> 
+          <li className="learnBtn"><NavLink to="/mailingList" className="learnLink">Learn More</NavLink></li>       
         </ul>
-      </nav>
+
+        
+      </nav>  
     )
   }
 
   navBarMobile() {
-    return (
-      <nav className="NavBar">
-        <ul>
-          <button className="toggleBtn open" onClick={this.hideNav} >
-            <li><NavLink to="/mailingList" className="hvr-sweep-to-top" >Subscribe</NavLink></li>
-            <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
-            <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
-            <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+    if (this.state.activeNav){      
+        return (
+          <nav className="NavBar">
+            <ul>
+              <button className="menuBtn open" onClick={this.handleMenuSelection} >
+                <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
+                <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
+                <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+              </button>
+              <button className="toggleBtn open" onClick={this.toggle}>
+                <FaClose />
+              </button>
+            </ul>
+          </nav>
+        )
+    } 
+    else {
+        return (
+          <button className="toggleBtn closed" onClick={this.toggle}>
+            <div id="toggleBtn-inner">
+              <FaAlignJustify />
+            </div>
           </button>
-          <button className="toggleBtn closed" onClick={this.toggle.bind(this)}>
-            <FaClose />
-          </button>
-        </ul>
-      </nav>
-    )
+        );  
+    }
   }
 
   render() {
-      /* desktop version */
-      if (this.props.containerWidth >= 700){
-      return this.navBarDesktop();
-      }
-      /* mobile version */
-      else {
-        if (this.state.activeNav){
-            return this.navBarMobile();
-          } else {
-            return (
-              <button className="toggleBtn closed" onClick={this.toggle.bind(this)}>
-                <FaAlignJustify />
-              </button>
-          );
-          }
-    }
+      return (this.props.containerWidth >= 700) ?
+            this.navBarDesktop() :/* desktop version */
+            this.navBarMobile();  /*mobile version */          
+ 
   }
 }
 

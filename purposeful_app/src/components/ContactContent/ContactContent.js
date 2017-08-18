@@ -8,7 +8,7 @@ import ChevronUP from 'react-icons/lib/fa/chevron-up';
 import ChevronDOWN from 'react-icons/lib/fa/chevron-down';
 // importing images 
 import oscar from './oscar.png';
-import james from './james2.jpg';
+import james from './james3.png';
 import diana from './diana.jpg';
 import partha from './partha-baral.jpg';
 import kevin from './kevin-jesse.jpg';

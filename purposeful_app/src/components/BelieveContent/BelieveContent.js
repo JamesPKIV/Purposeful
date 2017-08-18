@@ -38,7 +38,7 @@ class BelieveContent extends Component {
 						their own trail and create their own purpose in life, no matter who
 						they are, or where they come from, only where they want to go.
 						Ultimately, we want to see each person become excited about the work
-						they spend their lives doing, and become proud of waht they create.
+						they spend their lives doing, and become proud of what they create.
 						We believe that a life with a purpose is a life worth living.
 					</p>
 				</section>

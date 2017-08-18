@@ -74,8 +74,7 @@ class SignupContent extends Component {
 				{
 					this.state.isSignedUp ?
 			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> :
-			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick}
-			        	isFormShowing={this.props.isFormShowing}/>
+			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick} />
 
 			    }
 
