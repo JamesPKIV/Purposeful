@@ -1,6 +1,6 @@
 .thanksSection button {
     background-color: #0000A0;
-    color: white;    
+    color: white;
     border: none;
     padding: 10px 10px;
     margin: 8px 0px;
@@ -9,5 +9,5 @@
 }
 
 .thanksSection button:hover {
-    background-color:#0000F0;
+    background-color: #0000F0;
 }

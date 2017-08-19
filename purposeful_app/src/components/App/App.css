@@ -1,152 +1,131 @@
 /* settings universal to all screen sizes */
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .App {
-  box-sizing: border-box;
-  text-align: center;
-
-  width: 100%;
-
-  color: white;
-  background: #b5d558;
-  font-family: 'Arvo', serif;
-  letter-spacing: .05em;
-  
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background: #96b543;
+    font-family: 'Arvo', serif;
+    letter-spacing: .05em;
 }
 
 .learn-btn {
-  background-color: #236B8E;
-  border: none;
-  color: white;
-  padding: 10px;
+    background-color: #236B8E;
+    border: none;
+    color: white;
+    padding: 10px;
 }
 
 
 /* smartphone sized screens */
+
 @media screen and (max-width:700px) {
-
-  .App {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
-
-  }
-
-  .head-content: {
-    width: inherit;
-    height: inherit;
-    margin: auto;
-
-  } 
-
-  #head-rectangle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    height: 12vh;
-    background: #444;
-    z-index: 2;
-    box-shadow: 0px 2px 2px 2px;
-
-  }
-
-  .logo-div {
-    margin: auto;
-    flex: 1 1 10%;
-    height: inherit;
-    
-  }
-
-  .logo {
-    padding: 3px;
-    height: inherit;
-  }
-
-  .p-title-div {
-    flex: 2 2 50%;
-
-  }
-
-  .p-title{
-    font-size: 2em; 
-    letter-spacing: 2px;
-    font-family: 'Arvo', serif;
-    text-align: left;
-    padding-right:  10px;
-  }
-
- 
-  .nav-div{
-    margin: auto;
-    height: inherit;
-    flex: 1 1 15%;
-    align-self: stretch;
-  }
-
-  .main-content{
-    flex: 4 1 65%;
-    padding: 10px;
-    margin: auto;
-    overflow:scroll;
-  }
-
-.learn-div{
-  flex: 1 1 10%;
-  width: 100%;
-  background-color: rgba(5,5,5,.25);
- 
+    .App {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+    .head-content: {
+        width: inherit;
+        height: inherit;
+        margin: auto;
+    }
+    #head-rectangle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        height: 12vh;
+        background: #444;
+        z-index: 2;
+        box-shadow: 0px 2px 2px 2px;
+    }
+    .logo-div {
+        margin: auto;
+        flex: 1 1 10%;
+        height: inherit;
+    }
+    .logo {
+        padding: 3px;
+        height: 80%;
+        margin-top: 10%;
+    }
+    .p-title-div {
+        flex: 2 2 50%;
+    }
+    .p-title {
+        font-size: 2em;
+        letter-spacing: 2px;
+        font-family: 'Arvo', serif;
+        text-align: left;
+        padding-right: 10px;
+    }
+    .nav-div {
+        margin: auto;
+        height: inherit;
+        flex: 1 1 15%;
+        align-self: stretch;
+    }
+    .main-content {
+        flex: 4 1 65%;
+        padding: 10px;
+        margin: auto;
+        overflow: scroll;
+    }
+    .learn-div {
+        flex: 1 1 10%;
+        width: 100%;
+        background-color: rgba(5, 5, 5, .25);
+    }
+    .learn-btn {
+        background-color: #236B8E;
+        padding: 20px;
+        margin-top: 5px;
+        height: inherit;
+        width: 80%;
+        max-width: 50%;
+    }
 }
 
-.learn-btn{
-  background-color: #236B8E;
-  padding: 20px;
-  margin-top: 5px;
-  height: inherit;
-  width:80%;
-  max-width: 50%;
-  }
-}
 
 /*desktop sized screens*/
+
 @media screen and (min-width:700px) {
-  .App {
-    margin: auto;
-    padding: 20 20 20 20;
-    min-height: 100vh;
-    height: 100% !important;
-
-    color: white;
-    background-color:#86C67C;
-  }
-
-  .App-logo {
-    height: 80px;
-  }
-  .p-title{
-    margin-top: 15px;
-    font-size: 48px;
-    letter-spacing: 2px;
-    font-family: 'Arvo', serif;
-    margin-bottom: 20px;
-  }
-
-  .learn-div{
-    width: 100%;
-  }
-
-  .learn-btn{
-    font-size: 16px;
-    padding: 10px;
-    width: 20%;
-  }
-
-  .learn-btn:hover{
-    color: black;
-    background-color: #3299CC;
-  }
+    .App {
+        margin: auto;
+        padding: 20 20 20 20;
+        min-height: 100vh;
+        height: 100% !important;
+        color: white;
+    }
+    .App-logo {
+        height: 80px;
+    }
+    .p-title {
+        margin: 0;
+        border-top: 5px solid #7c7d7d;
+        padding: 20px 0;
+        font-size: 48px;
+        letter-spacing: 2px;
+        font-family: 'Arvo', serif;
+    }
+    .learn-div {
+        width: 100%;
+    }
+    .learn-btn {
+        font-size: 16px;
+        padding: 10px;
+        width: 20%;
+    }
+    .learn-btn:hover {
+        color: black;
+        background-color: #3299CC;
+    }
 }
