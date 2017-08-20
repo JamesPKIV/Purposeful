@@ -6,8 +6,11 @@
 }
 
 @media screen and (min-width:700px) {
-    #content {
-        margin-left: 20vw;
-        margin-right: 20vw;
+
+    .semi-transparent-box{
+        margin: 0 5%;
+        padding: 5px; 
+        color: #333;
+        background: rgba(255,255,255,.8);
     }
 }

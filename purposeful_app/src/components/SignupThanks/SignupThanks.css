@@ -11,3 +11,17 @@
 .thanksSection button:hover {
     background-color: #0000F0;
 }
+
+@media screen and (min-width:700px) {
+
+    .thanksSection {
+        
+        margin: 5% 5%;
+        padding: 5% 5%; 
+        margin: 20px; 
+    }
+   .semi-transparent-box{
+        color: #333;
+        background: rgba(255,255,255,.8);  
+    }
+}
