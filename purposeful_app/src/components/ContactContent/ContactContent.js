@@ -43,7 +43,7 @@ class ContactContent extends Component {
 	teamDesc() {
 		return (
 		<div className="div-about">
-			<h2 className="hd-leader">Leadership</h2>
+			<h2 className="hd-leader">Our Team</h2>
 			<ul className="ul-about">
 				<li>
 					<figure className="whoEntry">
@@ -85,7 +85,7 @@ class ContactContent extends Component {
 			<div className="chevron-div" onClick={this.showBoard}>
 				<span>Board of Advisors</span>
 				<br/>
-				<span><ChevronUP className="icon " /></span>
+				<span><ChevronDOWN className="icon " /></span>
 			</div>
 		</div>
 		)
@@ -121,9 +121,9 @@ class ContactContent extends Component {
 
 			</ul>
 			<div className="chevron-div" onClick={this.showTeam}> 
-				<span>Leadership</span>
+				<span>Our Team</span>
 				<br/>
-				<span><ChevronDOWN className="icon " /></span>
+				<span><ChevronUP className="icon " /></span>
 			</div>
 		</div>
 		)

@@ -33,7 +33,6 @@ class NavBar extends Component {
         });
   }
 
-  
   navBarDesktop() {
     return (
       <nav className="NavBar">
@@ -41,11 +40,9 @@ class NavBar extends Component {
           <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top navEntry">Our Story </NavLink></li>
           <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top navEntry">Our Pillars </NavLink></li>
           <li><img src={logo} className="logo" alt="Purposeful"></img></li>
-          <li><NavLink to="/contact" className="hvr-sweep-to-top navEntry">About us </NavLink></li> 
+          <li><NavLink to="/contact" className="hvr-sweep-to-top navEntry">About Us </NavLink></li>
           <li className="learnBtn"><NavLink to="/mailingList" className="learnLink">Learn More</NavLink></li>       
         </ul>
-
-        
       </nav>  
     )
   }
@@ -53,18 +50,22 @@ class NavBar extends Component {
   navBarMobile() {
     if (this.state.activeNav){      
         return (
-          <nav className="NavBar">
-            <ul>
-              <button className="menuBtn open" onClick={this.handleMenuSelection} >
-                <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
-                <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
-                <li><NavLink to="/contact" className="hvr-sweep-to-top">About us </NavLink></li>
+            <div className="NavBar-open">
+              <button className="toggleBtn closed" onClick={this.toggle}>
+                <div id="toggleBtn-inner">
+                  <FaAlignJustify />
+                </div>
               </button>
-              <button className="toggleBtn open" onClick={this.toggle}>
-                <FaClose />
-              </button>
-            </ul>
-          </nav>
+              <nav className="NavBar">
+                <ul>
+                  <button className="menuBtn open" onClick={this.handleMenuSelection} >
+                    <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
+                    <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
+                    <li><NavLink to="/contact" className="hvr-sweep-to-top">About Us </NavLink></li>
+                  </button>
+                </ul>
+              </nav>
+            </div>
         )
     } 
     else {
@@ -80,9 +81,8 @@ class NavBar extends Component {
 
   render() {
       return (this.props.containerWidth >= 700) ?
-            this.navBarDesktop() :/* desktop version */
-            this.navBarMobile();  /*mobile version */          
- 
+          this.navBarDesktop() :/* desktop version */
+          this.navBarMobile();  /*mobile version */
   }
 }
 
