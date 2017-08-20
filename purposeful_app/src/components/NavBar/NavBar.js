@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 import FaAlignJustify from 'react-icons/lib/fa/align-justify';
-import FaClose from 'react-icons/lib/fa/close';
 import logo from '../App/logo.png';
 
 class NavBar extends Component {
