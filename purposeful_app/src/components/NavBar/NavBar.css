@@ -1,13 +1,6 @@
 /* Universal settings*/
 
-.NavBar li:hover {
-    background-color: rgba(#62, #9a, #06, 50%);
-}
-
-.NavBar li :active {
-    background-color: none;
-}
-
+.NavBar li :active,
 .NavBar li :not(active) {
     background-color: none;
 }
@@ -25,7 +18,8 @@
         height: 100%;
         border: none;
         background-color: transparent;
-        color: white;
+        font-size: 30px;
+        color: #cacaca;
     }
     .toggleBtn.open {
         position: absolute;
@@ -42,14 +36,17 @@
         background-color: transparent;
     }
     .NavBar ul {
+        margin-top: 90px;
         position: absolute;
         top: 0px;
         right: 0px;
         z-index: 2;
         padding: 5px;
         list-style: none;
-        background-color: #EDEDED;
+        background-color: #444;
         text-align: center;
+        border-left: 3px solid white;
+        border-bottom: 3px solid white;
     }
     .NavBar li {
         display: block;
@@ -57,7 +54,7 @@
     }
     .NavBar li a {
         display: block;
-        color: black;
+        color: white;
         text-align: center;
         text-decoration: none;
         font-size: large;
@@ -65,7 +62,27 @@
         font-family: 'Arvo', serif;
     }
     .NavBar .icon {
-        font-size: 1.5em;
+        font-size: 24px;
+    }
+    .NavBar-open {
+        height: 100%;
+    }
+    .NavBar-open .toggleBtn.closed {
+        transition: color .3s;
+        color: #f0f0f0;
+    }
+    .learn-div {
+        border-top: 3px solid white;
+        background-color: #444;
+        max-height: 90px;
+    }
+    .learn-btn {
+        margin-top: 15px;
+        font-size: 16px;
+        height: 60px;
+        border-radius: 10px;
+        background-color: #C81C2D;
+        font-family: 'Arvo', serif;
     }
 }
 
@@ -105,21 +122,26 @@
     }
     .learnBtn {
         flex: 0 1 auto;
+        height: 41px;
         margin: auto;
         padding: 10px;
-        background-color: #236B8E;
+        background-color: #bb2f3d;
         border: none;
+        transition: background-color .3s;
+    }
+    .learnBtn:hover {
+        background-color: #d33444;
     }
     .learnBtn a {
         color: white;
         text-decoration: none;
-        padding: 10px 20px;
+        padding: 10px;
     }
     .NavBar .menuIcon {
         display: none;
     }
     .NavBar .icon {
-        font-size: 1.5em;
+        font-size: 20px;
     }
     .logo {
         height: 60px;
