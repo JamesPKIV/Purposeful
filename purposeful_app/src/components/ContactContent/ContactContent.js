@@ -42,7 +42,7 @@ class ContactContent extends Component {
 
 	teamDesc() {
 		return (
-		<div className="div-about">
+		<div className="div-about semi-transparent-box">
 			<h2 className="hd-leader">Leadership</h2>
 			<ul className="ul-about">
 				<li>
@@ -93,7 +93,7 @@ class ContactContent extends Component {
 	
 	boardDesc(){
 		return (
-			<div className="div-about">
+			<div className="div-about semi-transparent-box">
 			<h2 className="hd-leader">Board of Advisors</h2>
 			<ul className="ul-about">
 				<li>

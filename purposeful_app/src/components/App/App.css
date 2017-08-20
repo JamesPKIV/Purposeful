@@ -104,7 +104,16 @@
         min-height: 100vh;
         height: 100% !important;
         color: white;
+        background: url('./amos-g-1400px.jpg') no-repeat center fixed;
+        background-size: cover;
     }
+
+    .main-content {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
     .App-logo {
         height: 80px;
     }
