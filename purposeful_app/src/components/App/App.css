@@ -38,6 +38,7 @@
         margin: auto;
     }
     #head-rectangle {
+        min-height: 90px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -49,16 +50,13 @@
     }
     .logo-div {
         margin: auto;
-        flex: 1 1 10%;
         height: inherit;
+        margin-left: 5px;
     }
     .logo {
         padding: 3px;
         height: 80%;
         margin-top: 10%;
-    }
-    .p-title-div {
-        flex: 2 2 50%;
     }
     .p-title {
         font-size: 2em;
@@ -70,8 +68,8 @@
     .nav-div {
         margin: auto;
         height: inherit;
-        flex: 1 1 15%;
         align-self: stretch;
+        margin-right: 15px;
     }
     .main-content {
         flex: 4 1 65%;
@@ -104,13 +102,22 @@
         min-height: 100vh;
         height: 100% !important;
         color: white;
+        background: url('./amos-g-1400px.jpg') no-repeat center fixed;
+        background-size: cover;
     }
+
+    .main-content {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
     .App-logo {
         height: 80px;
     }
     .p-title {
         margin: 0;
-        border-top: 5px solid #7c7d7d;
+        border-top: 5px solid #fff;
         padding: 20px 0;
         font-size: 48px;
         letter-spacing: 2px;

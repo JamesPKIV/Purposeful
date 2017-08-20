@@ -8,10 +8,11 @@
 @media screen and (max-width:700px) {
     #signupForm {
         margin: auto;
-        margin-top: 70px;
-        padding: 5%;
+        margin-top: 20px;
+        padding: 10px 5%;
         width: 90%;
-        border: 1px solid grey;
+        border: 3px solid #7c7d7d;
+        border-radius: 15px;
         text-align: left;
         background-color: white;
         color: black;
@@ -29,9 +30,10 @@
     #signupForm input[type=text],
     input[type=email] {
         width: 100%;
-        border: 1px solid #ccc;
-        border-radius: none;
-        background-color: lightgrey;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        background-color: #eee;
+        font-family: 'Arvo', serif;
         font-size: 16px;
     }
     #signupForm input[type=text]:focus,
@@ -40,7 +42,7 @@
     }
     #signupForm input[type=button],
     input[type=submit] {
-        width: 40%;
+        width: 150px;
         background-color: #C81C2D;
         color: white;
         border: none;
@@ -48,7 +50,8 @@
         margin: auto;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 16px;
+        font-family: 'Arvo', serif;
     }
     .div-input {
         text-align: center;

@@ -42,8 +42,8 @@ class ContactContent extends Component {
 
 	teamDesc() {
 		return (
-		<div className="div-about">
-			<h2 className="hd-leader">Leadership</h2>
+		<div className="div-about semi-transparent-box">
+			<h2 className="hd-leader">Our Team</h2>
 			<ul className="ul-about">
 				<li>
 					<figure className="whoEntry">
@@ -85,7 +85,7 @@ class ContactContent extends Component {
 			<div className="chevron-div" onClick={this.showBoard}>
 				<span>Board of Advisors</span>
 				<br/>
-				<span><ChevronUP className="icon " /></span>
+				<span><ChevronDOWN className="icon " /></span>
 			</div>
 		</div>
 		)
@@ -93,7 +93,7 @@ class ContactContent extends Component {
 	
 	boardDesc(){
 		return (
-			<div className="div-about">
+			<div className="div-about semi-transparent-box">
 			<h2 className="hd-leader">Board of Advisors</h2>
 			<ul className="ul-about">
 				<li>
@@ -101,7 +101,7 @@ class ContactContent extends Component {
 						<img className="about-pic" alt="Partha Baral" src={partha} />
 						<figcaption className="about">
 							<span className="name"> Partha Baral </span> <br />
-							<span className="role-desc"> Senior Director VmWare </span>
+							<span className="role-desc"> Senior Director at VmWare </span>
 							<br />
 							<a href="https://www.linkedin.com/in/parthabaral/"><Linkedin className="icon" /></a>
 						</figcaption>
@@ -121,9 +121,9 @@ class ContactContent extends Component {
 
 			</ul>
 			<div className="chevron-div" onClick={this.showTeam}> 
-				<span>Leadership</span>
+				<span>Our Team</span>
 				<br/>
-				<span><ChevronDOWN className="icon " /></span>
+				<span><ChevronUP className="icon " /></span>
 			</div>
 		</div>
 		)

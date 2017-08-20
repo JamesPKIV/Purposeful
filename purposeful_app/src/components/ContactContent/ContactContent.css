@@ -4,12 +4,16 @@
     padding-top: 0;
 }
 
-.div-about a:visited {
+.div-about a,
+.div-about a:visited,
+.div-about a:active {
+    margin-top: 10px;
     color: #a8a8a8;
+    transition: color .5s;
 }
 
-.div-about a:active {
-    color: #a8a8a8;
+.div-about a:hover {
+    color: #747474;
 }
 
 @media screen and (max-width: 700px) {
@@ -67,8 +71,6 @@
     .div-about {
         margin: 0 0 50px 0;
         padding: 20px 0px;
-        color: black;
-        background-color: white;
     }
     .hd-leader {
         margin: 10px;
@@ -76,12 +78,15 @@
     }
     .ul-about {
         padding-bottom: 0px;
-        display: block;
-        background-color: white;
-        color: black;
+        display: flex;
+        justify-content: space-around;
+        align-items: space-around;
     }
     .ul-about li {
         display: inline-block;
+        background-color: white;
+        color: black;
+        margin: 5px;
     }
     .about-pic {
         border: 4px solid #96b543;
@@ -95,23 +100,24 @@
         font-size: 18px;
     }
     .role-desc {
-        font-size: 14px;
+        font-size: .8em;
         color: #7d7d7d;
         margin: 10px;
     }
     .icon {
-        margin-top: 3px;
-        margin-right: 5px;
-        font-size: 25px;
+        margin: 10px 5px;
+        font-size: 30px;
     }
     .chevron-div {
-        /*margin: 0 auto; */
+        font-size: 18px;
         width: 200px;
         margin: 0 auto;
+        margin-top: -10px;
+        transition: transform .3s;
     }
     .chevron-div:hover {
-        transform: font-size 1.2s ease;
-        font-size: 18px;
+        color: #3b3b3b;
         cursor: pointer;
+        transform: translate(0px, 3px);
     }
 }

@@ -1,13 +1,38 @@
 @media screen and (max-width:700px) {
-    #content {
+    .pillar-section {
         margin-left: 10vw;
         margin-right: 10vw;
     }
 }
 
 @media screen and (min-width:700px) {
-    #content {
-        margin-left: 20vw;
-        margin-right: 20vw;
+    .pillar-section {
+
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
     }
+
+    .pillar-container {
+    	display: flex;
+    	align-items: stretch;
+    	justify-content: stretch;
+    }
+
+    .pillar {
+    	padding: 10px;
+    	margin:  10px;
+    	border: 1px solid grey;
+    	flex: 1 1 30%;
+    }
+
+     .semi-transparent-box{
+     	margin: 0 5%;
+        padding: 0 5%; 
+        color: #333;
+        background: rgba(255,255,255,.8);
+        
+    }
+
 }
