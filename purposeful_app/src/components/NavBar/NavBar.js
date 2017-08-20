@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 import FaAlignJustify from 'react-icons/lib/fa/align-justify';
 import FaClose from 'react-icons/lib/fa/close';
+import logo from '../App/logo.png';
 
 class NavBar extends Component {
 
@@ -39,6 +40,7 @@ class NavBar extends Component {
         <ul>
           <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top navEntry">Our Story </NavLink></li>
           <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top navEntry">Our Pillars </NavLink></li>
+          <li><img src={logo} className="logo" alt="Purposeful"></img></li>
           <li><NavLink to="/contact" className="hvr-sweep-to-top navEntry">About us </NavLink></li> 
           <li className="learnBtn"><NavLink to="/mailingList" className="learnLink">Learn More</NavLink></li>       
         </ul>
