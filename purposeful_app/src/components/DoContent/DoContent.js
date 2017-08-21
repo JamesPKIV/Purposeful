@@ -20,25 +20,25 @@ class DoContent extends Component {
 					Mentorship, and Interactions.
 				</p>
 				<section className="pillar-container">
-					<p className="pillar">
-						<h3> <FaCaretRight/><span id="ideas-color0"> Ideas </span></h3>
+					<div className="pillar">
+						<h3><span id="ideas-color0"> Ideas </span></h3>
 						<img src={interactionsImg} alt=""/>
-						Share your idea with the world and collaborate with others to start a project
-						that is important to you, or discover and join a project that ignites your passion.
-					</p>
-					<p className="pillar">
-						<h3> <FaCaretRight/><span id="ideas-color1"> Mentorship </span></h3>
+						<p className="pillar-desc">Share your idea with the world and collaborate with others to start a project
+						that is important to you, or discover and join a project that ignites your passion.</p>
+					</div>
+					<div className="pillar">
+						<h3><span id="ideas-color1"> Mentorship </span></h3>
 						<img src={mentorImg} alt=""/>
-						Find a mentor to guide you through learning a new skill that interests you, or 
-						give back by sharing your knowledge and expertise through teaching others. 
-	        		</p>
-					<p className="pillar">
-						<h3><FaCaretRight/><span id="ideas-color2"> Interactions </span></h3>
+						<p className="pillar-desc">Find a mentor to guide you through learning a new skill that interests you, or 
+						give back by sharing your knowledge and expertise through teaching others.</p>
+	        		</div>
+					<div className="pillar">
+						<h3><span id="ideas-color2"> Interactions </span></h3>
 						<img src={teamImg} alt=""/>
-						Come together with new people who share your interests in online
-						chat sessions to see what you can create. We also aspire to set up office space(s) where people can
-						collaborate and engage beyond the virtual world.
-					</p>
+						<p className="pillar-desc">Come together with people who share your interests to see what you can create.
+						We're also working to set up office spaces where people can
+						collaborate beyond the digital world.</p>
+					</div>
 				</section>
 			</section>
 		);

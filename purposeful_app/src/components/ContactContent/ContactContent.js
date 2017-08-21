@@ -73,8 +73,8 @@ class ContactContent extends Component {
 					<figure className="whoEntry">
 						<img className="about-pic" alt="Diana Gonzalez Santillan" src={diana} />
 						<figcaption className="about">
-							<span className="name"> Diana Gonzalez Santillan</span> <br />
-							<span className="role-desc">Co-Founder & Software Engineer </span>
+							<span className="name"> Diana G. Santillan</span> <br />
+							<span className="role-desc">Co-Founder & Engineer </span>
 							<br />
 							<a href="https://github.com/digonsan"><Github className="icon" /></a>
 							<a href="https://www.linkedin.com/in/diana-gonzalez-santillan-57739187/" ><Linkedin className="icon" /></a>
