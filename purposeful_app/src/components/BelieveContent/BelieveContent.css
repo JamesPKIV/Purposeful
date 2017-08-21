@@ -1,34 +1,33 @@
 #believe-content {
-    text-align:start;
-    display:block;
+    text-align: start;
+    display: block;
     font-size: large;
 }
 
-
-
 #believe-title {
-        font-size: x-large;
-        margin-bottom: 2%;
- }
+    margin-bottom: 2%;
+}
 
-#ideas-color0{
+#ideas-color0 {
     color: #bb2f3d;
 }
-#ideas-color1{
+
+#ideas-color1 {
     color: #5c7a0a;
 }
-#ideas-color2{
+
+#ideas-color2 {
     color: #236b8e;
 }
 
-
-.semi-transparent-box{
+.semi-transparent-box {
     background-color: white;
     color: black;
-    padding-bottom: 2.5px;
+    padding-bottom: 20px;
+    border-radius: 10px;
 }
 
- .strongest {
+.strongest {
     text-align: center;
     font-weight: 700;
     font-size: 20px;
@@ -39,37 +38,31 @@
         font-size: x-large;
         padding-top: 20px;
     }
-
     #believe-content {
         text-align: center;
         padding: 3vw;
         color: black;
     }
-
     .believe-container {
         margin: 2vw;
         padding: 3vw;
     }
-
     .believe-description {
         width: 100%;
     }
 }
 
 @media screen and (min-width:700px) {
-
     #believe-content {
         margin-left: 5vw;
         margin-right: 5vw;
         margin-top: 0;
     }
-
-    #believe-description{
+    #believe-description {
         text-align: center;
         margin-bottom: none;
     }
-
-    .purposeful-img{
+    .purposeful-img {
         width: 60%;
         height: 60%;
         margin-top: 10px;

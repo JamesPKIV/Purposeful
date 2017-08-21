@@ -16,7 +16,6 @@
     color: #747474;
 }
 
-
 @media screen and (max-width: 700px) {
     .div-about {
         display: flex;
@@ -79,11 +78,6 @@
     .div-about {
         margin: 0 5%;
         padding: 5px 5%;
-    }
-    .hd-leader {
-        margin: 10px;
-        color: black;
-        padding-bottom: 10px;
     }
     .ul-about {
         padding-bottom: 0px;
