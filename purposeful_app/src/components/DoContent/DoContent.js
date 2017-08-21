@@ -35,9 +35,9 @@ class DoContent extends Component {
 					<p className="pillar">
 						<h3><FaCaretRight/><span id="ideas-color2"> Interactions </span></h3>
 						<img src={teamImg} alt=""/>
-						Come together with new people who share your interests in online
-						chat sessions to see what you can create. We also aspire to set up office space(s) where people can
-						collaborate and engage beyond the virtual world.
+						Come together with people who share your interests to see what you can create.
+						We're also working to set up office spaces where people can
+						collaborate beyond the digital world.
 					</p>
 				</section>
 			</section>

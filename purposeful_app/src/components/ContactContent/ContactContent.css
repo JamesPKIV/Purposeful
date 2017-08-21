@@ -21,7 +21,8 @@
     .div-about {
         display: flex;
         flex-flow: column wrap;
-        margin: 10px auto;
+        margin: 2.5vw;
+        padding: 15px;
         color: black;
         background-color: white;
     }
@@ -59,20 +60,25 @@
         font-weight: 900;
         font-size: 1.25em;
         margin: 10px;
+        text-align: center;
     }
     .role-desc {
-        margin: 10px;
+        text-align: center;
         font-size: 1em;
     }
     .icon {
         margin: 10px;
     }
+
+    .about a {
+        font-size: 2em;
+    }
 }
 
 @media screen and (min-width: 700px) {
     .div-about {
-        margin: 0 0 50px 0;
-        padding: 20px 0px;
+        margin: 0 5%;
+        padding: 5px 5%;
     }
     .hd-leader {
         margin: 10px;
@@ -102,11 +108,11 @@
     .name {
         font-weight: 900;
         font-size: 18px;
+        text-align: center;
     }
     .role-desc {
         font-size: .8em;
         color: #7d7d7d;
-        margin: 10px;
     }
     .icon {
         margin: 10px 5px;

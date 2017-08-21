@@ -1,8 +1,10 @@
 #believe-content {
     text-align:start;
     display:block;
-    font-size: larger;
+    font-size: large;
 }
+
+
 
 #believe-title {
         font-size: x-large;
@@ -26,6 +28,12 @@
     padding-bottom: 2.5px;
 }
 
+ .strongest {
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
 @media screen and (max-width:700px) {
     #believe-title {
         font-size: x-large;
@@ -33,25 +41,18 @@
     }
 
     #believe-content {
-        margin-left: 5vw;
-        margin-right: 5vw;
         text-align: center;
-        margin-top: 0;
+        padding: 3vw;
         color: black;
     }
 
-    .asked {
-        display: block;
-        margin-top: 20%;
-        margin-bottom: 10%;
-        font-style: italic;
+    .believe-container {
+        margin: 2vw;
+        padding: 3vw;
     }
 
-    .answered {
-        display: block;
-        margin-top: 0%;
-        margin-bottom: 10%;
-        font-style: italic;
+    .believe-description {
+        width: 100%;
     }
 }
 
@@ -61,16 +62,6 @@
         margin-left: 5vw;
         margin-right: 5vw;
         margin-top: 0;
-    }
-
-    .asked, .answered {
-        padding-left: 10%;
-    }
-
-    .strongest {
-        text-align: center;
-        font-weight: 700;
-        font-size: 20px;
     }
 
     #believe-description{
