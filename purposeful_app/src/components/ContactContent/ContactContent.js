@@ -101,7 +101,7 @@ class ContactContent extends Component {
 						<img className="about-pic" alt="Partha Baral" src={partha} />
 						<figcaption className="about">
 							<span className="name"> Partha Baral </span> <br />
-							<span className="role-desc"> Senior Director at VmWare </span>
+							<span className="role-desc"> Senior Director at VMware </span>
 							<br />
 							<a href="https://www.linkedin.com/in/parthabaral/"><Linkedin className="icon" /></a>
 						</figcaption>

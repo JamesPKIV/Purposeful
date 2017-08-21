@@ -91,8 +91,13 @@
 
 @media screen and (min-width:700px) {
     .NavBar {
+        position: fixed;
+        top:0;
+        right:0;
+        left:0;
         background-color: #444;
-        border-bottom: 5px solid #444;
+        margin-bottom: 100%;
+        border-bottom: 5px solid white;
     }
     .NavBar ul {
         flex-flow: row nowrap;

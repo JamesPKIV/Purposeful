@@ -102,8 +102,6 @@
         min-height: 100vh;
         height: 100% !important;
         color: white;
-        background: url('./amos-g-1400px.jpg') no-repeat center fixed;
-        background-size: cover;
     }
 
     .main-content {
@@ -122,6 +120,8 @@
         font-size: 48px;
         letter-spacing: 2px;
         font-family: 'Arvo', serif;
+        background: #96b543;
+        margin-bottom: 20px;
     }
     .learn-div {
         width: 100%;
@@ -134,5 +134,15 @@
     .learn-btn:hover {
         color: black;
         background-color: #3299CC;
+    }
+
+    .semi-transparent-box{
+        flex: 1 1 auto;
+        margin: auto;
+        width: 100%;
+        margin: 0 5%;
+        padding: 5px 5%; 
+        color: #111;
+        background: rgba(255,255,255,1);
     }
 }
