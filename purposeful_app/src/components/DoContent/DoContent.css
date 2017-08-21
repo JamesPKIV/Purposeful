@@ -7,7 +7,6 @@
 
 @media screen and (min-width:700px) {
     .pillar-section {
-
         display: flex;
         flex-flow: column;
         align-items: center;
@@ -21,18 +20,15 @@
     }
 
     .pillar {
-    	padding: 10px;
+    	padding: 15px;
     	margin:  10px;
     	border: 1px solid grey;
     	flex: 1 1 30%;
     }
 
-     .semi-transparent-box{
-     	margin: 0 5%;
-        padding: 0 5%; 
-        color: #333;
-        background: rgba(255,255,255,.8);
-        
+    .pillar img {
+        display: block;
+        margin: 5% auto;
+        width: 100%;
     }
-
 }

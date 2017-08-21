@@ -14,7 +14,7 @@ class SignupContent extends Component {
 			last: '',
 			email: '',
 			mList: [],
-			isSignedUp: true,
+			isSignedUp: false,
 	    };
 	}
 

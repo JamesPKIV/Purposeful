@@ -1,35 +1,38 @@
 import React, { Component } from 'react';
+import Link from 'react-router';
+import ChevronRIGHT from 'react-icons/lib/fa/chevron-right';
+
 import './BelieveContent.css';
 
 class BelieveContent extends Component {
 
 	render () {
 		return (
-			<article className="semi-transparent-box">
-				<section>
-					<h3>Why Purposeful?</h3>
-					<p id="content">
-						We believe that discovering and pursuing your passion
-						opens the doors to a fulfilling life with meaning and purpose.
+				<section className="semi-transparent-box">
+					<h2 id="believe-title">Why Purposeful?</h2>
+					
+					<p id="believe-content">
+						Every day a great idea, dream or aspiration goes unfulfilled 
+						because people don’t have the skills, network, or resources to make it happen. 
 						<br/>
 						<br/>
-						Every day, someone has a great idea that they are passionate about that
-						never comes to fruition because they don’t have the skills, network, or
-						resources to make it happen. What if there was a way to connect
-						those great ideas to great people who can help-	mentors with diverse skills,
-						or others who share a common interest and want to get involved?
+						<span className="asked"> We asked ourselves: </span>
+						<span className="power-statement">Could we improve people's lives by empowering them
+							to follow their dreams?
+						</span>
+						<span className="power-statement">Is there a way we could connect these great aspirations to great people
+					 	who have the ability and desire to help?
+						</span>
+						<span className="power-statement">If we could help people find purpose in their lives, <i>shouldn't we?</i>
+						</span>
 						<br/>
-						<br/> 
-						While today's social platforms have earned their place, we’ve come to realize
-						that people need a platform that brings meaning to their lives - a platform
-						for people who want to create, connect, and wake up every morning knowing
-						that their lives are purposeful.
-						<br/>
-						<br/> 
-						We are working diligently to build the social platform of the future!
+						<span className="answered"> We answered:</span>
+						<span className="power-statement strongest"> <i>Yes, yes we should.</i> 
+						<br/>Thus, Purposeful was born.
+						</span>
+
 					</p>
 				</section>
-			</article>
 		);
 	}
 }
