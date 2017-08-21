@@ -8,8 +8,8 @@ class BelieveContent extends Component {
 				<section className="believe-container semi-transparent-box">
 					<h2 id="believe-title">Why build Purposeful?</h2>
 					
-					<p id="believe-content">
-					<div  className="strongest">Every day millions of great <span id="ideas-color0">ideas</span>, <span id="ideas-color1">dreams</span>, and <span id="ideas-color2">aspirations</span> go unfilled...</div>
+					<div id="believe-content">
+					<div  className="strongest">Every day millions of great <span id="ideas-color0">ideas</span>, <span id="ideas-color1">dreams</span>, and <span id="ideas-color2">aspirations</span> go unfulfilled...</div>
 						<br/>
 						<div id="believe-description">
 					    We believe that when people have access to the right skills, resources, and network, those great ideas can grow into great endeavors.
@@ -23,7 +23,7 @@ class BelieveContent extends Component {
 						for being and becoming Purposeful as a community.
 						</div>
 
-					</p>
+					</div>
 				</section>
 		);
 	}

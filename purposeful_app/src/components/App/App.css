@@ -23,7 +23,12 @@
     padding: 10px;
 }
 
-
+/* small title font for very small screens */
+@media screen and (max-width:300px) {
+    .p-title {
+        font-size: large;
+    }
+}
 /* smartphone sized screens */
 
 @media screen and (max-width:700px) {
@@ -40,17 +45,19 @@
         margin: auto;
     }
     #head-rectangle {
-        min-height: 90px;
+        min-height: 70px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        height: 12vh;
+        height: 10vh;
+        width:100vw;
         background: #444;
         z-index: 2;
         box-shadow: 0px 2px 2px 2px;
     }
     .logo-div {
+        flex: 1 1 10%;
         margin: auto;
         height: inherit;
         margin-left: 5px;
@@ -60,14 +67,18 @@
         height: 80%;
         margin-top: 10%;
     }
-    .p-title {
-        font-size: 2em;
+    .p-title-div {
+        flex: 1 10 auto;
+    }
+    .p-title{
+        width: 100%;
         letter-spacing: 2px;
         font-family: 'Arvo', serif;
-        text-align: left;
-        padding-right: 10px;
+        text-align: center;
+        padding-right: 3%;
     }
     .nav-div {
+        flex: 1 2 15%;
         margin: auto;
         height: inherit;
         align-self: stretch;
