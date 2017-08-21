@@ -81,13 +81,13 @@
         padding-bottom: 0px;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
     }
     .ul-about li {
         flex: 0 1 30%;
         background-color: white;
         color: black;
-        margin: auto 5px;
+        margin: 5px;
     }
     .about-pic {
         border: 1px solid white;
