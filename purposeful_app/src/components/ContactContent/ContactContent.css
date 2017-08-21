@@ -115,8 +115,7 @@
     .chevron-div {
         font-size: 18px;
         width: 200px;
-        margin: 0 auto;
-        margin-top: -10px;
+        margin: -20px auto 10px auto;
         transition: transform .3s;
     }
     .chevron-div:hover {
