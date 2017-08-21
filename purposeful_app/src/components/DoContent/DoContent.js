@@ -10,7 +10,7 @@ class DoContent extends Component {
 	render () {
 		return (
 			<section className="pillar-section semi-transparent-box">
-				<h3>What is Purposeful?</h3>
+				<h2>What is Purposeful?</h2>
 				<p className="pillar-summary">
 					We are building a creative space for people to find purpose in their
 					lives through collaborating with others on projects that
@@ -21,19 +21,19 @@ class DoContent extends Component {
 				</p>
 				<section className="pillar-container">
 					<p className="pillar">
-						<h4> <FaCaretRight/><b> Ideas </b></h4>
+						<h3> <FaCaretRight/><span id="ideas-color0"> Ideas </span></h3>
 						<img src={interactionsImg} alt=""/>
 						Share your idea with the world and collaborate with others to start a project
 						that is important to you, or discover and join a project that ignites your passion.
 					</p>
 					<p className="pillar">
-						<h4> <FaCaretRight/><b> Mentorship </b></h4>
+						<h3> <FaCaretRight/><span id="ideas-color1"> Mentorship </span></h3>
 						<img src={mentorImg} alt=""/>
 						Find a mentor to guide you through learning a new skill that interests you, or 
 						give back by sharing your knowledge and expertise through teaching others. 
 	        		</p>
 					<p className="pillar">
-						<h4><FaCaretRight/><b> Interactions </b></h4>
+						<h3><FaCaretRight/><span id="ideas-color2"> Interactions </span></h3>
 						<img src={teamImg} alt=""/>
 						Come together with new people who share your interests in online
 						chat sessions to see what you can create. We also aspire to set up office space(s) where people can

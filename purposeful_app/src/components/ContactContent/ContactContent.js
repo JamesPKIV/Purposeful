@@ -11,7 +11,7 @@ import oscar from './oscar.png';
 import james from './james3.png';
 import diana from './diana.jpg';
 import partha from './partha-baral.jpg';
-import kevin from './kevin-jesse.jpg';
+import kevin from './kevin-jesse.png';
 
 class ContactContent extends Component {
 
