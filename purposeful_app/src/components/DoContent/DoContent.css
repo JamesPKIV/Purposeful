@@ -15,7 +15,6 @@
     }
 
     .pillar {
-    	padding: 15px;
     	margin:  10px;
         flex: 1 1 30%;
         background-color: #f5f5f5;
@@ -30,6 +29,7 @@
     }
 
     .pillar-desc {
+    	padding: 0 20px;
         font-size: 14px;
         color: #5c5c5c;
     }
@@ -51,7 +51,6 @@
     }
 
     .pillar {
-    	padding: 15px;
     	margin:  10px;
         flex: 1 1 30%;
         background-color: #f5f5f5;
@@ -66,6 +65,7 @@
     }
 
     .pillar-desc {
+        padding: 0 20px;
         font-size: 14px;
         color: #5c5c5c;
     }
