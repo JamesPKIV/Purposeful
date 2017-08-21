@@ -33,7 +33,6 @@ class App extends Component {
       showLearnBtn: true
     };
     this.handleFormShow = this.handleFormShow.bind(this);
-    
     this.handleLearnShow = this.handleLearnShow.bind(this);
     }
 
@@ -84,7 +83,7 @@ class App extends Component {
 
                   <div className="p-title-div">
                     <h1 className="p-title">
-                      <span className="purposeCSS">Purpose</span>ful
+                      Purposeful
                     </h1>
                   </div>
 

@@ -7,8 +7,11 @@
 
 @media screen and (max-width:700px) {
     .pillar-section {
-        margin-left: 2.5vw;
-        margin-right: 2.5vw;
+        margin: 2vw;
+        padding: 3vw;
+    }
+    .pillar-summary {
+        padding: 2vw;
     }
 
     .pillar {
