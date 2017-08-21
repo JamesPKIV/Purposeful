@@ -1,7 +1,29 @@
+.pillar-summary{
+    margin-top: 5px;
+}
+
+
+
+
 @media screen and (max-width:700px) {
     .pillar-section {
-        margin-left: 10vw;
-        margin-right: 10vw;
+        margin-left: 2.5vw;
+        margin-right: 2.5vw;
+    }
+
+    .pillar {
+    	padding: 15px;
+    	margin:  10px;
+        flex: 1 1 30%;
+        background-color: white;
+        border: 1px solid grey;
+        color: black;
+    }
+
+    .pillar img {
+        display: block;
+        margin: 5% auto;
+        width: 100%;
     }
 }
 
@@ -11,6 +33,7 @@
         flex-flow: column;
         align-items: center;
         justify-content: center;
+        padding-bottom: 20px;
     }
 
     .pillar-container {
