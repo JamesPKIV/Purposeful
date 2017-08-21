@@ -23,8 +23,9 @@ class DoContent extends Component {
 					<div className="pillar">
 						<h3> <FaCaretRight/><span id="ideas-color0"> Ideas </span></h3>
 						<img src={interactionsImg} alt=""/>
-						Share your idea with the world and collaborate with others to start a project
+						<p className="pillar-desc">Share your idea with the world and collaborate with others to start a project
 						that is important to you, or discover and join a project that ignites your passion.
+					  </p>
 					</div>
 					<div className="pillar">
 						<h3> <FaCaretRight/><span id="ideas-color1"> Mentorship </span></h3>
