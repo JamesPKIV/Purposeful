@@ -4,7 +4,6 @@ import './DoContent.css';
 import teamImg from './teamwork.jpg'
 import interactionsImg from './interactions.jpg'
 import mentorImg from './mentorship.jpg'
-import FaCaretRight from 'react-icons/lib/fa/caret-right'
 
 class DoContent extends Component {
 	render () {
