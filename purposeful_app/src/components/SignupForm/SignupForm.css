@@ -3,13 +3,55 @@
 }
 
 
+.input-block {
+        width: 100%;
+        margin: .5em auto;
+        padding: .5em;
+}
+
+.input-greyed {
+    border: .125em solid #ccc;
+    border-radius: .25em;
+    background-color: #eee;
+    font-family: 'Arvo', serif;
+    font-size: 1em;
+}
+
+.input-greyed:focus {
+    background-color: white;
+}
+
+.flex-box-stretch {
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.flex-box-col {
+    max-height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.flex-box-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.flex-item {
+    margin: auto;
+}
+
+.fullwidth {
+    width: 100%;
+}
 /*mobile*/
 
 @media screen and (max-width:700px) {
     #signupForm {
         margin: auto;
-        margin-top: 20px;
-        padding: 10px 5%;
+        padding: .5em 5%;
         width: 90%;
         border: 3px solid #7c7d7d;
         border-radius: 15px;
@@ -18,28 +60,10 @@
         color: black;
     }
     .sign-up-p {
+        margin: 3%;
         text-align: center;
     }
-    #signupForm input {
-        display: block;
-        margin: auto;
-        padding: 5%;
-        margin-top: 5%;
-        margin-bottom: 5%;
-    }
-    #signupForm input[type=text],
-    input[type=email] {
-        width: 100%;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        background-color: #eee;
-        font-family: 'Arvo', serif;
-        font-size: 16px;
-    }
-    #signupForm input[type=text]:focus,
-    input[type=email]:focus {
-        background-color: white;
-    }
+    
     #signupForm input[type=button],
     input[type=submit] {
         width: 150px;
@@ -47,14 +71,17 @@
         color: white;
         border: none;
         padding: 10px 10px;
-        margin: auto;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 1em;
         font-family: 'Arvo', serif;
     }
     .div-input {
         text-align: center;
+    }
+
+    .div-interest {
+        flex:2 1 auto;
     }
     #signupForm input[type=button]:hover,
     input[type=submit]:hover {
@@ -70,7 +97,6 @@
     #signupForm {
         padding: 10px 30px;
         margin: auto;
-        width: 70%;
         max-width: 600px;
         border: 3px solid #7c7d7d;
         border-radius: 15px;
@@ -84,25 +110,9 @@
     #signupForm label {
         margin-left: 10px;
     }
-    #signupForm input[type=text],
-    input[type=email] {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        background-color: #eee;
-        font-family: 'Arvo', serif;
-        font-size: 16px;
-    }
-    #signupForm input[type=text]:focus,
-    input[type=email]:focus {
-        background-color: white;
-        outline: none;
-    }
+    
     #signupForm input[type=button],
     input[type=submit] {
-        width: 40%;
         background-color: #C81C2D;
         color: white;
         border: none;

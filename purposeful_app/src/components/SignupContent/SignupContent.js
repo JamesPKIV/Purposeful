@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SignupForm from '../SignupForm/SignupForm.js';
 import SignupThanks from '../SignupThanks/SignupThanks.js';
+import './SignupContent.css';
 
 class SignupContent extends Component {
 
@@ -69,7 +70,7 @@ class SignupContent extends Component {
 
 		/* conditionally render form content depending on wether youve signed up or not */
 		return (
-			<article >
+			<article className="signup-content">
 				{
 					this.state.isSignedUp ?
 			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> :
