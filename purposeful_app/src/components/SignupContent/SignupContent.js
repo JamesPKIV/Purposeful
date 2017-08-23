@@ -17,25 +17,17 @@ class SignupContent extends Component {
 	    };
 	}
 
-
 	/* updates the state when the user changes any input in the form */
 	handleInputChange(event) {
-
-		const inputName = event.target.name;
-		const inputVal = event.target.value;
-
-		this.setState({
-			[inputName]: inputVal
-		});
+		this.setState(event);
 	}
-
 
 	/* submits the form data to the Firebase mailing list */
 	handleFormSubmit() {
 		let newEntry = {
-		"first": this.state.first,
-		"last": this.state.last,
-		"email": this.state.email
+            "first": this.state.first,
+            "last": this.state.last,
+            "email": this.state.email
 		};
 
 		let newUidRef = this.props.mlRef.push();
@@ -43,7 +35,7 @@ class SignupContent extends Component {
 		/* send data to Firebase mailing list. entry stored at auto generated UID */
 		let p1 = new Promise ( (resolve, reject) => {
 			newUidRef.set(newEntry);
-			resolve("Sucess!");
+			resolve("Success!");
 		});
 
 		p1.then( msg => {
@@ -52,7 +44,6 @@ class SignupContent extends Component {
 		});
 
 	}
-
 
 	/* clear the form data and show form */
 	handleFormReset() {
@@ -64,19 +55,15 @@ class SignupContent extends Component {
 		});
 	}
 
-
 	render () {
-
-		/* conditionally render form content depending on wether youve signed up or not */
+		/* conditionally render form content depending on whether youve signed up or not */
 		return (
 			<article >
 				{
 					this.state.isSignedUp ?
 			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> :
 			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleFormSubmit} />
-
 			    }
-
 			</article>
         );
 	}

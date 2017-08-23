@@ -1,49 +1,42 @@
 import React, { Component } from 'react';
+import GoogleLogin from 'react-google-login';
 import './SignupForm.css';
 
 class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
-    this.props.handleChange(e);
-  }
-
-  handleSubmit(event) {
-
-    //prevent form reset
-    event.preventDefault();
-    //if form is valid, send it
-    if (event.target.checkValidity() === true) {
-      this.props.onClick();
-    }
+  handleChange(response) {
+    //response is info from Google about signed in user
+    this.props.handleChange({
+      first: response.getBasicProfile().getName().split(" ")[0],
+      last: response.getBasicProfile().getName().split(" ")[1],
+      email: response.getBasicProfile().getEmail()
+    });
+    this.props.onClick();
   }
 
   render() {
     return (
       <article>
-
         <section>
-        { 
-            <form id="signupForm" onSubmit={this.handleSubmit}>
-              <p className="sign-up-p">  Sign up for our mailing list to keep up to date with Purposeful. </p>
-
-              <input type="text" name="first" placeholder="First Name" onChange={this.handleChange} autoFocus required />
-              <input type="text" name="last" placeholder="Last Name" onChange={this.handleChange} required />
-              <input type="email" name="email" placeholder="Email" onChange={this.handleChange} required />
-              <div className="div-input" ><input type="submit" value="Subscribe" /></div>
-            </form>
-        }
+          <div id="signupForm">
+            <p className="sign-up-p">Sign up for our mailing list to keep up to date with Purposeful.</p>
+            <GoogleLogin
+                clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                buttonText="Sign Up"
+                className="googleButton"
+                onSuccess={this.handleChange}
+                onFailure={this.handleChange}
+            />
+          </div>
         </section>
-
-
       </article>
     );
-  }// end of render()
-
+  }
+    
 }
 
 export default SignupForm;

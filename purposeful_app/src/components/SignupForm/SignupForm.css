@@ -13,7 +13,7 @@
         width: 90%;
         border: 3px solid #7c7d7d;
         border-radius: 15px;
-        text-align: left;
+        text-align: center;
         background-color: white;
         color: black;
     }
@@ -27,21 +27,7 @@
         margin-top: 5%;
         margin-bottom: 5%;
     }
-    #signupForm input[type=text],
-    input[type=email] {
-        width: 100%;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        background-color: #eee;
-        font-family: 'Arvo', serif;
-        font-size: 16px;
-    }
-    #signupForm input[type=text]:focus,
-    input[type=email]:focus {
-        background-color: white;
-    }
-    #signupForm input[type=button],
-    input[type=submit] {
+    #signupForm button {
         width: 150px;
         background-color: #C81C2D;
         color: white;
@@ -52,14 +38,6 @@
         cursor: pointer;
         font-size: 16px;
         font-family: 'Arvo', serif;
-    }
-    .div-input {
-        text-align: center;
-    }
-    #signupForm input[type=button]:hover,
-    input[type=submit]:hover {
-        color: black;
-        background-color: #C81C2D;
     }
 }
 
@@ -74,7 +52,7 @@
         max-width: 600px;
         border: 3px solid #7c7d7d;
         border-radius: 15px;
-        text-align: left;
+        text-align: center;
         background-color: white;
         color: black;
     }
@@ -84,24 +62,7 @@
     #signupForm label {
         margin-left: 10px;
     }
-    #signupForm input[type=text],
-    input[type=email] {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        background-color: #eee;
-        font-family: 'Arvo', serif;
-        font-size: 16px;
-    }
-    #signupForm input[type=text]:focus,
-    input[type=email]:focus {
-        background-color: white;
-        outline: none;
-    }
-    #signupForm input[type=button],
-    input[type=submit] {
+    .googleButton {
         width: 40%;
         background-color: #C81C2D;
         color: white;
@@ -114,12 +75,7 @@
         font-size: 16px;
         transition: background-color .3s;
     }
-    #signupForm input[type=button]:hover,
-    input[type=submit]:hover {
-        background-color: #d61b2e;
-    }
-    .div-input {
-        text-align: center;
-        padding: 10px;
+    .googleButton:hover {
+        background-color: #db2d3e;
     }
 }
