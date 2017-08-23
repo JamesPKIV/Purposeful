@@ -27,7 +27,20 @@
         margin-top: 5%;
         margin-bottom: 5%;
     }
-    #signupForm button {
+    #signupForm input[type=text],
+    input[type=email] {
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        background-color: #eee;
+        font-family: 'Arvo', serif;
+        font-size: 16px;
+    }
+    #signupForm input[type=text]:focus,
+    input[type=email]:focus {
+        background-color: white;
+    }
+    .googleButton {
         width: 150px;
         background-color: #C81C2D;
         color: white;
@@ -38,6 +51,9 @@
         cursor: pointer;
         font-size: 16px;
         font-family: 'Arvo', serif;
+    }
+    .googleButton:hover {
+        background-color: #db2d3e;
     }
 }
 
@@ -61,6 +77,19 @@
     }
     #signupForm label {
         margin-left: 10px;
+    }
+    #signupForm input[type=text],
+    input[type=email] {
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        background-color: #eee;
+        font-family: 'Arvo', serif;
+        font-size: 16px;
+    }
+    #signupForm input[type=text]:focus,
+    input[type=email]:focus {
+        background-color: white;
     }
     .googleButton {
         width: 40%;
