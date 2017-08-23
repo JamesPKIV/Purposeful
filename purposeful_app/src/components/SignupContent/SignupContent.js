@@ -14,6 +14,7 @@ class SignupContent extends Component {
 			first: '',
 			last: '',
 			email: '',
+			interest: '',
 			isSignedUp: false
 	    };
 	}
@@ -36,7 +37,8 @@ class SignupContent extends Component {
 		let newEntry = {
 		"first": this.state.first,
 		"last": this.state.last,
-		"email": this.state.email
+		"email": this.state.email,
+		"interest": this.state.interest
 		};
 
 		let newUidRef = this.props.mlRef.push();
@@ -61,6 +63,7 @@ class SignupContent extends Component {
 			first: '',
 			last: '',
 			email: '',
+			interest: '',
 			isSignedUp: false
 		});
 	}
