@@ -26,7 +26,7 @@
 /* small title font for very small screens */
 @media screen and (max-width:300px) {
     .p-title {
-        font-size: large;
+        font-size: 1.25em;
     }
 }
 /* smartphone sized screens */
@@ -34,13 +34,22 @@
 @media screen and (max-width:700px) {
     .App {
         height: 100vh;
+        max-height: 100%;
+        width: 100vw;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
         display: flex;
         flex-direction: column;
-        align-items: stretch;
-        justify-content: space-between;
+        align-items: center;
+        justify-content: stretch;
+        font-size: 16px;
+        overflow: hidden;
     }
     .head-content: {
-        width: inherit;
+        flex: 1 1 10vh;
+        width: 100vh;
+        max-width: 100%;
         height: inherit;
         margin: auto;
     }
@@ -49,18 +58,19 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         height: 10vh;
         width:100vw;
+        max-width: 100%;
         background: #444;
         z-index: 2;
         box-shadow: 0px 2px 2px 2px;
     }
     .logo-div {
-        flex: 1 1 10%;
+        flex: 0 1 10%;
+        max-width: 15%;
         margin: auto;
         height: inherit;
-        margin-left: 5px;
     }
     .logo {
         padding: 3px;
@@ -68,27 +78,30 @@
         margin-top: 10%;
     }
     .p-title-div {
-        flex: 1 10 auto;
+        flex: 0 10 50%;
+        max-width: 50%;
+
     }
     .p-title{
-        width: 100%;
+        width: inherit;
+        font-size: 1.75em;
         letter-spacing: 2px;
-        font-family: 'Arvo', serif;
         text-align: center;
-        padding-right: 3%;
+        padding: 0;
+        margin: 0;
     }
     .nav-div {
-        flex: 1 2 15%;
+        flex: 1 2 10%;
         margin: auto;
         height: inherit;
-        align-self: stretch;
-        margin-right: 15px;
+        max-width: 15%;
     }
     .main-content {
-        flex: 4 1 65%;
+        flex: 4 1 65vh;
         padding: 10px;
         margin: auto;
         overflow: scroll;
+        max-width: 100%;
     }
     .learn-div {
         flex: 1 1 10%;

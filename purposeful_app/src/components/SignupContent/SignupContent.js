@@ -7,14 +7,13 @@ class SignupContent extends Component {
 	constructor (props) {
 	    super(props);
 	    this.handleInputChange = this.handleInputChange.bind(this);
-	    this.handleClick = this.handleClick.bind(this);
+	    this.handleFormSubmit = this.handleFormSubmit.bind(this);
 	    this.handleFormReset = this.handleFormReset.bind(this);
 	    this.state = {
 			first: '',
 			last: '',
 			email: '',
-			mList: [],
-			isSignedUp: false,
+			isSignedUp: false
 	    };
 	}
 
@@ -32,7 +31,7 @@ class SignupContent extends Component {
 
 
 	/* submits the form data to the Firebase mailing list */
-	handleClick() {
+	handleFormSubmit() {
 		let newEntry = {
 		"first": this.state.first,
 		"last": this.state.last,
@@ -74,7 +73,7 @@ class SignupContent extends Component {
 				{
 					this.state.isSignedUp ?
 			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> :
-			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleClick} />
+			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleFormSubmit} />
 
 			    }
 

@@ -16,8 +16,7 @@ class DoContent extends Component {
 					lives through collaborating with others on projects that
 					they believe in. By connecting people around common goals, Purposeful will be a
 					launchpad to turn ideas, dreams, and aspirations into reality.
-					 Purposeful stands on three main pillars: Ideas,
-					Mentorship, and Interactions.
+					 Purposeful stands on three main pillars:
 				</p>
 				<section className="pillar-container">
 					<div className="pillar">

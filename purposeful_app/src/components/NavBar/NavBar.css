@@ -125,7 +125,6 @@
     }
     .learnBtn {
         flex: 0 1 auto;
-        height: 41px;
         margin: auto;
         padding: 10px;
         background-color: #bb2f3d;
