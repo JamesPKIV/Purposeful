@@ -4,7 +4,6 @@ import './DoContent.css';
 import teamImg from './teamwork.jpg'
 import interactionsImg from './interactions.jpg'
 import mentorImg from './mentorship.jpg'
-import FaCaretRight from 'react-icons/lib/fa/caret-right'
 
 class DoContent extends Component {
 	render () {
@@ -20,19 +19,19 @@ class DoContent extends Component {
 				</p>
 				<section className="pillar-container">
 					<div className="pillar">
-						<h3><span id="ideas-color0"> Ideas </span></h3>
+						<h4><span id="ideas-color0"> Ideas </span></h4>
 						<img src={interactionsImg} alt=""/>
 						<p className="pillar-desc">Share your idea with the world and collaborate with others to start a project
 						that is important to you, or discover and join a project that ignites your passion.</p>
 					</div>
 					<div className="pillar">
-						<h3><span id="ideas-color1"> Mentorship </span></h3>
+						<h4><span id="ideas-color1"> Mentorship </span></h4>
 						<img src={mentorImg} alt=""/>
 						<p className="pillar-desc">Find a mentor to guide you through learning a new skill that interests you, or 
 						give back by sharing your knowledge and expertise through teaching others.</p>
 	        		</div>
 					<div className="pillar">
-						<h3><span id="ideas-color2"> Interactions </span></h3>
+						<h4><span id="ideas-color2"> Interactions </span></h4>
 						<img src={teamImg} alt=""/>
 						<p className="pillar-desc">Come together with people who share your interests to see what you can create.
 						We're also working to set up office spaces where people can

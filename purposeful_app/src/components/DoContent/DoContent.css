@@ -1,5 +1,7 @@
 .pillar-summary{
     margin-top: 5px;
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
 
@@ -66,7 +68,7 @@
 
     .pillar-desc {
         padding: 0 20px;
-        font-size: 14px;
+        font-size: 12px;
         color: #5c5c5c;
     }
 }
