@@ -1,48 +1,43 @@
 import React, { Component } from 'react';
 import './DoContent.css';
 
-import FaCaretRight from 'react-icons/lib/fa/caret-right'
+import teamImg from './teamwork.jpg'
+import interactionsImg from './interactions.jpg'
+import mentorImg from './mentorship.jpg'
 
 class DoContent extends Component {
 	render () {
 		return (
-			<section>
-				<h3>Our Mission Statement</h3>
-				<p id="content">
-					At Purposeful, we strive to materialize our vision by building a
-					welcoming and creative space for people to find purpose in their own
-					lives through a social network that enables them to connect with
-					others who share their interests, and collaborate on projects that
-					they believe in. Purposeful, stands on two main pillars: the ideas
-					pillar, and the mentorship pillar, as well as an interactions bridge.
+			<section className="pillar-section semi-transparent-box">
+				<h2>What is Purposeful?</h2>
+				<p className="pillar-summary">
+					We are building a creative space for people to find purpose in their
+					lives through collaborating with others on projects that
+					they believe in. By connecting people around common goals, Purposeful will be a
+					launchpad to turn ideas, dreams, and aspirations into reality.
+					 Purposeful stands on three main pillars:
 				</p>
-				<p id = "content">
-					<FaCaretRight/> <b> The ideas pillar </b>
-					will give users the opportunity to develop cross-disciplinary projects
-					that are truly meaningful to them. Users will have the opportunity to
-					create a project if they have an idea, or join a project if they
-					simply want to get involved.
-				</p>
-				<p id = "content">
-					<FaCaretRight/> <b> The mentorship pillar </b>
-					will enable users to find mentors and mentor others in the disciplines
-					that they care about by providing general advice to their mentees. Any
-					given user can become both a mentor (in something they know about) and
-					a mentee (in something they want to learn about).
-        </p>
-				<p id = "content">
-					<FaCaretRight/> <b> The interactions bridge:</b> Purposeful will strive to create worthwhile interactions
-					between users both on the online application and in the physical world.
-					Online we will provide chat session as well as the two pillars above.
-					Physically we will set up office space(s) where people can collaborate
-					and engage beyond the virtual world.
-				</p>
-				<p id = "content">
-					By connecting people who share common goals, we will provide a
-					launchpad to turn our user’s dreams and aspirations into real actions,
-					and to enable them to find and nurture the greatness in themselves by
-					sharing their skills and collaborating with others along the way.
-				</p>
+				<section className="pillar-container">
+					<div className="pillar">
+						<h4><span id="ideas-color0"> Ideas </span></h4>
+						<img src={interactionsImg} alt=""/>
+						<p className="pillar-desc">Share your idea with the world and collaborate with others to start a project
+						that is important to you, or discover and join a project that ignites your passion.</p>
+					</div>
+					<div className="pillar">
+						<h4><span id="ideas-color1"> Mentorship </span></h4>
+						<img src={mentorImg} alt=""/>
+						<p className="pillar-desc">Find a mentor to guide you through learning a new skill that interests you, or 
+						give back by sharing your knowledge and expertise through teaching others.</p>
+	        		</div>
+					<div className="pillar">
+						<h4><span id="ideas-color2"> Interactions </span></h4>
+						<img src={teamImg} alt=""/>
+						<p className="pillar-desc">Come together with people who share your interests to see what you can create.
+						We're also working to set up office spaces where people can
+						collaborate beyond the digital world.</p>
+					</div>
+				</section>
 			</section>
 		);
 	}

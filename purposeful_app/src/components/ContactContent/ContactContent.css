@@ -1,109 +1,125 @@
-.ul-about{
-  list-style: none;
-  padding: 5%;
+.ul-about {
+    list-style: none;
+    padding: 5%;
+    padding-top: 0;
 }
 
+.div-about a,
+.div-about a:visited,
+.div-about a:active {
+    margin-top: 10px;
+    color: #a8a8a8;
+    transition: color .5s;
+}
 
+.div-about a:hover {
+    color: #747474;
+}
 
 @media screen and (max-width: 700px) {
-  .div-about{
-    display: block;
-    margin: 10px auto;
-    color: black;
-    background-color: white;
-  }
+    .div-about {
+        display: flex;
+        flex-flow: column wrap;
+        margin: 2.5vw;
+        padding: 15px;
+        color: black;
+        background-color: white;
+    }
+    .ul-about {
+        background-color: white;
+        color: black;
+        display: block;
+        margin: auto;
+        width: 100%;
+    }
+    .ul-about li {
+        display: block;
+        margin: auto;
+    }
+    .hd-leader {
+        padding: 30px 10px;
+        margin: 0px;
+        font-weight: 900;
+        color: black;
+        padding-bottom: 10px;
+    }
+    .whoEntry {
+        display: block;
+        margin: auto;
+        text-align: center;
+        margin: 20px;
+    }
+    .about-pic {
+        border-radius: 10%;
+        width: 45vw;
+        height: 50vw;
+        margin: 10px;
+    }
+    .name {
+        font-weight: 900;
+        font-size: 1.25em;
+        text-align: center;
+    }
+    .role-desc {
+        text-align: center;
+        font-size: 1em;
+    }
+    .icon {
+        margin: 10px;
+    }
 
-  .ul-about{
-    background-color: white;
-    color: black;
-    display: block;
-    margin: auto;
-    width: 100%;
-  }
-
-  .ul-about li {
-  display: block;
-  margin: auto;
+    .about a {
+        font-size: 2em;
+    }
 }
-
-  .hd-leader{
-    padding: 20px 10px;
-    margin: 0px;
-    font-weight: 900;
-  }
-
-  .whoEntry {
-    display: block;
-    margin: auto;
-    text-align: center;
-    margin: 20px;
-  }
-
-
-  .about-pic{
-    border-radius: 10%;
-    width: 45vw;
-    height: 50vw;
-    margin: 10px;
-  }
-
-  .name{
-    font-weight: 900;
-    font-size: 1.25em;
-    margin: 10px;
-  }
-
-  .role-desc{
-    margin: 10px;
-    font-size: 1em;
-  }
-
-  .icon{
-    margin: 10px;
-  }
-
-}
-
-
 
 @media screen and (min-width: 700px) {
-
-  .div-about{
-    margin: 30px 0px;
-    padding: 20px 0px;
-    color: black;
-    background-color: white;
-  }
-  .hd-leader{
-    padding-top: 20px;
-  }
-  .ul-about{
-    display: block;
-    background-color: white;
-    color: black;
-  }
-
-  .ul-about li{
-    display: inline-block;
-  }
-
-  .about-pic{
-    border-radius: 25px;
-    width: 180px;
-    height: 200px;
-  }
-
-  .name{
-    font-weight: 900;
-  }
-
-  .role-desc{
-    font-size: 13px;
-    margin: 10px;
-  }
-
-  .icon{
-    margin: 10px;
-  }
-
+    .div-about {
+        margin: 0 5%;
+        padding: 5px 5%;
+    }
+    .ul-about {
+        padding-bottom: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+    }
+    .ul-about li {
+        flex: 0 1 30%;
+        background-color: white;
+        color: black;
+        margin: 5px;
+    }
+    .about-pic {
+        border: 1px solid white;
+        box-shadow: 0 0 0 4px #444;
+        border-radius: 25px;
+        margin-bottom: 10px;
+        width: 190px;
+        height: 210px;
+    }
+    .name {
+        font-weight: 900;
+        font-size: 18px;
+        text-align: center;
+    }
+    .role-desc {
+        font-size: .8em;
+        color: #7d7d7d;
+    }
+    .icon {
+        margin: 10px 5px;
+        font-size: 30px;
+    }
+    .chevron-div {
+        font-size: 18px;
+        width: 200px;
+        margin: -20px auto 10px auto;
+        transition: transform .3s;
+    }
+    .chevron-div:hover {
+        color: #3b3b3b;
+        cursor: pointer;
+        transform: translate(0px, 3px);
+    }
 }
