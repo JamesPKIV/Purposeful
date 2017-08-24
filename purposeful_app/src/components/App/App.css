@@ -12,8 +12,7 @@
     background: #96b543;
     font-family: 'Arvo', serif;
     letter-spacing: .05em;
-
-    font-size: large;
+    font-size: 16px;
 }
 
 .learn-btn {
@@ -43,8 +42,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: stretch;
-        font-size: 16px;
-        overflow: hidden;
+
     }
     .head-content: {
         flex: 1 1 10vh;
@@ -99,8 +97,9 @@
     .main-content {
         flex: 4 1 65vh;
         padding: 10px;
+        display: block;
         margin: auto;
-        overflow: scroll;
+        overflow-y: auto;
         max-width: 100%;
     }
     .learn-div {

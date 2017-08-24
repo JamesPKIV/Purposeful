@@ -34,6 +34,7 @@ class SignupForm extends Component {
           </div>
         </section>
       </article>
+
     );
   }
     

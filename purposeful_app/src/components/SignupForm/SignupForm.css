@@ -3,13 +3,55 @@
 }
 
 
+.input-block {
+        width: 100%;
+        margin: .5em auto;
+        padding: .5em;
+}
+
+.input-greyed {
+    border: .125em solid #ccc;
+    border-radius: .25em;
+    background-color: #eee;
+    font-family: 'Arvo', serif;
+    font-size: 1em;
+}
+
+.input-greyed:focus {
+    background-color: white;
+}
+
+.flex-box-stretch {
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.flex-box-col {
+    max-height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.flex-box-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.flex-item {
+    margin: auto;
+}
+
+.fullwidth {
+    width: 100%;
+}
 /*mobile*/
 
 @media screen and (max-width:700px) {
     #signupForm {
         margin: auto;
-        margin-top: 20px;
-        padding: 10px 5%;
+        padding: .5em 5%;
         width: 90%;
         border: 3px solid #7c7d7d;
         border-radius: 15px;
@@ -18,8 +60,10 @@
         color: black;
     }
     .sign-up-p {
+        margin: 3%;
         text-align: center;
     }
+
     #signupForm input {
         display: block;
         margin: auto;
@@ -46,12 +90,12 @@
         color: white;
         border: none;
         padding: 10px 10px;
-        margin: auto;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 1em;
         font-family: 'Arvo', serif;
     }
+
     .googleButton:hover {
         background-color: #db2d3e;
     }
@@ -64,7 +108,6 @@
     #signupForm {
         padding: 10px 30px;
         margin: auto;
-        width: 70%;
         max-width: 600px;
         border: 3px solid #7c7d7d;
         border-radius: 15px;
@@ -78,6 +121,7 @@
     #signupForm label {
         margin-left: 10px;
     }
+
     #signupForm input[type=text],
     input[type=email] {
         width: 100%;
