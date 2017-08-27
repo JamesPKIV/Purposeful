@@ -78,6 +78,18 @@
     background-color: #696969;
 }
 
+.btn {
+    background-color: #C81C2D;
+    color: white;
+    border: none;
+    padding: .6em;
+    margin: auto;
+    border-radius: .3em;
+    font-family: 'Arvo', serif;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color .3s;
+}
 
 /*mobile*/
 
