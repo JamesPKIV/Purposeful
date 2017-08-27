@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
+import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import './SignupForm.css';
 
 class SignupForm extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       isOldFormShowing: false
     }
+    
     this.handleGoogleSignup = this.handleGoogleSignup.bind(this);
     this.handleGoogleFailure = this.handleGoogleSignup.bind(this);
+    this.handleFacebook = this.handleFacebook.bind(this);
     this.showOldForm = this.showOldForm.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
   }
 
+
+
   handleGoogleSignup(response) {
-    console.log(response);
     //response is info from Google about signed in user
     this.props.onOauth({
       first: response.getBasicProfile().getName().split(" ")[0],
@@ -50,6 +55,15 @@ class SignupForm extends Component {
         isOldFormShowing: true
       });
   }
+    
+  handleFacebook(response) {
+    this.props.handleFacebook({
+        first: response.name.split(" ")[0],
+        last: response.name.split(" ")[1],
+        email: response.email
+    });
+    this.props.submitForm();
+  }
 
   render() {
     return (
@@ -57,17 +71,25 @@ class SignupForm extends Component {
         <section>
           <div id="signupForm">
             <p className="sign-up-p">Join our mailing list and we'll let you know when we launch!</p>
-
             <p className="sign-up-p">Sign up through:</p>
             <GoogleLogin
-                clientId="842888689213-kilqknpjr5p0ulhvo3obl8b2l04gsced.apps.googleusercontent.com"
                 buttonText="Google"
-                className="googleButton"
+                className="authButton googleButton"
+                clientId="842888689213-kilqknpjr5p0ulhvo3obl8b2l04gsced.apps.googleusercontent.com"
                 onSuccess={this.handleGoogleSignup}
                 onFailure={this.handleGoogleFailure}
             />
-
-            <p>-- or --</p>
+            <br />
+            <FacebookLogin
+                textButton="Facebook"
+                cssClass="authButton facebookButton"
+                appId="1667509349939492"
+                fields="name,email,picture"
+                callback={this.handleFacebook}
+            />
+            <hr />
+            <button className="authButton emailButton">Email</button>
+       
 
             {
               this.state.isOldFormShowing ?

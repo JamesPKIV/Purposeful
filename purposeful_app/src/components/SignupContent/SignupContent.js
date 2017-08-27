@@ -78,8 +78,17 @@ class SignupContent extends Component {
 			<article className="signup-content">
 				{
 					this.state.isSignedUp ?
-			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> :
-			        <SignupForm onFormChange={this.handleFormChange} onOauth={this.handleOauthChange} submitForm={this.handleFormSubmit} />
+			        <SignupThanks
+                        onClick={this.handleFormReset}
+                        firstName={this.state.first}
+                    /> :
+			        <SignupForm
+                        handleGoogle={this.handleOauthChange}
+                        handleFacebook={this.handleOauthChange}
+                        onFormChange={this.handleFormChange}
+                        submitForm={this.handleFormSubmit} 
+                    />
+
 			    }
 			</article>
         );
