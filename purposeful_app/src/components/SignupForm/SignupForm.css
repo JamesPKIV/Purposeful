@@ -2,11 +2,10 @@
     font-size: larger;
 }
 
-
 .input-block {
-        width: 100%;
-        margin: .5em auto;
-        padding: .5em;
+    width: 100%;
+    margin: .5em auto;
+    padding: .5em;
 }
 
 .input-greyed {
@@ -46,6 +45,40 @@
 .fullwidth {
     width: 100%;
 }
+
+.googleButton {
+    background-color: #C81C2D;
+}
+
+.googleButton:hover {
+    background-color: #db2d3e;
+}
+
+.facebookButton {
+    background-color: #3b5998;
+}
+
+.facebookButton:hover {
+    background-color: #4568b2;
+}
+
+.linkedInButton {
+    background-color: #0077b5;
+}
+
+.linkedInButton:hover {
+    background-color: #0d8acb;
+}
+
+.emailButton {
+    background-color: #4a4a4a;
+}
+
+.emailButton:hover {
+    background-color: #696969;
+}
+
+
 /*mobile*/
 
 @media screen and (max-width:700px) {
@@ -63,7 +96,6 @@
         margin: 3%;
         text-align: center;
     }
-
     #signupForm input {
         display: block;
         margin: auto;
@@ -84,20 +116,19 @@
     input[type=email]:focus {
         background-color: white;
     }
-    .googleButton {
+    .authButton {
         width: 150px;
-        background-color: #C81C2D;
         color: white;
         border: none;
         padding: 10px 10px;
+        margin: 5px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 1em;
         font-family: 'Arvo', serif;
     }
-
-    .googleButton:hover {
-        background-color: #db2d3e;
+    hr {
+        width: 175px;
     }
 }
 
@@ -121,7 +152,6 @@
     #signupForm label {
         margin-left: 10px;
     }
-
     #signupForm input[type=text],
     input[type=email] {
         width: 100%;
@@ -135,20 +165,20 @@
     input[type=email]:focus {
         background-color: white;
     }
-    .googleButton {
+    .authButton {
         width: 40%;
-        background-color: #C81C2D;
         color: white;
         border: none;
         padding: 10px;
         margin: auto;
+        margin: 5px;
         border-radius: 5px;
         font-family: 'Arvo', serif;
         cursor: pointer;
         font-size: 16px;
         transition: background-color .3s;
     }
-    .googleButton:hover {
-        background-color: #db2d3e;
+    hr {
+        width: 50%;
     }
 }

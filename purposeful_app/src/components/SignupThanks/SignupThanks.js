@@ -13,7 +13,7 @@ class SignupThanks extends Component {
 			  </p>
 
 			  <button id='formResetBtn' onClick={() => this.props.onClick()}>
-			    Reset Signup Form 
+			    Back 
 			  </button>
 			</section>
 		);

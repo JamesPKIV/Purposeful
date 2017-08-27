@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect, HashRouter as Router } from 'react-router-dom';
+import { Route, Redirect, BrowserRouter as Router } from 'react-router-dom';
 import Dimensions from 'react-dimensions';
 import './App.css';
 import NavBar from '../NavBar/NavBar.js';
@@ -9,8 +9,6 @@ import DoContent from '../DoContent/DoContent.js';
 import ContactContent from '../ContactContent/ContactContent.js';
 import logo from './logo.png';
 import * as firebase from 'firebase';
-
-
 
 // Initialize Firebase connection
 var config = {
@@ -23,7 +21,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
 class App extends Component {
 
   constructor () {
@@ -35,7 +32,6 @@ class App extends Component {
     this.handleFormShow = this.handleFormShow.bind(this);
     this.handleLearnShow = this.handleLearnShow.bind(this);
     }
-
 
   /* called once app is rendered. set up refs to the Firebase mailing list and determines mobile or desktop view */
   componentWillMount() {
@@ -69,10 +65,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-
-
+        
           <header className="head-content">
-
 
             {/* display different header content on mobile device */
               this.props.containerWidth <= 700 ?
@@ -91,7 +85,6 @@ class App extends Component {
                     <NavBar containerWidth={this.props.containerWidth} onClick={() => this.handleLearnShow()}/>
                   </div>
                 </div>
-
               :
                 <div className="desktop-head">
                   <div className="nav-div">
@@ -105,8 +98,6 @@ class App extends Component {
                 </div>
             }
           </header>
-        
-
 
           <section className="main-content">
               <Route exact path="/" render={() => <Redirect to="/whatWeBelieve" />} />
