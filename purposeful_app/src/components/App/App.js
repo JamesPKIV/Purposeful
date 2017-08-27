@@ -40,7 +40,7 @@ class App extends Component {
   /* called once app is rendered. set up refs to the Firebase mailing list and determines mobile or desktop view */
   componentWillMount() {
     const dbRootRef = firebase.database().ref();
-    const mlRef = dbRootRef.child('mailing_list');
+    const mlRef = dbRootRef.child('TEST_MAILING_LIST');
 
     this.dbRootRef = dbRootRef;
     this.setState({ mailingListRef: mlRef });
@@ -49,7 +49,7 @@ class App extends Component {
 
   /* show the form if the user wants to sign up */
   handleFormShow(history) {
-    /* navigate to mailingList page if not there already*/
+    /* navigate to mailingList page if not there already */
     if (history.location.pathname !== '/mailingList') {
       history.push('/mailingList');
     }

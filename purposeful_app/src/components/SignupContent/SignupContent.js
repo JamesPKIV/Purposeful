@@ -7,7 +7,8 @@ class SignupContent extends Component {
 
 	constructor (props) {
 	    super(props);
-	    this.handleInputChange = this.handleInputChange.bind(this);
+	    this.handleOauthChange = this.handleOauthChange.bind(this);
+	    this.handleFormChange = this.handleFormChange.bind(this);
 	    this.handleFormSubmit = this.handleFormSubmit.bind(this);
 	    this.handleFormReset = this.handleFormReset.bind(this);
 	    this.state = {
@@ -19,18 +20,30 @@ class SignupContent extends Component {
 	    };
 	}
 
-	/* updates the state when the user changes any input in the form */
-	handleInputChange(event) {
-		this.setState(event);
+	/* updates the state when the user signs up through google*/
+	handleOauthChange(OauthState) {
+		this.setState(OauthState);
 	}
+
+	/* updates the state when the user changes any input in the old fashioned form */
+	handleFormChange(event) {
+		const inputName = event.target.name;
+		const inputVal = event.target.value;
+
+		this.setState({
+		       [inputName]: inputVal
+		});
+
+	}
+
 
 	/* submits the form data to the Firebase mailing list */
 	handleFormSubmit() {
 		let newEntry = {
-      "first": this.state.first,
-      "last": this.state.last,
-      "email": this.state.email,
-      "interest": this.state.interest
+	      "first": this.state.first,
+	      "last": this.state.last,
+	      "email": this.state.email,
+	      "interest": this.state.interest
 		};
 
 		let newUidRef = this.props.mlRef.push();
@@ -66,7 +79,7 @@ class SignupContent extends Component {
 				{
 					this.state.isSignedUp ?
 			        <SignupThanks onClick={this.handleFormReset} firstName={this.state.first} /> :
-			        <SignupForm handleChange={this.handleInputChange} onClick={this.handleFormSubmit} />
+			        <SignupForm onFormChange={this.handleFormChange} onOauth={this.handleOauthChange} submitForm={this.handleFormSubmit} />
 			    }
 			</article>
         );
