@@ -23,7 +23,7 @@ class SignupForm extends Component {
 
   handleGoogleSignup(response) {
     //response is info from Google about signed in user
-    this.props.onOauth({
+    this.props.handleGoogle({
       first: response.getBasicProfile().getName().split(" ")[0],
       last: response.getBasicProfile().getName().split(" ")[1],
       email: response.getBasicProfile().getEmail()
@@ -88,10 +88,9 @@ class SignupForm extends Component {
                 callback={this.handleFacebook}
             />
             <hr />
-            <button className="authButton emailButton">Email</button>
-       
 
             {
+              /* show email button Xor old form */
               this.state.isOldFormShowing ?
                 <form id="old-form" onSubmit={this.handleFormSubmit} >
                   <div className="flex-box-stretch flex-item fullwidth">
@@ -115,7 +114,7 @@ class SignupForm extends Component {
                 </form>
 
               :
-                <button id="show-old-form-btn" className="btn" onClick={this.showOldForm}> Leave us your email! </button>
+                <button id="show-old-form-btn" className="authButton emailButton" onClick={this.showOldForm}> Email </button>
             
             }
 
