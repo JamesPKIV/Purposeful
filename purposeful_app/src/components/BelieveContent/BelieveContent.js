@@ -28,17 +28,19 @@ class BelieveContent extends Component {
 						<p>To read more about our motivations,
 						check out these articles written by our team:
 						</p>
-						<ul id="articles-list">
-						<li className="left"> <a href="https://www.linkedin.com/pulse/calculated-risk-why-ive-decided-invest-8000-dollars-towards-parra?published=t">
-							A calculated risk: Why I've decided to invest $8000 dollars towards living a life of Purpose</a>
-					 	</li>
-					 	<li className="left"> <a href="https://www.linkedin.com/pulse/compiled-success-why-some-people-find-quicker-than-others-oscar-parra?trk=mp-reader-card">
-							Compiled Success: Why some people find success quicker than others?</a>
-					 	</li>
+                        <ul id="articles-list">
+                            <a href="https://www.linkedin.com/pulse/calculated-risk-why-ive-decided-invest-8000-dollars-towards-parra?published=t" target="_newtab">
+                                <li className="left">
+                                    A calculated risk: Why I've decided to invest $8000 dollars towards living a life of Purpose
+                                </li>
+                            </a>
+                            <a href="https://www.linkedin.com/pulse/compiled-success-why-some-people-find-quicker-than-others-oscar-parra?trk=mp-reader-card" target="_newtab">
+                                <li className="left">
+                                    Compiled Success: Why some people find success quicker than others?
+                                </li>
+                            </a>
 						</ul>
 					</div>
-						
-
 				</div>
 			</section>
 
