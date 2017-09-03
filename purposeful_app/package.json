@@ -11,6 +11,7 @@
     "react-facebook-login": "^3.6.2",
     "react-fontawesome": "^1.6.1",
     "react-google-login": "^2.9.3",
+    "react-google-login-component": "^0.8.0",
     "react-icons": "^2.2.5",
     "react-materialize": "^1.0.8",
     "react-router": "^4.1.2",
