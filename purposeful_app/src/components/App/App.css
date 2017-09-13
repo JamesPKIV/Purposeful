@@ -1,173 +1,30 @@
-/* settings universal to all screen sizes */
-
-* {
-    box-sizing: border-box;
-}
-
 .App {
-    box-sizing: border-box;
-    text-align: center;
-    width: 100%;
-    color: white;
-    background: #96b543;
-    font-family: 'Arvo', serif;
-    letter-spacing: .05em;
-    font-size: 16px;
+  text-align: center;
+  display: flex;
+  
 }
 
-.learn-btn {
-    background-color: #236B8E;
-    border: none;
-    color: white;
-    padding: 10px;
+.head-content {
+  max-height: 12vh;
 }
 
-/* small title font for very small screens */
-@media screen and (max-width:300px) {
-    .p-title {
-        font-size: 1.25em;
-    }
-}
-/* smartphone sized screens */
-
-@media screen and (max-width:700px) {
-    .App {
-        height: 100vh;
-        max-height: 100%;
-        width: 100vw;
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: stretch;
-
-    }
-    .head-content: {
-        flex: 1 1 10vh;
-        width: 100vh;
-        max-width: 100%;
-        height: inherit;
-        margin: auto;
-    }
-    #head-rectangle {
-        min-height: 70px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 10vh;
-        width:100vw;
-        max-width: 100%;
-        background: #444;
-        z-index: 2;
-        box-shadow: 0px 2px 2px 2px;
-    }
-    .logo-div {
-        flex: 0 1 10%;
-        max-width: 15%;
-        margin: auto;
-        height: inherit;
-    }
-    .logo {
-        padding: 3px;
-        height: 80%;
-        margin-top: 10%;
-    }
-    .p-title-div {
-        flex: 0 10 50%;
-        max-width: 50%;
-
-    }
-    .p-title{
-        width: inherit;
-        font-size: 1.75em;
-        letter-spacing: 2px;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-    }
-    .nav-div {
-        flex: 1 2 10%;
-        margin: auto;
-        height: inherit;
-        max-width: 15%;
-    }
-    .main-content {
-        flex: 4 1 65vh;
-        padding: 10px;
-        display: block;
-        margin: auto;
-        overflow-y: auto;
-        max-width: 100%;
-    }
-    .learn-div {
-        flex: 1 1 10%;
-        width: 100%;
-        background-color: rgba(5, 5, 5, .25);
-    }
-    .learn-btn {
-        background-color: #236B8E;
-        padding: 20px;
-        margin-top: 5px;
-        height: inherit;
-        width: 80%;
-        max-width: 50%;
-    }
+.page-content {
+  padding-top: 12vh;
 }
 
 
-/*desktop sized screens*/
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
 
-@media screen and (min-width:700px) {
-    .App {
-        margin: auto;
-        padding: 20 20 20 20;
-        min-height: 100vh;
-        height: 100% !important;
-        color: white;
-    }
+.App-intro {
+  font-size: large;
+}
 
-    .main-content {
-        display: flex;
-        align-items: stretch;
-        justify-content: center;
-    }
-
-    .App-logo {
-        height: 80px;
-    }
-    .p-title {
-        margin: 0;
-        border-top: 5px solid #fff;
-        padding: 20px 0;
-        font-size: 48px;
-        letter-spacing: 2px;
-        font-family: 'Arvo', serif;
-        background: #96b543;
-        margin-bottom: 20px;
-    }
-    .learn-div {
-        width: 100%;
-    }
-    .learn-btn {
-        font-size: 16px;
-        padding: 10px;
-        width: 20%;
-    }
-    .learn-btn:hover {
-        color: black;
-        background-color: #3299CC;
-    }
-
-    .semi-transparent-box{
-        flex: 1 1 auto;
-        margin: auto;
-        width: 100%;
-        margin: 0 5%;
-        padding: 5px 5%; 
-        color: #111;
-        background: rgba(255,255,255,1);
-    }
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

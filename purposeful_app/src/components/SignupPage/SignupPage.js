@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SignupForm from '../SignupForm/SignupForm.js';
 import SignupThanks from '../SignupThanks/SignupThanks.js';
-import './SignupContent.css';
+import './SignupPage.css';
 
-class SignupContent extends Component {
+class SignupPage extends Component {
 
 	constructor (props) {
 	    super(props);
@@ -39,25 +39,7 @@ class SignupContent extends Component {
 
 	/* submits the form data to the Firebase mailing list */
 	handleFormSubmit() {
-		let newEntry = {
-	      "first": this.state.first,
-	      "last": this.state.last,
-	      "email": this.state.email,
-	      "interest": this.state.interest
-		};
-
-		let newUidRef = this.props.mlRef.push();
-
-		/* send data to Firebase mailing list. entry stored at auto generated UID */
-		let p1 = new Promise ( (resolve, reject) => {
-			newUidRef.set(newEntry);
-			resolve("Success!");
-		});
-
-		p1.then( msg => {
-			alert("You have sucessfully joined our mailing list!");
-			this.setState({isSignedUp: true});
-		});
+		/* stub to be filled in */
 
 	}
 
@@ -75,7 +57,7 @@ class SignupContent extends Component {
 	render () {
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
-			<article className="signup-content">
+			<article className="signup-Page">
 				{
 					this.state.isSignedUp ?
 			        <SignupThanks
@@ -95,4 +77,4 @@ class SignupContent extends Component {
 	}
 }
 
-export default SignupContent;
+export default SignupPage;

@@ -23,7 +23,6 @@ class NavBar extends Component {
 
    handleMenuSelection() {
       this.toggle();
-      this.props.onClick();
   }
 
   toggle() {
@@ -36,11 +35,11 @@ class NavBar extends Component {
     return (
       <nav className="NavBar">
         <ul>
-          <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top navEntry">Our Story </NavLink></li>
-          <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top navEntry">Our Pillars </NavLink></li>
+          <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Home </NavLink></li>
+          <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
           <li><img src={logo} className="logo" alt="Purposeful"></img></li>
-          <li><NavLink to="/contact" className="hvr-sweep-to-top navEntry">About Us </NavLink></li>
-          <li className="learnBtn"><NavLink to="/mailingList" className="learnLink">Learn More</NavLink></li>       
+          <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Profile </NavLink></li>
+          <li className="learnBtn"><NavLink to="/login" className="learnLink">Sign Up</NavLink></li>       
         </ul>
       </nav>  
     )
@@ -58,9 +57,9 @@ class NavBar extends Component {
               <nav className="NavBar">
                 <ul>
                   <button className="menuBtn open" onClick={this.handleMenuSelection} >
-                    <li><NavLink to="/whatWeBelieve" className="hvr-sweep-to-top">Our Story </NavLink></li>
-                    <li><NavLink to="/whatWeDo" className="hvr-sweep-to-top">Our Pillars </NavLink></li>
-                    <li><NavLink to="/contact" className="hvr-sweep-to-top">About Us </NavLink></li>
+                    <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Home </NavLink></li>
+                    <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
+                    <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Profile </NavLink></li>
                   </button>
                 </ul>
               </nav>

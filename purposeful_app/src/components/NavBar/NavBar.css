@@ -89,10 +89,12 @@
 
 @media screen and (min-width:700px) {
     .NavBar {
+        display: flex;
         position: fixed;
         top:0;
         right:0;
         left:0;
+        height: inherit;
         background-color: #444;
         margin-bottom: 100%;
         border-bottom: 5px solid white;
