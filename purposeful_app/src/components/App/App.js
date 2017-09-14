@@ -10,6 +10,7 @@ import HomePage from '../HomePage/HomePage'
 import MentorshipPage from '../MentorshipPage/MentorshipPage'
 import ProfilePage from '../ProfilePage/ProfilePage'
 import SignupPage from '../SignupPage/SignupPage'
+import LandingPage from '../LandingPage/LandingPage'
 
 
 class App extends Component {
@@ -17,10 +18,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+
           <header className="head-content">
-            {
+            {/*
               <NavBar containerWidth={this.props.containerWidth}/>
-            }
+            */}
           </header>
 
           <section className="page-content">
@@ -29,6 +31,8 @@ class App extends Component {
               <Route path="/mentorship" render={() => <MentorshipPage />} />
               <Route path="/profile" render={() => <ProfilePage />} />
               <Route path="/login" render={() => <SignupPage />} />
+
+              <Route path="/landing" render={() => <LandingPage />} />
           </section>
 
 

@@ -1,0 +1,34 @@
+.LandingBack {
+    /*organized from favorite to not so favorite, james' bridge is cool but
+      incomplete in my screen, also thought we could think of other imagery
+      like birds and whales being happy, or those pictures of monkeys grooming
+      each other (being a team)... but I didn't put any monkeys here...*/
+
+    background-image: url("jungle_bridge.jpg");
+    /*background-image: url("birds-flying-in-sky.jpg");*/
+    /*background-image: url("forest_bridge.jpg");*/
+    /*background-image: url("river_bridge.jpg");*/
+    /*background-image: url("whale.jpg");*/
+
+    background-size: cover;
+    width: 100vw;
+    height:100vh;
+
+}
+
+h1 {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  color: white;
+  font-size: 60px;
+}
+
+.navLinks {
+  word-spacing: 25px;
+  position:absolute;
+  top: 90vh;
+  left: 60vw;
+  color: white;
+  font-size: 20px;
+}
