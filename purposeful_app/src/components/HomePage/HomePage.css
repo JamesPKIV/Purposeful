@@ -1,5 +1,38 @@
 .home-content {
-	color: black;
-	background: white;
-	vertical-align: center;
+		color: black;
+		background: white;
+}
+
+.feed-item {
+	margin: 10px;
+    flex: 1 1 20%;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    color: black;
+}
+
+.feed-item.icon {
+    display: block;
+    margin: 5% auto;
+    width: 100%;
+}
+
+ .feed-item.desc {
+	padding: 0 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+@media screen and (min-width:700px) {
+	.home-content {
+		vertical-align: center;
+	}
+
+}
+
+@media screen and (max-width:700px) {
+	.home-content {
+		vertical-align: center;
+	}
+
 }

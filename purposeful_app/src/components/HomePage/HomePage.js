@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './HomePage.css';
+import ActivityFeed from '../ActivityFeed/ActivityFeed'
 
 class HomePage extends Component {
 
@@ -18,8 +19,19 @@ class HomePage extends Component {
 				{
 					this.state.isLoggedIn ?
 			        <p> you are logged in, and this is your home page. </p>
-                    :
-                    <p> you are NOT logged in, and this is your home page. </p>
+			        : <p> you are NOT logged in, and this is your home page. </p>
+			    } 
+
+			    <div>
+				    {
+				    	this.state.isLoggedIn  && 
+				        <ActivityFeed title="Activity in Your Network"/>
+	                }
+                	
+                	<ActivityFeed title="Mentors "/>
+                	<ActivityFeed title="Mentees "/>
+                	<ActivityFeed title="Collaborations"/>
+            	</div>
 			    }
 			</article>
         );
