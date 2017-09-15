@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
+import logo from './logo.png';
+import FaAngleDown from 'react-icons/lib/fa/angle-down';
 
 class LandingPage extends Component {
 
@@ -13,14 +15,16 @@ class LandingPage extends Component {
   render(){
     return(
       <div className="LandingBack">
-        <h1>Become Purposeful</h1>
+				<img className="logo" src={logo}/>
+        <h1>Become Prposeful</h1>
+				<button className="arrowButton"> <FaAngleDown/> </button>
 
         <div className="navLinks">
           <p>
-            <a href="dummy"> About_Purposeful </a>
-            <a href="dummy"> Our_Team </a>
-            <a href="dummy"> Donate </a>
-            <a href="dummy"> Privacy_Policy </a>
+            <a href="dummy1"> _About_Purposeful_ </a>
+            <a href="dummy2"> _Our_Team_ </a>
+            <a href="dummy3"> _Donate_ </a>
+            <a href="dummy4"> _Privacy_Policy_ </a>
           </p>
         </div>
 

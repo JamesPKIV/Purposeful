@@ -18,17 +18,39 @@
 
 h1 {
   position: absolute;
-  top: 50%;
+  top: 40%;
   width: 100%;
   color: white;
-  font-size: 60px;
+  font-size: 7vh;
+}
+
+.arrowButton {
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  top: 52%;
+  left: 47%;
+  font-size: 7vh;
 }
 
 .navLinks {
-  word-spacing: 25px;
+  word-spacing: 2vw;
   position:absolute;
   top: 90vh;
   left: 60vw;
+  font-size: 2vh;
+}
+
+a {
   color: white;
-  font-size: 20px;
+  text-decoration: none;
+}
+
+.logo{
+  width: auto;
+  height: 13vh;
+  position: center;
+  vertical-align: middle;
 }
