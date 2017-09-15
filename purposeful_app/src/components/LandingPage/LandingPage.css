@@ -24,7 +24,7 @@ h1 {
   font-size: 7vh;
 }
 
-.arrowButton {
+.arrowButtonDown {
   border: none;
   color: white;
   cursor: pointer;
@@ -33,6 +33,33 @@ h1 {
   top: 52%;
   left: 47%;
   font-size: 7vh;
+}
+
+.arrowButtonUp {
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  top: 70%;
+  left: 47%;
+  font-size: 7vh;
+}
+
+.inputName{
+  position: absolute;
+  width: 30vw;
+  right: 35vw;
+  top: 60%;
+}
+
+.contGuest{
+  color: white;
+  font-size: 2.5vh;
+  text-decoration: none;
+  position:absolute;
+  top: 67%;
+  right: 45vw;
 }
 
 .navLinks {
@@ -51,6 +78,7 @@ a {
 .logo{
   width: auto;
   height: 13vh;
-  position: center;
-  vertical-align: middle;
+  position: absolute;
+  top: 25%;
+  right:47%;
 }

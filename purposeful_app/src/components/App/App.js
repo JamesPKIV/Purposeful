@@ -26,7 +26,7 @@ class App extends Component {
           </header>
 
           <section className="page-content">
-              <Route exact path="/" render={() => <Redirect to="/home" />} />
+              <Route exact path="/" render={() => <Redirect to="/landing" />} />
               <Route path="/home" render={() => <HomePage />} />
               <Route path="/mentorship" render={() => <MentorshipPage />} />
               <Route path="/profile" render={() => <ProfilePage />} />
