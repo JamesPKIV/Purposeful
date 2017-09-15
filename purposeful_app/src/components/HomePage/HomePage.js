@@ -13,6 +13,7 @@ class HomePage extends Component {
 	
 
 	render () {
+
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
 			<article className="home-content">
@@ -25,14 +26,14 @@ class HomePage extends Component {
 			    <div>
 				    {
 				    	this.state.isLoggedIn  && 
-				        <ActivityFeed title="Activity in Your Network"/>
+				        <ActivityFeed title="Activity in Your Network" linkTo="/home" />
 	                }
                 	
-                	<ActivityFeed title="Mentors "/>
-                	<ActivityFeed title="Mentees "/>
-                	<ActivityFeed title="Collaborations"/>
+                	<ActivityFeed title="Mentors" linkTo="/mentorship" />
+                	<ActivityFeed title="Mentees" linkTo="/mentorship" />
+                	<ActivityFeed title="Collaborations" linkTo="/home" />
             	</div>
-			    }
+			    
 			</article>
         );
 	}
