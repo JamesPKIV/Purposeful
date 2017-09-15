@@ -39,14 +39,14 @@ class NavBar extends Component {
           <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
           <li><img src={logo} className="logo" alt="Purposeful"></img></li>
           <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Profile </NavLink></li>
-          <li className="learnBtn"><NavLink to="/login" className="learnLink">Sign Up</NavLink></li>       
+          <li className="learnBtn"><NavLink to="/login" className="learnLink">Sign Up</NavLink></li>
         </ul>
-      </nav>  
+      </nav>
     )
   }
 
   navBarMobile() {
-    if (this.state.activeNav){      
+    if (this.state.activeNav){
         return (
             <div className="NavBar-open">
               <button className="toggleBtn closed" onClick={this.toggle}>
@@ -65,7 +65,7 @@ class NavBar extends Component {
               </nav>
             </div>
         )
-    } 
+    }
     else {
         return (
           <button className="toggleBtn closed" onClick={this.toggle}>
@@ -73,12 +73,15 @@ class NavBar extends Component {
               <FaAlignJustify />
             </div>
           </button>
-        );  
+        );
     }
   }
 
   render() {
-      return (this.props.containerWidth >= 700) ?
+      //console.log("CONSOLE LOG: " + window.location);
+      return (
+
+        this.props.containerWidth >= 700) ?
           this.navBarDesktop() :/* desktop version */
           this.navBarMobile();  /*mobile version */
   }

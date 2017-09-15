@@ -7,9 +7,9 @@ class HomePage extends Component {
 		super(props);
 		this.state = {
 			isLoggedIn : false
-		}
+		};
 	}
-	
+
 
 	render () {
 		/* conditionally render form content depending on whether youve signed up or not */

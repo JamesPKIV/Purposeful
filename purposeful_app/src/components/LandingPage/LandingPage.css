@@ -1,0 +1,84 @@
+.LandingBack {
+    /*organized from favorite to not so favorite, james' bridge is cool but
+      incomplete in my screen, also thought we could think of other imagery
+      like birds and whales being happy, or those pictures of monkeys grooming
+      each other (being a team)... but I didn't put any monkeys here...*/
+
+    background-image: url("jungle_bridge.jpg");
+    /*background-image: url("birds-flying-in-sky.jpg");*/
+    /*background-image: url("forest_bridge.jpg");*/
+    /*background-image: url("river_bridge.jpg");*/
+    /*background-image: url("whale.jpg");*/
+
+    background-size: cover;
+    width: 100vw;
+    height:100vh;
+
+}
+
+h1 {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  color: white;
+  font-size: 7vh;
+}
+
+.arrowButtonDown {
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  top: 52%;
+  left: 47%;
+  font-size: 7vh;
+}
+
+.arrowButtonUp {
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  top: 70%;
+  left: 47%;
+  font-size: 7vh;
+}
+
+.inputName{
+  position: absolute;
+  width: 30vw;
+  right: 35vw;
+  top: 60%;
+}
+
+.contGuest{
+  color: white;
+  font-size: 2.5vh;
+  text-decoration: none;
+  position:absolute;
+  top: 67%;
+  right: 45vw;
+}
+
+.navLinks {
+  word-spacing: 2vw;
+  position:absolute;
+  top: 90vh;
+  left: 60vw;
+  font-size: 2vh;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.logo{
+  width: auto;
+  height: 13vh;
+  position: absolute;
+  top: 25%;
+  right:47%;
+}

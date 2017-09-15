@@ -1,15 +1,15 @@
 .App {
   text-align: center;
   display: flex;
-  
+
 }
 
 .head-content {
-  max-height: 12vh;
+  /*max-height: 12vh;*/
 }
 
 .page-content {
-  padding-top: 12vh;
+  /*padding-top: 12vh;*/
 }
 
 
