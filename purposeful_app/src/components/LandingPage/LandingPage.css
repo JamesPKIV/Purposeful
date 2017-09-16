@@ -4,8 +4,8 @@
       like birds and whales being happy, or those pictures of monkeys grooming
       each other (being a team)... but I didn't put any monkeys here...*/
 
-    background-image: url("jungle_bridge.jpg");
-    /*background-image: url("birds-flying-in-sky.jpg");*/
+    /*background-image: url("jungle_bridge.jpg"); */
+    /* background-image: url("birds-flying-in-sky.jpg"); */
     /*background-image: url("forest_bridge.jpg");*/
     /*background-image: url("river_bridge.jpg");*/
     /*background-image: url("whale.jpg");*/
@@ -18,39 +18,42 @@
 
 h1 {
   position: absolute;
-  top: 40%;
+  top: 20%;
   width: 100%;
   color: white;
   font-size: 7vh;
+  text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 }
 
-.arrowButtonDown {
-  border: none;
-  color: white;
+.continueButton {
+  margin: 0 auto;
+  border-style: round ;
+  background-color:#bbd26a;
+  color: black;
   cursor: pointer;
   position: absolute;
-  background-color: transparent;
-  top: 52%;
-  left: 47%;
-  font-size: 7vh;
+  top: 50%;
+  left: 45%;
+  font-size: 2.5vh;
+  
 }
-
-.arrowButtonUp {
-  border: none;
+.arrowIcon{
   color: white;
-  cursor: pointer;
-  position: absolute;
-  background-color: transparent;
-  top: 70%;
-  left: 47%;
-  font-size: 7vh;
+  font-size: 15px;
+  padding-left: 5px;
 }
 
 .inputName{
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  background: none;
   position: absolute;
   width: 30vw;
   right: 35vw;
-  top: 60%;
+  top: 40%;
+  text-align: center;
+  font-size: 24px;
 }
 
 .contGuest{
@@ -62,14 +65,6 @@ h1 {
   right: 45vw;
 }
 
-.navLinks {
-  word-spacing: 2vw;
-  position:absolute;
-  top: 90vh;
-  left: 60vw;
-  font-size: 2vh;
-}
-
 a {
   color: white;
   text-decoration: none;
@@ -79,6 +74,62 @@ a {
   width: auto;
   height: 13vh;
   position: absolute;
-  top: 25%;
+  top: 10%;
   right:47%;
+}
+
+.icons-list{
+  display: inline-block;
+  list-style: none;
+}
+
+.login-icon{
+  float: left;
+  padding-right: 40px;
+  font-size: 60px;
+}
+
+.login-div{
+  position: absolute;
+  top:60%;
+  left: 30%;
+  margin: auto;
+  width: 40%;
+}
+
+.login-h2{
+  margin-bottom: 0;
+  margin-top: 10;
+  color:black;
+}
+
+.facebook-icon{
+  color:#3B5998;
+  background-color: white;
+}
+
+.google-icon{
+  color:#d34836;
+  background-color: white;
+}
+
+.linkedin-icon{
+  color: #007bb6;
+  background-color: white;
+}
+
+.footer-bar {
+  width: 100%;
+  height:100px;
+  position:absolute;
+  top: 88vh;
+  background-color: #444;
+}
+
+.navLinks {
+  margin-top: 20px;
+  word-spacing: 2vw;
+  position:absolute;
+  left: 60vw;
+  font-size: 2vh;
 }
