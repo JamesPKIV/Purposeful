@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
+import { Link } from "react-router-dom";
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
@@ -58,7 +59,9 @@ class LandingPage extends Component {
 			<div>
 				<div className="row">
 					<div className="col s4 push-s4">
-						<h2 className="login-h2">Login</h2>
+						<Link to={{"pathname":"/home", "state":{"isLoggedIn":true} }}>
+              <h2 className="login-h2">Login</h2>
+				    </Link>
 					</div>
 				</div>
 				<div className="row">
