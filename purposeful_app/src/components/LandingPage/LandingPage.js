@@ -25,65 +25,79 @@ class LandingPage extends Component {
 		});
 	}
 
-	becomePurposeful = () => {
-		return (
-			<div>
-				<h1>Welcome to Purposeful</h1>
-			</div>
-		);
-	}
-
 	purposeful_Signup = () => {
 		if (!this.state.nameSet) {
 			return (
 				<div>
-					<input className="inputName" type="text" name="FirstName" value="What is your name?" />
-					<div><a className="continueButton btn" onClick={this.toggle}>Continue<i className="arrowIcon material-icons">arrow_forward</i> </a></div>
+					<div className="row">
+						<div className="input-field col s4 push-s4">
+							<input placeholder="What is your name?"  type="text" name="FirstName" className="active validate" required/>
+						</div>
+					</div>
+					<div className="row">
+						<div className="col s4 push-s4">
+							<a className="btn light-green" onClick={this.toggle}>
+								Continue<i className="arrowIcon material-icons">arrow_forward</i>
+							</a>
+						</div>
+					</div>
 				</div>
 			);
 		}else if(this.state.nameSet) {
 			return(
-			<div>
-				<input className="inputName" type="text" name="FirstName" value="Email" />
-			</div>
+				<div className="row">
+					<div className="input-field col s4 push-s4">
+						<input placeholder="Email?" className="active validate" type="text" name="Email" required/>
+					</div>
+				</div>
 			);
 		}
 	}
 
 	purposeful_Login = () => {
 		return (
-			<div className="login-div">
-				<Link to={{"pathname":"/home", "state":{"isLoggedIn":true} }}>
-					<h2 className="login-h2"> Login </h2>
-				</Link>
-
-				<ul className="icons-list">
-					<li className="login-icon"><div><a href="https://facebook.com"> <FaFacebook className="facebook-icon"/></a></div></li>
-					<li className="login-icon"><div><a href="https://google.com"> <FaGoogle className="google-icon"/></a></div></li>
-					<li className="login-icon"><div><a href="https://linkedin.com"> <FaLinkedin className="linkedin-icon"/></a></div></li>
-				</ul>
+			<div>
+				<div className="row">
+					<div className="col s4 push-s4">
+						<Link to={{"pathname":"/home", "state":{"isLoggedIn":true} }}>
+              <h2 className="login-h2">Login</h2>
+				    </Link>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col s8 push-s5">
+						<div className="col s1">
+							<a href="https://facebook.com"> <FaFacebook className="facebook-icon"/></a>
+						</div>
+						<div className="col s1" >
+							<a href="https://google.com"> <FaGoogle className="google-icon"/></a>
+						</div>
+						<div className="col s1" >
+							<a href="https://linkedin.com"> <FaLinkedin className="linkedin-icon"/></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
-
 	}
 
 	render() {
 		return (
-			<div className="LandingBack">
-				<img className="logo" src={logo} />
-				{this.becomePurposeful()}
-				{this.purposeful_Signup()}
-				{this.purposeful_Login()}
+			<div className="valign LandingBack">
 
-				<div className="footer-bar">
-					<div className="navLinks">
-						<p>
-							<a href="dummy1"> _About_Purposeful_ </a>
-							<a href="dummy2"> _Our_Team_ </a>
-							<a href="dummy3"> _Donate_ </a>
-							<a href="dummy4"> _Privacy_Policy_ </a>
-						</p>
+				<div className="row">
+					<div className="col s4 push-s4">
+						<img className="logo" src={logo} />
 					</div>
+				</div>
+				<div className="row">
+					<h1>Welcome to Purposeful</h1>
+				</div>
+				<div className="row">
+					{this.purposeful_Signup()}
+				</div>
+				<div className="row">
+					{this.purposeful_Login()}
 				</div>
 
 			</div>
