@@ -12,6 +12,10 @@
     color: black;
 }
 
+.feed-title {
+	color: black;
+}
+
 .feed-item.icon {
     display: block;
     margin: 5% auto;

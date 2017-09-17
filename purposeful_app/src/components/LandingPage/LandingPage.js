@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
+import { Link } from "react-router-dom";
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
@@ -52,7 +53,10 @@ class LandingPage extends Component {
 	purposeful_Login = () => {
 		return (
 			<div className="login-div">
-				<h2 className="login-h2"> Login </h2>
+				<Link to={{"pathname":"/home", "state":{"isLoggedIn":true} }}>
+					<h2 className="login-h2"> Login </h2>
+				</Link>
+
 				<ul className="icons-list">
 					<li className="login-icon"><div><a href="https://facebook.com"> <FaFacebook className="facebook-icon"/></a></div></li>
 					<li className="login-icon"><div><a href="https://google.com"> <FaGoogle className="google-icon"/></a></div></li>
