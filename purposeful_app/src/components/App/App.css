@@ -1,3 +1,21 @@
+/*
+Overriding Materialize's width for containers and grid
+*/
+.mainContainer {
+  width: 100vw;
+  max-width:initial;
+  height: 100vh;
+  max-height: initial;
+}
+
+.row {
+  width: 100vw;
+}
+
+
+/*
+Styles we had since phase 1
+*/
 .App {
   text-align: center;
   display: flex;
@@ -11,7 +29,6 @@
 .page-content {
   padding-top: 15vh;
 }
-
 
 .App-header {
   background-color: #222;
