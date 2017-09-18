@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './HomePage.css';
 import ActivityFeed from '../ActivityFeed/ActivityFeed'
+import { Col, Row } from "react-materialize";
 
 class HomePage extends Component {
 
@@ -16,14 +17,13 @@ class HomePage extends Component {
 
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
-			<article className="home-content">
+			<div id="home-content" className="row">
 				{
 					this.state.isLoggedIn ?
 			        <p> you are logged in, and this is your home page. </p>
 			        : <p> you are NOT logged in, and this is your home page. </p>
 			    } 
-
-			    <div>
+			    <div className="activity-feeds col l10 push-l1">
 				    {
 				    	this.state.isLoggedIn  && 
 				        <ActivityFeed title="Activity in Your Network" linkTo="/home" />
@@ -34,7 +34,7 @@ class HomePage extends Component {
                 	<ActivityFeed title="Collaborations" linkTo="/home" />
             	</div>
 			    
-			</article>
+			</div>
         );
 	}
 }

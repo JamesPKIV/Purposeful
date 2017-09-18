@@ -1,8 +1,4 @@
-.feed-box {
-	width: inherit;
-	display: flex;
-	flex-align: stretch;
-}
+
 
 .feed-item {
 	margin: 10px;
