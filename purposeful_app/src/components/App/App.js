@@ -28,7 +28,7 @@ class App extends Component {
             */}
           </header>
 
-          <section className="mainContainer valign-wrapper"> {/*used to be page-content*/}
+          <main className="mainContainer valign-wrapper"> {/*used to be page-content*/}
               <Route exact path="/" render={() => <Redirect to="/landing" />} />
               <Route path="/home" render={() => <HomePage />} />
               <Route path="/mentorship" render={() => <MentorshipPage />} />
@@ -37,29 +37,24 @@ class App extends Component {
 
               <Route path="/landing" render={() => <LandingPage />} />
               <Route path="/SEprofile" render={() => <SEProfilePage />} />
+          </main>
 
-              <div className="container">
-                <footer className="page-footer">
-                  <div class = "row grey darken-4">
-                    <div class = "col s12">
-                      <h5 class = "white-text">Footer Content</h5>
-                    </div>
-                    <div class = "col">
-                      <ul>
-                        <li><a href="dummy1"> _About_Purposeful_ </a></li>
-                        <li><a href="dummy2"> _Our_Team_ </a></li>
-                        <li><a href="dummy3"> _Donate_ </a></li>
-                        <li><a href="dummy4"> _Privacy_Policy_ </a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </footer>
+          <footer className="page-footer grey darken-4">
+            <div className = "row">
+              <div className = "col s2 push-s4">
+                <a href="dummy1">About_Purposeful</a>
               </div>
-          </section>
-
-
-
-
+              <div className="col s2 push-s4">
+                <a href="dummy2">Our_Team</a>
+              </div>
+              <div className= "col s2 push-s4">
+                <a href="dummy3">Donate</a>
+              </div>
+              <div className="col s2 push-s4">
+                <a href="dummy4">Privacy_Policy</a>
+              </div>
+            </div>
+          </footer>
 
         </div>
       </Router>

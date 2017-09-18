@@ -1,25 +1,27 @@
 /*
 Overriding Materialize's width for containers and grid
 */
-.mainContainer {
-  width: 100vw;
-  max-width:initial;
-  height: 100vh;
-  max-height: initial;
+main {
+  flex: 1 0 auto;
 }
 
-.row {
+.row{
   width: 100vw;
 }
 
+a {
+  color: white;
+}
 
 /*
-Styles we had since phase 1
+Styles we had since phase 1 BUT added stuff to App for materialize footer
 */
 .App {
   text-align: center;
   display: flex;
-
+  min-height: 100vh;
+  min-width: 100vw;
+  flex-direction: column;
 }
 
 .head-content {
