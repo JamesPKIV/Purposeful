@@ -29,12 +29,12 @@ class LandingPage extends Component {
 		if (!this.state.nameSet) {
 			return (
 				<div>
-					<div className="row">
+					<div className="row fullrow">
 						<div className="input-field col s4 push-s4">
 							<input placeholder="What is your name?"  type="text" name="FirstName" className="active validate" required/>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row fullrow">
 						<div className="col s4 push-s4">
 							<a className="btn light-green" onClick={this.toggle}>
 								Continue<i className="arrowIcon material-icons">arrow_forward</i>
@@ -45,7 +45,7 @@ class LandingPage extends Component {
 			);
 		}else if(this.state.nameSet) {
 			return(
-				<div className="row">
+				<div className="row fullrow">
 					<div className="input-field col s4 push-s4">
 						<input placeholder="Email?" className="active validate" type="text" name="Email" required/>
 					</div>
@@ -57,14 +57,14 @@ class LandingPage extends Component {
 	purposeful_Login = () => {
 		return (
 			<div>
-				<div className="row">
+				<div className="row fullrow">
 					<div className="col s4 push-s4">
 						<Link to={{"pathname":"/home", "state":{"isLoggedIn":true} }}>
               <h2 className="login-h2">Login</h2>
 				    </Link>
 					</div>
 				</div>
-				<div className="row">
+				<div className="row fullrow">
 					<div className="col s8 push-s5">
 						<div className="col s1">
 							<a href="https://facebook.com"> <FaFacebook className="facebook-icon"/></a>
@@ -83,24 +83,22 @@ class LandingPage extends Component {
 
 	render() {
 		return (
-			<div className="valign LandingBack">
-
-				<div className="row">
-					<div className="col s4 push-s4">
-						<img className="logo" src={logo} />
+				<div className="valign LandingBack">
+					<div className="row fullrow">
+						<div className="col s4 push-s4">
+							<img className="logo" src={logo} />
+						</div>
+					</div>
+					<div className="row fullrow">
+						<h1>Welcome to Purposeful</h1>
+					</div>
+					<div className="row fullrow">
+						{this.purposeful_Signup()}
+					</div>
+					<div className="row fullrow">
+						{this.purposeful_Login()}
 					</div>
 				</div>
-				<div className="row">
-					<h1>Welcome to Purposeful</h1>
-				</div>
-				<div className="row">
-					{this.purposeful_Signup()}
-				</div>
-				<div className="row">
-					{this.purposeful_Login()}
-				</div>
-
-			</div>
 		);
 	}
 }
