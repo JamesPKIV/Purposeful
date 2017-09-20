@@ -10,6 +10,7 @@
 
 
 import React, { Component } from 'react';
+import { Collection, Card, Row, Col } from 'react-materialize';
 import { Link } from 'react-router-dom';
 import './ActivityFeed.css';
 
@@ -39,10 +40,12 @@ class ActivityFeed extends Component {
 	*/
 	create_feed_item(item, idx) {
 		return (
-			<div className="feed-item" key={idx}> 
-				<User className="icon" />
-				<h4> {item.name} </h4>
-				<p className="desc"> {item.desc} </p>
+			<div className="col l2">
+				<Card className="feed-item" key={idx}> 
+					<User className="icon" />
+					<h4> {item.name} </h4>
+					<p className="desc"> {item.desc} </p>
+				</Card>
 			</div>
 		);
 	}
@@ -53,12 +56,16 @@ class ActivityFeed extends Component {
 			this.create_feed_item(item, idx) );
 	
 		return (			
-			<article className="activity-feed"> 				
+			<div className="col l10 push-l1"> 				
 				<Link className="feed-title" to={this.props.linkTo}> <h4> {this.state.title} </h4> </Link>
-				<section className="feed-box">
+				
+				<Collection>
+					<div className="row">
 					{feed_components}
-				</section>
-			</article>
+					</div>
+				</Collection>
+				
+			</div>
 		);
 		
 	}

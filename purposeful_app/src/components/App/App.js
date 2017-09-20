@@ -40,7 +40,7 @@ class App extends Component {
           </main>
 
           <footer className="page-footer grey darken-4">
-            <div className = "row">
+            <div className = "row fullrow">
               <div className = "col s2 push-s4">
                 <a href="dummy1">About_Purposeful</a>
               </div>
