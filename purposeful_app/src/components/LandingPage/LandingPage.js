@@ -15,13 +15,39 @@ class LandingPage extends Component {
 		this.state = {
 			isLoggedIn: false,
 			inputInfo: false,
-			nameSet: false
+			nameSet: false,
+			userName: "What is your name?",
+			userEmail: "Email",
+			userPwd: "Create a password",
 		};
+		this.userNameSet = this.userNameSet.bind(this);
+		this.userInfoSet = this.userEmailSet.bind(this);
+		this.userPwdSet = this.userPwdSet.bind(this);
 	}
 
 	toggle = () => {
 		this.setState({
 			nameSet: !this.state.nameSet
+		});
+
+
+	}
+
+	userNameSet = (e) => {
+		this.setState({
+			userName: e.target.value,
+		});
+	}
+
+	userEmailSet = (e) => {
+		this.setState({
+			userEmail: e.target.value,
+		});
+	}
+
+	userPwdSet = (e) =>{
+		this.setState({
+			userPwd: e.target.value,
 		});
 	}
 
@@ -31,7 +57,7 @@ class LandingPage extends Component {
 				<div>
 					<div className="row fullrow">
 						<div className="input-field col s4 push-s4">
-							<input placeholder="What is your name?"  type="text" name="FirstName" className="active validate" required/>
+							<input placeholder={this.state.userName} onChange={this.userNameSet} type="text" name="FirstName" className="active validate" required />
 						</div>
 					</div>
 					<div className="row fullrow">
@@ -43,13 +69,28 @@ class LandingPage extends Component {
 					</div>
 				</div>
 			);
-		}else if(this.state.nameSet) {
-			return(
-				<div className="row fullrow">
-					<div className="input-field col s4 push-s4">
-						<input placeholder="Email?" className="active validate" type="text" name="Email" required/>
+		} else if (this.state.nameSet) {
+			return (
+				<div>
+					<div className="row fullrow">
+						<div className="input-field col s4 push-s4">
+							<input placeholder={this.state.userEmail}  onChange={this.userEmailSet} type="text" name="Email" className="active validate" required />
+						</div>
+					</div>
+					<div className="row fullrow">
+						<div className="input-field col s4 push-s4">
+							<input placeholder={this.state.userPwd} onChange={this.userPwdSet} className="active validate" type="text" name="Email" required />
+						</div><br />
+					</div>
+					<div className="row fullrow">
+						<div className="col s4 push-s4">
+							<a className="btn light-green" href="/home">
+								Sign in<i className="arrowIcon material-icons">arrow_forward</i>
+							</a>
+						</div>
 					</div>
 				</div>
+			
 			);
 		}
 	}
@@ -59,21 +100,21 @@ class LandingPage extends Component {
 			<div>
 				<div className="row fullrow">
 					<div className="col s4 push-s4">
-						<Link to={{"pathname":"/home", "state":{"isLoggedIn":true} }}>
-              <h2 className="login-h2">Login</h2>
-				    </Link>
+						<Link to={{ "pathname": "/home", "state": { "isLoggedIn": true } }}>
+							<h2 className="login-h2">Login</h2>
+						</Link>
 					</div>
 				</div>
 				<div className="row fullrow">
 					<div className="col s8 push-s5">
 						<div className="col s1">
-							<a href="https://facebook.com"> <FaFacebook className="facebook-icon"/></a>
+							<a href="https://facebook.com"> <FaFacebook className="facebook-icon" /></a>
 						</div>
 						<div className="col s1" >
-							<a href="https://google.com"> <FaGoogle className="google-icon"/></a>
+							<a href="https://google.com"> <FaGoogle className="google-icon" /></a>
 						</div>
 						<div className="col s1" >
-							<a href="https://linkedin.com"> <FaLinkedin className="linkedin-icon"/></a>
+							<a href="https://linkedin.com"> <FaLinkedin className="linkedin-icon" /></a>
 						</div>
 					</div>
 				</div>
@@ -83,22 +124,22 @@ class LandingPage extends Component {
 
 	render() {
 		return (
-				<div className="valign LandingBack">
-					<div className="row fullrow">
-						<div className="col s4 push-s4">
-							<img className="logo" src={logo} />
-						</div>
-					</div>
-					<div className="row fullrow">
-						<h1>Welcome to Purposeful</h1>
-					</div>
-					<div className="row fullrow">
-						{this.purposeful_Signup()}
-					</div>
-					<div className="row fullrow">
-						{this.purposeful_Login()}
+			<div className="valign LandingBack">
+				<div className="row fullrow">
+					<div className="col s4 push-s4">
+						<img className="logo" src={logo} />
 					</div>
 				</div>
+				<div className="row fullrow">
+					<h1>Welcome to Purposeful</h1>
+				</div>
+				<div className="row fullrow">
+					{this.purposeful_Signup()}
+				</div>
+				<div className="row fullrow">
+					{this.purposeful_Login()}
+				</div>
+			</div>
 		);
 	}
 }
