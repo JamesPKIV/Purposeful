@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SEProfilePage.css';
 import profile_pic from './profile-pic-default.jpg';
+import project_pic from './project-pic-default.jpg';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
@@ -245,7 +246,44 @@ class SEProfilePage extends Component {
 
 	pull_collab(){
 		return(
-			<div></div>
+			<div className="row">
+
+				<div className="col s3">
+					<div className="card">
+						<div className="card-image">
+							<img src={project_pic}/>
+						</div>
+						<div className="card-content">
+							Thinking Sofas: We strive to build sofas that help you reach
+							those wonderful philosophical ideas.
+						</div>
+					</div>
+				</div>
+
+
+				<div className="col s3">
+					<div className="card">
+						<div className="card-image">
+							<img src={project_pic}/>
+						</div>
+						<div className="card-content">
+							We created a community garden at our neighborhood, we can help
+							you start on at your neighborhood too!
+						</div>
+					</div>
+				</div>
+
+				<div className="col s3">
+					<div className="card">
+						<div className="card-image">
+							<img src={project_pic}/>
+						</div>
+						<div className="card-content">
+							Annyone who wants to quit smoking, we can do it together!
+						</div>
+					</div>
+				</div>
+			</div>
 		);
 	}
 
