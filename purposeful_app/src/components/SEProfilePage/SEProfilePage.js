@@ -3,6 +3,7 @@ import './SEProfilePage.css';
 import profile_pic from './profile-pic-default.jpg';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
+import FaAngleRight from 'react-icons/lib/fa/angle-right';
 
 class SEProfilePage extends Component {
 
@@ -40,24 +41,30 @@ class SEProfilePage extends Component {
 			return(
 				<div className="card-panel">
 					<p className="profile-titles ">
-						My Purpose
+						Doing
 						<button onClick={this.togglePurpose} className="btn-flat">
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
 					</p>
-					<p className="profile-text valign">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+					<p className="profile-text valign">Write in this space current personal,
+					inter-personal, professional, or organizational projects you are working
+					on. Try to explain why these projects make you excited, and the ways
+					they relate to your experience, skills, and interests.</p>
 				</div>
 			);
 		} else {
 			return(
 				<div className="card-panel">
 					<p className="profile-titles ">
-						My Purpose
+						Doing
 						<button onClick={this.togglePurpose}  className="btn-flat">
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
-					<p className="profile-text truncate valign">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+					<p className="profile-text truncate valign">Write in this space current personal,
+					inter-personal, professional, or organizational projects you are working
+					on. Try to explain why these projects make you excited, and the ways
+					they relate to your experience, skills, and interests.</p>
 				</div>
 			);
 		}
@@ -68,24 +75,30 @@ class SEProfilePage extends Component {
 			return(
 				<div className="card-panel">
 					<p className="profile-titles ">
-						My Goals
+						Will do
 						<button onClick={this.toggleGoals} className="btn-flat">
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
 					</p>
-					<p className="profile-text valign">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+					<p className="profile-text valign">Write in this space anything that
+					you wish to do in the future. They can be ready-to-start
+					ideas, half-baked ideas, long-term goals, personal goals, new-year
+					resolutions, crazy dreams, or anything you wish you knew more about!</p>
 				</div>
 			);
 		} else {
 			return(
 				<div className="card-panel">
 					<p className="profile-titles ">
-						My Goals
+						Will do
 						<button onClick={this.toggleGoals}  className="btn-flat">
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
-					<p className="profile-text truncate valign">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+					<p className="profile-text truncate valign">Write in this space anything that
+					you wish to do in the future. They can be ready-to-start
+					ideas, half-baked ideas, long-term goals, personal goals, new-year
+					resolutions, crazy dreams, or anything you wish you knew more about!</p>
 				</div>
 			);
 		}
@@ -96,27 +109,144 @@ class SEProfilePage extends Component {
 			return(
 				<div className="card-panel">
 					<p className="profile-titles ">
-						My Achievements
+						Did
 						<button onClick={this.toggleAccomplish} className="btn-flat">
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
 					</p>
-					<p className="profile-text valign">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+					<p className="profile-text valign">Write in this space anything that
+					you feel proud you have accomplished. It could include your academic
+					achievements, personal challenges that you have defeated, places you
+					have traveled to, hobbies you have learned, or anything else you can
+					think about!</p>
 				</div>
 			);
 		} else {
 			return(
 				<div className="card-panel">
 					<p className="profile-titles ">
-						My Achievements
+						Did
 						<button onClick={this.toggleAccomplish}  className="btn-flat">
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
-					<p className="profile-text truncate valign">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+					<p className="profile-text truncate valign">Write in this space anything that
+					you feel proud you have accomplished. It could include your academic
+					achievements, personal challenges that you have defeated, places you
+					have traveled to, hobbies you have learned, or anything else you can
+					think about!</p>
 				</div>
 			);
 		}
+	}
+
+	pull_mentors(){
+		return(
+			<div className="row valign-wrapper">
+			{/*This will be the format used but profiles will be drawn
+				dynamically from database and horizontal scroll will only
+				happen if there are more than 5 mentors. If there are
+				less than 5 col size will adjust so they are not so tiny*/}
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Pancho</p>
+					<p className="small-name">Pantera</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Henri</p>
+					<p className="small-name">Poincare</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Ada</p>
+					<p className="small-name">Lovelace</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Edgar Allan</p>
+					<p className="small-name">Poe</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Eve</p>
+					<p className="small-name">Moneypenny</p>
+				</div>
+				<div className="col s2 valign">
+					<button onClick={console.log("arrow")}  className="btn-flat">
+						<FaAngleRight className="profile-name"></FaAngleRight>
+					</button>
+				</div>
+			</div>
+		);
+	}
+
+	pull_mentees(){
+		return(
+			<div className="row valign-wrapper">
+			{/*This will be the format used but profiles will be drawn
+				dynamically from database and horizontal scroll will only
+				happen if there are more than 5 mentees. If there are
+				less than 5 col size will adjust so they are not so tiny*/}
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Leonard</p>
+					<p className="small-name">Nemoy</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Hermione</p>
+					<p className="small-name">Granger</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Xenia</p>
+					<p className="small-name">Onatopp</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Ealinor</p>
+					<p className="small-name">Rigby</p>
+				</div>
+				<div className="col s2">
+					<img className="responsive-img circle" src={profile_pic}/>
+					<p className="small-name">Spud</p>
+					<p className="small-name">McKenzie</p>
+				</div>
+				<div className="col s2 valign">
+					<button onClick={console.log("arrow")}  className="btn-flat">
+						<FaAngleRight className="profile-name"></FaAngleRight>
+					</button>
+				</div>
+			</div>
+		);
+	}
+
+	pull_stories(){
+		return(
+			<div className="row">
+				<div className="collection">
+					<a href="dummy1" className="collection-item black-text">
+						How I decided I needed to plant my own garden
+					</a>
+					<a href="dummy2" className="collection-item black-text">
+						Choosing the best socks for your interview
+					</a>
+					<a href="dummy3" className="collection-item black-text">
+						How I came up with a human-size hamster-ball floating on water idea
+					</a>
+					<a href="dummy4" className="collection-item black-text">
+						The time I opened my own restaurant
+					</a>
+				</div>
+			</div>
+		);
+	}
+
+	pull_collab(){
+		return(
+			<div></div>
+		);
 	}
 
 	render(){
@@ -155,26 +285,43 @@ class SEProfilePage extends Component {
 
 						<div className="row">
 							<div className="col s10 push-s1">
+
 								<div className="card-panel">
-									<p className="profile-titles">
-										My Mentors
-									</p>
+									<div className="row valign-wrapper">
+										<p className="col s2 profile-titles valign">Mentors</p>
+										<p className="col s10 profile-text valign">These are people who have
+										guided Jane towards her goals.</p>
+									</div>
+									{this.pull_mentors()}
 								</div>
+
 								<div className="card-panel">
-									<p className="profile-titles">
-										My Mentees
-									</p>
+									<div className="row valign-wrapper">
+										<p className="col s2 profile-titles valign">Mentees</p>
+										<p className="col s10 profile-text valign">These are people who have
+										been supported by Jane to achieve their goals.</p>
+									</div>
+									{this.pull_mentees()}
 								</div>
+
 								<div className="card-panel">
-									<p className="profile-titles">
-										My Stories
-									</p>
+									<div className="row valign-wrapper">
+										<p className="col s2 profile-titles valign">Stories</p>
+										<p className="col s10 profile-text valign">Learn more about how
+										Jane got to where she is today.</p>
+									</div>
+									{this.pull_stories()}
 								</div>
+
 								<div className="card-panel">
-									<p className="profile-titles">
-										My Collaborations
-									</p>
+									<div className="row valign-wrapper">
+										<p className="col s3 profile-titles valign">Collaborations</p>
+										<p className="col s9 profile-text valign">These are the projects
+										that Jane is currenly working on.</p>
+									</div>
+										{this.pull_collab()}
 								</div>
+
 							</div>
 						</div>
 					</div>
