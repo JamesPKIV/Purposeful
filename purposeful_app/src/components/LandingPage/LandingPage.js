@@ -56,9 +56,11 @@ class LandingPage extends Component {
 		const email = this.state.userEmail;
 		const pwd = this.state.userPwd;
 
-		Client.create_user(name, email, pwd, (user) => {
-			console.log("(LandingPage) user account created! user: ", user);
-			alert("user account created! user: ", user);
+		Client.create_user(name, email, pwd, (data) => {
+			console.log("(LandingPage) user account created! new user data: ", data);
+
+			console.log("(data.id: ", data.id);
+			alert("user account created! new user id: "+ data.id);
 		})
 	}
 

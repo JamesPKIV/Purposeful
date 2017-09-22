@@ -22,12 +22,15 @@ function create_user(name, email, pwd, callback_fn) {
 	})
 	.then(checkStatus)
 	.then(parseJSON)
-	.then(data => {console.log("create_user success: ", data)});
-	/*.then(callback_fn);*/
+	.then(response => {
+		console.log("create_user success! new user: ", response.data.id);
+		return response;
+	})
+	.then(response => {callback_fn(response.data)} );
 }
 
 
-/** this function adapted from: 
+/** this function adapted froma: 
 https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
 */ 
 function checkStatus(response) {
