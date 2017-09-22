@@ -1,11 +1,14 @@
 /*postgres test connection*/
-const pgp = require('pg-promise')(/*options*/);
-const connectionString = process.env.DATABASE_URL || 
-	"postgres://test:test@localhost:5432/purposeful_test_db";
-const db = pgp(connectionString);
+var db = require("./pg_database.js").db;
+var pgp = require("./pg_database.js").pgp;
 
 /* create users table */
-const query = db.query(
-  'CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, name VARCHAR(40) NOT NULL)'
-  )
-.then(() => { pgp.end()});
+db.task (t => {
+	return t.none("DROP TABLE IF EXISTS users")
+	.then( () => {
+		return t.any(
+  			"CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, name VARCHAR(40) NOT NULL, email VARCHAR(40) NOT NULL) "
+  		)
+	})
+	.then(() => { pgp.end()});
+});
