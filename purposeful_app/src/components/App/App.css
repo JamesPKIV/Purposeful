@@ -13,6 +13,21 @@ a {
   color: white;
 }
 
+.mobile-font{
+  font-size: 3vw;
+}
+
+.desktop-font{
+  display: block;
+  padding-right: 4vw;
+}
+
+.footer-links{
+  display: inline-flex;
+  float: right;
+}
+
+
 /*
 Styles we had since phase 1 BUT added stuff to App for materialize footer
 */
@@ -21,6 +36,7 @@ Styles we had since phase 1 BUT added stuff to App for materialize footer
   display: flex;
   min-height: 100vh;
   min-width: 100vw;
+  max-width: 100vw;
   flex-direction: column;
 }
 
