@@ -10,6 +10,16 @@ class SEProfilePage extends Component {
 
 	constructor (props) {
 		super(props);
+		this.togglePurpose = this.togglePurpose.bind(this);
+		this.toggleGoals = this.toggleGoals.bind(this);
+		this.toggleAccomplish = this.toggleAccomplish.bind(this);
+		this.purpose_content = this.purpose_content.bind(this);
+		this.goals_content = this.goals_content.bind(this);
+		this.accomplish_content = this.accomplish_content.bind(this);
+		this.pull_mentors = this.pull_mentors.bind(this);
+		this.pull_mentees = this.pull_mentees.bind(this);
+		this.pull_stories = this.pull_stories.bind(this);
+		this.pull_collab = this.pull_collab.bind(this);
 		this.state = {
 			isLoggedIn : false,
 			purposeDisplay : false,
@@ -38,37 +48,37 @@ class SEProfilePage extends Component {
 	}
 
 	purpose_content(){
-		if(this.state.purposeDisplay){
-			return(
-				<div className="card-panel">
-					<p className="profile-titles ">
-						Doing
-						<button onClick={this.togglePurpose} className="btn-flat">
-							<FaAngleUp className="profile-titles"></FaAngleUp>
-						</button>
-					</p>
-					<p className="profile-text valign">Write in this space current personal,
-					inter-personal, professional, or organizational projects you are working
-					on. Try to explain why these projects make you excited, and the ways
-					they relate to your experience, skills, and interests.</p>
-				</div>
-			);
-		} else {
-			return(
-				<div className="card-panel">
-					<p className="profile-titles ">
-						Doing
-						<button onClick={this.togglePurpose}  className="btn-flat">
-							<FaAngleDown className="profile-titles"></FaAngleDown>
-						</button>
-					</p>
-					<p className="profile-text truncate valign">Write in this space current personal,
-					inter-personal, professional, or organizational projects you are working
-					on. Try to explain why these projects make you excited, and the ways
-					they relate to your experience, skills, and interests.</p>
-				</div>
-			);
-		}
+			if(this.state.purposeDisplay){
+				return(
+					<div className="card-panel">
+						<p className="profile-titles">
+							Doing
+							<button onClick={this.togglePurpose} className="btn-flat">
+								<FaAngleUp className="profile-titles"></FaAngleUp>
+							</button>
+						</p>
+						<p className="profile-text valign">Write in this space current personal,
+						inter-personal, professional, or organizational projects you are working
+						on. Try to explain why these projects make you excited, and the ways
+						they relate to your experience, skills, and interests.</p>
+					</div>
+				);
+			} else {
+				return(
+					<div className="card-panel">
+						<p className="profile-titles ">
+							Doing
+							<button onClick={this.togglePurpose}  className="btn-flat">
+								<FaAngleDown className="profile-titles"></FaAngleDown>
+							</button>
+						</p>
+						<p className="profile-text truncate valign">Write in this space current personal,
+						inter-personal, professional, or organizational projects you are working
+						on. Try to explain why these projects make you excited, and the ways
+						they relate to your experience, skills, and interests.</p>
+					</div>
+				);
+			}
 	}
 
 	goals_content(){
@@ -148,32 +158,32 @@ class SEProfilePage extends Component {
 				dynamically from database and horizontal scroll will only
 				happen if there are more than 5 mentors. If there are
 				less than 5 col size will adjust so they are not so tiny*/}
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Pancho</p>
 					<p className="small-name">Pantera</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Henri</p>
 					<p className="small-name">Poincare</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Ada</p>
 					<p className="small-name">Lovelace</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Edgar Allan</p>
 					<p className="small-name">Poe</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Eve</p>
 					<p className="small-name">Moneypenny</p>
 				</div>
-				<div className="col s2 valign">
+				<div className="col s2 m2 l2valign">
 					<button onClick={console.log("arrow")}  className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
 					</button>
@@ -189,32 +199,32 @@ class SEProfilePage extends Component {
 				dynamically from database and horizontal scroll will only
 				happen if there are more than 5 mentees. If there are
 				less than 5 col size will adjust so they are not so tiny*/}
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Leonard</p>
 					<p className="small-name">Nemoy</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Hermione</p>
 					<p className="small-name">Granger</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Xenia</p>
 					<p className="small-name">Onatopp</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Ealinor</p>
 					<p className="small-name">Rigby</p>
 				</div>
-				<div className="col s2">
+				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic}/>
 					<p className="small-name">Spud</p>
 					<p className="small-name">McKenzie</p>
 				</div>
-				<div className="col s2 valign">
+				<div className="col s2 m2 l2 valign">
 					<button onClick={console.log("arrow")}  className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
 					</button>
@@ -227,16 +237,16 @@ class SEProfilePage extends Component {
 		return(
 			<div className="row">
 				<div className="collection">
-					<a href="dummy1" className="collection-item black-text">
+					<a href="dummy1" className="collection-item green-text">
 						How I decided I needed to plant my own garden
 					</a>
-					<a href="dummy2" className="collection-item black-text">
+					<a href="dummy2" className="collection-item green-text">
 						Choosing the best socks for your interview
 					</a>
-					<a href="dummy3" className="collection-item black-text">
+					<a href="dummy3" className="collection-item green-text">
 						How I came up with a human-size hamster-ball floating on water idea
 					</a>
-					<a href="dummy4" className="collection-item black-text">
+					<a href="dummy4" className="collection-item green-text">
 						The time I opened my own restaurant
 					</a>
 				</div>
@@ -248,38 +258,47 @@ class SEProfilePage extends Component {
 		return(
 			<div className="row">
 
-				<div className="col s3">
+				<div className="col s4 m3 l3">
 					<div className="card">
 						<div className="card-image">
 							<img src={project_pic}/>
 						</div>
-						<div className="card-content">
+						<div className="card-content collabCard-text">
 							Thinking Sofas: We strive to build sofas that help you reach
 							those wonderful philosophical ideas.
 						</div>
+						<div className="card-action light-green">
+							<a href="#" className="white-text">Learn More</a>
+						</div>
 					</div>
 				</div>
 
 
-				<div className="col s3">
-					<div className="card">
+				<div className="col s4 m3 l3">
+					<div className="card ">
 						<div className="card-image">
 							<img src={project_pic}/>
 						</div>
-						<div className="card-content">
+						<div className="card-content collabCard-text">
 							We created a community garden at our neighborhood, we can help
 							you start on at your neighborhood too!
 						</div>
+						<div className="card-action light-green">
+							<a href="#" className="white-text">Learn More</a>
+						</div>
 					</div>
 				</div>
 
-				<div className="col s3">
+				<div className="col s4 m3 l3">
 					<div className="card">
 						<div className="card-image">
 							<img src={project_pic}/>
 						</div>
-						<div className="card-content">
+						<div className="card-content collabCard-text">
 							Annyone who wants to quit smoking, we can do it together!
+						</div>
+						<div className="card-action light-green">
+							<a href="#" className="white-text">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -287,13 +306,13 @@ class SEProfilePage extends Component {
 		);
 	}
 
-	render(){
+	displayDesktop(){
 		return(
 			<div>
 				<div className="row fullrow"> <p> </p> </div>
 				<div className="row fullrow">
 
-					<div className="col s4">
+					<div className="col s4 m4 l4">
 						<img className="responsive-img circle" src={profile_pic}/>
 						<p className="profile-name"> Jane Doe </p>
 						<div className="container">
@@ -303,17 +322,17 @@ class SEProfilePage extends Component {
 						</div>
 					</div>
 
-					<div className="col s8">
+					<div className="col s8 m8 l8">
 						<div className="row"> <p> </p> </div>
 						<div className="row"> <p> </p> </div>
 						<div className="row">
-							<div className="col s4">
-								<button className="btn-large waves-effect light-green valign-wrapper"> Become their Mentee </button>
+							<div className="col s4 m4 l4">
+								<button className="btn-large waves-effect light-green"> Become their Mentee </button>
 							</div>
-							<div className="col s4">
+							<div className="col s4 m4 l4">
 								<button className="btn-large waves-effect light-green"> Invite to Collaborate </button>
 							</div>
-							<div className="col s4">
+							<div className="col s4 m4 l4">
 								<button className="btn-large waves-effect light-green"> Folow their Activity </button>
 							</div>
 						</div>
@@ -322,12 +341,12 @@ class SEProfilePage extends Component {
 						<div className="row"> <p> </p> </div>
 
 						<div className="row">
-							<div className="col s10 push-s1">
+							<div className="col s10 m10 l10 push-l1">
 
 								<div className="card-panel">
 									<div className="row valign-wrapper">
-										<p className="col s2 profile-titles valign">Mentors</p>
-										<p className="col s10 profile-text valign">These are people who have
+										<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
+										<p className="col s10 m10 l10 profile-text valign">These are people who have
 										guided Jane towards her goals.</p>
 									</div>
 									{this.pull_mentors()}
@@ -335,8 +354,8 @@ class SEProfilePage extends Component {
 
 								<div className="card-panel">
 									<div className="row valign-wrapper">
-										<p className="col s2 profile-titles valign">Mentees</p>
-										<p className="col s10 profile-text valign">These are people who have
+										<p className="col s2 m2 l2 profile-titles valign">Mentees</p>
+										<p className="col s10 m10 l10 profile-text valign">These are people who have
 										been supported by Jane to achieve their goals.</p>
 									</div>
 									{this.pull_mentees()}
@@ -344,8 +363,8 @@ class SEProfilePage extends Component {
 
 								<div className="card-panel">
 									<div className="row valign-wrapper">
-										<p className="col s2 profile-titles valign">Stories</p>
-										<p className="col s10 profile-text valign">Learn more about how
+										<p className="col s2 m2 l2 profile-titles valign">Stories</p>
+										<p className="col s10 m10 l10 profile-text valign">Learn more about how
 										Jane got to where she is today.</p>
 									</div>
 									{this.pull_stories()}
@@ -353,20 +372,98 @@ class SEProfilePage extends Component {
 
 								<div className="card-panel">
 									<div className="row valign-wrapper">
-										<p className="col s3 profile-titles valign">Collaborations</p>
-										<p className="col s9 profile-text valign">These are the projects
+										<p className="col s3 m3 l3 profile-titles valign">Collaborations</p>
+										<p className="col s9 m9 l9 profile-text valign">These are the projects
 										that Jane is currenly working on.</p>
 									</div>
 										{this.pull_collab()}
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		);
+	}
+
+	displayMobile(){
+		return(
+			<div>
+				<div className="row fullrow"> <p> </p></div>
+				<div className="row fullrow">
+						<div className="col s5 m5 l5">
+							<img className="responsive-img circle" src={profile_pic}/>
+							<p className="profile-name"> Jane Doe </p>
+						</div>
+
+						<div className="col s6 m6 l6 ">
+							<div className="row">
+								<button className="btn waves-effect light-green"> Become their Mentee </button>
+							</div>
+							<div className="row">
+								<button className="btn waves-effect light-green"> Invite to Collaborate </button>
+							</div>
+							<div className="row">
+								<button className="btn waves-effect light-green"> Folow their Activity </button>
+							</div>
+						</div>
+				</div>
+				<div className="row fullrow">
+					{this.purpose_content()}
+					{this.goals_content()}
+					{this.accomplish_content()}
+				</div>
+				<div className="row fullrow">
+					<div className="card-panel">
+						<div className="row">
+							<p className="profile-titles">Mentors</p>
+							<p className="profile-text">These are people who have
+							guided Jane towards her goals.</p>
+						</div>
+						{this.pull_mentors()}
+					</div>
+
+					<div className="card-panel">
+						<div className="row">
+							<p className="profile-titles">Mentees</p>
+							<p className="profile-text">These are people who have
+							been supported by Jane to achieve their goals.</p>
+						</div>
+						{this.pull_mentees()}
+					</div>
+
+					<div className="card-panel">
+						<div className="row">
+							<p className="profile-titles">Stories</p>
+							<p className="profile-text">Learn more about how
+							Jane got to where she is today.</p>
+						</div>
+						{this.pull_stories()}
+					</div>
+
+					<div className="card-panel">
+						<div className="row">
+							<p className="profile-titles">Collaborations</p>
+							<p className="profile-text">These are the projects
+							that Jane is currenly working on.</p>
+						</div>
+							{this.pull_collab()}
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	render(){
+		if(window.innerWidth > 700){
+			return(
+				this.displayDesktop()
+			);
+		} else {
+			return(
+				this.displayMobile()
+			);
+		}
 	}
 }
 

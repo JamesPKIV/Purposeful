@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
 import { Link } from "react-router-dom";
-import FaAngleDown from 'react-icons/lib/fa/angle-down';
-import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
@@ -136,7 +134,7 @@ class LandingPage extends Component {
 			<div className="valign LandingBack">
 				<div className="row fullrow">
 					<div className="col s4 push-s4">
-						<img className="logo" src={logo} />
+						<img className="logo" src={logo} alt="purposeful logo here" />
 					</div>
 				</div>
 				<div className="row fullrow">
