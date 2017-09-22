@@ -56,3 +56,9 @@ h1 {
     /*background-image: url("whale.jpg");*/
     background-size: cover;
 }
+
+
+.light-green{
+  padding-top: 0;
+  padding-bottom: 10px;
+}
