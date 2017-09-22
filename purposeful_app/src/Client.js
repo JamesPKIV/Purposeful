@@ -1,3 +1,8 @@
+/* React Client module for communicating with express server. 
+*/
+
+/** This function ...
+*/
 function get_user_profile(user_id, callback_fn) {
 	return fetch("api/users?q=${user_id}", {
 		accept: "application/json"
@@ -7,6 +12,9 @@ function get_user_profile(user_id, callback_fn) {
 	.then(callback_fn);
 }
 
+/** This function creates a user account with the name, email, and password
+* provided as arguments.
+*/
 function create_user(name, email, pwd, callback_fn) {
 	return fetch("api/users/new", {
 		method: "POST",
@@ -23,14 +31,13 @@ function create_user(name, email, pwd, callback_fn) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(response => {
-		console.log("create_user success! new user: ", response.data.id);
-		return response;
-	})
-	.then(response => {callback_fn(response.data)} );
+		console.log("create_user success! new user data obj: ", response.data);
+		callback_fn(response.data);
+	} );
 }
 
 
-/** this function adapted froma: 
+/** this function adapted from: 
 https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
 */ 
 function checkStatus(response) {
