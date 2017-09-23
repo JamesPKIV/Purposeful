@@ -4,16 +4,17 @@
 /** This function ...
 */
 function get_user_profile(user_id, callback_fn) {
-	return fetch("api/users?q=${user_id}", {
+	return fetch("api/users/${user_id}", {
 		accept: "application/json"
 	})
 	.then(checkStatus)
 	.then(parseJSON)
-	.then(callback_fn);
+	.then(response => {callback_fn(response)} );
 }
 
 /** This function creates a user account with the name, email, and password
-* provided as arguments.
+* arguments provided, then calls the callback function if the account
+* creation succeeds.
 */
 function create_user(name, email, pwd, callback_fn) {
 	return fetch("api/users/new", {
@@ -33,7 +34,10 @@ function create_user(name, email, pwd, callback_fn) {
 	.then(response => {
 		console.log("create_user success! new user data obj: ", response.data);
 		callback_fn(response.data);
-	} );
+	} )
+	.catch(function(error) {  
+		console.log('Create User Request failed', error);  
+	});
 }
 
 
