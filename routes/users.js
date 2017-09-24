@@ -23,7 +23,7 @@ router.post('/new', function(req, res, next) {
 	console.log("serving /api/users/new request: ", new_entry);
 	/* insert new entry into users table */
 	const query = db.one(
-	  	"INSERT INTO users(name, email) VALUES (${name}, ${email}) RETURNING (name, id)",
+	  	"INSERT INTO users(name, email) VALUES (${name}, ${email}) RETURNING (name, id) AS name, id",
 	  	new_entry
   	)
   	.then(query_data => { 
@@ -31,13 +31,10 @@ router.post('/new', function(req, res, next) {
 		return query_data;
 	})
 	.then( query_data => {
-		/* format query data as an object with keys "name" and "id" */
-		var row = query_data.row.slice(1, -1).split(",");
-		var user_obj = {name: row[0], id:row[1]};
-	  	res.json({msg: 'ok', data:user_obj});
+	  	res.json({msg: 'ok', data:query_data});
 	})
 	.catch(error => {
-        console.log('ERROR:', error);
+        console.log('CLIENT ERROR: creating new user:', error);
     });
 });
 
