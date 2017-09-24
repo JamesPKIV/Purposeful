@@ -4,7 +4,7 @@
 /** This function ...
 */
 function fetch_user_profile(user_id, callback_fn) {
-	return fetch("api/users/${user_id}", {
+	return fetch("api/users/" + user_id, {
 		accept: "application/json"
 	})
 	.then(checkStatus)
@@ -20,7 +20,7 @@ function fetch_user_profile(user_id, callback_fn) {
 * email: new user's email
 * pwd: new user's password
 * callback_fn: a callback function which recieves from the response the created user's 
-* 	name and unique user ID. The function is passed an object with two members,
+* 	name and unique user ID. The callback function is passed an object with two members,
 *	name and id, like this:
 		{name: "NAME", id: 123}	
 */

@@ -42,17 +42,25 @@ router.post('/new', function(req, res, next) {
 });
 
 
-/* GET users listing. */
-router.get('/:uid', function(req, res, next) {
+/* GET user listing by user id.  
+* If successful, sends a response with a JSON body containing name and 
+* email properties for the given id.
+*/
+router.get('/user/:uid', function(req, res, next) {
 
-
+console.log("USERS.JS->/user/:uid) reached. req.params:", req.params);
 	/* query users table */
-	const query = db.query(
-	  "SELECT name, email FROM users WHERE id = ${1}", [uid]
+	const query = db.one(
+	  "SELECT name, email FROM users WHERE id = $1", [req.params.uid]
 	)
-	.then(() => { pgp.end()});
-	  res.json({msg: 'Getting goodies from the users route!', data:query});
-});
+	.then((query_data) => {
+		console.log("USERS.JS->/user/:uid) query data:", query_data);
+		return query_data;
+	})
+	.then((query_data) => {
+	  res.json({msg: 'ok', data:query_data});
+	});
+})
 
 
 module.exports = router;
