@@ -3,7 +3,7 @@
 
 /** This function ...
 */
-function get_user_profile(user_id, callback_fn) {
+function fetch_user_profile(user_id, callback_fn) {
 	return fetch("api/users/${user_id}", {
 		accept: "application/json"
 	})
@@ -12,9 +12,17 @@ function get_user_profile(user_id, callback_fn) {
 	.then(response => {callback_fn(response)} );
 }
 
-/** This function creates a user account with the name, email, and password
-* arguments provided, then calls the callback function if the account
-* creation succeeds.
+/** This function creates a new user account with the name, email, and password
+* arguments provided and returns the created user's information if successful.
+*
+* Arguments:
+* name: new user's name
+* email: new user's email
+* pwd: new user's password
+* callback_fn: a callback function which recieves from the response the created user's 
+* 	name and unique user ID. The function is passed an object with two members,
+*	name and id, like this:
+		{name: "NAME", id: 123}	
 */
 function create_user(name, email, pwd, callback_fn) {
 	return fetch("api/users/new", {
@@ -32,16 +40,18 @@ function create_user(name, email, pwd, callback_fn) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(response => {
-		console.log("create_user success! new user data obj: ", response.data);
+		console.log("(CLIENT.JS) create_user success! new user data obj: ", response.data);
 		callback_fn(response.data);
 	} )
 	.catch(function(error) {  
-		console.log('Create User Request failed', error);  
+		console.log('(CLIENT.JS) Create User Request failed', error);  
 	});
 }
 
 
-/** this function adapted from: 
+
+
+/** this middleware function is a adapted from: 
 https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
 */ 
 function checkStatus(response) {

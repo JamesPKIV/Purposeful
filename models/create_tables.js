@@ -3,47 +3,100 @@ var db = require("./pg_database.js").db;
 var pgp = require("./pg_database.js").pgp;
 
 
-db.task (t => {
+/* if this flag is set true, report status of all queries */
+const VERBOSE = true;
 
-		/*users table definitions*/
-		const users_table_name = "users";
-		const USER_TBL_COLUMNS = [
-			"id SERIAL PRIMARY KEY", 
-			"name VARCHAR(40) NOT NULL", 
-			"email VARCHAR(40) NOT NULL",
-		];
+/* if this flag is set true, overwrite existing tables */
+const SHOULD_DROP_TABLES = true;
 
-		/*interests table definitions*/
-		const intr_table_name = "interests";
-		const INTEREST_TBL_COLUMNS = [
-			"id SERIAL PRIMARY KEY",
-			"uid INTEGER REFERENCES users(id)", 
-			"interest VARCHAR(100) NOT NULL", 
-			"category VARCHAR(100)"
-		];
+		
+/* table names */
+const USER_TBL = "users";
+const MENTR_TBL = "mentorship";
+const INTR_TBL = "interests";
+const SKILL_TBL = "skills";
+const USER_SKILL_MAP = "user_skill_map";
+const USER_INTR_MAP = "user_interest_map";  
 
-		return drop_table(intr_table_name, t) /* drop interests table */
-			.then(() => { return drop_table(users_table_name, t) /*  drop users table */
-				.then(() => { return create_table(users_table_name, USER_TBL_COLUMNS, t) /* create users table */
-					.then(() => { return create_table(intr_table_name, INTEREST_TBL_COLUMNS, t) /* create interests table */
-						.then(() => {pgp.end()});
-					})
-				})
-			});		
-});
 
-function drop_table(table_name, t) {
-	return t.none("DROP TABLE IF EXISTS ${table~}", {table:table_name})
-		.catch((error) => {console.log("Error dropping ", table_name, " table: ", error)});
-}
+/* table column definitions */
+/* users table */
+const USER_TBL_COLS = [
+	"id SERIAL PRIMARY KEY", 
+	"name VARCHAR(40) NOT NULL", 
+	"email VARCHAR(40) NOT NULL",
+];
 
-function create_table(table_name, column_def_array, t) {
-	return t.none(
-		"CREATE TABLE IF NOT EXISTS ${table~}(${columns^}) ", {
-			table: table_name,
-			columns: column_def_array.join(","),
-		})
-		.then(() => {console.log(table_name, "table created!"); })
-		.catch((error) => {console.log("Error creating ", table_name, " table: ", error)});
-}
+/* interests table definitions */
+const INTR_TBL_COLS = [
+	"id SERIAL PRIMARY KEY",
+	"uid INTEGER NOT NULL REFERENCES users(id)", 
+	"interest VARCHAR(100) NOT NULL", 
+	"category VARCHAR(100)"
+];
+
+/* skills table definitions */
+
+const SKILLS_TBL_COLS = [
+	"id SERIAL PRIMARY KEY",
+	"uid INTEGER NOT NULL REFERENCES users(id)", 
+	"name VARCHAR(100) NOT NULL", 
+	"level VARCHAR(100)",
+	"category VARCHAR(100)",
+];
+
+
+
+/* The tables defined below map the user data tables above to one another. */
+/* Mentorship user map table definitions*/
+const MENTR_TBL_COLS = [
+	"id SERIAL PRIMARY KEY",
+	"mentor_uid INTEGER NOT NULL REFERENCES users(id)", 
+	"mentee_uid INTEGER NOT NULL REFERENCES users(id)", 
+];
+
+
+/*user-skill map table definitions*/
+const USER_SKILL_MAP_COLS = [
+	"id SERIAL PRIMARY KEY",
+	"uid INTEGER NOT NULL REFERENCES users(id)", 
+	"skill_id INTEGER  NOT NULL REFERENCES skills(id)"
+];
+
+
+/*user-interest map table definitions*/
+const USER_INTR_MAP_COLS = [
+	"id SERIAL PRIMARY KEY",
+	"uid INTEGER NOT NULL REFERENCES users(id)", 
+	"interest_id INTEGER NOT NULL REFERENCES interests(id)"
+];
+
+
+/* map of table names to their respective column definitions. */
+
+/* this map contains the independent tables, which contain no references to 
+* other tables. 
+*/
+const INDEP_TBL_NAME_COL_MAP = {
+	[USER_TBL]: USER_TBL_COLS,
+	[INTR_TBL]: INTR_TBL_COLS,
+	[SKILL_TBL]: SKILLS_TBL_COLS,
+} 
+
+/* this map contains the dependent tables, which DO contain references to 
+* other tables. 
+*/
+const DEP_TBL_NAME_COL_MAP = {
+	[MENTR_TBL]: MENTR_TBL_COLS,
+	[USER_SKILL_MAP]: USER_SKILL_MAP_COLS, 
+	[USER_INTR_MAP]: USER_INTR_MAP_COLS,
+} 
+
+/* this map contains the join of all tables listed in the 
+* DEP_/INDEP_TBL_NAME_COL_MAP onjects above.
+*/
+const ALL_TBL_NAME_COL_MAP = Object.assign(
+	DEP_TBL_NAME_COL_MAP, INDEP_TBL_NAME_COL_MAP);
+
+
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { Link } from "react-router-dom";
+import { Route, Link, withRouter } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
 import Client from "../../Client";
+
 
 class LandingPage extends Component {
 
@@ -22,7 +23,7 @@ class LandingPage extends Component {
 		this.userNameSet = this.userNameSet.bind(this);
 		this.userInfoSet = this.userEmailSet.bind(this);
 		this.userPwdSet = this.userPwdSet.bind(this);
-		this.submitNewUser = this.submitNewUser.bind(this);
+		this.handleCreateUser = this.handleCreateUser.bind(this);
 	}
 
 	toggle = () => {
@@ -51,18 +52,24 @@ class LandingPage extends Component {
 		});
 	}
 
-	submitNewUser = () => {
+	handleCreateUser = (hist) => {
 		const name = this.state.userName;
 		const email = this.state.userEmail;
 		const pwd = this.state.userPwd;
 
 		Client.create_user(name, email, pwd, (data) => {
 			console.log("(LandingPage) user account created! new user data: ", data);
-
-			console.log("(data.id: ", data.id);
 			alert("user account created! new user id: "+ data.id);
-		})
-	}
+			/* navigate to home page */
+			console.log("history: ", hist);
+			hist.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
+		});
+
+		
+		
+   }
+
+	
 
 
 	purposeful_Signup = () => {
@@ -98,9 +105,11 @@ class LandingPage extends Component {
 					</div>
 					<div className="row fullrow">
 						<div className="col s4 push-s4">
-							<button className="btn light-green" onClick={this.submitNewUser}>
-								Create Account<i className="arrowIcon material-icons">arrow_forward</i>
-							</button>
+							<Route render={ ({history}) => (
+								<button className="btn light-green"	onClick={() => {this.handleCreateUser(history)}}>
+										Create Account<i className="arrowIcon material-icons">arrow_forward</i>
+								</button>
+							)} />
 						</div>
 					</div>
 				</div>
@@ -157,4 +166,4 @@ class LandingPage extends Component {
 		);
 	}
 }
-export default LandingPage;
+export default withRouter(LandingPage);

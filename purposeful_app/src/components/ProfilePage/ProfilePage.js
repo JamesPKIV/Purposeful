@@ -5,6 +5,8 @@ class ProfilePage extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
+			name: "",
+			uid: "",
 			isLoggedIn : false
 		}
 	}
@@ -16,7 +18,7 @@ class ProfilePage extends Component {
 			<article className="profile-content">
 				{
 					this.state.isLoggedIn ?
-			        <p> you are logged in, and this is your profile page. </p>
+			        <p> you are logged in {this.state.name}, id#{this.state.uid}, and this is your profile page. </p>
                     :
                     <p> you are NOT logged in, and this is your profile page. </p>
 			    }
