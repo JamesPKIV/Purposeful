@@ -1,0 +1,23 @@
+.profile-name{
+  font-size: 4vh;
+}
+
+.small-name{
+  font-size: 2vh;
+  text-align: center;
+}
+
+.profile-titles{
+  font-size: 3vh;
+  text-align: left;
+}
+
+.profile-text{
+  font-size: 2vh;
+  text-align: left;
+}
+
+.collabCard-text{
+  text-overflow: ellipsis;
+  max-height: 12vh;
+}
