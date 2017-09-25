@@ -1,4 +1,6 @@
-
+/* this file creates the database tables as defined in ./table_defs.js.
+* It also drops any existing tables with the same names. To disable this
+* behavior, change the variable flag SHOULD_DROP_TABLES. */
 
 
 var db = require("./pg_database.js").db;
@@ -6,7 +8,7 @@ var pgp = require("./pg_database.js").pgp;
 var dbconsts = require("./table_defs.js");
 
 /* if this flag is set true, overwrite existing tables */
-const SHOULD_DROP_TABLES = true;
+var SHOULD_DROP_TABLES = true;
 
 
 /* this function drops all tables passed as keys in the name_col_map */
@@ -22,8 +24,7 @@ function drop_tables(name_col_map, t) {
 
 /* this function creates all tables in the name_col_map */
 function create_tables(name_col_map, t) {
-	var creates =[];
-
+	var creates = [];
 	for (tbl_name in name_col_map) {
 		var tbl_col_list = name_col_map[tbl_name];
 		creates.push(create_table(tbl_name, tbl_col_list, t));
@@ -41,16 +42,26 @@ function drop_table(table_name, t) {
 
 
 /* creates a table with the given name and columns if the table doesnt exist */
-function create_table(table_name, column_def_array, t) {
+function create_table(table_name, column_def_obj, t) {
+	
+	var col_names = Object.keys(column_def_obj);
+	var cols = [];
+	
+	var col_name = "";
+	for (var idx = 0; idx < col_names.length; idx++) {
+		col_name = col_names[idx];
+		cols.push( col_name + " " + column_def_obj[col_name]);
+	}
+		
 	return t.any(
 		"CREATE TABLE IF NOT EXISTS ${table~}(${columns^}) ", {
 			table: table_name,
-			columns: column_def_array.join(","),
+			columns: cols.join(","),
 		})
 		.then(() => {
 			if(dbconsts.VERBOSE) {
 				console.log("Success creating table ", table_name, " with columns: ");
-				console.log(column_def_array);
+				console.log(cols);
 			}
 		})
 		.catch((error) => {if(dbconsts.VERBOSE) console.log("Error creating ", table_name, " table: ", error)});
@@ -75,4 +86,6 @@ db.task (t => {
 				.then(() => { pgp.end()});
 			})
 	}
+
+	
 });	
