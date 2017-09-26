@@ -9,7 +9,8 @@ import FaCamera from 'react-icons/lib/fa/camera';
 import FaPencil from 'react-icons/lib/fa/pencil';
 import FaGroup from 'react-icons/lib/fa/group';
 import FaMagic from 'react-icons/lib/fa/magic';
-import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o'
+import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o';
+import FaFloppyO from 'react-icons/lib/fa/floppy-o';
 
 class ProfilePage extends Component {
 
@@ -19,12 +20,11 @@ class ProfilePage extends Component {
 		this.loadLoggedIn = this.loadLoggedIn.bind(this);
 		this.loadLoggedOut= this.loadLoggedOut.bind(this);
 
-		this.togglePurpose = this.togglePurpose.bind(this);
-		this.toggleGoals = this.toggleGoals.bind(this);
-		this.toggleAccomplish = this.toggleAccomplish.bind(this);
 		this.purpose_content = this.purpose_content.bind(this);
 		this.goals_content = this.goals_content.bind(this);
 		this.accomplish_content = this.accomplish_content.bind(this);
+		this.edit_or_save = this.edit_or_save.bind(this);
+
 		this.pull_mentors = this.pull_mentors.bind(this);
 		this.pull_mentees = this.pull_mentees.bind(this);
 		this.pull_stories = this.pull_stories.bind(this);
@@ -36,14 +36,54 @@ class ProfilePage extends Component {
 			isLoggedIn : false,
 			purposeDisplay : false,
 			goalsDisplay : false,
-			accomplishDisplay: false
+			accomplishDisplay: false,
+			purposeEdit: false,
+			goalsEdit: false,
+			accomplishEdit: false
 		};
 	}
 
-	toggle(){
-		this.setState({
-			isLoggedIn: !this.state.isLoggedIn
-		});
+	toggle(to_toggle){
+		switch(to_toggle){
+			case "isLoggedIn":
+				this.setState({
+					isLoggedIn: !this.state.isLoggedIn
+				});
+				break;
+			case "purposeDisplay":
+				this.setState({
+					purposeDisplay: !this.state.purposeDisplay
+				});
+				break;
+			case "goalsDisplay":
+				this.setState({
+					goalsDisplay: !this.state.goalsDisplay
+				});
+				break;
+			case "accomplishDisplay":
+				this.setState({
+					accomplishDisplay: !this.state.accomplishDisplay
+				});
+				break;
+			case "purposeEdit":
+				this.setState({
+					purposeEdit: !this.state.purposeEdit
+				});
+				break;
+			case "goalsEdit":
+				this.setState({
+					goalsEdit: !this.state.goalsEdit
+				});
+				break;
+			case "accomplishEdit":
+				this.setState({
+					accomplishEdit: !this.state.accomplishEdit
+				});
+				break;
+			default:
+				break;
+		}
+
 	}
 
 	loadLoggedIn(){
@@ -62,28 +102,63 @@ class ProfilePage extends Component {
 		return(
 			<div>
 			<p> you are NOT logged in, and this is your profile page. Dummy button to log in:</p>
-			<button onClick={this.toggle}> LOGIN </button>
+			<button onClick={() => this.toggle("isLoggedIn")}> LOGIN </button>
 			</div>
 		);
 	}
 
-	togglePurpose = () => {
-		console.log ("toggle activated");
-		this.setState({
-			purposeDisplay: !this.state.purposeDisplay
-		});
-	}
-
-	toggleGoals = () => {
-		this.setState({
-			goalsDisplay: !this.state.goalsDisplay
-		});
-	}
-
-	toggleAccomplish = () => {
-		this.setState({
-			accomplishDisplay: !this.state.accomplishDisplay
-		});
+	edit_or_save(to_toggle, button_or_text){
+		var toggle_state;
+		var text;
+		var display_string;
+		switch(to_toggle){
+			case "purposeEdit":
+				toggle_state = this.state.purposeEdit;
+				display_string = "purposeDisplay";
+				text = "Write in this space current personal, inter-personal, professional, or organizational projects you are working on. Try to explain why these projects make you excited, and the ways they relate to your experience, skills, and interests.";
+				break;
+			case "goalsEdit":
+				toggle_state = this.state.goalsEdit;
+				display_string = "goalsDisplay";
+				text = "Write in this space anything that you wish to do in the future. They can be ready-to-start ideas, half-baked ideas, long-term goals, personal goals, new-year resolutions, crazy dreams, or anything you wish you knew more about!";
+				break;
+			case "accomplishEdit":
+				toggle_state = this.state.accomplishEdit;
+				display_string = "accomplishDisplay";
+				text = "Write in this space anything that you feel proud you have accomplished. It could include your academic achievements, personal challenges that you have defeated, places you have traveled to, hobbies you have learned, or anything else you can think about!";
+				break;
+			default:
+				break;
+		}
+		if(toggle_state){
+			console.log("BEFORE THE IF");
+			if(button_or_text === "button"){
+				return(
+					<button onClick={() => this.toggle(to_toggle)} className="btn-flat profile-text right">
+						Save <FaFloppyO className="profile-text"></FaFloppyO>
+					</button>
+				);
+			} else {
+				console.log("EVER GETS HERE");
+				return(
+					<div className="input-field">
+						<input value={text} type="text" className="active"></input>
+					</div>
+				);
+			}
+		} else {
+			if(button_or_text === "button"){
+				return(
+					<button onClick={() => this.toggle(to_toggle)} className="btn-flat profile-text right">
+						Edit <FaPencil className="profile-text"></FaPencil>
+					</button>
+				);
+			} else {
+				return(
+					<p className="profile-text valign">{text}</p>
+				);
+			}
+		}
 	}
 
 	purpose_content(){
@@ -92,17 +167,12 @@ class ProfilePage extends Component {
 					<div className="card-panel">
 						<p className="profile-titles">
 							Doing
-							<button onClick={this.togglePurpose} className="btn-flat">
+							<button onClick={() => this.toggle("purposeDisplay")} className="btn-flat">
 								<FaAngleUp className="profile-titles"></FaAngleUp>
 							</button>
-							<button className="btn-flat profile-text right">
-								Edit <FaPencil className="profile-text"></FaPencil>
-							</button>
+							{this.edit_or_save("purposeEdit","button")}
 						</p>
-						<p className="profile-text valign">Write in this space current personal,
-						inter-personal, professional, or organizational projects you are working
-						on. Try to explain why these projects make you excited, and the ways
-						they relate to your experience, skills, and interests.</p>
+						{this.edit_or_save("purposeEdit", "text")}
 					</div>
 				);
 			} else {
@@ -110,12 +180,10 @@ class ProfilePage extends Component {
 					<div className="card-panel">
 						<p className="profile-titles ">
 							Doing
-							<button onClick={this.togglePurpose}  className="btn-flat">
+							<button onClick={() => this.toggle("purposeDisplay")}  className="btn-flat">
 								<FaAngleDown className="profile-titles"></FaAngleDown>
 							</button>
-							<button className="btn-flat profile-text right">
-								Edit <FaPencil className="profile-text"></FaPencil>
-							</button>
+							{this.edit_or_save("purposeEdit", "button")}
 						</p>
 						<p className="profile-text truncate valign">Write in this space current personal,
 						inter-personal, professional, or organizational projects you are working
@@ -130,19 +198,14 @@ class ProfilePage extends Component {
 		if(this.state.goalsDisplay){
 			return(
 				<div className="card-panel">
-					<p className="profile-titles ">
+					<p className="profile-titles">
 						Will do
-						<button onClick={this.toggleGoals} className="btn-flat">
+						<button onClick={() =>this.toggle("goalsDisplay")} className="btn-flat">
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
-						<button className="btn-flat profile-text right">
-							Edit <FaPencil className="profile-text"></FaPencil>
-						</button>
+						{this.edit_or_save("goalsEdit", "button")}
 					</p>
-					<p className="profile-text valign">Write in this space anything that
-					you wish to do in the future. They can be ready-to-start
-					ideas, half-baked ideas, long-term goals, personal goals, new-year
-					resolutions, crazy dreams, or anything you wish you knew more about!</p>
+					{this.edit_or_save("goalsEdit", "text")}
 				</div>
 			);
 		} else {
@@ -150,12 +213,10 @@ class ProfilePage extends Component {
 				<div className="card-panel">
 					<p className="profile-titles ">
 						Will do
-						<button onClick={this.toggleGoals}  className="btn-flat">
+						<button onClick={() => this.toggle("goalsDisplay")}  className="btn-flat">
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
-						<button className="btn-flat profile-text right">
-							Edit <FaPencil className="profile-text"></FaPencil>
-						</button>
+						{this.edit_or_save("goalsEdit", "button")}
 					</p>
 					<p className="profile-text truncate valign">Write in this space anything that
 					you wish to do in the future. They can be ready-to-start
@@ -172,18 +233,12 @@ class ProfilePage extends Component {
 				<div className="card-panel">
 					<p className="profile-titles ">
 						Did
-						<button onClick={this.toggleAccomplish} className="btn-flat">
+						<button onClick={() => this.toggle("accomplishDisplay")} className="btn-flat">
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
-						<button className="btn-flat profile-text right">
-							Edit <FaPencil className="profile-text"></FaPencil>
-						</button>
+						{this.edit_or_save("accomplishEdit", "button")}
 					</p>
-					<p className="profile-text valign">Write in this space anything that
-					you feel proud you have accomplished. It could include your academic
-					achievements, personal challenges that you have defeated, places you
-					have traveled to, hobbies you have learned, or anything else you can
-					think about!</p>
+					{this.edit_or_save("accomplishEdit", "text")}
 				</div>
 			);
 		} else {
@@ -191,12 +246,10 @@ class ProfilePage extends Component {
 				<div className="card-panel">
 					<p className="profile-titles ">
 						Did
-						<button onClick={this.toggleAccomplish}  className="btn-flat">
+						<button onClick={() => this.toggle("accomplishDisplay")}  className="btn-flat">
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
-						<button className="btn-flat profile-text right">
-							Edit <FaPencil className="profile-text"></FaPencil>
-						</button>
+						{this.edit_or_save("accomplishEdit", "button")}
 					</p>
 					<p className="profile-text truncate valign">Write in this space anything that
 					you feel proud you have accomplished. It could include your academic
@@ -241,7 +294,7 @@ class ProfilePage extends Component {
 					<p className="small-name">Moneypenny</p>
 				</div>
 				<div className="col s2 m2 l2valign">
-					<button onClick={console.log("arrow")}  className="btn-flat">
+					<button className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
 					</button>
 				</div>
@@ -282,7 +335,7 @@ class ProfilePage extends Component {
 					<p className="small-name">McKenzie</p>
 				</div>
 				<div className="col s2 m2 l2 valign">
-					<button onClick={console.log("arrow")}  className="btn-flat">
+					<button className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
 					</button>
 				</div>

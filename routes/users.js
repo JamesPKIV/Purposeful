@@ -31,9 +31,9 @@ router.post('/new', function(req, res, next) {
 			return query_data;
 		})
 		.then( query_data => {
-		  	res.json({msg: 'ok', data:query_data});
+		  	res.json({msg: 'ok', data:query_data
+		.catch( err => {});
 		})
-		.catch( err => {
 	    	console.log("USERS.JS->/new): Error creating new user:", err.message );
 
 	    	if (err instanceof Sequelize.ValidationError) {
