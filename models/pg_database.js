@@ -1,23 +1,21 @@
+/* this file contains the database connection credentials. 
+* you must modify the arguments according to your local database setup.
+* This file has been gitignored. DO NOT push your modified 
+* credentials to github/ source control. 
+*/
+const VERBOSE = true;
+
 const Sequelize = require("sequelize");
 
-
-/* thhe first argument is the database name ("purposeful_test_db")
+/* the first argument is the database name ("purposeful_test_db")
 * the second arg is your postgres username
 * the third arg is your postgres password
 */
-const db = new Sequelize('database', 'username', 'password', {
+const db = new Sequelize("purposeful_test_db", "test", "test", {
   	host: "localhost",
   	port: "5432",
   	dialect: "postgres",
 });
 
 
-db.authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-module.exports = {db, Sequelize};
+module.exports = {db, Sequelize, VERBOSE};

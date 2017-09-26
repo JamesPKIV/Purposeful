@@ -6,24 +6,11 @@ function handleCreateUser () {
 		const email = "test@bepurposeful.co";
 		const pwd = "test123";
 
-		console.log("starting Create User test! ");
-		create_user(name, email, pwd, (data) => {
-			console.log("(LandingPage) user account created! new user data: ", data);
-			alert("user account created! new user id: "+ data.id);
-			this.setState({
-				uid: data.id
-			});
-		});
-
-
-		
+		create_user(name, email, pwd);
    }
 
 
-function create_user() {
-	const name = "tester";
-	const email = "test@bepurposeful.co";
-	const pwd = "test123";
+function create_user(name, email, pwd) {
 
 	console.log("STARTING CREATEUSER TEST-----");
 
@@ -42,13 +29,11 @@ function create_user() {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(user_data => {
-		console.log("create_user success! new user data obj: ", user_data);
+		console.log("Created new user data obj: ", user_data);
+		console.log("(CREATEUSERTEST.JS) create_user test success!");
 	} )
 	.catch(function(error) {  
-		console.log('Create User Request failed', error);  
-	})
-	.then(() => { 
-		console.log("CREATEUSER TEST FINISHED*****");
+		console.log("CREATEUSERTEST.JS) Create User test failed. ");  
 	});
 }
 
@@ -59,12 +44,23 @@ https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
 function checkStatus(response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response;
+	} else {
+		const error = new Error(`(CREATEUSERTEST.JS)HTTP Error ${response.statusText}`);
+		error.status = response.statusText;
+		error.response = response;
+		return parseJSON(response)
+			.then((res) => {
+				error.body = res;
+				
+				throw error;
+			})
+			.catch(function(error) {
+				console.log(error); // eslint-disable-line no-consoleconsole.log(e); // calling it as a method, btw
+				throw error;
+			});
 	}
-	const error = new Error(`HTTP Error ${response.statusText}`);
-	error.status = response.statusText;
-	error.response = response;
-	console.log(error); // eslint-disable-line no-console
-	throw error;
+
+	
 }
 
 function parseJSON(response) {

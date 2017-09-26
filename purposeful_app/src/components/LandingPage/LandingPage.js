@@ -81,18 +81,20 @@ class LandingPage extends Component {
 	purposeful_Signup = () => {
 		if (!this.state.nameSet) {
 			return (
-				<div className="row fullrow">
-					<form onSubmit={this.handleContinue}>
-						<div className="input-field col s4 push-s4">
-							<input
-								type="text"
-								placeholder="What is your name?"
-								value={this.state.userName}
-								onChange={this.userNameSet}
-								name="fullName" />
-							<input className="btn light-green" type="submit" value="Continue " />
-						</div>
-					</form>
+				<div>
+					<div className="row fullrow">
+						<form onSubmit={this.handleContinue}>
+							<div className="input-field col s4 push-s4">
+								<input
+									type="text"
+									placeholder="What is your name?"
+									value={this.state.userName}
+									onChange={this.userNameSet}
+									name="fullName" />
+								<input className="btn light-green" type="submit" value="Continue " />
+							</div>
+						</form>
+					</div>
 				</div>
 			);
 		} else if (this.state.nameSet) {
@@ -101,42 +103,14 @@ class LandingPage extends Component {
 					<form onSubmit={this.handleSubmit}>
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
-								<input 
-									placeholder="Email"
-									value={this.state.userEmail}
-									onChange={this.userEmailSet} 
-									type="text" 
-									name="Email" 
-									className="active validate"
-									required />
+								<input placeholder="Email" onChange={this.userEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
-					</div>
-					<div className="row fullrow">
-						<div className="input-field col s4 push-s4">
-							<input 
-								placeholder="Password" 
-								value={this.state.userPwd} 
-								onChange={this.userPwdSet} 
-								className="active validate" 
-								type="password" 
-								name="Email" 
-								required />
-						</div><br />
-					</div>
-					<div className="row fullrow">
-						<div className="col s4 push-s4">
-							<Route render={ ({history}) => (
-								<button className="btn light-green"	onClick={() => {this.handleCreateUser(history)}}>
-										Create Account<i className="arrowIcon material-icons">arrow_forward</i>
-								</button>
-							)} />
-=======
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
 								<input placeholder={this.state.userPwd} onChange={this.userPwdSet} className="active validate" type="text" name="Password" required />
-							</div><br />
->>>>>>> development
+							</div>
+							<br />
 						</div>
 						<div className="row fullrow">
 							<div className="col s4 push-s4">

@@ -1,91 +1,31 @@
-/* this file creates the database tables as defined in ./table_defs.js.
+#!/usr/bin/env node
+
+/** this file creates the database tables as defined in ./tables.js.
 * It also drops any existing tables with the same names. To disable this
 * behavior, change the variable flag SHOULD_DROP_TABLES. */
 
 
 var db = require("./pg_database.js").db;
-var pgp = require("./pg_database.js").pgp;
-var dbconsts = require("./table_defs.js");
+var VERBOSE = require("./pg_database.js").VERBOSE;
+var tables = require ("./tables.js").db_tables;
 
 /* if this flag is set true, overwrite existing tables */
 var SHOULD_DROP_TABLES = true;
 
 
-/* this function drops all tables passed as keys in the name_col_map */
-function drop_tables(name_col_map, t) {
-	var drops =[];
 
-	for (tbl_name in name_col_map) {
-		drops.push(drop_table(tbl_name, t));
-	}
-	return Promise.all(drops);
-}
-
-
-/* this function creates all tables in the name_col_map */
-function create_tables(name_col_map, t) {
-	var creates = [];
-	for (tbl_name in name_col_map) {
-		var tbl_col_list = name_col_map[tbl_name];
-		creates.push(create_table(tbl_name, tbl_col_list, t));
-	}
-	return Promise.all(creates);
-}
-
-
-/* drops a table with the given name if the table exists */
-function drop_table(table_name, t) {
-	return t.any("DROP TABLE IF EXISTS ${table~} CASCADE", {table:table_name})
-		.then(() => { if(dbconsts.VERBOSE) console.log("Success dropping table ", table_name)})
-		.catch((error, table_name) => {if(dbconsts.VERBOSE) console.log("Error dropping table ", table_name, ": ", error)});
-}
-
-
-/* creates a table with the given name and columns if the table doesnt exist */
-function create_table(table_name, column_def_obj, t) {
-	
-	var col_names = Object.keys(column_def_obj);
-	var cols = [];
-	
-	var col_name = "";
-	for (var idx = 0; idx < col_names.length; idx++) {
-		col_name = col_names[idx];
-		cols.push( col_name + " " + column_def_obj[col_name]);
-	}
-		
-	return t.any(
-		"CREATE TABLE IF NOT EXISTS ${table~}(${columns^}) ", {
-			table: table_name,
-			columns: cols.join(","),
-		})
+/* this function creates all tables defined in tables.js */
+function create_tables() {
+	return db.sync({force: SHOULD_DROP_TABLES})
 		.then(() => {
-			if(dbconsts.VERBOSE) {
-				console.log("Success creating table ", table_name, " with columns: ");
-				console.log(cols);
-			}
+			if(VERBOSE) 
+				console.log("Successfully created tables! ");
 		})
-		.catch((error) => {if(dbconsts.VERBOSE) console.log("Error creating ", table_name, " table: ", error)});
+		.catch((error) => {
+			if(VERBOSE) 
+				console.log("Error creating tables: ", error);
+		})
+		.done(() => {db.close()});
 }
 
-
-
-/* this task creates the tables listed in the TBL_NAME_COL_MAP. 
-* It also drops the tables if the drop flag is set.
-*/
-db.task (t => {
-	if (SHOULD_DROP_TABLES) {
-		return drop_tables(dbconsts.ALL_TBL_NAME_COL_MAP, t)
-			.then(() => { return create_tables(dbconsts.INDEP_TBL_NAME_COL_MAP, t)/* create users table */
-				.then(() => { return create_tables(dbconsts.DEP_TBL_NAME_COL_MAP, t)/* create users table */
-					.then(() => { pgp.end()});
-				})
-			});
-	} else {
-		return create_tables(dbconsts.INDEP_TBL_NAME_COL_MAP, t)/* create users table */
-			.then(() => { return create_tables(dbconsts.DEP_TBL_NAME_COL_MAP, t)/* create users table */
-				.then(() => { pgp.end()});
-			})
-	}
-
-	
-});	
+create_tables();

@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
-var users = require('./routes/users');
+var users = require('./routes/users.js');
 
 var app = express();
 
@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/users", users);
 
 app.get("/api/testing", (req, res)=> {
+  console.log("Serving /api/testing...");
 	res.json({
 		message: "testing get express request!!!"
 	});
