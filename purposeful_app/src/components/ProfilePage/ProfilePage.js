@@ -37,7 +37,8 @@ class ProfilePage extends Component {
 			accomplishDisplay: false,
 			purposeEdit: false,
 			goalsEdit: false,
-			accomplishEdit: false
+			accomplishEdit: false,
+			changePicture: false
 		};
 	}
 
@@ -78,10 +79,14 @@ class ProfilePage extends Component {
 					accomplishEdit: !this.state.accomplishEdit
 				});
 				break;
+			case "changePicture":
+				this.setState({
+					changePicture: !this.state.changePicture
+				});
+				break;
 			default:
 				break;
 		}
-
 	}
 
 	loadLoggedIn(){
@@ -414,6 +419,32 @@ class ProfilePage extends Component {
 		);
 	}
 
+	change_picture(){
+		console.log(this.state.changePicture);
+		if(this.state.changePicture){
+			return(
+				<div className="row">
+					<div className="file-field input-field row">
+						<div className="btn waves-effect light-green col s6 m6 l6 push-l3">
+							<span>Browse For a New Picture</span> <input type="file"></input>
+						</div>
+					</div>
+					<div className="row">
+						<button onClick={() => this.toggle("changePicture")} className="col s2 m2 l2 push-l8 btn waves-effect light-green darken-3">
+							Cancel
+						</button>
+					</div>
+				</div>
+			);
+		} else {
+			return(
+				<div className="row">
+					<button onClick={() => this.toggle("changePicture")} className="btn waves-effect light-green"> Edit your profile picture  <FaCamera> </FaCamera> </button>
+				</div>
+			);
+		}
+	}
+
 	displayDesktop(){
 		return(
 			<div>
@@ -425,11 +456,7 @@ class ProfilePage extends Component {
 							<img className="responsive-img circle" src={profile_pic}/>
 							<p className="profile-name"> Your Name </p>
 						</div>
-
-						<div className="row">
-							<button className="btn waves-effect light-green"> Edit your profile picture  <FaCamera> </FaCamera> </button>
-						</div>
-
+						{this.change_picture()}
 						<div className="row">
 							<button className="btn waves-effect light-green"> Edit your account information  <FaPencil> </FaPencil> </button>
 						</div>
