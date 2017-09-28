@@ -5,6 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var users = require('./routes/users.js');
+var mentorship = require('./routes/mentorship.js');
 
 var app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+app.use("/api/mentorship", mentorship);
 app.use("/api/users", users);
 
 app.get("/api/testing", (req, res)=> {

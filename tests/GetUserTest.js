@@ -1,26 +1,25 @@
 var fetch = require("node-fetch");
-
-
+var db = require("../models/pg_database.js").db;
+var get_user_by_uid = require("../models/db_utils.js").get_user_by_uid;
 function fetch_user_profile_test() {
 	const TEST_UID = 1;
 
 	console.log("STARTING GET USER TEST-----");
 
-	fetch("http://localhost:3001/api/users/user/" + TEST_UID, {
-		headers: {accept: "application/json"}
+	return get_user_by_uid(TEST_UID)
+	.then((data) => { 
+
+		console.log("User info retrieved: ", data);
+		console.log("Get User By Uid Test success!");
 	})
-	.then(checkStatus)
-	.then(parseJSON)
-	.then(user_data => {
-		console.log("get user success! new user data obj: ", user_data);
-	} )
-	.catch(function(error) {  
-		console.log('Get User Request failed: ', error);  
+	.catch((error) => {  
+		console.log('Error getting user by id: ', error);  
+		console.log("Get User By Uid Test failed with errors.");
 	})
-	.then(() => { 
-		console.log("GETUSER TEST FINISHED*****");
-	});
+	.then( () => db.close());
+	
 }
+
 
 
 /** this middleware function is a adapted from: 

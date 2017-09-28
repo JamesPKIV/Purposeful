@@ -7,6 +7,8 @@
 
 var db = require("./pg_database.js").db;
 var VERBOSE = require("./pg_database.js").VERBOSE;
+
+/* required table definition imports */
 var tables = require ("./tables.js").db_tables;
 
 /* if this flag is set true, overwrite existing tables */
@@ -24,8 +26,10 @@ function create_tables() {
 		.catch((error) => {
 			if(VERBOSE) 
 				console.log("Error creating tables: ", error);
-		})
-		.done(() => {db.close()});
+			throw error;
+		});
 }
 
-create_tables();
+
+module.exports = {create_tables};
+
