@@ -61,7 +61,7 @@ class ActivityFeed extends Component {
 
 				<Collection>
 					<div className="row">
-					{feed_components}
+					{feed_components} {/* Feed_components is an array where each array index holds a list of f */}
 					</div>
 				</Collection>
 

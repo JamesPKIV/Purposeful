@@ -30,6 +30,9 @@ a {
   padding: 10px 20px;
 }
 
+footer{
+  z-index: 5;
+}
 
 /*
 Styles we had since phase 1 BUT added stuff to App for materialize footer

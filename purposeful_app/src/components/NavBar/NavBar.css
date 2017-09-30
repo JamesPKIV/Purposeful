@@ -102,6 +102,7 @@
         height: inherit;
         background-color: #212121;
         margin-bottom: 100%;
+        z-index: 5;
         /*border-bottom: 5px solid white;*/
     }
     .NavBar ul {
