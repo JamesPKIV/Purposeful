@@ -1,4 +1,5 @@
-var db =require("../models/tables.js").db_tables;
+var db_tables =require("../models/tables.js").db_tables;
+var db =require("../models/pg_database.js").db;
 var VERBOSE = require("../models/pg_database.js").VERBOSE;
 var Sequelize = require("../models/pg_database.js").Sequelize;
 var express = require('express');
@@ -68,7 +69,7 @@ router.post('/new', function(req, res, next) {
 });
 
 
-/* GET user listing by user id.  
+/* GET user's skills by user id.  
 * If successful, sends a response with a JSON body containing name and 
 * email properties for the given id.
 */
