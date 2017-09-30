@@ -74,9 +74,10 @@ router.post('/new', function(req, res, next) {
 });
 
 
+
 /* GET user's mentors listings by user id.  
-* If successful, sends a response with a JSON body containing name and 
-* id properties for all mentors for the given mentee_uid.
+* If successful, sends a response with a JSON body containing user
+* properties for all mentors for the given mentee_uid.
 */
 router.get('/mentors/:mentee_uid', function(req, res, next) {
 
@@ -106,10 +107,41 @@ router.get('/mentors/:mentee_uid', function(req, res, next) {
 		    	})
 		})
 		.catch(error => {  handleError(error, res) });	
-		
-
 })
 
+
+
+/* GET user's mentees listings by mentor's user id.  
+* If successful, sends a response with a JSON body containing user
+* properties for all mentees for the given mentor_uid.
+*/
+router.get('/mentees/:mentor_uid', function(req, res, next) {
+
+	if (VERBOSE) console.log("MENTORSHIP.JS->/mentees reached. ");
+
+	if (VERBOSE) console.log ("request params:", req.params);
+
+	const mentor_uid = req.params.mentor_uid;
+
+	/* TODO: validate that user is who they claim to be with sessions */
+
+	if (!mentor_uid) {
+		var msg = "No mentor_uid provided in request json body."
+		return handleError( new Error(msg), res );
+	}
+	if (VERBOSE) console.log("mentor_uid provided:", mentor_uid);
+	/* lookup mentee in users table, then get mentors */
+	return db_tables.Users.findById(mentor_uid)
+		.then(mentor => {
+			if (VERBOSE) console.log("MENTORSHIP.JS->/mentors) mentor retrieved: ", mentor);
+			return mentor.getMentees()	
+		    	.then(mentee_list => {
+			    	if (VERBOSE) console.log("Successfully fetched mentees: ", mentee_list);
+		    		res.json({msg: "ok", data: mentee_list})
+		    	})
+		})
+		.catch(error => {  handleError(error, res) });	
+})
 
 
 
