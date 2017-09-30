@@ -25,6 +25,9 @@ a {
 .footer-links{
   display: inline-flex;
   float: right;
+  font-size: 18px;
+  font-family: 'Arvo', serif;
+  padding: 10px 20px;
 }
 
 
