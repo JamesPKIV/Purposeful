@@ -48,6 +48,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.json({error: res.locals.error, message: res.locals.message || "Error rendering error page"});
+
 });
 
 module.exports = app;

@@ -7,6 +7,7 @@ function fetch_user_profile(user_id, callback_fn) {
 	return fetch("api/users/" + user_id, {
 		accept: "application/json"
 	})
+
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(response => {callback_fn(response)} );
@@ -70,3 +71,4 @@ function parseJSON(response) {
 }
 
 module.exports = { create_user };
+
