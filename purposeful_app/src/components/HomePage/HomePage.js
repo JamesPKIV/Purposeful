@@ -5,7 +5,7 @@ import ActivityFeed from '../ActivityFeed/ActivityFeed';
 
 class HomePage extends Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			name: "",
@@ -14,6 +14,7 @@ class HomePage extends Component {
 		};
 
 	}
+
 
 
 	componentDidMount () {
@@ -45,9 +46,8 @@ class HomePage extends Component {
                 	<ActivityFeed title="Mentees" linkTo="/mentorship" />
                 	<ActivityFeed title="Collaborations" linkTo="/home" />
             	</div>
-
-			</div>
-        );
+        	</div>
+		);
 	}
 }
 

@@ -25,10 +25,10 @@ class App extends Component {
       <footer className="page-footer grey darken-4">
         <div className = "row fullrow">
           <ul className="footer-links">
-            <li><a href="dummy1" className="desktop-font">About_Purposeful</a></li>
-            <li><a href="dummy2" className="desktop-font">Our_Team</a></li>
+            <li><a href="dummy1" className="desktop-font">About</a></li>
+            <li><a href="dummy2" className="desktop-font">Our Team</a></li>
             <li><a href="dummy3" className="desktop-font">Donate</a></li>
-            <li><a href="dummy4" className="desktop-font">Privacy_Policy</a></li>
+            <li><a href="dummy4" className="desktop-font">Privacy Policy</a></li>
           </ul>
         </div>
       </footer>

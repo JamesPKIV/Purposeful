@@ -82,6 +82,11 @@
         background-color: #C81C2D;
         font-family: 'Arvo', serif;
     }
+    .plogo {
+        width: 50px;
+        height: 50px;
+        padding: 15px 20px;
+    }
 }
 
 
@@ -95,9 +100,10 @@
         right:0;
         left:0;
         height: inherit;
-        background-color: #444;
+        background-color: #212121;
         margin-bottom: 100%;
-        border-bottom: 5px solid white;
+        z-index: 5;
+        /*border-bottom: 5px solid white;*/
     }
     .NavBar ul {
         flex-flow: row nowrap;
@@ -147,9 +153,9 @@
     .NavBar .icon {
         font-size: 20px;
     }
-    .logo {
-        height: 60px;
-        margin-bottom: -19px;
+    .plogo {
+        width: 75px;
+        height: 75px;
     }
 }
 
