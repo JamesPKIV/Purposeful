@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { Link } from "react-router-dom";
+import { Route, Link, withRouter } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
 import Client from "../../Client";
+
 
 class LandingPage extends Component {
 
@@ -15,22 +16,14 @@ class LandingPage extends Component {
 			isLoggedIn: false,
 			inputInfo: false,
 			nameSet: false,
-			userName: "tester",
-			userEmail: "test@bepurposeful.co",
-			userPwd: "test",
+			userName: '',
+			userEmail: "Email",
+			userPwd: "Create a password",
 		};
 		this.userNameSet = this.userNameSet.bind(this);
 		this.userInfoSet = this.userEmailSet.bind(this);
 		this.userPwdSet = this.userPwdSet.bind(this);
-		this.submitNewUser = this.submitNewUser.bind(this);
-	}
-
-	toggle = () => {
-		this.setState({
-			nameSet: !this.state.nameSet
-		});
-
-
+		this.handleCreateUser = this.handleCreateUser.bind(this);
 	}
 
 	userNameSet = (e) => {
@@ -45,66 +38,87 @@ class LandingPage extends Component {
 		});
 	}
 
-	userPwdSet = (e) =>{
+	userPwdSet = (e) => {
 		this.setState({
 			userPwd: e.target.value,
 		});
 	}
 
-	submitNewUser = () => {
+	handleCreateUser = (hist) => {
 		const name = this.state.userName;
 		const email = this.state.userEmail;
 		const pwd = this.state.userPwd;
 
 		Client.create_user(name, email, pwd, (data) => {
 			console.log("(LandingPage) user account created! new user data: ", data);
-
-			console.log("(data.id: ", data.id);
 			alert("user account created! new user id: "+ data.id);
-		})
+			/* navigate to home page */
+			console.log("history: ", hist);
+			hist.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
+		});
+
+		
+		
+   }
+
+	handleContinue = (e) => {
+		e.preventDefault();
+		this.setState({
+			nameSet: !this.state.nameSet,
+		});
 	}
 
+	handleSubmit = () => {
+
+		// Create user and redirect to website home page
+		alert("Name: " + this.state.userName + " " +
+			"Email: " + this.state.userEmail + " " +
+			"Password: " + this.state.userPwd);
+		
+		// Redirect user to home page
+	}
 
 	purposeful_Signup = () => {
 		if (!this.state.nameSet) {
 			return (
 				<div>
 					<div className="row fullrow">
-						<div className="input-field col s4 push-s4">
-							<input placeholder={this.state.userName} onChange={this.userNameSet} type="text" name="FirstName" className="active validate" required />
-						</div>
-					</div>
-					<div className="row fullrow">
-						<div className="col s4 push-s4">
-							<a className="btn light-green" onClick={this.toggle}>
-								Continue<i className="arrowIcon material-icons">arrow_forward</i>
-							</a>
-						</div>
+						<form onSubmit={this.handleContinue}>
+							<div className="input-field col s4 push-s4">
+								<input
+									type="text"
+									placeholder="What is your name?"
+									value={this.state.userName}
+									onChange={this.userNameSet}
+									name="fullName" />
+								<input className="btn light-green" type="submit" value="Continue " />
+							</div>
+						</form>
 					</div>
 				</div>
 			);
 		} else if (this.state.nameSet) {
 			return (
 				<div>
-					<div className="row fullrow">
-						<div className="input-field col s4 push-s4">
-							<input placeholder={this.state.userEmail}  onChange={this.userEmailSet} type="text" name="Email" className="active validate" required />
+					<form onSubmit={this.handleSubmit}>
+						<div className="row fullrow">
+							<div className="input-field col s4 push-s4">
+								<input placeholder="Email" onChange={this.userEmailSet} type="text" name="Email" className="active validate" required />
+							</div>
 						</div>
-					</div>
-					<div className="row fullrow">
-						<div className="input-field col s4 push-s4">
-							<input placeholder={this.state.userPwd} onChange={this.userPwdSet} className="active validate" type="text" name="Email" required />
-						</div><br />
-					</div>
-					<div className="row fullrow">
-						<div className="col s4 push-s4">
-							<button className="btn light-green" onClick={this.submitNewUser}>
-								Create Account<i className="arrowIcon material-icons">arrow_forward</i>
-							</button>
+						<div className="row fullrow">
+							<div className="input-field col s4 push-s4">
+								<input placeholder={this.state.userPwd} onChange={this.userPwdSet} className="active validate" type="text" name="Password" required />
+							</div>
+							<br />
 						</div>
-					</div>
+						<div className="row fullrow">
+							<div className="col s4 push-s4">
+								<input className="btn light-green" type="submit" value="Sign in" />
+							</div>
+						</div>
+					</form>
 				</div>
-
 			);
 		}
 	}
@@ -141,7 +155,7 @@ class LandingPage extends Component {
 			<div className="valign LandingBack">
 				<div className="row fullrow">
 					<div className="col s4 push-s4">
-						<img className="logo" src={logo} alt="purposeful logo here" />
+						<img className="logo" src={logo} alt="purposeful logo here" /> 
 					</div>
 				</div>
 				<div className="row fullrow">
@@ -157,4 +171,4 @@ class LandingPage extends Component {
 		);
 	}
 }
-export default LandingPage;
+export default withRouter(LandingPage);

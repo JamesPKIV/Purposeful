@@ -5,14 +5,15 @@ import project_pic from './project-pic-default.jpg';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
+import FaUserTimes from 'react-icons/lib/fa/user-times';
+import FaUserPlus from 'react-icons/lib/fa/user-plus';
+import $ from 'jquery';
 
 class SEProfilePage extends Component {
 
 	constructor (props) {
 		super(props);
-		this.togglePurpose = this.togglePurpose.bind(this);
-		this.toggleGoals = this.toggleGoals.bind(this);
-		this.toggleAccomplish = this.toggleAccomplish.bind(this);
+		this.toggle = this.toggle.bind(this);
 		this.purpose_content = this.purpose_content.bind(this);
 		this.goals_content = this.goals_content.bind(this);
 		this.accomplish_content = this.accomplish_content.bind(this);
@@ -20,31 +21,60 @@ class SEProfilePage extends Component {
 		this.pull_mentees = this.pull_mentees.bind(this);
 		this.pull_stories = this.pull_stories.bind(this);
 		this.pull_collab = this.pull_collab.bind(this);
+		this.ask_mentee = this.ask_mentee.bind(this);
+		this.invite_collab - this.invite_collab.bind(this);
+		this.follow = this.follow.bind(this);
 		this.state = {
 			isLoggedIn : false,
 			purposeDisplay : false,
 			goalsDisplay : false,
-			accomplisDisplay: false
+			accomplisDisplay: false,
+			askMentee: false,
+			inviteCollab: false,
+			follow: false
 		};
   }
 
-	togglePurpose = () => {
-		console.log ("toggle activated");
-		this.setState({
-			purposeDisplay: !this.state.purposeDisplay
-		});
-	}
-
-	toggleGoals = () => {
-		this.setState({
-			goalsDisplay: !this.state.goalsDisplay
-		});
-	}
-
-	toggleAccomplish = () => {
-		this.setState({
-			accomplishDisplay: !this.state.accomplishDisplay
-		});
+	toggle(to_toggle){
+		switch(to_toggle){
+			case "isLoggedIn":
+				this.setState({
+					isLoggedIn: !this.state.isLoggedIn
+				});
+				break;
+			case "purposeDisplay":
+				this.setState({
+					purposeDisplay: !this.state.purposeDisplay
+				});
+				break;
+			case "goalsDisplay":
+				this.setState({
+					goalsDisplay: !this.state.goalsDisplay
+				});
+				break;
+			case "accomplishDisplay":
+				this.setState({
+					accomplishDisplay: !this.state.accomplishDisplay
+				});
+				break;
+			case "askMentee":
+				this.setState({
+					askMentee: !this.state.askMentee
+				});
+				break;
+			case "inviteCollab":
+				this.setState({
+					inviteCollab: !this.state.inviteCollab
+				});
+				break;
+			case "follow":
+				this.setState({
+					follow: !this.state.follow
+				});
+				break;
+			default:
+				break;
+		}
 	}
 
 	purpose_content(){
@@ -53,7 +83,7 @@ class SEProfilePage extends Component {
 					<div className="card-panel">
 						<p className="profile-titles">
 							Doing
-							<button onClick={this.togglePurpose} className="btn-flat">
+							<button onClick={() => this.toggle("purposeDisplay")} className="btn-flat">
 								<FaAngleUp className="profile-titles"></FaAngleUp>
 							</button>
 						</p>
@@ -68,7 +98,7 @@ class SEProfilePage extends Component {
 					<div className="card-panel">
 						<p className="profile-titles ">
 							Doing
-							<button onClick={this.togglePurpose}  className="btn-flat">
+							<button onClick={() => this.toggle("purposeDisplay")}  className="btn-flat">
 								<FaAngleDown className="profile-titles"></FaAngleDown>
 							</button>
 						</p>
@@ -87,7 +117,7 @@ class SEProfilePage extends Component {
 				<div className="card-panel">
 					<p className="profile-titles ">
 						Will do
-						<button onClick={this.toggleGoals} className="btn-flat">
+						<button onClick={() => this.toggle("goalsDisplay")} className="btn-flat">
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
 					</p>
@@ -102,7 +132,7 @@ class SEProfilePage extends Component {
 				<div className="card-panel">
 					<p className="profile-titles ">
 						Will do
-						<button onClick={this.toggleGoals}  className="btn-flat">
+						<button onClick={() => this.toggle("goalsDisplay")}  className="btn-flat">
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
@@ -121,7 +151,7 @@ class SEProfilePage extends Component {
 				<div className="card-panel">
 					<p className="profile-titles ">
 						Did
-						<button onClick={this.toggleAccomplish} className="btn-flat">
+						<button onClick={() => this.toggle("accomplishDisplay")} className="btn-flat">
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
 					</p>
@@ -137,7 +167,7 @@ class SEProfilePage extends Component {
 				<div className="card-panel">
 					<p className="profile-titles ">
 						Did
-						<button onClick={this.toggleAccomplish}  className="btn-flat">
+						<button onClick={() => this.toggle("accomplishDisplay")}  className="btn-flat">
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
@@ -306,6 +336,70 @@ class SEProfilePage extends Component {
 		);
 	}
 
+	ask_mentee(){
+		if (this.state.askMentee){
+			return(
+				<p>editable message with send or cancel buttons</p>
+			);
+		} else {
+			return(
+				<div className="row"> <p> </p> </div>
+			);
+		}
+	}
+
+	invite_collab(){
+		if(this.state.inviteCollab){
+			return(
+				<p>editable message with send or cancel buttons</p>
+			);
+		} else {
+			return(
+				<div className="row"> <p> </p> </div>
+			);
+		}
+	}
+
+	follow(to_show){
+		if(this.state.follow){
+			if(to_show === "desktop"){
+				return(
+					<div className="col s4 m4 l4">
+						<button onClick={() => this.toggle("follow")} className="btn-large waves-effect light-green darken-3">
+							Stop Following <FaUserTimes className="profile-text"></FaUserTimes>
+						</button>
+					</div>
+				);
+			} else {
+				return(
+					<div className="row">
+						<button onClick={() => this.toggle("follow")} className="btn waves-effect light-green darken-3">
+							Unfollow <FaUserTimes className="profile-text"></FaUserTimes>
+						</button>
+					</div>
+				);
+			}
+		} else {
+			if(to_show === "desktop"){
+				return(
+					<div className="col s4 m4 l4">
+						<button onClick={() => this.toggle("follow")} className="btn-large waves-effect light-green">
+							Follow their Activity <FaUserPlus className="profile-text"></FaUserPlus>
+						</button>
+					</div>
+				);
+			} else {
+				return(
+					<div className="row">
+						<button onClick={() => this.toggle("follow")} className="btn waves-effect light-green">
+							Follow <FaUserPlus className="profile-text"></FaUserPlus>
+						</button>
+					</div>
+				);
+			}
+		}
+	}
+
 	displayDesktop(){
 		return(
 			<div>
@@ -327,19 +421,16 @@ class SEProfilePage extends Component {
 						<div className="row"> <p> </p> </div>
 						<div className="row">
 							<div className="col s4 m4 l4">
-								<button className="btn-large waves-effect light-green"> Become their Mentee </button>
+								<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green"> Become their Mentee </button>
 							</div>
 							<div className="col s4 m4 l4">
-								<button className="btn-large waves-effect light-green"> Invite to Collaborate </button>
+								<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green"> Invite to Collaborate </button>
 							</div>
-							<div className="col s4 m4 l4">
-								<button className="btn-large waves-effect light-green"> Folow their Activity </button>
-							</div>
+							{this.follow("desktop")}
 						</div>
+						{this.ask_mentee()}
+						{this.invite_collab()}
 						<div className="row"> <p> </p> </div>
-						<div className="row"> <p> </p> </div>
-						<div className="row"> <p> </p> </div>
-
 						<div className="row">
 							<div className="col s10 m10 l10 push-l1">
 
@@ -398,14 +489,12 @@ class SEProfilePage extends Component {
 
 						<div className="col s6 m6 l6 ">
 							<div className="row">
-								<button className="btn waves-effect light-green"> Become their Mentee </button>
+								<button onClick={() => this.toggle("askMentee")} className="btn waves-effect light-green"> Become Mentee </button>
 							</div>
 							<div className="row">
-								<button className="btn waves-effect light-green"> Invite to Collaborate </button>
+								<button onClick={() => this.toggle("inviteCollab")} className="btn waves-effect light-green"> Invite to Collab </button>
 							</div>
-							<div className="row">
-								<button className="btn waves-effect light-green"> Folow their Activity </button>
-							</div>
+							{this.follow("mobile")}
 						</div>
 				</div>
 				<div className="row fullrow">

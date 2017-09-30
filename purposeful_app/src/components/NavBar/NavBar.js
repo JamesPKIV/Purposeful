@@ -6,9 +6,9 @@ import logo from '../App/logo.png';
 
 class NavBar extends Component {
 
-  constructor() {
-    super();
-    this.state = {activeNav: true};
+  constructor(props) {
+    super(props);
+    this.state = { activeNav: true };
     this.navBarDesktop = this.navBarDesktop.bind(this);
     this.navBarMobile = this.navBarMobile.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -21,69 +21,68 @@ class NavBar extends Component {
     }
   }
 
-   handleMenuSelection() {
-      this.toggle();
+  handleMenuSelection() {
+    this.toggle();
   }
 
   toggle() {
-        this.setState ({
-          activeNav : !this.state.activeNav
-        });
+    this.setState({
+      activeNav: !this.state.activeNav
+    });
   }
 
   navBarDesktop() {
     return (
       <nav className="NavBar">
         <ul>
+          <li><img width="50" height="50" src={logo} className="plogo" alt="Purposeful"></img></li> 
           <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Home </NavLink></li>
+          <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Collaborations </NavLink></li>
           <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
-          <li><img src={logo} className="logo" alt="Purposeful"></img></li>
+          {/*<li><img src={logo} className="logo" alt="Purposeful"></img></li> */}
+          <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Stories </NavLink></li>
           <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Profile </NavLink></li>
-          <li className="learnBtn"><NavLink to="/login" className="learnLink">Sign Up</NavLink></li>
+          {/*<li className="learnBtn"><NavLink to="/login" className="learnLink">Sign Up</NavLink></li> */}
         </ul>
       </nav>
-    )
+    );
   }
 
   navBarMobile() {
-    if (this.state.activeNav){
-        return (
-            <div className="NavBar-open">
-              <button className="toggleBtn closed" onClick={this.toggle}>
-                <div id="toggleBtn-inner">
-                  <FaAlignJustify />
-                </div>
-              </button>
-              <nav className="NavBar">
-                <ul>
-                  <button className="menuBtn open" onClick={this.handleMenuSelection} >
-                    <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Home </NavLink></li>
-                    <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
-                    <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Profile </NavLink></li>
-                  </button>
-                </ul>
-              </nav>
-            </div>
-        )
-    }
-    else {
-        return (
+    if (this.state.activeNav) {
+      return (
+        <div className="NavBar-open">
           <button className="toggleBtn closed" onClick={this.toggle}>
             <div id="toggleBtn-inner">
               <FaAlignJustify />
             </div>
           </button>
-        );
+          <nav className="NavBar">
+            <ul>
+              <button className="menuBtn open" onClick={this.handleMenuSelection} >
+                <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Home </NavLink></li>
+                <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
+                <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Profile </NavLink></li>
+              </button>
+            </ul>
+          </nav>
+        </div>
+      )
+    }
+    else {
+      return (
+        <button className="toggleBtn closed" onClick={this.toggle}>
+          <div id="toggleBtn-inner">
+            <FaAlignJustify />
+          </div>
+        </button>
+      );
     }
   }
 
   render() {
-      //console.log("CONSOLE LOG: " + window.location);
-      return (
-
-        this.props.containerWidth >= 700) ?
-          this.navBarDesktop() :/* desktop version */
-          this.navBarMobile();  /*mobile version */
+    //console.log("CONSOLE LOG: " + window.location);
+    return (this.navBarDesktop()); /* desktop version */
   }
 }
 
