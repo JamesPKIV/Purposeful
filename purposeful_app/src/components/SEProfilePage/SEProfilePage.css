@@ -16,3 +16,8 @@
   font-size: 2vh;
   text-align: left;
 }
+
+.collabCard-text{
+  text-overflow: ellipsis;
+  max-height: 12vh;
+}

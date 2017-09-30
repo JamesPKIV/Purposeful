@@ -3,14 +3,14 @@
 *	linkTo: link that the title will be embedded in
 *	feed_items: array of items to be displayed in the feed.
 * 		each feed item must be an object with the following members:
-			name: name or title to be displayed 
+			name: name or title to be displayed
 			desc: desription of the item
 **/
 
 
 
 import React, { Component } from 'react';
-import { Collection, Card, Row, Col } from 'react-materialize';
+import { Collection, Card} from 'react-materialize';
 import { Link } from 'react-router-dom';
 import './ActivityFeed.css';
 
@@ -23,7 +23,7 @@ class ActivityFeed extends Component {
 		super(props);
 		this.state = {
 			title: this.props.title || "feed title",
-			feed_items: this.props.feed_items || 
+			feed_items: this.props.feed_items ||
 				//default feed items
 				[ {"name":"Name", "desc":"availability, skills and interests"},
 				{"name":"Name", "desc":"availability, skills and interests"},
@@ -34,14 +34,14 @@ class ActivityFeed extends Component {
 
 		this.create_feed_item = this.create_feed_item.bind(this);
 	}
-	
-	/** this function creates an individual feed component to be rendered in the feed. 
+
+	/** this function creates an individual feed component to be rendered in the feed.
 	* Overwrite this function to change the view of the individual feed components.
 	*/
 	create_feed_item(item, idx) {
 		return (
 			<div className="col l2">
-				<Card className="feed-item" key={idx}> 
+				<Card className="feed-item" key={idx}>
 					<User className="icon" />
 					<h4> {item.name} </h4>
 					<p className="desc"> {item.desc} </p>
@@ -54,20 +54,20 @@ class ActivityFeed extends Component {
 		//render a feed component to display for each item in the feed_items array
 		const feed_components = this.state.feed_items.map( (item, idx) =>
 			this.create_feed_item(item, idx) );
-	
-		return (			
-			<div className="col l10 push-l1"> 				
+
+		return (
+			<div className="col l10 push-l1">
 				<Link className="feed-title" to={this.props.linkTo}> <h4> {this.state.title} </h4> </Link>
-				
+
 				<Collection>
 					<div className="row">
 					{feed_components}
 					</div>
 				</Collection>
-				
+
 			</div>
 		);
-		
+
 	}
 }
 

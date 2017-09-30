@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
 import { Link } from "react-router-dom";
-import FaAngleDown from 'react-icons/lib/fa/angle-down';
-import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
+import Client from "../../Client";
 
 class LandingPage extends Component {
 
@@ -16,13 +15,14 @@ class LandingPage extends Component {
 			isLoggedIn: false,
 			inputInfo: false,
 			nameSet: false,
-			userName: "What is your name?",
-			userEmail: "Email",
-			userPwd: "Create a password",
+			userName: "tester",
+			userEmail: "test@bepurposeful.co",
+			userPwd: "test",
 		};
 		this.userNameSet = this.userNameSet.bind(this);
 		this.userInfoSet = this.userEmailSet.bind(this);
 		this.userPwdSet = this.userPwdSet.bind(this);
+		this.submitNewUser = this.submitNewUser.bind(this);
 	}
 
 	toggle = () => {
@@ -50,6 +50,20 @@ class LandingPage extends Component {
 			userPwd: e.target.value,
 		});
 	}
+
+	submitNewUser = () => {
+		const name = this.state.userName;
+		const email = this.state.userEmail;
+		const pwd = this.state.userPwd;
+
+		Client.create_user(name, email, pwd, (data) => {
+			console.log("(LandingPage) user account created! new user data: ", data);
+
+			console.log("(data.id: ", data.id);
+			alert("user account created! new user id: "+ data.id);
+		})
+	}
+
 
 	purposeful_Signup = () => {
 		if (!this.state.nameSet) {
@@ -84,13 +98,13 @@ class LandingPage extends Component {
 					</div>
 					<div className="row fullrow">
 						<div className="col s4 push-s4">
-							<a className="btn light-green" href="/home">
-								Sign in<i className="arrowIcon material-icons">arrow_forward</i>
-							</a>
+							<button className="btn light-green" onClick={this.submitNewUser}>
+								Create Account<i className="arrowIcon material-icons">arrow_forward</i>
+							</button>
 						</div>
 					</div>
 				</div>
-			
+
 			);
 		}
 	}
@@ -127,7 +141,7 @@ class LandingPage extends Component {
 			<div className="valign LandingBack">
 				<div className="row fullrow">
 					<div className="col s4 push-s4">
-						<img className="logo" src={logo} />
+						<img className="logo" src={logo} alt="purposeful logo here" />
 					</div>
 				</div>
 				<div className="row fullrow">

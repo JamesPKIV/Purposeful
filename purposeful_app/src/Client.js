@@ -2,26 +2,52 @@ function get_user_profile(user_id, callback_fn) {
 	return fetch("api/users?q=${user_id}", {
 		accept: "application/json"
 	})
-		.then(checkStatus)
-		.then(parseJSON)
-		.then(callback_fn);
+
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(callback_fn);
+}
+
+function create_user(name, email, pwd, callback_fn) {
+	return fetch("api/users/new", {
+		method: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			name: name,
+			email: email,
+			pwd: pwd,
+		})
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(response => {
+		console.log("create_user success! new user: ", response.data.id);
+		return response;
+	})
+	.then(response => {callback_fn(response.data)} );
 }
 
 
-/** this function adapted from: 
+/** this function adapted froma: 
 https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
 */ 
-function checkStatus(res) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  }
-  const error = new Error(`HTTP Error ${response.statusText}`);
-  error.status = response.statusText;
-  error.response = response;
-  console.log(error); // eslint-disable-line no-console
-  throw error;
+function checkStatus(response) {
+	if (response.status >= 200 && response.status < 300) {
+		return response;
+	}
+	const error = new Error(`HTTP Error ${response.statusText}`);
+	error.status = response.statusText;
+	error.response = response;
+	console.log(error); // eslint-disable-line no-console
+	throw error;
 }
 
 function parseJSON(response) {
-  return response.json();
+	return response.json();
 }
+
+module.exports = { create_user };
+
