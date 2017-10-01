@@ -137,7 +137,7 @@ class LandingPage extends Component {
 			<div className="valign LandingBack">
 				<div className="row fullrow">
 					<div className="col s4 push-s4">
-						<img className="logo" src={logo} alt="purposeful logo here" />
+						<img className="logo" src={logo} alt="purposeful logo here" /> 
 					</div>
 				</div>
 				<div className="row fullrow">

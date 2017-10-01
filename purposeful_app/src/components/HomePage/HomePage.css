@@ -4,6 +4,10 @@
 }
 
 
+.activity-feeds{
+	margin-top: 150px;
+}
+
 @media screen and (min-width:700px) {
 	.home-content {
 		vertical-align: center;
