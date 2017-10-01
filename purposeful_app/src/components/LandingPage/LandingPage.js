@@ -89,7 +89,7 @@ class LandingPage extends Component {
 						</div>
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
-								<input placeholder={this.state.userPwd} onChange={this.userPwdSet} className="active validate" type="text" name="Password" required />
+								<input placeholder={this.state.userPwd} onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
 							</div><br />
 						</div>
 						<div className="row fullrow">
@@ -137,7 +137,7 @@ class LandingPage extends Component {
 			<div className="valign LandingBack">
 				<div className="row fullrow">
 					<div className="col s4 push-s4">
-						<img className="logo" src={logo} alt="purposeful logo here" /> 
+						<img className="logo" src={logo} alt="purposeful logo here" />
 					</div>
 				</div>
 				<div className="row fullrow">
