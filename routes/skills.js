@@ -30,7 +30,10 @@ router.post('/new', function(req, res, next) {
 		
 		var finds = [
 			db_tables.Users.findById(entry_uid, {transaction: tr}),
-			db_tables.Skills.findOrCreate({where:{name: entry_skill_name}, {transaction: tr}),
+			db_tables.Skills.findOrCreate(
+				{where:{name: entry_skill_name}},
+				 {transaction: tr}
+			 ),
 		];
 
 
@@ -108,6 +111,7 @@ router.get('/get_skills/:uid', function(req, res, next) {
 						res.status(400).send({msg: "nok", "error": err.message});
 						next(err);
 					});
+			});
 	}
 })
 

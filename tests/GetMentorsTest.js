@@ -57,54 +57,6 @@ function handle_get_mentors () {
 			console.log ("Create Mentor Test complete - failed with errors.");
 		})
 		.then(() => db.close());
-
 }
-
-
-/*
-function get_mentors(mentee_uid) {
-	const TEST_UID = mentee_uid;
-
-	console.log("STARTING GET MENTORS TEST-----");
-
-	return fetch("http://localhost:3001/api/mentorship/mentors", {
-		headers: {accept: "application/json"},
-		body: JSON.stringify({
-			mentee_uid: TEST_UID,
-		})
-	})
-	.then(checkStatus)
-	.then(parseJSON)
-	.then(user_data => {
-		console.log("Recieved mentors data obj: ", user_data);
-		console.log("(GETMENTORSTEST.JS) Get Mentors success!");
-	} )
-	.catch(error => {  
-		console.log("Error in Get Mentors test: ", error);
-		console.log('(GETMENTORSTEST.JS) Get Mentors Request failed with errors. ');  
-	});
-
-}
-*/
-
-/** this middleware function is a adapted from: 
-https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
-*/ 
-function checkStatus(response) {
-	if (response.status >= 200 && response.status < 300) {
-		return response;
-	}
-	const error = new Error(`HTTP Error ${response.statusText}`);
-	error.status = response.statusText;
-	error.response = response;
-	console.log(error); // eslint-disable-line no-console
-	throw error;
-}
-
-function parseJSON(response) {
-	return response.json();
-}
-
-
 
 handle_get_mentors();
