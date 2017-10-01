@@ -23,7 +23,6 @@ class LandingPage extends Component {
 		this.userNameSet = this.userNameSet.bind(this);
 		this.userInfoSet = this.userEmailSet.bind(this);
 		this.userPwdSet = this.userPwdSet.bind(this);
-		this.handleCreateUser = this.handleCreateUser.bind(this);
 	}
 
 	userNameSet = (e) => {
@@ -44,7 +43,20 @@ class LandingPage extends Component {
 		});
 	}
 
-	handleCreateUser = (hist) => {
+	handleContinue = (e) => {
+		e.preventDefault();
+		this.setState({
+			nameSet: !this.state.nameSet,
+		});
+	}
+
+	handleSubmit = (e) => {
+		e.preventDefault();
+				// Create user and redirect to website home page
+		alert("Name: " + this.state.userName + " " +
+			"Email: " + this.state.userEmail + " " +
+			"Password: " + this.state.userPwd);
+
 		const name = this.state.userName;
 		const email = this.state.userEmail;
 		const pwd = this.state.userPwd;
@@ -56,24 +68,6 @@ class LandingPage extends Component {
 			console.log("history: ", hist);
 			hist.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
 		});
-
-		
-		
-   }
-
-	handleContinue = (e) => {
-		e.preventDefault();
-		this.setState({
-			nameSet: !this.state.nameSet,
-		});
-	}
-
-	handleSubmit = () => {
-
-		// Create user and redirect to website home page
-		alert("Name: " + this.state.userName + " " +
-			"Email: " + this.state.userEmail + " " +
-			"Password: " + this.state.userPwd);
 		
 		// Redirect user to home page
 	}
@@ -171,4 +165,5 @@ class LandingPage extends Component {
 		);
 	}
 }
+
 export default withRouter(LandingPage);

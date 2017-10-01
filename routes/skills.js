@@ -30,7 +30,9 @@ router.post('/new', function(req, res, next) {
 		
 		var finds = [
 			db_tables.Users.findById(entry_uid, {transaction: tr}),
-			db_tables.Skills.findOrCreate({where:{name: entry_skill_name}, {transaction: tr}),
+			db_tables.Skills.findOrCreate(
+				{where:{name: entry_skill_name}}, {transaction: tr}
+			),
 		];
 
 
