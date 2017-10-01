@@ -31,6 +31,8 @@ class ProfilePage extends Component {
 		this.pull_collab = this.pull_collab.bind(this);
 
 		this.state = {
+			name: "",
+			uid: "",
 			isLoggedIn : false,
 			purposeDisplay : false,
 			goalsDisplay : false,
@@ -651,8 +653,17 @@ class ProfilePage extends Component {
 	render () {
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
+			<article className="profile-content">
+				{
+					this.state.isLoggedIn ?
+			        <p> you are logged in {this.state.name}, id#{this.state.uid}, and this is your profile page. </p>
+                    :
+                    <p> you are NOT logged in, and this is your profile page. </p>
+			    }
+			</article>
+        );
 
-			this.state.isLoggedIn) ?
+			this.state.isLoggedIn ?
 				this.loadLoggedIn() :/* desktop version */
 				this.loadLoggedOut();  /*mobile version */
 	}

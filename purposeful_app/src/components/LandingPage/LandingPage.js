@@ -49,14 +49,26 @@ class LandingPage extends Component {
 		});
 	}
 
-	handleSubmit = () => {
-
-		//Collect data and send to next stage (interestSkills)
+	handleSubmit = (e) => {
+		e.preventDefault();
+				// Create user and redirect to website home page
 		alert("Name: " + this.state.userName + " " +
 			"Email: " + this.state.userEmail + " " +
 			"Password: " + this.state.userPwd);
 
-		// Redirect to interestSkills page
+		const name = this.state.userName;
+		const email = this.state.userEmail;
+		const pwd = this.state.userPwd;
+
+		Client.create_user(name, email, pwd, (data) => {
+			console.log("(LandingPage) user account created! new user data: ", data);
+			alert("user account created! new user id: "+ data.id);
+			/* navigate to home page */
+			console.log("history: ", hist);
+			hist.push('/home', {isLoggedIn: true, uid: data.id, name: data.name});
+		});
+
+		// Redirect user to home page
 	}
 
 	purposeful_Signup = () => {
@@ -153,4 +165,5 @@ class LandingPage extends Component {
 		);
 	}
 }
-export default LandingPage;
+
+export default withRouter(LandingPage);
