@@ -31,5 +31,4 @@ function create_tables() {
 }
 
 
- create_tables();
-
+create_tables();

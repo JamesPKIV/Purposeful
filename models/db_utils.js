@@ -45,7 +45,9 @@ function create_user(name, email, pwd) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(user_data => {
-		console.log("(DB_UTILS->CREATE_USER) create_user success!");
+
+		console.log("(DB_UTILS->CREATE_USER) response recieved: ", user_data);
+		console.log("(DB_UTILS->CREATE_USER) response recieved without error.");
 		return user_data;
 	} )
 	.catch(function(error) {  
@@ -92,7 +94,7 @@ function create_mentorship(mentee_uid, mentor_uid) {
 	.then(parseJSON)
 	.then(user_data => {
 		console.log("Created new mentorship data obj: ", user_data.data);
-		console.log("(DB_UTILS->CREATE_MENTORSHIP) create_mentorship success!");
+		console.log("(DB_UTILS->CREATE_MENTORSHIP) create_mentorship  response recieved without error.");
 		return user_data;
 	} )
 	.catch(function(error) {  
@@ -118,7 +120,7 @@ function get_mentors(mentee_uid) {
 	.then(parseJSON)
 	.then(user_data => {
 		console.log("(DB_UTILS->GET_MENTORS) Recieved mentors data obj: ", user_data.data);
-		console.log("(DB_UTILS->GET_MENTORS) Get Mentors success!");
+		console.log("(DB_UTILS->GET_MENTORS) Get Mentors  response recieved without error");
 		return user_data;
 	} )
 	.catch(error => {  
@@ -127,6 +129,67 @@ function get_mentors(mentee_uid) {
 		throw error;  
 	});
 }
+
+
+/* this function creates a user skill relation */
+function add_user_skill(user_id, skill_name) {
+	console.log("(DB_UTILS->ADD_USER_SKILL) called!");
+	return fetch("http://localhost:3001/api/skills/new", {
+		method: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			user_id: user_id,
+			skill_name: skill_name,
+		})
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(user_data => {
+		console.log("(DB_UTILS->ADD_USER_SKILL) Created new user skill data obj: ", user_data.data);
+		console.log("(DB_UTILS->ADD_USER_SKILL) response recieved without error.");
+		return user_data;
+	} )
+	.catch(function(error) {  
+		console.log("(DB_UTILS->ADD_USER_SKILL)Error: ", error); 
+		console.log("DB_UTILS->ADD_USER_SKILL) failed with errors. "); 
+		throw error; 
+	});
+}
+
+
+
+/* this function returns user information for all of the given user's mentors */
+function get_user_skills(user_id) {
+
+	console.log("(DB_UTILS->GET_USER_SKILLS) called with user_id: ", user_id);
+
+	return fetch("http://localhost:3001/api/skills/get_skills/" + user_id, {
+		headers: {
+			"Accept": "application/json",
+		},
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(user_data => {
+		console.log("(DB_UTILS->GET_USER_SKILLS) Recieved mentors data obj: ", user_data.data);
+		console.log("(DB_UTILS->GET_USER_SKILLS) Get User Skills Response recieved without error");
+		return user_data;
+	} )
+	.catch(error => {  
+		console.log("(DB_UTILS->GET_USER_SKILLS) Error in Get Mentors test: ", error);
+		console.log('(DB_UTILS->GET_USER_SKILLS) Get User Skills Request failed with errors. ');
+		throw error;  
+	});
+}
+
+
+
+
+
+
 
 
 /** this middleware function is a adapted from: 
@@ -160,4 +223,4 @@ function parseJSON(response) {
 
 
 module.exports = { create_tables, create_user, create_mentorship, 
-	get_user_by_uid, get_mentors};
+	get_user_by_uid, get_mentors, add_user_skill, get_user_skills};

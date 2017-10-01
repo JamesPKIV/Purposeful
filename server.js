@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 //app.use("/api/interests", interests);
-//app.use("/api/skills", skills); 
+app.use("/api/skills", skills);
 app.use("/api/mentorship", mentorship);
 app.use("/api/users", users);
 

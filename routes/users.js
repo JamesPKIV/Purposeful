@@ -1,4 +1,4 @@
-var db =require("../models/tables.js").db_tables;
+var db_tables =require("../models/tables.js").db_tables;
 var VERBOSE = require("../models/pg_database.js").VERBOSE;
 var Sequelize = require("../models/pg_database.js").Sequelize;
 var express = require('express');
@@ -25,7 +25,7 @@ router.post('/new', function(req, res, next) {
 	const entry_email = req.body.email;
 
 	/* insert new entry into users table */
-	const query = db.Users.create({name: entry_name, email: entry_email})
+	const query = db_tables.Users.create({name: entry_name, email: entry_email})
 	  	.then( query_data => { 
 			console.log("USERS.JS: New User inserted:", new_entry);
 			return query_data;
@@ -81,7 +81,7 @@ router.get('/user/:uid', function(req, res, next) {
 	}
 	else {
 		/* query users table */
-		return db.Users.findById(uid)
+		return db_tables.Users.findById(uid)
 			.then((query_data) => {
 				console.log("USERS.JS->/user/:uid) query data:", query_data);
 				return query_data;
