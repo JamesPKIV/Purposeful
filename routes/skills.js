@@ -33,7 +33,7 @@ router.post('/new', function(req, res, next) {
 			db_tables.Skills.findOrCreate(
 				{where:{name: entry_skill_name}},
 				 {transaction: tr}
-			 ),
+			),
 		];
 
 

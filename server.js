@@ -5,7 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var users = require('./routes/users.js');
-var skills = require('./routes/skills.js');
+//var skills = require('./routes/skills.js');
 var mentorship = require('./routes/mentorship.js');
 //var interests = require('./routes/interests.js');
 

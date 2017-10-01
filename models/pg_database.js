@@ -11,7 +11,7 @@ const Sequelize = require("sequelize");
 * the second arg is your postgres username
 * the third arg is your postgres password
 */
-const db = new Sequelize("purposeful_test_db", "test", "test", {
+const db = new Sequelize("purposeful_test_db", "test", "test123", {
   	host: "localhost",
   	port: "5432",
   	dialect: "postgres",
