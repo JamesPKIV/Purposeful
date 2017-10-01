@@ -5,9 +5,9 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var users = require('./routes/users.js');
-var skills = require('./routes/skills.js');
+//var skills = require('./routes/skills.js');
 var mentorship = require('./routes/mentorship.js');
-var interests = require('./routes/interests.js');
+//var interests = require('./routes/interests.js');
 
 var app = express();
 
@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 
-app.use("/api/interests", interests);
-app.use("/api/skills", skills);
+//app.use("/api/interests", interests);
+//app.use("/api/skills", skills); 
 app.use("/api/mentorship", mentorship);
 app.use("/api/users", users);
 

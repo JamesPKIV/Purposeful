@@ -31,5 +31,5 @@ function create_tables() {
 }
 
 
-module.exports = {create_tables};
+ create_tables();
 
