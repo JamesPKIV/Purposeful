@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { Link } from "react-router-dom";
+import { NavLink, Route, Redirect, BrowserRouter as Router, Link} from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
+import InterestSkills from '../InterestSkills/InterestSkills';
 
 class LandingPage extends Component {
 
@@ -50,12 +51,12 @@ class LandingPage extends Component {
 
 	handleSubmit = () => {
 
-		// Create user and redirect to website home page
+		//Collect data and send to next stage (interestSkills)
 		alert("Name: " + this.state.userName + " " +
 			"Email: " + this.state.userEmail + " " +
 			"Password: " + this.state.userPwd);
-		
-		// Redirect user to home page
+
+		// Redirect to interestSkills page
 	}
 
 	purposeful_Signup = () => {
@@ -80,7 +81,7 @@ class LandingPage extends Component {
 		} else if (this.state.nameSet) {
 			return (
 				<div>
-					<form onSubmit={this.handleSubmit}>
+					<form >
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
 								<input placeholder="Email" onChange={this.userEmailSet} type="text" name="Email" className="active validate" required />
@@ -93,7 +94,9 @@ class LandingPage extends Component {
 						</div>
 						<div className="row fullrow">
 							<div className="col s4 push-s4">
-								<input className="btn light-green" type="submit" value="Sign in" />
+								<Link onClick={this.handleSubmit} to={{"pathname":"/interestskills"}}>
+									<div  type="submit" className="btn light-green">Sign In </div>
+								</Link>
 							</div>
 						</div>
 					</form>

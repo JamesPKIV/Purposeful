@@ -10,6 +10,7 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LandingPage from '../LandingPage/LandingPage';
 import SEProfilePage from '../SEProfilePage/SEProfilePage';
+import InterestSkills from '../InterestSkills/InterestSkills';
 
 class App extends Component {
   constructor(props){
@@ -92,6 +93,7 @@ class App extends Component {
 
               <Route path="/landing" render={() => <LandingPage />} />
               <Route path="/SEprofile" render={() => <SEProfilePage />} />
+              <Route path="/interestskills" render={()=> <InterestSkills/>} />
           </main>
           {this.footer()}
         </div>
