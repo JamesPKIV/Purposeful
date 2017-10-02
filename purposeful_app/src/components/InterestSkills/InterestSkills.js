@@ -10,10 +10,15 @@ class InterestSkills extends Component {
       interests: true,
       continue: false,
       chosen_interests: [],
-      chosen_skills: []
+      chosen_skills: [],
+      categories: ["Technology","Music","Food","Travel","Dance",
+                   "Fitness","Chemistry","Physics","Mathematics",
+                   "Cars","Literature","Movies","Education","Psichology",
+                    "Architecture","Plants" ]
     };
     this.InterestSkillsDesktop = this.InterestSkillsDesktop.bind(this);
     this.pullCategories = this.pullCategories.bind(this);
+    this.chosen = this.chosen.bind(this);
   }
 
   toggle(to_toggle){
@@ -28,7 +33,9 @@ class InterestSkills extends Component {
     }
   }
 
-  chosen(category){
+  chosen(e){
+    var category = e.target.id;
+    console.log(category + " is of type " + typeof(category));
     if(this.state.interests){
       this.state.chosen_interests.push(category);
       if(this.state.chosen_interests.length === 3){
@@ -42,10 +49,108 @@ class InterestSkills extends Component {
     }
   }
 
+  get_lighten(i){
+    var lighten = "";
+    switch(i % 6){
+      case 0:
+        lighten = " lighten-3";
+        break;
+      case 1:
+        lighten = " lighten-2";
+        break;
+      case 2:
+        lighten = " lighten-1";
+        break;
+      case 3:
+        lighten = "";
+        break;
+      case 4:
+        lighten = " lighten-1";
+        break;
+      case 5:
+        lighten = " lighten-2";
+        break;
+      default:
+        break;
+    }
+    return lighten;
+  }
+
+  get_push(j){
+    var push = "";
+    switch(j % 4){
+      case 0:
+        push = " push-l1";
+        break;
+      case 1:
+        push = " push-l2";
+        break;
+      case 2:
+        push = " push-l3";
+        break;
+      case 3:
+        push = " push-l4";
+        break;
+      default:
+        break;
+    }
+    return push;
+  }
+
   pullCategories(){
+    var num_categories = this.state.categories.length;
+    var num_rows = num_categories / 4;
+    var extra_row = num_categories % 4;
+    var class_name = "light-green category z-depth-3 col s2 m2 l2";
+    var actual_class_name = "";
+    var lighten = "";
+    var push = "";
+    var i;
+    let return_code = null;
+    for(i = 0; i < num_rows; i++){
+      lighten = this.get_lighten(i);
+      var lighten_name = class_name + lighten;
+      var j;
+      var return_inside = null;
+      for(j = 0; j < 4; j++){
+        push = this.get_push(j);
+        actual_class_name = lighten_name + push;
+        var categ = this.state.categories[(i*4)+j];
+        return_inside =
+          <span>
+            {return_inside}
+            <a id={categ} onClick={this.chosen} className={actual_class_name}>
+              <p>{categ}</p>
+            </a>
+          </span>;
+      }
+      return_code=<span>{return_code}<div className="row">{return_inside}</div></span>;
+    }
+    if(extra_row > 0){
+      var k;
+      var light = this.get_lighten(i);
+      return_inside = null;
+      for(k = 0; k < extra_row; k++){
+        console.log(extra_row);
+        var pu = this.get_push(k);
+        var a_cl_name = class_name + light + pu;
+        var ca = this.state.categories[(i*4)+k];
+        return_inside =
+        <span>
+          {return_inside}
+          <a id={ca} onClick={this.chosen} className={a_cl_name}>
+            <p>{ca}</p>
+          </a>
+        </span>;
+      }
+      return_code=<span>{return_code}<div className="row">{return_inside}</div></span>;
+    }
+
+
     return(
       <div className="row">
-        <div className="row">
+        {return_code}
+      {/*  <div className="row">
           <a onClick={()=>this.chosen("Technology")} className="light-green lighten-3 category z-depth-3 col s2 m2 l2 push-l1">
             <p> Technology </p>
           </a>
@@ -100,7 +205,7 @@ class InterestSkills extends Component {
           <a onClick={()=>this.chosen("Plants")} className="light-green z-depth-3 category col s2 m2 l2 push-l4">
             <p> Plants </p>
           </a>
-        </div>
+        </div>*/}
       </div>
     );
   }

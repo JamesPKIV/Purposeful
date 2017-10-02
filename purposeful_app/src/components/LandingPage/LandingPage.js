@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { NavLink, Route, Redirect, BrowserRouter as Router, Link} from "react-router-dom";
+import { Link, withRouter} from "react-router-dom";
+import Client from '../../Client.js';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
-import InterestSkills from '../InterestSkills/InterestSkills';
 
 class LandingPage extends Component {
 
@@ -50,7 +50,6 @@ class LandingPage extends Component {
 	}
 
 	handleSubmit = (e) => {
-		e.preventDefault();
 				// Create user and redirect to website home page
 		alert("Name: " + this.state.userName + " " +
 			"Email: " + this.state.userEmail + " " +
@@ -63,12 +62,7 @@ class LandingPage extends Component {
 		Client.create_user(name, email, pwd, (data) => {
 			console.log("(LandingPage) user account created! new user data: ", data);
 			alert("user account created! new user id: "+ data.id);
-			/* navigate to home page */
-			console.log("history: ", hist);
-			hist.push('/home', {isLoggedIn: true, uid: data.id, name: data.name});
 		});
-
-		// Redirect user to home page
 	}
 
 	purposeful_Signup = () => {
