@@ -14,8 +14,6 @@ var tables = require ("./tables.js").db_tables;
 /* if this flag is set true, overwrite existing tables */
 var SHOULD_DROP_TABLES = true;
 
-
-
 /* this function creates all tables defined in tables.js */
 function create_tables() {
 	return db.sync({force: SHOULD_DROP_TABLES})
@@ -27,7 +25,8 @@ function create_tables() {
 			if(VERBOSE) 
 				console.log("Error creating tables: ", error);
 			throw error;
-		});
+		})
+		.then(() => {db.close()});
 }
 
 

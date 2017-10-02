@@ -58,6 +58,7 @@ router.post('/new', function(req, res, next) {
 
 				return res.status(400).json({msg: "nok", "errors": err_msgs});
 	    	}
+	    	return res.status(err.status).json({msg: "nok", "error": err.message});
 	    });
 });
 

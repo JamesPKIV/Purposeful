@@ -65,8 +65,8 @@ class LandingPage extends Component {
 			console.log("(LandingPage) user account created! new user data: ", data);
 			alert("user account created! new user id: "+ data.id);
 			/* navigate to home page */
-			console.log("history: ", hist);
-			hist.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
+			console.log("history: ", this.props.history);
+			this.props.history.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
 		});
 		
 		// Redirect user to home page

@@ -7,7 +7,7 @@ import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaUserTimes from 'react-icons/lib/fa/user-times';
 import FaUserPlus from 'react-icons/lib/fa/user-plus';
-import $ from 'jquery';
+//import $ from 'jquery';
 
 class SEProfilePage extends Component {
 
