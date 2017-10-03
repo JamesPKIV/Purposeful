@@ -10,10 +10,15 @@ class InterestSkills extends Component {
       interests: true,
       continue: false,
       chosen_interests: [],
-      chosen_skills: []
+      chosen_skills: [],
+      categories: ["Technology","Music","Food","Travel","Dance",
+                   "Fitness","Chemistry","Physics","Mathematics",
+                   "Cars","Literature","Movies","Education","Psychology",
+                    "Architecture","Plants", "Fashion", "Health"]
     };
     this.InterestSkillsDesktop = this.InterestSkillsDesktop.bind(this);
     this.pullCategories = this.pullCategories.bind(this);
+    this.chosen = this.chosen.bind(this);
   }
 
   toggle(to_toggle){
@@ -28,7 +33,10 @@ class InterestSkills extends Component {
     }
   }
 
-  chosen(category){
+  chosen(some, e){
+    var the_id = e.currentTarget.id;
+    var category = the_id.substr(1, the_id.length-1);
+    e.currentTarget.className = some;
     if(this.state.interests){
       this.state.chosen_interests.push(category);
       if(this.state.chosen_interests.length === 3){
@@ -42,65 +50,116 @@ class InterestSkills extends Component {
     }
   }
 
+  get_lighten(i){
+    var lighten = "";
+    switch(i % 6){
+      case 0:
+        lighten = " lighten-3";
+        break;
+      case 1:
+        lighten = " lighten-2";
+        break;
+      case 2:
+        lighten = " lighten-1";
+        break;
+      case 3:
+        lighten = "";
+        break;
+      case 4:
+        lighten = " lighten-1";
+        break;
+      case 5:
+        lighten = " lighten-2";
+        break;
+      default:
+        break;
+    }
+    return lighten;
+  }
+
+  get_push(j){
+    var push = "";
+    switch(j % 4){
+      case 0:
+        push = " push-l1";
+        break;
+      case 1:
+        push = " push-l2";
+        break;
+      case 2:
+        push = " push-l3";
+        break;
+      case 3:
+        push = " push-l4";
+        break;
+      default:
+        break;
+    }
+    return push;
+  }
+
   pullCategories(){
+    var num_categories = this.state.categories.length;
+    var num_rows = Math.floor(num_categories / 4);
+    var extra_row = num_categories % 4;
+    var class_name = "light-green hoverable category z-depth-2 col s2 m2 l2";
+    var disabled_class_name = "blue-grey category z-depth-1 col s2 m2 l2";
+    var actual_class_name = "";
+    var extra_class = "";
+    var lighten = "";
+    var push = "";
+    var i;
+    let return_code = null;
+    for(i = 0; i < num_rows; i++){
+      lighten = this.get_lighten(i);
+      var j;
+      var return_inside = null;
+      for(j = 0; j < 4; j++){
+        push = this.get_push(j);
+        extra_class = lighten + push;
+        var categ = this.state.categories[(i*4)+j];
+        actual_class_name = class_name + extra_class;
+        let boundClick = this.chosen.bind(this, disabled_class_name + extra_class);
+        var the_id = "";
+        if(this.state.interests){
+          the_id = "i" + categ;
+        } else {
+          the_id = "s" + categ;
+        }
+        return_inside =
+          <span>
+            {return_inside}
+            <a id={the_id} onClick={boundClick} className={actual_class_name}>
+              <p>{categ}</p>
+            </a>
+          </span>;
+      }
+      return_code=<span>{return_code}<div className="row">{return_inside}</div></span>;
+    }
+    if(extra_row > 0){
+      var k;
+      var light = this.get_lighten(i);
+      return_inside = null;
+      for(k = 0; k < extra_row; k++){
+        var pu = this.get_push(k);
+        var extra = light + pu;
+        var a_cl_name = "";
+        var ca = this.state.categories[(i*4)+k];
+        a_cl_name = class_name + extra;
+        let boundClick = this.chosen.bind(this, disabled_class_name + extra);
+        return_inside =
+        <span>
+          {return_inside}
+          <a id={ca} onClick={boundClick} className={a_cl_name}>
+            <p>{ca}</p>
+          </a>
+        </span>;
+      }
+      return_code=<span>{return_code}<div className="row">{return_inside}</div></span>;
+    }
     return(
       <div className="row">
-        <div className="row">
-          <a onClick={()=>this.chosen("Technology")} className="light-green lighten-3 category z-depth-3 col s2 m2 l2 push-l1">
-            <p> Technology </p>
-          </a>
-          <a onClick={()=>this.chosen("Food")} className="light-green lighten-3 category z-depth-3 col s2 m2 l2 push-l2">
-            <p> Food </p>
-          </a>
-          <a onClick={()=>this.chosen("Music")} className="light-green lighten-3 category z-depth-3 col s2 m2 l2 push-l3">
-            <p> Music </p>
-          </a>
-          <a onClick={()=>this.chosen("Travel")} className="light-green lighten-3 category z-depth-3 col s2 m2 l2 push-l4">
-            <p> Travel </p>
-          </a>
-        </div>
-        <div className="row">
-          <a onClick={()=>this.chosen("Dance")} className="light-green lighten-2 z-depth-3 category col s2 m2 l2 push-l1">
-            <p> Dance </p>
-          </a>
-          <a onClick={()=>this.chosen("Fitness")} className="light-green lighten-2 z-depth-3 category col s2 m2 l2 push-l2">
-            <p> Fitness </p>
-          </a>
-          <a onClick={()=>this.chosen("Chemistry")} className="light-green lighten-2 z-depth-3 category col s2 m2 l2 push-l3">
-            <p> Chemistry </p>
-          </a>
-          <a onClick={()=>this.chosen("Physics")} className="light-green lighten-2 z-depth-3 category col s2 m2 l2 push-l4">
-            <p> Physics </p>
-          </a>
-        </div>
-        <div className="row">
-          <a onClick={()=>this.chosen("Mathematics")} className="light-green lighten-1 z-depth-3 category col s2 m2 l2 push-l1">
-            <p> Mathematics </p>
-          </a>
-          <a onClick={()=>this.chosen("Cars")} className="light-green lighten-1 z-depth-3 category col s2 m2 l2 push-l2">
-            <p> Cars </p>
-          </a>
-          <a onClick={()=>this.chosen("Literature")} className="light-green lighten-1 z-depth-3 category col s2 m2 l2 push-l3">
-            <p> Literature </p>
-          </a>
-          <a onClick={()=>this.chosen("Movies")} className="light-green lighten-1 z-depth-3 category col s2 m2 l2 push-l4">
-            <p> Movies </p>
-          </a>
-        </div>
-        <div className="row">
-          <a onClick={()=>this.chosen("Education")} className="light-green z-depth-3 category col s2 m2 l2 push-l1">
-            <p> Education </p>
-          </a>
-          <a onClick={()=>this.chosen("Psichology")} className="light-green z-depth-3 category col s2 m2 l2 push-l2">
-            <p > Psichology </p>
-          </a>
-          <a onClick={()=>this.chosen("Architecture")} className="light-green z-depth-3 category col s2 m2 l2 push-l3">
-            <p> Architecture </p>
-          </a>
-          <a onClick={()=>this.chosen("Plants")} className="light-green z-depth-3 category col s2 m2 l2 push-l4">
-            <p> Plants </p>
-          </a>
-        </div>
+        {return_code}
       </div>
     );
   }
@@ -108,7 +167,7 @@ class InterestSkills extends Component {
   continue_from(where){
     if(where === "interests"){
       this.toggle("interests");
-      this.toggle("continue")
+      this.toggle("continue");
     } else {
       alert("Going to home now \n chosen_interests: "+ this.state.chosen_interests+"\n chosen_skills: "+this.state.chosen_skills);
     }
@@ -143,15 +202,21 @@ class InterestSkills extends Component {
   interests_or_skills(){
     if(this.state.interests){
       return(
-        <div className="row">
-          <h2> Tell Us Your Interests </h2>
-        </div>
+        <span>
+          <div className="row">
+            <h2> Tell Us Your Interests </h2>
+          </div>
+          {this.pullCategories()}
+        </span>
       );
     } else {
       return(
-        <div className="row">
-          <h2> Tell Us Your Skills </h2>
-        </div>
+        <span>
+          <div className="row">
+            <h2> Tell Us Your Skills </h2>
+          </div>
+          {this.pullCategories()}
+        </span>
       );
     }
   }
@@ -160,7 +225,7 @@ class InterestSkills extends Component {
     return(
       <div className="container">
         {this.interests_or_skills()}
-        {this.pullCategories()}
+        
         {this.continue_button()}
       </div>
     );
