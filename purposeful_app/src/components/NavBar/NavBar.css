@@ -131,6 +131,42 @@
         font-size: 18px;
         font-family: 'Arvo', serif;
     }
+
+    li input.searchInput{
+        width: 400px;
+        margin-top: 18px;
+        font-size: 18px;
+        font-family: 'Arvo', serif;
+        background:#E8E8E8;
+        border-radius: 5px;
+        color: black;
+        text-indent: 35px;
+    }
+
+    .divSearch{
+        position: relative;
+    }
+    
+    .FaSearchIcon{
+        position: absolute;
+        top: 31px; 
+        left: 10px;
+        color: black;
+    }
+
+    .settingsBtn{
+        border-color: #212121;
+        border: none;
+    }
+
+    .FaCog{
+        margin-top: 12px;
+    }
+
+    .navRight{
+        float:right;
+    }
+
     .learnBtn {
         flex: 0 1 auto;
         margin: auto;
@@ -154,8 +190,8 @@
         font-size: 20px;
     }
     .plogo {
-        width: 75px;
-        height: 75px;
+        width: 60px;
+        height: 60px;
     }
 }
 
@@ -207,4 +243,22 @@
 .hvr-sweep-to-top:active:before {
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: black;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: black;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: black;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: black;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color: black;
 }
