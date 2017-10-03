@@ -61,15 +61,17 @@ class LandingPage extends Component {
 		const email = this.state.userEmail;
 		const pwd = this.state.userPwd;
 
-		Client.create_user(name, email, pwd, (data) => {
-			console.log("(LandingPage) user account created! new user data: ", data);
-			alert("user account created! new user id: "+ data.id);
-			/* navigate to home page */
-			console.log("history: ", this.props.history);
-			this.props.history.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
-		});
-		
-		// Redirect user to home page
+		Client.create_user(name, email, pwd)
+			.then(data => {
+				console.log("(LandingPage) user account created! new user data: ", data);
+				alert("user account created! new user id: "+ data.id);
+				/* navigate to home page */
+				this.props.history.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
+			})
+			.catch(err => {
+				console.log("(LandingPage) user account creation failed with error: ", JSON.stringify(err));
+				alert("Error creating new user account: " + err.reason);
+			});
 	}
 
 	purposeful_Signup = () => {

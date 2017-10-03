@@ -1,9 +1,6 @@
 /* React Client module for communicating with express server. 
 */
 
-
-
-
 /** This function creates a new user account with the name, email, and password
 * arguments provided and returns the created user's information if successful.
 *
@@ -16,7 +13,7 @@
 *	that was created in the database, like this:
 *		{name: "NAME", id: 123, ...}	
 */
-function create_user(name, email, pwd, callback_fn) {
+function create_user(name, email, pwd) {
 
 	return fetch("api/users/new", {
 		method: "POST",
@@ -32,15 +29,16 @@ function create_user(name, email, pwd, callback_fn) {
 	})
 	.then(checkStatus)
 	.then(parseJSON)
-	.then(response => {
-		console.log("(CLIENT.JS->CREATE_USER) Response OK with new user data obj: ", response.data);
+	.then(result => {
+		console.log("(CLIENT.JS->CREATE_USER) Response OK with new user data obj: ", result.data);
 		console.log("(CLIENT.JS->CREATE_USER) responded with status OK"); 
-		callback_fn(response.data);
-	} )
-	.catch(function(error) {  
+		return result.data;
+	})
+	.catch(error => {  
 		console.log("(CLIENT.JS->CREATE_USER) Request Error:", error);
 		console.log("(CLIENT.JS->CREATE_USER) Request Failed with Errors.");
-		callback_fn(error); 
+		throw error.body;
+
 	});
 }
 
