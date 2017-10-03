@@ -68,7 +68,7 @@ class LandingPage extends Component {
 			})
 			.catch(err => {
 				console.log("(LandingPage) user account creation failed with error: ", JSON.stringify(err));
-				alert("Error creating new user account: " + err.reason);
+				alert("Error creating new user account: " + err.message);
 			});
 	}
 
