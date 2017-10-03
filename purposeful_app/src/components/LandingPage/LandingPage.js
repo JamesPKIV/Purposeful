@@ -59,11 +59,11 @@ class LandingPage extends Component {
 		const email = this.state.userEmail;
 		const pwd = this.state.userPwd;
 
-		Client.create_user(name, email, pwd)
+		Client.add_new_user(name, email, pwd)
 			.then(data => {
 				console.log("(LandingPage) user account created! new user data: ", data);
 				alert("user account created! new user id: "+ data.id);
-				/* navigate to home page */
+				/* programmatically navigate to home page, with state object */
 				this.props.history.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
 			})
 			.catch(err => {

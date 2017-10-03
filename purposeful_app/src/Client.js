@@ -8,12 +8,11 @@
 * name: new user's name
 * email: new user's email
 * pwd: new user's password
-* callback_fn: a callback function which recieves from the response the created user's 
-* 	name and unique user ID. The callback function is passed an object with the entry 
-*	that was created in the database, like this:
+*
+* Returns:  an object with the entry that was created in the database, like this:
 *		{name: "NAME", id: 123, ...}	
 */
-function create_user(name, email, pwd) {
+function add_new_user(name, email, pwd) {
 
 	return fetch("api/users/new", {
 		method: "POST",
@@ -30,13 +29,13 @@ function create_user(name, email, pwd) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(result => {
-		console.log("(CLIENT.JS->CREATE_USER) Response OK with new user data obj: ", result.data);
-		console.log("(CLIENT.JS->CREATE_USER) responded with status OK"); 
+		console.log("(CLIENT.JS->ADD_NEW_USER) Response OK with new user data obj: ", result.data);
+		console.log("(CLIENT.JS->ADD_NEW_USER) responded with status OK"); 
 		return result.data;
 	})
 	.catch(error => {  
-		console.log("(CLIENT.JS->CREATE_USER) Request Error:", error);
-		console.log("(CLIENT.JS->CREATE_USER) Request Failed with Errors.");
+		console.log("(CLIENT.JS->ADD_NEW_USER) Request Error:", error);
+		console.log("(CLIENT.JS->ADD_NEW_USER) Request Failed with Errors.");
 		throw error.body;
 
 	});
@@ -45,30 +44,30 @@ function create_user(name, email, pwd) {
 
 
 /* this function gets a user's information by uid */
-function get_user_by_uid (uid, callback_fn) {
+function get_user_by_uid (uid) {
 
-	return fetch("http://localhost:3001/api/users/user/" + uid, {
+	return fetch("api/users/user/" + uid, {
 			headers: {accept: "application/json"}
 		})
 		.then(checkStatus)
 		.then(parseJSON)
-		.then(response => {
-			console.log("(CLIENT.JS->GET_USER_BY_UID) Response OK with new user data obj: ", response.data);
+		.then(result => {
+			console.log("(CLIENT.JS->GET_USER_BY_UID) Response OK with new user data obj: ", result.data);
 			console.log("(CLIENT.JS->GET_USER_BY_UID) responded with status OK"); 
-			callback_fn(response.data);
+			return result.data;
 		} )
 		.catch(function(error) {  
 			console.log("(CLIENT.JS->GET_USER_BY_UID) Request Error:", error);
 			console.log("(CLIENT.JS->GET_USER_BY_UID) Request Failed with Errors.");
-			throw error;  
+			throw error.body;  
 		});
 }
 
 
 /* this function creates a mentorship relation between two users */
-function create_mentorship(mentee_uid, mentor_uid, callback_fn) {
-	console.log("(DB_UTILS->CREATE_MENTORSHIP) called!");
-	return fetch("http://localhost:3001/api/mentorship/new", {
+function add_mentorship(mentee_uid, mentor_uid) {
+	console.log("(DB_UTILS->ADD_NEW_MENTORSHIP) called!");
+	return fetch("api/mentorship/new", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -81,26 +80,26 @@ function create_mentorship(mentee_uid, mentor_uid, callback_fn) {
 	})
 	.then(checkStatus)
 	.then(parseJSON)
-	.then(response => {
-			console.log("(CLIENT.JS->CREATE_MENTORSHIP) Response OK with new user data obj: ", response.data);
-			console.log("(CLIENT.JS->CREATE_MENTORSHIP) responded with status OK"); 
-			callback_fn(response.data);
-		} )
+	.then(result => {
+			console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) Response OK with new user data obj: ", result.data);
+			console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) responded with status OK"); 
+			return result.data;
+		})
 		.catch(function(error) {  
-			console.log("(CLIENT.JS->CREATE_MENTORSHIP) Request Error:", error);
-			console.log("(CLIENT.JS->CREATE_MENTORSHIP) Request Failed with Errors.");
-			throw error;  
+			console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) Request Error:", error);
+			console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) Request Failed with Errors.");
+			throw error.body;  
 		});
 	
 }
 
 
 /* this function returns user information for all of the given user's mentors */
-function get_mentors(mentee_uid, callback_fn) {
+function get_mentors(mentee_uid) {
 
 	console.log("(DB_UTILS->GET_MENTORS) called with mentee_uid: ", mentee_uid);
 
-	return fetch("http://localhost:3001/api/mentorship/mentors/" + mentee_uid, {
+	return fetch("api/mentorship/mentors/" + mentee_uid, {
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
@@ -108,15 +107,15 @@ function get_mentors(mentee_uid, callback_fn) {
 	})
 	.then(checkStatus)
 	.then(parseJSON)
-	.then(response => {
-			console.log("(CLIENT.JS->GET_MENTORS) Response OK with new user data obj: ", response.data);
+	.then(result => {
+			console.log("(CLIENT.JS->GET_MENTORS) Response OK with new user data obj: ", result.data);
 			console.log("(CLIENT.JS->GET_USER_BY_UID) responded with status OK"); 
-			callback_fn(response.data);
+			return result.data;
 		} )
 		.catch(function(error) {  
 			console.log("(CLIENT.JS->GET_USER_BY_UID) Request Error:", error);
 			console.log("(CLIENT.JS->GET_USER_BY_UID) Request Failed with Errors.");
-			throw error;  
+			throw error.body;  
 		});
 }
 
@@ -124,7 +123,7 @@ function get_mentors(mentee_uid, callback_fn) {
 /* this function creates a user skill relation */
 function add_user_skill(user_id, skill_name) {
 	console.log("(DB_UTILS->ADD_USER_SKILL) called!");
-	return fetch("http://localhost:3001/api/skills/new", {
+	return fetch("api/skills/new", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -140,12 +139,12 @@ function add_user_skill(user_id, skill_name) {
 	.then(user_data => {
 		console.log("(DB_UTILS->ADD_USER_SKILL) Created new user skill data obj: ", user_data.data);
 		console.log("(DB_UTILS->ADD_USER_SKILL) response recieved without error.");
-		return user_data;
+		return user_data.data;
 	} )
-	.catch(function(error) {  
+	.catch(error => {  
 		console.log("(DB_UTILS->ADD_USER_SKILL)Error: ", error); 
 		console.log("DB_UTILS->ADD_USER_SKILL) failed with errors. "); 
-		throw error; 
+		throw error.body; 
 	});
 }
 
@@ -156,7 +155,7 @@ function get_user_skills(user_id) {
 
 	console.log("(DB_UTILS->GET_USER_SKILLS) called with user_id: ", user_id);
 
-	return fetch("http://localhost:3001/api/skills/get_skills/" + user_id, {
+	return fetch("api/skills/get_skills/" + user_id, {
 		headers: {
 			"Accept": "application/json",
 		},
@@ -166,12 +165,12 @@ function get_user_skills(user_id) {
 	.then(user_data => {
 		console.log("(DB_UTILS->GET_USER_SKILLS) Recieved mentors data obj: ", user_data.data);
 		console.log("(DB_UTILS->GET_USER_SKILLS) Get User Skills Response recieved without error");
-		return user_data;
+		return user_data.data;
 	} )
 	.catch(error => {  
 		console.log("(DB_UTILS->GET_USER_SKILLS) Error in Get Mentors test: ", error);
 		console.log('(DB_UTILS->GET_USER_SKILLS) Get User Skills Request failed with errors. ');
-		throw error;  
+		throw error.body;  
 	});
 }
 
@@ -212,6 +211,6 @@ function parseJSON(response) {
 }
 
 
-module.exports = {  create_user, create_mentorship, 
+module.exports = {  add_new_user, add_mentorship, 
 	get_user_by_uid, get_mentors, add_user_skill, get_user_skills};
 
