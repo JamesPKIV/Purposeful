@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './HomePage.css';
-import ActivityFeed from '../ActivityFeed/ActivityFeed'
-import NavBar from '../NavBar/NavBar'
+import ActivityFeed from '../ActivityFeed/ActivityFeed';
+import NavBar from '../NavBar/NavBar';
 
 class HomePage extends Component {
 
