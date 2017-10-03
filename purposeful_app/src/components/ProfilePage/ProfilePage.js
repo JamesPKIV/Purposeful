@@ -115,28 +115,23 @@ class ProfilePage extends Component {
 	edit_or_save(to_toggle, button_or_text){
 		var toggle_state;
 		var text;
-		var display_string;
 		switch(to_toggle){
 			case "purposeEdit":
 				toggle_state = this.state.purposeEdit;
-				display_string = "purposeDisplay";
 				text = "Write in this space current personal, inter-personal, professional, or organizational projects you are working on. Try to explain why these projects make you excited, and the ways they relate to your experience, skills, and interests.";
 				break;
 			case "goalsEdit":
 				toggle_state = this.state.goalsEdit;
-				display_string = "goalsDisplay";
 				text = "Write in this space anything that you wish to do in the future. They can be ready-to-start ideas, half-baked ideas, long-term goals, personal goals, new-year resolutions, crazy dreams, or anything you wish you knew more about!";
 				break;
 			case "accomplishEdit":
 				toggle_state = this.state.accomplishEdit;
-				display_string = "accomplishDisplay";
 				text = "Write in this space anything that you feel proud you have accomplished. It could include your academic achievements, personal challenges that you have defeated, places you have traveled to, hobbies you have learned, or anything else you can think about!";
 				break;
 			default:
 				break;
 		}
 		if(toggle_state){
-			console.log("BEFORE THE IF");
 			if(button_or_text === "button"){
 				return(
 					<button onClick={() => this.toggle(to_toggle)} className="btn-flat profile-text right">
@@ -144,7 +139,6 @@ class ProfilePage extends Component {
 					</button>
 				);
 			} else {
-				console.log("EVER GETS HERE");
 				return(
 					<div className="input-field">
 						<input value={text} type="text" className="active"></input>
@@ -274,27 +268,27 @@ class ProfilePage extends Component {
 				happen if there are more than 5 mentors. If there are
 				less than 5 col size will adjust so they are not so tiny*/}
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Pancho</p>
 					<p className="small-name">Pantera</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Henri</p>
 					<p className="small-name">Poincare</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Ada</p>
 					<p className="small-name">Lovelace</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Edgar Allan</p>
 					<p className="small-name">Poe</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Eve</p>
 					<p className="small-name">Moneypenny</p>
 				</div>
@@ -315,27 +309,27 @@ class ProfilePage extends Component {
 				happen if there are more than 5 mentees. If there are
 				less than 5 col size will adjust so they are not so tiny*/}
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Leonard</p>
 					<p className="small-name">Nemoy</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Hermione</p>
 					<p className="small-name">Granger</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Xenia</p>
 					<p className="small-name">Onatopp</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Ealinor</p>
 					<p className="small-name">Rigby</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Spud</p>
 					<p className="small-name">McKenzie</p>
 				</div>
@@ -376,14 +370,14 @@ class ProfilePage extends Component {
 				<div className="col s4 m4 l4">
 					<div className="card">
 						<div className="card-image">
-							<img src={project_pic}/>
+							<img src={project_pic} alt=""/>
 						</div>
 						<div className="card-content collabCard-text">
 							Thinking Sofas: We strive to build sofas that help you reach
 							those wonderful philosophical ideas.
 						</div>
 						<div className="card-action light-green">
-							<a href="#" className="white-text">Learn More</a>
+							<a href="dummy1" className="white-text">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -392,14 +386,14 @@ class ProfilePage extends Component {
 				<div className="col s4 m4 l4">
 					<div className="card ">
 						<div className="card-image">
-							<img src={project_pic}/>
+							<img src={project_pic} alt=""/>
 						</div>
 						<div className="card-content collabCard-text">
 							We created a community garden at our neighborhood, we can help
 							you start on at your neighborhood too!
 						</div>
 						<div className="card-action light-green">
-							<a href="#" className="white-text">Learn More</a>
+							<a href="dummy2" className="white-text">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -407,13 +401,13 @@ class ProfilePage extends Component {
 				<div className="col s4 m4 l4">
 					<div className="card">
 						<div className="card-image">
-							<img src={project_pic}/>
+							<img src={project_pic} alt=""/>
 						</div>
 						<div className="card-content collabCard-text">
 							Annyone who wants to quit smoking, we can do it together!
 						</div>
 						<div className="card-action light-green">
-							<a href="#" className="white-text">Learn More</a>
+							<a href="dummy3" className="white-text">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -422,7 +416,6 @@ class ProfilePage extends Component {
 	}
 
 	change_picture(){
-		console.log(this.state.changePicture);
 		if(this.state.changePicture){
 			return(
 				<div className="row">
@@ -447,6 +440,18 @@ class ProfilePage extends Component {
 		}
 	}
 
+	editAccount(){
+		console.log("edit");
+	/*	return(
+			<div id="myModal" className="modal">
+  			<div className="modal-content">
+    			<span className="close">&times;</span>
+    			<p>Some text in the Modal..</p>
+  			</div>
+			</div>
+		);*/
+	}
+
 	displayDesktop(){
 		return(
 			<div>
@@ -455,12 +460,14 @@ class ProfilePage extends Component {
 
 					<div className="col s4 m4 l4">
 						<div className="row">
-							<img className="responsive-img circle" src={profile_pic}/>
+							<img className="responsive-img circle" src={profile_pic} alt=""/>
 							<p className="profile-name"> Your Name </p>
 						</div>
 						{this.change_picture()}
 						<div className="row">
-							<button className="btn waves-effect light-green"> Edit your account information  <FaPencil> </FaPencil> </button>
+							<button className="btn waves-effect light-green" onClick={this.editAccount()}>
+								Edit your account information  <FaPencil> </FaPencil>
+							</button>
 						</div>
 
 						<div className="row"> <p> </p> </div>
@@ -550,7 +557,7 @@ class ProfilePage extends Component {
 				<div className="row fullrow"> <p> </p></div>
 				<div className="row fullrow">
 					<div className="col s5 m5 l5">
-						<img className="responsive-img circle" src={profile_pic}/>
+						<img className="responsive-img circle" src={profile_pic} alt=""/>
 					</div>
 					<div className="col s7 m7 l7 ">
 						<div className="row">

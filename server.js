@@ -29,7 +29,7 @@ app.get("/api/testing", (req, res)=> {
 	res.json({
 		message: "testing get express request!!!"
 	});
-	
+
 })
 
 // catch 404 and forward to error handler
