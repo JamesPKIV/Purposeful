@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import './HomePage.css';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
+import NavBar from '../NavBar/NavBar';
+
 
 class HomePage extends Component {
 
@@ -33,7 +35,7 @@ class HomePage extends Component {
 			<div id="home-content" className="row">
 				{
 					this.state.isLoggedIn ?
-			       <p> you are logged in {this.state.name}, id#{this.state.uid}, and this is your profile page. </p>
+			       <p> you are logged in {this.state.name}, id#{this.state.uid}, and this is your home page. </p>
 			        : <p> you are NOT logged in, and this is your home page. </p>
 			    }
 			    <div className="activity-feeds col l10 push-l1">
