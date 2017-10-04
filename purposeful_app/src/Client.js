@@ -1,19 +1,6 @@
 /* React Client module for communicating with express server. 
 */
 
-/* THIS MUST BE SET FALSE TO OPERATE THIS FILE THROUGH REACT IN A BROWSER,
-* AND MUST BE SET TRUE TO OPERATE THIS FILE FROM THE COMMAND LINE USING NODE
-*/
-const COMMAND_LINE_TESTING = false;
-
-/* duct tape for testing from command line node environment  */
-var prepend_path = "";
-if (COMMAND_LINE_TESTING) {
-	//fetch = require("node-fetch");
-	prepend_path = "http://localhost:3001/";
-}
-
-
 /** This function creates a new user account with the name, email, and password
 * arguments provided and returns the created user's information if successful.
 *
@@ -27,7 +14,7 @@ if (COMMAND_LINE_TESTING) {
 */
 function add_new_user(name, email, pwd) {
 
-	return fetch(prepend_path + "api/users/new", {
+	return fetch("api/users/new", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -59,7 +46,7 @@ function add_new_user(name, email, pwd) {
 /* this function gets a user's information by uid */
 function get_user_by_uid (uid) {
 
-	return fetch(prepend_path + "api/users/user/" + uid, {
+	return fetch("api/users/user/" + uid, {
 			headers: {accept: "application/json"}
 		})
 		.then(checkStatus)
@@ -79,10 +66,8 @@ function get_user_by_uid (uid) {
 
 /* this function creates a mentorship relation between two users */
 function add_mentorship(mentee_uid, mentor_uid) {
-
-	
-	console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) called!");
-	return fetch(prepend_path + "api/mentorship/new", {
+	console.log("(DB_UTILS->ADD_NEW_MENTORSHIP) called!");
+	return fetch("api/mentorship/new", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -112,11 +97,9 @@ function add_mentorship(mentee_uid, mentor_uid) {
 /* this function returns user information for all of the given user's mentors */
 function get_mentors(mentee_uid) {
 
-	
+	console.log("(DB_UTILS->GET_MENTORS) called with mentee_uid: ", mentee_uid);
 
-	console.log("(CLIENT.JS->GET_MENTORS) called with mentee_uid: ", mentee_uid);
-
-	return fetch(prepend_path + "api/mentorship/mentors/" + mentee_uid, {
+	return fetch("api/mentorship/mentors/" + mentee_uid, {
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
@@ -137,12 +120,10 @@ function get_mentors(mentee_uid) {
 }
 
 
-/* this function adds a new skill to a user's profile */
+/* this function creates a user skill relation */
 function add_user_skill(user_id, skill_name) {
-
-	
-	console.log("(CLIENT.JS->ADD_USER_SKILL) called!");
-	return fetch(prepend_path +"api/skills/new", {
+	console.log("(DB_UTILS->ADD_USER_SKILL) called!");
+	return fetch("api/skills/new", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -156,59 +137,25 @@ function add_user_skill(user_id, skill_name) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(user_data => {
-		console.log("(CLIENT.JS->ADD_USER_SKILL) Created new user skill data obj: ", user_data.data);
-		console.log("(CLIENT.JS->ADD_USER_SKILL) response recieved without error.");
+		console.log("(DB_UTILS->ADD_USER_SKILL) Created new user skill data obj: ", user_data.data);
+		console.log("(DB_UTILS->ADD_USER_SKILL) response recieved without error.");
 		return user_data.data;
 	} )
 	.catch(error => {  
-		console.log("(CLIENT.JS->ADD_USER_SKILL)Error: ", error); 
-		console.log("CLIENT.JS->ADD_USER_SKILL) failed with errors. "); 
+		console.log("(DB_UTILS->ADD_USER_SKILL)Error: ", error); 
+		console.log("DB_UTILS->ADD_USER_SKILL) failed with errors. "); 
 		throw error.body; 
 	});
 }
 
-
-
-/* this function adds an array of skills to a user's profile 
-*
-* NOT CURRENTLY FUNCTIONAL - OUR API DOESNT YET SUPPORT AN ARRAY OF SKILLS
- */
-function add_user_skills(user_id, skill_name_arr) {
-
-	
-	console.log("(CLIENT.JS->ADD_USER_SKILLS) called!");
-	return fetch(prepend_path + "api/skills/add_skills", {
-		method: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			user_id: user_id,
-			skill_names: skill_name_arr,
-		})
-	})
-	.then(checkStatus)
-	.then(parseJSON)
-	.then(user_data => {
-		console.log("(CLIENT.JS->ADD_USER_SKILLS) Created new user skill data obj: ", user_data.data);
-		console.log("(CLIENT.JS->ADD_USER_SKILLS) response recieved without error.");
-		return user_data.data;
-	} )
-	.catch(error => {  
-		console.log("(CLIENT.JS->ADD_USER_SKILLS) Error: ", error); 
-		console.log("CLIENT.JS->ADD_USER_SKILLS) failed with errors. "); 
-		throw error.body; 
-	});
-}
 
 
 /* this function returns user information for all of the given user's mentors */
 function get_user_skills(user_id) {
 
-	console.log("(CLIENT.JS->GET_USER_SKILLS) called with user_id: ", user_id);
+	console.log("(DB_UTILS->GET_USER_SKILLS) called with user_id: ", user_id);
 
-	return fetch(prepend_path + "api/skills/get_skills/" + user_id, {
+	return fetch("api/skills/get_skills/" + user_id, {
 		headers: {
 			"Accept": "application/json",
 		},
@@ -216,48 +163,17 @@ function get_user_skills(user_id) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(user_data => {
-		console.log("(CLIENT.JS->GET_USER_SKILLS) Recieved mentors data obj: ", user_data.data);
-		console.log("(CLIENT.JS->GET_USER_SKILLS) Get User Skills Response recieved without error");
+		console.log("(DB_UTILS->GET_USER_SKILLS) Recieved mentors data obj: ", user_data.data);
+		console.log("(DB_UTILS->GET_USER_SKILLS) Get User Skills Response recieved without error");
 		return user_data.data;
 	} )
 	.catch(error => {  
-		console.log("(CLIENT.JS->GET_USER_SKILLS) Error in Get Mentors test: ", error);
-		console.log('(CLIENT.JS->GET_USER_SKILLS) Get User Skills Request failed with errors. ');
+		console.log("(DB_UTILS->GET_USER_SKILLS) Error in Get Mentors test: ", error);
+		console.log('(DB_UTILS->GET_USER_SKILLS) Get User Skills Request failed with errors. ');
 		throw error.body;  
 	});
 }
 
-
-/* this function returns user information for all users with the requested skill */
-function get_users_with_skill(skill_name) {
-
-	console.log("(CLIENT.JS->GET_USERS_WITH_SKILL) called with skill_name: ", skill_name);
-
-	return fetch(prepend_path + "api/skills/get_users_with_skill/" + skill_name, {
-		headers: {
-			"Accept": "application/json",
-		},
-	})
-	.then(checkStatus)
-	.then(parseJSON)
-	.then(user_data => {
-		console.log("(CLIENT.JS->GET_USERS_WITH_SKILL) Recieved skilled users data obj: ", user_data.data);
-		console.log("(CLIENT.JS->GET_USERS_WITH_SKILL) Get Users With Skills Response recieved without error.");
-		return user_data.data;
-	})
-	.catch(error => {  
-		console.log("(CLIENT.JS->GET_USERS_WITH_SKILL) Error in Get Mentors test: ", error);
-		console.log("(CLIENT.JS->GET_USERS_WITH_SKILL) Get Users With Skills Request failed with errors. ");
-		throw error.body;  
-	});
-}
-
-
-/* STUB: simply adds all interests as skills for now until interests are implemented
-*/
-function add_skills_and_interests(user_id, skills, interests) {
-	return add_user_skills(user_id, skills.concat(interests) );
-}
 
 
 
@@ -282,7 +198,7 @@ function checkStatus(response)  {
 				throw error;
 			})
 			.catch(function(error) {
-				console.log(error); // eslint-disable-line no-console
+				console.log(error); // eslint-disable-line no-consoleconsole.log(e); // calling it as a method, btw
 				throw error;
 			});
 	}
@@ -295,7 +211,6 @@ function parseJSON(response) {
 }
 
 
-module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
-	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
-	add_skills_and_interests};
+module.exports = {  add_new_user, add_mentorship, 
+	get_user_by_uid, get_mentors, add_user_skill, get_user_skills};
 
