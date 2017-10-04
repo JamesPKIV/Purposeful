@@ -181,12 +181,15 @@ class InterestSkills extends Component {
     if(where === "interests"){
       this.toggle("interests");
       this.toggle("continue");
+      /*GO TO TOP*/
+      window.scrollTo(0,0);
     } else {
       alert("Going to home now \n chosen_interests: "+ this.state.chosen_interests+"\n chosen_skills: "+this.state.chosen_skills);
     }
   }
 
   continue_button(){
+    var apostrophe = "'";
     if(this.state.continue){
       if(this.state.interests){
         return(
@@ -196,7 +199,9 @@ class InterestSkills extends Component {
               <h4 className="row">Create your own category!</h4>
               <div className="row input-field">
                 <input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7"/>
-                <button className="btn col s4 m4 l4 push-l1 light-green darken-1">Add Category</button>
+                <button onClick={() => this.handleSubmit(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
+                  Add Category
+                </button>
               </div>
             </div>
             <button onClick={()=> this.continue_from("interests")} className="col s5 m5 l5 btn-large light-green darken-1 valign">
@@ -212,19 +217,20 @@ class InterestSkills extends Component {
               <h4 className="row">Create your own category!</h4>
               <div className="row input-field">
                 <input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7"/>
-                <button className="btn col s4 m4 l4 push-l1 light-green darken-1">Add Category</button>
+                <button onClick={() => this.handleSubmit(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
+                  Add Category
+                </button>
               </div>
             </div>
             <span className="col s5 m5 l5 ">
               <Link onClick={()=> this.continue_from("skills")} to={{"pathname":"/home"}}>
-                <button  className="col s12 m12 l12 btn-large light-green darken-1 valign"> Continue </button>
+                <button className="col s12 m12 l12 btn-large light-green darken-1 valign"> Continue </button>
               </Link>
             </span>
           </div>
         );
       }
     } else {
-      var apostrophe = "'";
       return(
         <div className="row valign-wrapper">
           <div className="col s5 m5 l5 valign">
@@ -232,7 +238,9 @@ class InterestSkills extends Component {
             <h4 className="row">Create your own category!</h4>
             <div className="row input-field">
               <input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7"/>
-              <button className="btn col s4 m4 l4 push-l1 light-green darken-1">Add Category</button>
+              <button onClick={() => this.handleSubmit(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
+                Add Category
+              </button>
             </div>
           </div>
           <div className="col s5 m5 l5 valign">
@@ -246,6 +254,14 @@ class InterestSkills extends Component {
         </div>
       );
     }
+  }
+
+  handleSubmit(new_categ){
+    this.state.categories.push(new_categ);
+    var new_array = this.state.categories;
+    this.setState({
+      categories: new_array
+    });
   }
 
   interests_or_skills(){

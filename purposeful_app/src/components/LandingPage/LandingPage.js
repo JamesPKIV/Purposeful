@@ -63,8 +63,7 @@ class LandingPage extends Component {
 			.then(data => {
 				console.log("(LandingPage) user account created! new user data: ", data);
 				alert("user account created! new user id: "+ data.id);
-				/* programmatically navigate to home page, with state object */
-				this.props.history.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
+				
 			})
 			.catch(err => {
 				console.log("(LandingPage) user account creation failed with error: ", JSON.stringify(err));
