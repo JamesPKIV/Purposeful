@@ -15,9 +15,9 @@ class LandingPage extends Component {
 			isLoggedIn: false,
 			inputInfo: false,
 			nameSet: false,
-			userName: 'test',
-			userEmail: "test@bepurposeful.co",
-			userPwd: "pswd",
+			userName: '',
+			userEmail: "Email",
+			userPwd: "Create a password",
 		};
 		this.userNameSet = this.userNameSet.bind(this);
 		this.userInfoSet = this.userEmailSet.bind(this);
@@ -50,8 +50,7 @@ class LandingPage extends Component {
 	}
 
 	handleSubmit = (e) => {
-		e.preventDefault();
-				// Create user and redirect to skills/interests page
+				// Create user and redirect to website home page
 		alert("Name: " + this.state.userName + " " +
 			"Email: " + this.state.userEmail + " " +
 			"Password: " + this.state.userPwd);
@@ -64,12 +63,12 @@ class LandingPage extends Component {
 			.then(data => {
 				console.log("(LandingPage) user account created! new user data: ", data);
 				alert("user account created! new user id: "+ data.id);
-				/* programmatically navigate to interests & skills page, with state object */
-				this.props.history.push('/interestskills', {isLoggedIn: true, user_id: data.id, user_name: data.name}); 
+				/* programmatically navigate to home page, with state object */
+				this.props.history.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
 			})
 			.catch(err => {
 				console.log("(LandingPage) user account creation failed with error: ", JSON.stringify(err));
-				alert("Error creating new user account: " + err.message);
+				alert("Error creating new user account: " + err.reason);
 			});
 	}
 
@@ -108,7 +107,7 @@ class LandingPage extends Component {
 						</div>
 						<div className="row fullrow">
 							<div className="col s4 push-s4">
-								<Link onClick={this.handleSubmit} to={{pathname:"/interestskills", state:{}}}>
+								<Link onClick={this.handleSubmit} to={{"pathname":"/interestskills"}}>
 									<div  type="submit" className="btn light-green">Sign In </div>
 								</Link>
 							</div>
