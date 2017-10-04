@@ -15,9 +15,9 @@ class LandingPage extends Component {
 			isLoggedIn: false,
 			inputInfo: false,
 			nameSet: false,
-			userName: '',
-			userEmail: "Email",
-			userPwd: "Create a password",
+			userName: 'test',
+			userEmail: "test@bepurposeful.co",
+			userPwd: "pswd",
 		};
 		this.userNameSet = this.userNameSet.bind(this);
 		this.userInfoSet = this.userEmailSet.bind(this);
@@ -50,7 +50,8 @@ class LandingPage extends Component {
 	}
 
 	handleSubmit = (e) => {
-				// Create user and redirect to website home page
+		e.preventDefault();
+				// Create user and redirect to skills/interests page
 		alert("Name: " + this.state.userName + " " +
 			"Email: " + this.state.userEmail + " " +
 			"Password: " + this.state.userPwd);
@@ -59,10 +60,17 @@ class LandingPage extends Component {
 		const email = this.state.userEmail;
 		const pwd = this.state.userPwd;
 
-		Client.create_user(name, email, pwd, (data) => {
-			console.log("(LandingPage) user account created! new user data: ", data);
-			alert("user account created! new user id: "+ data.id);
-		});
+		Client.add_new_user(name, email, pwd)
+			.then(data => {
+				console.log("(LandingPage) user account created! new user data: ", data);
+				alert("user account created! new user id: "+ data.id);
+				/* programmatically navigate to interests & skills page, with state object */
+				this.props.history.push('/interestskills', {isLoggedIn: true, user_id: data.id, user_name: data.name}); 
+			})
+			.catch(err => {
+				console.log("(LandingPage) user account creation failed with error: ", JSON.stringify(err));
+				alert("Error creating new user account: " + err.message);
+			});
 	}
 
 	purposeful_Signup = () => {
@@ -100,7 +108,7 @@ class LandingPage extends Component {
 						</div>
 						<div className="row fullrow">
 							<div className="col s4 push-s4">
-								<Link onClick={this.handleSubmit} to={{"pathname":"/interestskills"}}>
+								<Link onClick={this.handleSubmit} to={{pathname:"/interestskills", state:{}}}>
 									<div  type="submit" className="btn light-green">Sign In </div>
 								</Link>
 							</div>

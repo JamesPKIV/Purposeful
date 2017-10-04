@@ -20,7 +20,7 @@ const Interest = db.define('interests', {
 
 const Skill = db.define('skills', {
 	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
-	name: {type: Sequelize.STRING, allowNull: false}, 
+	name: {type: Sequelize.STRING, allowNull: false, unique: true}, 
 	level: {type: Sequelize.STRING},
 });
 
