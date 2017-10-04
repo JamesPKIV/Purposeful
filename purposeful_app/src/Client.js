@@ -1,6 +1,19 @@
 /* React Client module for communicating with express server. 
 */
 
+/* THIS MUST BE SET FALSE TO OPERATE THIS FILE THROUGH REACT IN A BROWSER,
+* AND MUST BE SET TRUE TO OPERATE THIS FILE FROM THE COMMAND LINE USING NODE
+*/
+const COMMAND_LINE_TESTING = false;
+
+/* duct tape for testing from command line node environment  */
+var prepend_path = "";
+if (COMMAND_LINE_TESTING) {
+	//fetch = require("node-fetch");
+	prepend_path = "http://localhost:3001/";
+}
+
+
 /** This function creates a new user account with the name, email, and password
 * arguments provided and returns the created user's information if successful.
 *
@@ -12,20 +25,6 @@
 * Returns:  an object with the entry that was created in the database, like this:
 *		{name: "NAME", id: 123, ...}	
 */
-
-/* THIS MUST BE SET FALSE TO OPERATE THIS FILE THROUGH REACT IN A BROWSER,
-* AND MUST BE SET TRUE TO OPERATE THIS FILE FROM THE COMMAND LINE USING NODE
-*/
-const COMMAND_LINE_TESTING = false;
-
-var prepend_path = "";
-if (COMMAND_LINE_TESTING) {
-	var fetch = require("node-fetch");
-	prepend_path = "http://localhost:3001/";
-}
-
-
-
 function add_new_user(name, email, pwd) {
 
 	return fetch(prepend_path + "api/users/new", {
@@ -178,7 +177,7 @@ function add_user_skills(user_id, skill_name_arr) {
 
 	
 	console.log("(CLIENT.JS->ADD_USER_SKILLS) called!");
-	return fetch(prepend_path + "api/skills/new", {
+	return fetch(prepend_path + "api/skills/add_skills", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -186,7 +185,7 @@ function add_user_skills(user_id, skill_name_arr) {
 		},
 		body: JSON.stringify({
 			user_id: user_id,
-			skill_name_arr: skill_name_arr,
+			skill_names: skill_name_arr,
 		})
 	})
 	.then(checkStatus)
@@ -254,6 +253,17 @@ function get_users_with_skill(skill_name) {
 }
 
 
+/* STUB: simply adds all interests as skills for now until interests are implemented
+*/
+function add_skills_and_interests(user_id, skills, interests) {
+	return add_user_skills(user_id, skills.concat(interests) );
+}
+
+
+
+
+
+
 
 /** this middleware function is a adapted from: 
 https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
@@ -286,5 +296,6 @@ function parseJSON(response) {
 
 
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
-	get_mentors, add_user_skill, get_user_skills, get_users_with_skill};
+	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
+	add_skills_and_interests};
 

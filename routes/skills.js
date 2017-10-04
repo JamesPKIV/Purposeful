@@ -70,7 +70,77 @@ router.post("/new", function(req, res, next) {
 });
 
 
-/* GET user's skills by user id.  
+
+
+/**	
+	This HTTP POST function creates a set of new skill entries for the user with the 
+* user id and skill names provided in the request.
+*
+* Arguments: new user's skill names array and user id must be sent in the body of the request as JSON:
+*		{ uid: "user's email", skill_names: ["new skill 1", "new skill 2",...] }
+
+* Returns: if successful, a response is sent with status code 200 containing the 
+	JSON encoded object with the created user-skill relations.
+**/
+router.post("/add_skills", function(req, res, next) {
+	const new_entry = req.body;
+	console.log("serving /api/skills/add_skills request with body: ", new_entry);
+	const entry_uid = new_entry.user_id;
+	const entry_skill_arr = new_entry.skill_names;
+
+
+	var finds = [ db_tables.Users.findById(entry_uid) ];
+	var entry_skill_name = "";
+
+	for (var i = 0; i < entry_skill_arr.length; i++) {
+		entry_skill_name = entry_skill_arr[i];
+	 	finds.push( 
+	 		db_tables.Skills.findCreateFind({ 
+				where: {
+					name: entry_skill_name
+				}
+			})
+		); 
+	}
+
+	return Promise.all(finds)
+	    .then(entries => { 
+	    	console.log ("User, skill objects: ", JSON.stringify(entries));
+
+	    	var user = entries[0];
+	    	var skills = entries.slice(1).map(x => { return x[0] });
+
+
+	    	if (! user)
+	    		throw new Error ("The user does not exist.");
+
+	    	if (! skills)
+	    		throw new Error ("The skill name is not valid.");
+
+			return user.addSkills(skills)
+	    		.then((result) => {
+			    	if (VERBOSE) console.log("(/api/skills/add_skills) Added new user-skill relations: ", JSON.stringify(result));
+		    		return result;
+				})
+				.catch(error => { 
+			    	throw error;
+			    });	
+		})
+	    .then(result => {
+	    	if (VERBOSE) console.log("(/api/skills/add_skills) Successfully added new skill relations: ", result);
+			res.json({msg: "ok", data: result[0]});
+			return result;
+		})
+		.catch(error => { 
+			handleError(error, res); 
+			next(error); 
+		});
+});
+
+
+
+/* GET user's skills by user id.  user_id must be 
+*
 * If successful, sends a response with a JSON body containing name and 
 * email properties for the given id.
 */
@@ -115,7 +185,11 @@ router.get("/get_skills/:uid", function(req, res, next) {
 
 
 
-
+/* GET users who possess a given skill.
+*  
+* If successful, sends a response with a JSON body containing user 
+* objects for each of the matching skill users.
+*/
 router.get("/get_users_with_skill/:skill_name", function(req, res, next) {
 
 	console.log("serving /api/skills/get_users_with_skill request.");
@@ -154,8 +228,7 @@ router.get("/get_users_with_skill/:skill_name", function(req, res, next) {
 			res.status(400).send({msg: "nok", "error": err.message});
 			next(err);
 		});
-
-});
+})
 
 
 
@@ -192,7 +265,6 @@ function handleError (err, response) {
 	else {
 		response.status(500).json({msg: err.status, "error": err.message});
 	}
-
 }
 
 
