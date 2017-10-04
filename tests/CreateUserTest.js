@@ -1,6 +1,6 @@
 
 var fetch = require("node-fetch");
-var create_user = require("../models/db_utils.js").create_user;
+var create_user = require("../purposeful_app/src/Client.js").create_user;
 var	db = require("../models/pg_database.js").db;
 
 function handleCreateUser () {

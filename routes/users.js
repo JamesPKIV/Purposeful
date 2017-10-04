@@ -31,33 +31,34 @@ router.post('/new', function(req, res, next) {
 			return query_data;
 		})
 		.then( query_data => {
-		  	res.json({msg: 'ok', data:query_data});
+		  	res.json({message: 'ok', data:query_data});
 	  	})
 		.catch( err => {
 	    	console.log("USERS.JS->/new): Error creating new user:", err.message );
 
 	    	if (err instanceof Sequelize.ValidationError) {
 	    		var err_msgs = [];
-	    		var msg = "";
+	    		var message = "";
 	    		var each_err = "";
 	    		for (var err_idx = 0; err_idx < err.errors.length; err_idx++) {
 	    			each_err = err.errors[err_idx];
 	    			if (VERBOSE) console.log ("error: ", each_err);
-		    		msg = "";
+		    		message = "";
 	    			if (each_err.type === "unique violation") {
-	    				msg = "A user account already exists for the provided "	+ each_err.path
+	    				message = "A user account already exists for the provided "	+ each_err.path
 	    					 + ": " + each_err.value;
 	    			}
 	    			else {
-	    				msg = each_err.message;
+	    				message = each_err.message;
 	    			}
 
-	    			err_msgs.push(msg);
+	    			err_msgs.push(message);
 	    		}
 	    		if (VERBOSE) console.log ("err_msgs: ", err_msgs);
 
-				return res.status(400).json({msg: "nok", "errors": err_msgs});
+				return res.status(400).json({message: "nok", reason: err_msgs.join(", ")});
 	    	}
+	    	return res.status(500).json({message: "nok", reason: err.message});
 	    });
 });
 

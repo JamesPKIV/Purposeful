@@ -8,6 +8,7 @@ import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaUserTimes from 'react-icons/lib/fa/user-times';
 import FaUserPlus from 'react-icons/lib/fa/user-plus';
 
+
 class SEProfilePage extends Component {
 
 	constructor (props) {
