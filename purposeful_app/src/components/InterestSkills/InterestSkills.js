@@ -36,7 +36,7 @@ class InterestSkills extends Component {
   chosen(some, e){
     var the_id = e.currentTarget.id;
     var category = the_id.substr(1, the_id.length-1);
-    e.currentTarget.className = some;
+    document.getElementById(the_id).className = some;
     if(this.state.interests){
       this.state.chosen_interests.push(category);
       if(this.state.chosen_interests.length === 3){
@@ -103,7 +103,7 @@ class InterestSkills extends Component {
     var num_rows = Math.floor(num_categories / 4);
     var extra_row = num_categories % 4;
     var class_name = "light-green hoverable category z-depth-2 col s2 m2 l2";
-    var disabled_class_name = "blue-grey category z-depth-1 col s2 m2 l2";
+    var disabled_class_name = "blue-grey grey-text category z-depth-1 col s2 m2 l2";
     var actual_class_name = "";
     var extra_class = "";
     var lighten = "";
@@ -123,16 +123,23 @@ class InterestSkills extends Component {
         var the_id = "";
         if(this.state.interests){
           the_id = "i" + categ;
+          return_inside =
+            <span>
+              {return_inside}
+              <a key={the_id} id={the_id} onClick={boundClick} className={actual_class_name}>
+                <p>{categ}</p>
+              </a>
+            </span>;
         } else {
           the_id = "s" + categ;
+          return_inside =
+            <span>
+              {return_inside}
+              <a key={the_id} id={the_id} onClick={boundClick} className={actual_class_name}>
+                <p>{categ}</p>
+              </a>
+            </span>;
         }
-        return_inside =
-          <span>
-            {return_inside}
-            <a id={the_id} onClick={boundClick} className={actual_class_name}>
-              <p>{categ}</p>
-            </a>
-          </span>;
       }
       return_code=<span>{return_code}<div className="row">{return_inside}</div></span>;
     }
@@ -145,12 +152,18 @@ class InterestSkills extends Component {
         var extra = light + pu;
         var a_cl_name = "";
         var ca = this.state.categories[(i*4)+k];
+        var t_id = "";
+        if(this.state.interests){
+          t_id = "i"+ca;
+        } else {
+          t_id = "s"+ca;
+        }
         a_cl_name = class_name + extra;
         let boundClick = this.chosen.bind(this, disabled_class_name + extra);
         return_inside =
         <span>
           {return_inside}
-          <a id={ca} onClick={boundClick} className={a_cl_name}>
+          <a key={t_id} id={t_id} onClick={boundClick} className={a_cl_name}>
             <p>{ca}</p>
           </a>
         </span>;
@@ -177,23 +190,59 @@ class InterestSkills extends Component {
     if(this.state.continue){
       if(this.state.interests){
         return(
-          <div className="row">
-            <button onClick={()=> this.continue_from("interests")} className="col s5 m5 l5 push-l4 btn-large light-green darken-1"> Continue </button>
+          <div className="row valign-wrapper">
+            <div className="col s5 m5 l5 valign">
+              <h4 className="row">Can{apostrophe}t find what you are looking for?</h4>
+              <h4 className="row">Create your own category!</h4>
+              <div className="row input-field">
+                <input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7"/>
+                <button className="btn col s4 m4 l4 push-l1 light-green darken-1">Add Category</button>
+              </div>
+            </div>
+            <button onClick={()=> this.continue_from("interests")} className="col s5 m5 l5 btn-large light-green darken-1 valign">
+              Continue
+            </button>
           </div>
         );
       } else {
         return(
-          <div className="row">
-            <Link onClick={()=> this.continue_from("skills")} to={{"pathname":"/home"}}>
-              <button  className="col s5 m5 l5 push-l4 btn-large light-green darken-1"> Continue </button>
-            </Link>
+          <div className="row valign-wrapper">
+            <div className="col s5 m5 l5 valign">
+              <h4 className="row">Can{apostrophe}t find what you are looking for?</h4>
+              <h4 className="row">Create your own category!</h4>
+              <div className="row input-field">
+                <input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7"/>
+                <button className="btn col s4 m4 l4 push-l1 light-green darken-1">Add Category</button>
+              </div>
+            </div>
+            <span className="col s5 m5 l5 ">
+              <Link onClick={()=> this.continue_from("skills")} to={{"pathname":"/home"}}>
+                <button  className="col s12 m12 l12 btn-large light-green darken-1 valign"> Continue </button>
+              </Link>
+            </span>
           </div>
         );
       }
     } else {
+      var apostrophe = "'";
       return(
-        <div className="row">
-          <button className="col s5 m5 l5 push-l4 btn-large light-green darken-1 disabled"> Continue </button>
+        <div className="row valign-wrapper">
+          <div className="col s5 m5 l5 valign">
+            <h4 className="row">Can{apostrophe}t find what you are looking for?</h4>
+            <h4 className="row">Create your own category!</h4>
+            <div className="row input-field">
+              <input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7"/>
+              <button className="btn col s4 m4 l4 push-l1 light-green darken-1">Add Category</button>
+            </div>
+          </div>
+          <div className="col s5 m5 l5 valign">
+            <span className="row">
+              <button className="col s12 m12 l12 btn-large light-green darken-1 disabled">
+                Continue
+              </button>
+            </span>
+            <p className="row">HINT: Choose at least three categories</p>
+          </div>
         </div>
       );
     }
@@ -225,7 +274,6 @@ class InterestSkills extends Component {
     return(
       <div className="container">
         {this.interests_or_skills()}
-        
         {this.continue_button()}
       </div>
     );
