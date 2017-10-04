@@ -98,7 +98,7 @@ router.post("/add_skills", function(req, res, next) {
 	 		db_tables.Skills.findCreateFind({ 
 				where: {
 					name: entry_skill_name
-				}
+				},
 			})
 		); 
 	}
