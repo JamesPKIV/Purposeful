@@ -8,6 +8,7 @@ import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaUserTimes from 'react-icons/lib/fa/user-times';
 import FaUserPlus from 'react-icons/lib/fa/user-plus';
 
+
 class SEProfilePage extends Component {
 
 	constructor (props) {
@@ -188,27 +189,27 @@ class SEProfilePage extends Component {
 				happen if there are more than 5 mentors. If there are
 				less than 5 col size will adjust so they are not so tiny*/}
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Pancho</p>
 					<p className="small-name">Pantera</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Henri</p>
 					<p className="small-name">Poincare</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Ada</p>
 					<p className="small-name">Lovelace</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Edgar Allan</p>
 					<p className="small-name">Poe</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Eve</p>
 					<p className="small-name">Moneypenny</p>
 				</div>
@@ -229,27 +230,27 @@ class SEProfilePage extends Component {
 				happen if there are more than 5 mentees. If there are
 				less than 5 col size will adjust so they are not so tiny*/}
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Leonard</p>
 					<p className="small-name">Nemoy</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Hermione</p>
 					<p className="small-name">Granger</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Xenia</p>
 					<p className="small-name">Onatopp</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Ealinor</p>
 					<p className="small-name">Rigby</p>
 				</div>
 				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic}/>
+					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Spud</p>
 					<p className="small-name">McKenzie</p>
 				</div>
@@ -290,14 +291,14 @@ class SEProfilePage extends Component {
 				<div className="col s4 m3 l3">
 					<div className="card">
 						<div className="card-image">
-							<img src={project_pic}/>
+							<img src={project_pic} alt=""/>
 						</div>
 						<div className="card-content collabCard-text">
 							Thinking Sofas: We strive to build sofas that help you reach
 							those wonderful philosophical ideas.
 						</div>
 						<div className="card-action light-green">
-							<a href="#" className="white-text">Learn More</a>
+							<a href="dummy1" className="white-text">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -306,14 +307,14 @@ class SEProfilePage extends Component {
 				<div className="col s4 m3 l3">
 					<div className="card ">
 						<div className="card-image">
-							<img src={project_pic}/>
+							<img src={project_pic} alt=""/>
 						</div>
 						<div className="card-content collabCard-text">
 							We created a community garden at our neighborhood, we can help
 							you start on at your neighborhood too!
 						</div>
 						<div className="card-action light-green">
-							<a href="#" className="white-text">Learn More</a>
+							<a href="dummy2" className="white-text">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -321,13 +322,13 @@ class SEProfilePage extends Component {
 				<div className="col s4 m3 l3">
 					<div className="card">
 						<div className="card-image">
-							<img src={project_pic}/>
+							<img src={project_pic} alt=""/>
 						</div>
 						<div className="card-content collabCard-text">
 							Annyone who wants to quit smoking, we can do it together!
 						</div>
 						<div className="card-action light-green">
-							<a href="#" className="white-text">Learn More</a>
+							<a href="dummy3" className="white-text">Learn More</a>
 						</div>
 					</div>
 				</div>
@@ -406,7 +407,7 @@ class SEProfilePage extends Component {
 				<div className="row fullrow">
 
 					<div className="col s4 m4 l4">
-						<img className="responsive-img circle" src={profile_pic}/>
+						<img className="responsive-img circle" src={profile_pic} alt=""/>
 						<p className="profile-name"> Jane Doe </p>
 						<div className="container">
 								{this.purpose_content()}
@@ -482,7 +483,7 @@ class SEProfilePage extends Component {
 				<div className="row fullrow"> <p> </p></div>
 				<div className="row fullrow">
 						<div className="col s5 m5 l5">
-							<img className="responsive-img circle" src={profile_pic}/>
+							<img className="responsive-img circle" src={profile_pic} alt=""/>
 							<p className="profile-name"> Jane Doe </p>
 						</div>
 

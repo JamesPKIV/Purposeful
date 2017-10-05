@@ -59,6 +59,7 @@ function add_new_user(name, email, pwd) {
 function get_user_by_uid (uid) {
 
 	return fetch(prepend_path + "api/users/user/" + uid, {
+
 			headers: {accept: "application/json"}
 		})
 		.then(checkStatus)
@@ -79,9 +80,9 @@ function get_user_by_uid (uid) {
 /* this function creates a mentorship relation between two users */
 function add_mentorship(mentee_uid, mentor_uid) {
 
-	
 	console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) called!");
 	return fetch(prepend_path + "api/mentorship/new", {
+
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -111,11 +112,13 @@ function add_mentorship(mentee_uid, mentor_uid) {
 /* this function returns user information for all of the given user's mentors */
 function get_mentors(mentee_uid) {
 
+
 	
 
 	console.log("(CLIENT.JS->GET_MENTORS) called with mentee_uid: ", mentee_uid);
 
 	return fetch(prepend_path + "api/mentorship/mentors/" + mentee_uid, {
+
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
@@ -134,6 +137,7 @@ function get_mentors(mentee_uid) {
 			throw error.body;  
 		});
 }
+
 
 
 /* this function adds a new skill to a user's profile */
@@ -227,6 +231,7 @@ function get_user_skills(user_id) {
 }
 
 
+
 /* this function returns user information for all users with the requested skill */
 function get_users_with_skill(skill_name) {
 
@@ -284,5 +289,7 @@ function parseJSON(response) {
 
 
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
-	get_mentors, add_user_skill, get_user_skills, get_users_with_skill};
+	get_mentors, add_user_skill, add_user_skills, get_user_skills,
+	get_users_with_skill
+};
 

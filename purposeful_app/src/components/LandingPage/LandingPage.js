@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { NavLink, Route, Redirect, BrowserRouter as Router, Link} from "react-router-dom";
+import { Link, withRouter} from "react-router-dom";
+import Client from '../../Client.js';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
-import InterestSkills from '../InterestSkills/InterestSkills';
 
 class LandingPage extends Component {
 
@@ -49,14 +49,27 @@ class LandingPage extends Component {
 		});
 	}
 
-	handleSubmit = () => {
-
-		//Collect data and send to next stage (interestSkills)
+	handleSubmit = (e) => {
+				// Create user and redirect to website home page
 		alert("Name: " + this.state.userName + " " +
 			"Email: " + this.state.userEmail + " " +
 			"Password: " + this.state.userPwd);
 
-		// Redirect to interestSkills page
+		const name = this.state.userName;
+		const email = this.state.userEmail;
+		const pwd = this.state.userPwd;
+
+		Client.add_new_user(name, email, pwd)
+			.then(data => {
+				console.log("(LandingPage) user account created! new user data: ", data);
+				alert("user account created! new user id: "+ data.id);
+				/* programmatically navigate to home page, with state object */
+				this.props.history.push('/home', {isLoggedIn: true, uid: data.id, name: data.name}); 
+			})
+			.catch(err => {
+				console.log("(LandingPage) user account creation failed with error: ", JSON.stringify(err));
+				alert("Error creating new user account: " + err.reason);
+			});
 	}
 
 	purposeful_Signup = () => {
@@ -153,4 +166,5 @@ class LandingPage extends Component {
 		);
 	}
 }
-export default LandingPage;
+
+export default withRouter(LandingPage);
