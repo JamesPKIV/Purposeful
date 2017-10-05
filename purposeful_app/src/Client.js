@@ -1,6 +1,19 @@
 /* React Client module for communicating with express server. 
 */
 
+/* THIS MUST BE SET FALSE TO OPERATE THIS FILE THROUGH REACT IN A BROWSER,
+* AND MUST BE SET TRUE TO OPERATE THIS FILE FROM THE COMMAND LINE USING NODE
+*/
+const COMMAND_LINE_TESTING = false;
+
+/* duct tape for testing from command line node environment  */
+var prepend_path = "";
+if (COMMAND_LINE_TESTING) {
+	//fetch = require("node-fetch");
+	prepend_path = "http://localhost:3001/";
+}
+
+
 /** This function creates a new user account with the name, email, and password
 * arguments provided and returns the created user's information if successful.
 *
@@ -12,18 +25,6 @@
 * Returns:  an object with the entry that was created in the database, like this:
 *		{name: "NAME", id: 123, ...}	
 */
-
-/* THIS MUST BE SET FALSE TO OPERATE THIS FILE THROUGH REACT IN A BROWSER,
-* AND MUST BE SET TRUE TO OPERATE THIS FILE FROM THE COMMAND LINE USING NODE
-*/
-const COMMAND_LINE_TESTING = false;
-
-var prepend_path = "";
-if (COMMAND_LINE_TESTING) {
-	var fetch = require("node-fetch");
-	prepend_path = "http://localhost:3001/";
-}
-
 function add_new_user(name, email, pwd) {
 
 	return fetch(prepend_path + "api/users/new", {
@@ -59,7 +60,6 @@ function add_new_user(name, email, pwd) {
 function get_user_by_uid (uid) {
 
 	return fetch(prepend_path + "api/users/user/" + uid, {
-
 			headers: {accept: "application/json"}
 		})
 		.then(checkStatus)
@@ -80,9 +80,9 @@ function get_user_by_uid (uid) {
 /* this function creates a mentorship relation between two users */
 function add_mentorship(mentee_uid, mentor_uid) {
 
+	
 	console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) called!");
 	return fetch(prepend_path + "api/mentorship/new", {
-
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -112,13 +112,11 @@ function add_mentorship(mentee_uid, mentor_uid) {
 /* this function returns user information for all of the given user's mentors */
 function get_mentors(mentee_uid) {
 
-
 	
 
 	console.log("(CLIENT.JS->GET_MENTORS) called with mentee_uid: ", mentee_uid);
 
 	return fetch(prepend_path + "api/mentorship/mentors/" + mentee_uid, {
-
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
@@ -137,7 +135,6 @@ function get_mentors(mentee_uid) {
 			throw error.body;  
 		});
 }
-
 
 
 /* this function adds a new skill to a user's profile */
@@ -180,7 +177,7 @@ function add_user_skills(user_id, skill_name_arr) {
 
 	
 	console.log("(CLIENT.JS->ADD_USER_SKILLS) called!");
-	return fetch(prepend_path + "api/skills/new", {
+	return fetch(prepend_path + "api/skills/add_skills", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json",
@@ -188,7 +185,7 @@ function add_user_skills(user_id, skill_name_arr) {
 		},
 		body: JSON.stringify({
 			user_id: user_id,
-			skill_name_arr: skill_name_arr,
+			skill_names: skill_name_arr,
 		})
 	})
 	.then(checkStatus)
@@ -231,7 +228,6 @@ function get_user_skills(user_id) {
 }
 
 
-
 /* this function returns user information for all users with the requested skill */
 function get_users_with_skill(skill_name) {
 
@@ -255,6 +251,17 @@ function get_users_with_skill(skill_name) {
 		throw error.body;  
 	});
 }
+
+
+/* STUB: simply adds all interests as skills for now until interests are implemented
+*/
+function add_skills_and_interests(user_id, skills, interests) {
+	return add_user_skills(user_id, skills.concat(interests) );
+}
+
+
+
+
 
 
 
@@ -289,7 +296,6 @@ function parseJSON(response) {
 
 
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
-	get_mentors, add_user_skill, add_user_skills, get_user_skills,
-	get_users_with_skill
-};
+	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
+	add_skills_and_interests};
 
