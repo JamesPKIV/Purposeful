@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './InterestSkills.css';
 import Client from "../../Client.js";
 
@@ -25,7 +25,7 @@ class InterestSkills extends Component {
 
 	/* once this component mounts, load any state data that was sent
 	*  from the previous page
-	*/ 
+	*/
 	componentDidMount () {
 		var recieved_state = this.props.history.location.state;
 
@@ -48,7 +48,7 @@ class InterestSkills extends Component {
 		}
 	}
 
-	chosen(e){
+	chosen(some, e){
 		var the_id = e.currentTarget.id;
     var category = the_id.substr(1, the_id.length-1);
     document.getElementById(the_id).className = some;
@@ -115,8 +115,9 @@ class InterestSkills extends Component {
 
   pullCategories(){
     var num_categories = this.state.categories.length;
-    var num_rows = Math.floor(num_categories / 4);
-    var extra_row = num_categories % 4;
+		var num_cols = 4;
+		var num_rows = Math.floor(num_categories / num_cols);
+    var extra_row = num_categories % num_cols;
     var class_name = "light-green hoverable category z-depth-2 col s2 m2 l2";
     var disabled_class_name = "blue-grey grey-text category z-depth-1 col s2 m2 l2";
     var actual_class_name = "";
@@ -125,11 +126,18 @@ class InterestSkills extends Component {
     var push = "";
     var i;
     let return_code = null;
-    for(i = 0; i < num_rows; i++){
+    for(i = 0; i <= num_rows; i++){
+			if(i === num_rows){
+				if(extra_row === 0){
+					break;
+				} else {
+					num_cols = extra_row;
+				}
+			}
       lighten = this.get_lighten(i);
       var j;
       var return_inside = null;
-      for(j = 0; j < 4; j++){
+      for(j = 0; j < num_cols; j++){
         push = this.get_push(j);
         extra_class = lighten + push;
         var categ = this.state.categories[(i*4)+j];
@@ -158,33 +166,6 @@ class InterestSkills extends Component {
       }
       return_code=<span>{return_code}<div className="row">{return_inside}</div></span>;
     }
-    if(extra_row > 0){
-      var k;
-      var light = this.get_lighten(i);
-      return_inside = null;
-      for(k = 0; k < extra_row; k++){
-        var pu = this.get_push(k);
-        var extra = light + pu;
-        var a_cl_name = "";
-        var ca = this.state.categories[(i*4)+k];
-        var t_id = "";
-        if(this.state.interests){
-          t_id = "i"+ca;
-        } else {
-          t_id = "s"+ca;
-        }
-        a_cl_name = class_name + extra;
-        let boundClick = this.chosen.bind(this, disabled_class_name + extra);
-        return_inside =
-        <span>
-          {return_inside}
-          <a key={t_id} id={t_id} onClick={boundClick} className={a_cl_name}>
-            <p>{ca}</p>
-          </a>
-        </span>;
-      }
-      return_code=<span>{return_code}<div className="row">{return_inside}</div></span>;
-    }
     return(
       <div className="row">
         {return_code}
@@ -193,24 +174,24 @@ class InterestSkills extends Component {
   }
 
   	/* advance to next section. if all sections are complete, send interests & skills
-	* to the backend and navigate to the home page 
-	*/ 
+	* to the backend and navigate to the home page
+	*/
   continue_from(where){
 		if(where === "interests"){
 			this.toggle("interests");
 			this.toggle("continue");
       window.scrollTo(0,0);
 		} else {
-			
+
 			var interests = this.state.chosen_interests;
 			var skills = this.state.chosen_skills;
 			var user_id = this.state.user_id;
-			alert("Continuing... \n chosen_interests: " + interests 
+			alert("Continuing... \n chosen_interests: " + interests
 						+ "\n chosen_skills: "+ skills
 					);
 			Client.add_skills_and_interests(user_id, skills, interests)
 				.then( user_profile => {
-					alert("Going to home now \n chosen_interests: " + interests 
+					alert("Going to home now \n chosen_interests: " + interests
 						+ "\n chosen_skills: "+ skills
 					);
 					this.setState({
@@ -260,9 +241,9 @@ class InterestSkills extends Component {
               </div>
             </div>
             <span className="col s5 m5 l5 ">
-              <Link onClick={()=> this.continue_from("skills")} to={{"pathname":"/home"}}>
-                <button className="col s12 m12 l12 btn-large light-green darken-1 valign"> Continue </button>
-              </Link>
+              <button onClick={()=> this.continue_from("skills")} className="col s12 m12 l12 btn-large light-green darken-1 valign">
+								Continue
+							</button>
             </span>
           </div>
         );
