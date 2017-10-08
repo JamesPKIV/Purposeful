@@ -15,9 +15,9 @@ class LandingPage extends Component {
 			isLoggedIn: false,
 			inputInfo: false,
 			nameSet: false,
-			userName: 'test',
-			userEmail: "test@bepurposeful.co",
-			userPwd: "pswd",
+			userName: '',
+			userEmail: "",
+			userPwd: "",
 		};
 		this.userNameSet = this.userNameSet.bind(this);
 		this.userInfoSet = this.userEmailSet.bind(this);
@@ -95,7 +95,7 @@ class LandingPage extends Component {
 		} else if (this.state.nameSet) {
 			return (
 				<div>
-					<form >
+					<form>
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
 								<input placeholder="Email" onChange={this.userEmailSet} type="text" name="Email" className="active validate" required />
@@ -103,7 +103,7 @@ class LandingPage extends Component {
 						</div>
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
-								<input placeholder={this.state.userPwd} onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
+								<input placeholder="Password" onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
 							</div><br />
 						</div>
 						<div className="row fullrow">

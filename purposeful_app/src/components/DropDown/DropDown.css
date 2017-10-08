@@ -1,0 +1,46 @@
+.settingsBtn{
+    border-color: #212121;
+    border: none;
+}
+
+
+.FaCog{
+    color: #f5f5f5;
+    margin-top: 12px;
+}
+
+.FaCog2{
+    color: #b4d458;
+    margin-top: 12px;
+}
+
+.div-dropdown{
+    position: absolute;
+    right: 0;
+    background-color: white !important;
+    z-index: 999;
+    width: 250px;
+    border: 3px solid;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.ul-dropdown{
+    padding: 0 !important;
+}
+.li-dropdown{
+    width: 250px;
+}
+
+.li-navs{
+    padding-left: 5px;
+    font-size: 18px;
+    color:black;
+    transition: none;
+    display:block;
+    padding-right: 160px;
+    width: inherit;
+    border: 1px solid;
+    border-bottom: 1px;
+    border-color: #C9C9C9;
+}

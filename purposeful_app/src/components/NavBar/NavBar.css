@@ -154,15 +154,6 @@
         color: black;
     }
 
-    .settingsBtn{
-        border-color: #212121;
-        border: none;
-    }
-
-    .FaCog{
-        margin-top: 12px;
-    }
-
     .navRight{
         float:right;
     }
