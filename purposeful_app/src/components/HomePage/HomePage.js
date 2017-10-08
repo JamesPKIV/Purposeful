@@ -20,8 +20,6 @@ class HomePage extends Component {
 
 	}
 
-
-
 	componentDidMount () {
 		var recieved_state = this.props.history.location.state;
 
@@ -42,24 +40,13 @@ class HomePage extends Component {
 
 	}
 
-
 	render () {
 
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
 			<div id="home-content" className="row">
-				{
-					this.state.isLoggedIn ?
-					<p> you are logged in {this.state.user_name}, id#{this.state.user_id}, and this is your home page. </p>
-					: <p> you are NOT logged in, and this is your home page. </p>
-				}
+				<NavBar />
 				<div className="activity-feeds col l10 push-l1">
-					{
-						this.state.isLoggedIn  &&
-						<MentorFeed title="Mentors you may like"
-							feedItems={this.state.mentors_list} 
-						/>
-					}
 
 					<ActivityFeed title="Activity in Your Network" linkTo="/mentorship" />
 					<ActivityFeed title="Mentees" linkTo="/mentorship" />

@@ -3,9 +3,8 @@ import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 import FaAlignJustify from 'react-icons/lib/fa/align-justify';
 import FaSearch from 'react-icons/lib/fa/search';
-import FaCog from 'react-icons/lib/fa/cog';
 import logo from '../App/logo.png';
-
+import DropDown from '../DropDown/DropDown';
 
 class NavBar extends Component {
 
@@ -19,7 +18,9 @@ class NavBar extends Component {
     this.navBarMobile = this.navBarMobile.bind(this);
     this.toggle = this.toggle.bind(this);
     this.handleMenuSelection = this.handleMenuSelection.bind(this);
-    this.showSettings = this.showSettings.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+
   }
 
   componentWillMount = () => {
@@ -32,15 +33,19 @@ class NavBar extends Component {
     this.toggle();
   }
 
-  handleSearch = (e) => {
+  // update the value to be searched for
+  handleUpdate = (e) => {
     this.setState({
 			searchInput: e.target.value,
     });
-    console.log(typeof(this.searchInput));
   }
 
-  showSettings = () => {
-    // need to create a dropdown bar in React 
+  // make the api call to the database with the search value input
+  handleSearch = (e) =>{
+    if(e.key == 'Enter'){
+      alert(e.target.value +" the value of search input \nsend request to server" );
+      // Make client.js call to search the database with value input
+    }
   }
 
   toggle = () => {
@@ -59,14 +64,14 @@ class NavBar extends Component {
           <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
           <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Stories </NavLink></li>
           { /* Right side of navbar */}
-          <li className="navRight"><button className="settingsBtn" onClick={this.showSettings()}><FaCog className="FaCog" size={28} /></button></li>
+          <li className="navRight"><DropDown/></li>
           <li className="navRight"><NavLink to="/profile" className="navEntry">Profile </NavLink></li>
-          <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />
+          <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />  
             <input  className="searchInput" 
                     placeholder="Search"
-                    value={this.state.searchInput}
-                    onChange={this.handleSearch} 
-            />
+                    onChange={this.handleUpdate} 
+                    onKeyPress={this.handleSearch}
+                />
             </div>
           </li>
         </ul>
