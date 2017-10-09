@@ -15,6 +15,8 @@ import AboutPurposeful from '../AboutPurposeful/AboutPurposeful';
 import OurTeam from '../OurTeam/OurTeam';
 import DonateForm from '../DonateForm/DonateForm';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
+import StoriesPage from '../StoriesPage/StoriesPage';
+import CollabPage from '../CollabPage/CollabPage';
 
 class App extends Component {
   constructor(props){
@@ -98,6 +100,8 @@ class App extends Component {
               <Route path="/landing" render={() => <LandingPage />} />
               <Route path="/SEprofile" render={() => <SEProfilePage />} />
               <Route path="/interestskills" render={()=> <InterestSkills/>} />
+              <Route path="/stories" render={()=> <StoriesPage/>} />
+              <Route path="/collabs" render={()=> <CollabPage/>} />
 
               <Route path="/about" render={()=> <AboutPurposeful/>} />
               <Route path="/team" render={()=> <OurTeam/>} />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './ProfilePage.css';
 import profile_pic from '../SEProfilePage/profile-pic-default.jpg';
 import project_pic from '../SEProfilePage/project-pic-default.jpg';
@@ -346,18 +347,18 @@ class ProfilePage extends Component {
 		return(
 			<div className="row">
 				<div className="collection">
-					<a href="dummy1" className="collection-item green-text">
+					<Link to="/stories" className="collection-item green-text">
 						How I decided I needed to plant my own garden
-					</a>
-					<a href="dummy2" className="collection-item green-text">
+					</Link>
+					<Link to="/stories" className="collection-item green-text">
 						Choosing the best socks for your interview
-					</a>
-					<a href="dummy3" className="collection-item green-text">
+					</Link>
+					<Link to="/stories" className="collection-item green-text">
 						How I came up with a human-size hamster-ball floating on water idea
-					</a>
-					<a href="dummy4" className="collection-item green-text">
+					</Link>
+					<Link to="/stories" className="collection-item green-text">
 						The time I opened my own restaurant
-					</a>
+					</Link>
 				</div>
 			</div>
 		);
@@ -377,7 +378,7 @@ class ProfilePage extends Component {
 							those wonderful philosophical ideas.
 						</div>
 						<div className="card-action light-green">
-							<a href="dummy1" className="white-text">Learn More</a>
+							<Link to="/collabs" className="white-text">Manage</Link>
 						</div>
 					</div>
 				</div>
@@ -393,7 +394,7 @@ class ProfilePage extends Component {
 							you start on at your neighborhood too!
 						</div>
 						<div className="card-action light-green">
-							<a href="dummy2" className="white-text">Learn More</a>
+							<Link to="/collabs" className="white-text">Manage</Link>
 						</div>
 					</div>
 				</div>
@@ -407,7 +408,7 @@ class ProfilePage extends Component {
 							Annyone who wants to quit smoking, we can do it together!
 						</div>
 						<div className="card-action light-green">
-							<a href="dummy3" className="white-text">Learn More</a>
+							<Link to="/collabs" className="white-text">Manage</Link>
 						</div>
 					</div>
 				</div>
@@ -492,10 +493,14 @@ class ProfilePage extends Component {
 									<div className="row valign-wrapper">
 										<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
 										<div className="col s5 m5 l5 push-l1">
-											<button className="btn waves-effect light-green"> Manage your current mentors  <FaGroup> </FaGroup> </button>
+											<Link to="/mentorship" className="btn waves-effect light-green">
+												Manage your current mentors  <FaGroup> </FaGroup>
+											</Link>
 										</div>
 										<div className="col s5 m5 l5">
-											<button className="btn waves-effect light-green"> Find a mentor!  <FaMagic> </FaMagic> </button>
+											<Link to="/mentorship" className="btn waves-effect light-green">
+												Find a mentor!  <FaMagic> </FaMagic>
+											</Link>
 										</div>
 									</div>
 									{this.pull_mentors()}
@@ -505,10 +510,14 @@ class ProfilePage extends Component {
 									<div className="row valign-wrapper">
 										<p className="col s2 m2 l2 profile-titles valign">Mentees</p>
 										<div className="col s5 m5 l5 push-l1">
-											<button className="btn waves-effect light-green"> Manage your current mentees  <FaGroup> </FaGroup> </button>
+											<Link to="/mentorship" className="btn waves-effect light-green">
+												Manage your current mentees  <FaGroup> </FaGroup>
+											</Link>
 										</div>
 										<div className="col s5 m5 l5">
-											<button className="btn waves-effect light-green"> Find a mentee!  <FaMagic> </FaMagic> </button>
+											<Link to="/mentorship" className="btn waves-effect light-green">
+												Find a mentee!  <FaMagic> </FaMagic>
+											</Link>
 										</div>
 									</div>
 									{this.pull_mentees()}
@@ -518,10 +527,14 @@ class ProfilePage extends Component {
 									<div className="row valign-wrapper">
 										<p className="col s2 m2 l2 profile-titles valign">Stories</p>
 										<div className="col s4 m4 l4">
-											<button className="btn waves-effect light-green"> Manage your stories  <FaPencil> </FaPencil> </button>
+											<Link to="/stories" className="btn waves-effect light-green">
+												Manage your stories  <FaPencil> </FaPencil>
+											</Link>
 										</div>
 										<div className="col s5 m5 l5">
-											<button className="btn waves-effect light-green"> Write a new story or article!  <FaPencil> </FaPencil> </button>
+											<Link to="/stories" className="btn waves-effect light-green">
+												Write a new story or article!  <FaPencil> </FaPencil>
+											</Link>
 										</div>
 									</div>
 									{this.pull_stories()}
@@ -531,13 +544,19 @@ class ProfilePage extends Component {
 										<div className= "col s4 m4 l4">
 											<p className="row profile-titles">Collaborations</p>
 											<div className="row">
-												<button className="btn waves-effect light-green"> Manage your collabs  <FaGroup> </FaGroup> </button>
+												<Link to="/collabs" className="btn waves-effect light-green">
+													Manage your collabs  <FaGroup> </FaGroup>
+												</Link>
 											</div>
 											<div className="row">
-												<button className="btn waves-effect light-green"> Find collab!  <FaMagic> </FaMagic> </button>
+												<Link to="/collabs" className="btn waves-effect light-green">
+													Find collab!  <FaMagic> </FaMagic>
+												</Link>
 											</div>
 											<div className="row">
-												<button className="btn waves-effect light-green"> Start a collab!  <FaLightbulbO> </FaLightbulbO> </button>
+												<Link to="/collabs" className="btn waves-effect light-green">
+													Start a collab!  <FaLightbulbO> </FaLightbulbO>
+												</Link>
 											</div>
 										</div>
 										{this.pull_collab()}
@@ -583,10 +602,14 @@ class ProfilePage extends Component {
 						</div>
 						<div className="row">
 							<div className="col s6 m6 l6">
-								<button className="btn waves-effect light-green">Manage<FaGroup></FaGroup> </button>
+								<Link to="/mentorship" className="btn waves-effect light-green">
+									Manage<FaGroup></FaGroup>
+								</Link>
 							</div>
 							<div className="col s6 m6 l6">
-								<button className="btn waves-effect light-green">Find<FaMagic></FaMagic> </button>
+								<Link to="/mentorship" className="btn waves-effect light-green">
+									Find<FaMagic></FaMagic>
+								</Link>
 							</div>
 						</div>
 						{this.pull_mentors()}
@@ -598,10 +621,14 @@ class ProfilePage extends Component {
 						</div>
 						<div className="row">
 							<div className="col s6 m6 l6">
-								<button className="btn waves-effect light-green">Manage<FaGroup></FaGroup> </button>
+								<Link to="/mentorship" className="btn waves-effect light-green">
+									Manage<FaGroup></FaGroup>
+								</Link>
 							</div>
 							<div className="col s6 m6 l6">
-								<button className="btn waves-effect light-green">Find<FaMagic></FaMagic> </button>
+								<Link to="/mentorship" className="btn waves-effect light-green">
+									Find<FaMagic></FaMagic>
+								</Link>
 							</div>
 						</div>
 						{this.pull_mentees()}
@@ -613,10 +640,14 @@ class ProfilePage extends Component {
 						</div>
 						<div className="row">
 							<div className="col s6 m6 l6">
-								<button className="btn waves-effect light-green">Manage<FaPencil></FaPencil> </button>
+								<Link to="/stories" className="btn waves-effect light-green">
+									Manage<FaPencil></FaPencil>
+								</Link>
 							</div>
 							<div className="col s6 m6 l6">
-								<button className="btn waves-effect light-green">Write<FaPencil></FaPencil> </button>
+								<Link to="/stories" className="btn waves-effect light-green">
+									Write<FaPencil></FaPencil>
+								</Link>
 							</div>
 						</div>
 						{this.pull_stories()}
@@ -628,13 +659,19 @@ class ProfilePage extends Component {
 						</div>
 						<div className="row">
 							<div className="col s4 m4 l4">
-								<button className="btn waves-effect light-green">Manage<FaGroup></FaGroup> </button>
+								<Link to="/collabs" className="btn waves-effect light-green">
+									Manage<FaGroup></FaGroup>
+								</Link>
 							</div>
 							<div className="col s4 m4 l4">
-								<button className="btn waves-effect light-green">Find<FaMagic></FaMagic> </button>
+								<Link to="/collabs" className="btn waves-effect light-green">
+									Find<FaMagic></FaMagic>
+								</Link>
 							</div>
 							<div className="col s4 m4 l4">
-								<button className="btn waves-effect light-green">Start<FaLightbulbO></FaLightbulbO> </button>
+								<Link to="/collabs" className="btn waves-effect light-green">
+									Start<FaLightbulbO></FaLightbulbO>
+								</Link>
 							</div>
 						</div>
 						{this.pull_collab()}
