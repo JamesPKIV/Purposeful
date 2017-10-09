@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import {Link, NavLink, withRouter } from 'react-router-dom';
 import './NavBar.css';
 import FaAlignJustify from 'react-icons/lib/fa/align-justify';
 import FaSearch from 'react-icons/lib/fa/search';
 import logo from '../App/logo.png';
-import DropDown from '../DropDown/DropDown';
+import DropDown from './DropDown';
 
 class NavBar extends Component {
 
@@ -20,10 +20,15 @@ class NavBar extends Component {
     this.handleMenuSelection = this.handleMenuSelection.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-
+    this.handleNav = this.handleNav.bind(this);
   }
 
   componentWillMount = () => {
+    var recieved_state = this.props.history.location.state;
+    if (recieved_state !== null) {
+			this.setState( recieved_state );
+		}
+
     if (this.props.containerWidth <= 700) {
       this.toggle();
     }
@@ -46,6 +51,12 @@ class NavBar extends Component {
       alert(e.target.value +" the value of search input \nsend request to server" );
       // Make client.js call to search the database with value input
     }
+  } 
+
+  handleNav = (val) => {
+    console.log(val + " was selected");
+    this.props.history.push(val, this.props.history.location.state);
+
   }
 
   toggle = () => {
@@ -58,14 +69,13 @@ class NavBar extends Component {
     return (
       <nav className="NavBar">
         <ul>
-          <li><img width="50" height="50" src={logo} className="plogo" alt="Purposeful"></img></li>
-
-          <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Collaborations </NavLink></li>
-          <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
-          <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Stories </NavLink></li>
+          <li><button onClick={() => this.handleNav("home")} className="navEntry"><img width="50" height="50" src={logo} className="plogo" alt="Purposeful"></img></button></li>
+          <li><button onClick={() => this.handleNav("collaborations")}  className="hvr-sweep-to-top navEntry">Collaborations </button></li>
+          <li><button onClick={() => this.handleNav("/mentorship")}  className="hvr-sweep-to-top navEntry">Mentorship </button></li>
+          <li><button onClick={() => this.handleNav("stories")}  className="hvr-sweep-to-top navEntry">Stories </button></li>
           { /* Right side of navbar */}
           <li className="navRight"><DropDown/></li>
-          <li className="navRight"><NavLink to="/profile" className="navEntry">Profile </NavLink></li>
+          <li className="navRight"><button onClick={() => this.handleNav("/profile")} className="navEntry" >Profile </button></li>
           <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />  
             <input  className="searchInput" 
                     placeholder="Search"
@@ -93,7 +103,6 @@ class NavBar extends Component {
               <button className="menuBtn open" onClick={this.handleMenuSelection} >
                 <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Home </NavLink></li>
                 <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
-                <li><NavLink to="/profile" className="hvr-sweep-to-top navEntry">Profile </NavLink></li>
               </button>
             </ul>
           </nav>
@@ -118,4 +127,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

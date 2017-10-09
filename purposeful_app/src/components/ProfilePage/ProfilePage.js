@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './ProfilePage.css';
+import NavBar from '../NavBar/NavBar';
+
 import profile_pic from '../SEProfilePage/profile-pic-default.jpg';
 import project_pic from '../SEProfilePage/project-pic-default.jpg';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
@@ -31,9 +34,9 @@ class ProfilePage extends Component {
 		this.pull_collab = this.pull_collab.bind(this);
 
 		this.state = {
-			name: "",
-			uid: "",
-			isLoggedIn : false,
+			user_name: "",
+			user_id: "",
+			isLoggedin : false,
 			purposeDisplay : false,
 			goalsDisplay : false,
 			accomplishDisplay: false,
@@ -41,6 +44,16 @@ class ProfilePage extends Component {
 			goalsEdit: false,
 			accomplishEdit: false,
 			changePicture: false
+		};
+	}
+
+	componentDidMount () {
+		var recieved_state = this.props.history.location.state;
+
+		console.log("(Profile.JS) componentDidMount state: ", recieved_state);
+		if (recieved_state !== null) {
+			this.setState( recieved_state );
+			console.log ("Profile.js) state recieved. New state: ", this.state);
 		};
 	}
 
@@ -455,13 +468,14 @@ class ProfilePage extends Component {
 	displayDesktop(){
 		return(
 			<div>
-				<div className="row fullrow"> <p> </p> </div>
-				<div className="row fullrow">
-
-					<div className="col s4 m4 l4">
+				{/* Reason for the below line of code?
+					<div className="row fullrow"> <p> </p> </div> */ 
+				}
+				<div className="row fullrow main-content">
+					<div className="col s4">
 						<div className="row">
 							<img className="responsive-img circle" src={profile_pic} alt=""/>
-							<p className="profile-name"> Your Name </p>
+							<p className="profile-name"> {this.state.user_name} </p>
 						</div>
 						{this.change_picture()}
 						<div className="row">
@@ -474,7 +488,7 @@ class ProfilePage extends Component {
 						<div className="row"> <p> </p> </div>
 						<div className="row"> <p> </p> </div>
 						<div className="row">
-							<div className="container">
+							<div className="container left-content">
 									{this.purpose_content()}
 									{this.goals_content()}
 									{this.accomplish_content()}
@@ -482,7 +496,7 @@ class ProfilePage extends Component {
 						</div>
 					</div>
 
-					<div className="col s8 m8 l8">
+					<div className="col s8">
 						<div className="row"> <p> </p> </div>
 						<div className="row"> <p> </p> </div>
 						<div className="row">
@@ -649,20 +663,14 @@ class ProfilePage extends Component {
 	render () {
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
-			<article className="profile-content">
-				{
-					this.state.isLoggedIn ?
-			        <p> you are logged in {this.state.name}, id#{this.state.uid}, and this is your profile page. </p>
-                    :
-                    <p> you are NOT logged in, and this is your profile page. </p>
-			    }
-			</article>
-        );
-
-			this.state.isLoggedIn ?
+			<div>
+				<NavBar />
+				{this.state.isLoggedIn ?
 				this.loadLoggedIn() :/* desktop version */
-				this.loadLoggedOut();  /*mobile version */
+				this.loadLoggedOut() } /*mobile version */
+			</div>
+        );
 	}
 }
 
-export default ProfilePage;
+export default withRouter(ProfilePage);

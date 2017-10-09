@@ -122,7 +122,9 @@
     .NavBar li :not(active) {
         background-color: inherit;
     }
+
     .navEntry {
+        border: none;
         display: block;
         color: white;
         text-align: center;
