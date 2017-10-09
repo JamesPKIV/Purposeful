@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './InterestSkills.css';
 import Client from "../../Client.js";
+import working from "../App/still_working.png";
 
 class InterestSkills extends Component {
 
@@ -315,14 +316,24 @@ class InterestSkills extends Component {
 
 	InterestSkillsMobile(){
 		return(
-			<h1> This is a placeholder for the mobile version </h1>
+			<span>
+				<img src={working} alt="working" width="100vw" className="row center"/>
+				<p className="row"> We are hard at work to bring this component to your mobile soon! </p>
+				<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
+			</span>
 		);
 	}
 
 	render() {
-		return (
-			this.InterestSkillsDesktop()
-		);
+		if(window.innerWidth > 700){
+			return(
+				this.InterestSkillsDesktop()
+			);
+		} else {
+			return(
+				this.InterestSkillsMobile()
+			);
+		}
 	}
 }
 

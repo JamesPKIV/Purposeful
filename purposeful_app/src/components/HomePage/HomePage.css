@@ -3,9 +3,14 @@
 		background: white;
 }
 
+.logged-in-p{
+	margin-top: 200px;
+	font-size: 20px;
+	font-weight: 700;
+}
 
 .activity-feeds{
-	margin-top: 150px;
+	margin-top: 0;
 }
 
 @media screen and (min-width:700px) {
