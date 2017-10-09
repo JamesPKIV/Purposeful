@@ -453,23 +453,11 @@ class ProfilePage extends Component {
 		}
 	}
 
-	editAccount(){
-		console.log("edit");
-	/*	return(
-			<div id="myModal" className="modal">
-  			<div className="modal-content">
-    			<span className="close">&times;</span>
-    			<p>Some text in the Modal..</p>
-  			</div>
-			</div>
-		);*/
-	}
-
 	displayDesktop(){
 		return(
 			<div>
 				{/* Reason for the below line of code?
-					<div className="row fullrow"> <p> </p> </div> */ 
+					<div className="row fullrow"> <p> </p> </div> */
 				}
 				<div className="row fullrow main-content">
 					<div className="col s4">
@@ -479,9 +467,9 @@ class ProfilePage extends Component {
 						</div>
 						{this.change_picture()}
 						<div className="row">
-							<button className="btn waves-effect light-green" onClick={this.editAccount()}>
+							<Link to="/editProfile" className="btn waves-effect light-green">
 								Edit your account information  <FaPencil> </FaPencil>
-							</button>
+							</Link>
 						</div>
 
 						<div className="row"> <p> </p> </div>
@@ -703,7 +691,7 @@ class ProfilePage extends Component {
 				<NavBar />
 				{this.state.isLoggedIn ?
 				this.loadLoggedIn() :/* desktop version */
-				this.loadLoggedOut() } /*mobile version */
+				this.loadLoggedOut() /*mobile version */}
 			</div>
         );
 	}

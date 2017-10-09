@@ -40,7 +40,7 @@ class OurTeam extends Component {
 			);
 		} else {
 			return(
-				this.sMobile()
+				this.Mobile()
 			);
 		}
 	}

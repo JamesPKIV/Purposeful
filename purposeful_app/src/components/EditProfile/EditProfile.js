@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './AboutPurposeful.css';
+import './EditProfile.css';
 import working from "../App/still_working.png";
 
-class AboutPurposeful extends Component {
+class EditProfile extends Component {
 
 	constructor() {
 		super();
@@ -15,11 +15,7 @@ class AboutPurposeful extends Component {
 
   Desktop(){
     return(
-      <span>
-				<img src={working} alt="working" width="300vw" className="row center"/>
-				<p className="row"> We are hard at work to tell you more about us soon! </p>
-				<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
-			</span>
+      <p>HERE</p>
     );
   }
 
@@ -27,8 +23,8 @@ class AboutPurposeful extends Component {
     return(
       <span>
 				<img src={working} alt="working" width="100vw" className="row center"/>
-				<p className="row"> We are hard at work to tell you more about us soon! </p>
-				<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
+				<p className="row"> For now this is not implemented, but edit your profile in a desktop!</p>
+				<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
 			</span>
     );
   }
@@ -46,4 +42,4 @@ class AboutPurposeful extends Component {
 	}
 }
 
-export default AboutPurposeful;
+export default EditProfile;

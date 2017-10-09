@@ -40,7 +40,7 @@ class DonateForm extends Component {
 			);
 		} else {
 			return(
-				this.sMobile()
+				this.Mobile()
 			);
 		}
 	}

@@ -40,7 +40,7 @@ class PrivacyPolicy extends Component {
 			);
 		} else {
 			return(
-				this.sMobile()
+				this.Mobile()
 			);
 		}
 	}

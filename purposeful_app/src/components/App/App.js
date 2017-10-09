@@ -17,6 +17,7 @@ import DonateForm from '../DonateForm/DonateForm';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import StoriesPage from '../StoriesPage/StoriesPage';
 import CollabPage from '../CollabPage/CollabPage';
+import EditProfile from '../EditProfile/EditProfile';
 
 class App extends Component {
   constructor(props){
@@ -74,7 +75,7 @@ class App extends Component {
       );
     }
   }
-  
+
   render() {
     return (
       <Router>
@@ -100,6 +101,7 @@ class App extends Component {
               <Route path="/interestskills" render={()=> <InterestSkills/>} />
               <Route path="/stories" render={()=> <StoriesPage/>} />
               <Route path="/collabs" render={()=> <CollabPage/>} />
+              <Route path="/editProfile" render={()=> <EditProfile/>} />
 
               <Route path="/about" render={()=> <AboutPurposeful/>} />
               <Route path="/team" render={()=> <OurTeam/>} />

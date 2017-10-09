@@ -40,7 +40,7 @@ class CollabPage extends Component {
 			);
 		} else {
 			return(
-				this.sMobile()
+				this.Mobile()
 			);
 		}
 	}
