@@ -145,6 +145,64 @@ router.get('/mentees/:mentor_uid', function(req, res, next) {
 
 
 
+router.get("dash/:user_id", (req, res, next) => {
+
+	if (VERBOSE) console.log("MENTORSHIP.JS->/dash reached. ");
+	if (VERBOSE) console.log ("request params:", req.params);
+
+	const user_id = req.params.user_id;
+
+
+	/* TODO: validate that user is who they claim to be with sessions */
+	if (!user_id) {
+		var msg = "No user_uid provided in request json body."
+		return handleError( new Error(msg), res );
+	}
+
+	/* lookup mentee in users table, then get mentors */
+	return db_tables.Users.findById(user_id)
+
+		.then(user => {
+			if (VERBOSE) console.log("MENTORSHIP.JS->/dash) user retrieved: ", user);
+			
+			var user_queries = [
+				user.getMentees(),
+				user.getMentors(),
+				user.getSkills(),
+			]
+
+			return Promise.all(user_queries)	
+		    	.then(results => {
+
+		    		var mentee_list = results[0];
+		    		var mentor_list = results[1];
+		    		var skill_list = results[2];
+
+		    		
+		    		var rand_idx = Math.floor(skill_list.length * Math.rand());
+		    		var rand_skill = skill_list[rand_idx];
+		    		//get a random skill to return recommended mentors for 
+		    		return rand_skill.getUsers()
+		    			.then ( recomm_mentors => {
+		    				if (VERBOSE) 
+		    					console.log("Successfully fetched mentees: ", mentee_list);
+		    				
+		    				var data = {
+		    					mentees:mentee_list, 
+		    					mentors:mentor_list, 
+		    					recommended:recomm_mentors
+		    				};
+
+		    				res.json({msg: "ok", data: data})
+		    			});
+
+			    	
+		    	})
+		})
+		.catch(error => {  handleError(error, res) });	
+})
+
+
 function handleError (err, response) {
 
 	console.log("(MENTORSHIP.JS->HANDLEERROR): Error:", err.message );

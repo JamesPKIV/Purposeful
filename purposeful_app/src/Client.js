@@ -36,7 +36,7 @@ function add_new_user(name, email, pwd) {
 		body: JSON.stringify({
 			name: name,
 			email: email,
-			pwd: pwd,
+			password: pwd,
 		})
 	})
 	.then(checkStatus)
@@ -257,7 +257,28 @@ function add_skills_and_interests(user_id, skills, interests) {
 }
 
 
+function get_mentorship_dash(mentee_uid) {
+	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called with mentee_uid: ", mentee_uid);
 
+	return fetch(prepend_path + "api/mentorship/dash/" + mentee_uid, {
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+		},
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(result => {
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Response OK with new user data obj: ", result.data);
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) responded with status OK"); 
+		return result.data;
+	})
+	.catch(error => {  
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Request Error:", error);
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Request Failed with Errors.");
+		throw error.body;  
+	});
+}
 
 
 
@@ -294,5 +315,5 @@ function parseJSON(response) {
 
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
 	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
-	add_skills_and_interests};
+	add_skills_and_interests };
 
