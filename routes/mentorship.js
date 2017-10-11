@@ -145,7 +145,7 @@ router.get('/mentees/:mentor_uid', function(req, res, next) {
 
 
 
-router.get("dash/:user_id", (req, res, next) => {
+router.get("/dash/:user_id", (req, res, next) => {
 
 	if (VERBOSE) console.log("MENTORSHIP.JS->/dash reached. ");
 	if (VERBOSE) console.log ("request params:", req.params);
@@ -174,12 +174,13 @@ router.get("dash/:user_id", (req, res, next) => {
 			return Promise.all(user_queries)	
 		    	.then(results => {
 
+		    		console.log()
 		    		var mentee_list = results[0];
 		    		var mentor_list = results[1];
 		    		var skill_list = results[2];
 
 		    		
-		    		var rand_idx = Math.floor(skill_list.length * Math.rand());
+		    		var rand_idx = Math.floor(skill_list.length * Math.random());
 		    		var rand_skill = skill_list[rand_idx];
 		    		//get a random skill to return recommended mentors for 
 		    		return rand_skill.getUsers()

@@ -85,7 +85,7 @@ class App extends Component {
 
 
 	fetchHome () {
-		Client.get_mentorship_dash()
+		Client.get_mentorship_dash(this.state.userId)
 			.then (dash_data => {
 				var mentees = dash_data["mentees"];
 				var mentors = dash_data["mentors"];
