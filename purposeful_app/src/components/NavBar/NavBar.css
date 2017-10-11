@@ -122,7 +122,9 @@
     .NavBar li :not(active) {
         background-color: inherit;
     }
+
     .navEntry {
+        border: none;
         display: block;
         color: white;
         text-align: center;
@@ -152,15 +154,6 @@
         top: 31px; 
         left: 10px;
         color: black;
-    }
-
-    .settingsBtn{
-        border-color: #212121;
-        border: none;
-    }
-
-    .FaCog{
-        margin-top: 12px;
     }
 
     .navRight{

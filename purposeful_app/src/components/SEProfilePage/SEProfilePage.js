@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './SEProfilePage.css';
 import profile_pic from './profile-pic-default.jpg';
 import project_pic from './project-pic-default.jpg';
@@ -31,7 +32,9 @@ class SEProfilePage extends Component {
 			accomplisDisplay: false,
 			askMentee: false,
 			inviteCollab: false,
-			follow: false
+			follow: false,
+			requestSent: false,
+			inviteSent: false
 		};
   }
 
@@ -72,6 +75,21 @@ class SEProfilePage extends Component {
 					follow: !this.state.follow
 				});
 				break;
+			case "requestSent":
+				this.setState({
+					requestSent: !this.state.requestSent
+				});
+				this.setState({
+					askMentee: !this.state.askMentee
+				});
+				break;
+			case "inviteSent":
+				this.setState({
+					inviteSent: !this.state.inviteSent
+				});
+				this.setState({
+					inviteCollab: !this.state.inviteCollab
+				})
 			default:
 				break;
 		}
@@ -267,18 +285,18 @@ class SEProfilePage extends Component {
 		return(
 			<div className="row">
 				<div className="collection">
-					<a href="dummy1" className="collection-item green-text">
+					<Link to="/stories" className="collection-item green-text">
 						How I decided I needed to plant my own garden
-					</a>
-					<a href="dummy2" className="collection-item green-text">
+					</Link>
+					<Link to="/stories" className="collection-item green-text">
 						Choosing the best socks for your interview
-					</a>
-					<a href="dummy3" className="collection-item green-text">
+					</Link>
+					<Link to="/stories" className="collection-item green-text">
 						How I came up with a human-size hamster-ball floating on water idea
-					</a>
-					<a href="dummy4" className="collection-item green-text">
+					</Link>
+					<Link to="/stories" className="collection-item green-text">
 						The time I opened my own restaurant
-					</a>
+					</Link>
 				</div>
 			</div>
 		);
@@ -298,7 +316,7 @@ class SEProfilePage extends Component {
 							those wonderful philosophical ideas.
 						</div>
 						<div className="card-action light-green">
-							<a href="dummy1" className="white-text">Learn More</a>
+							<Link to="/collabs" className="white-text">Learn More</Link>
 						</div>
 					</div>
 				</div>
@@ -314,7 +332,7 @@ class SEProfilePage extends Component {
 							you start on at your neighborhood too!
 						</div>
 						<div className="card-action light-green">
-							<a href="dummy2" className="white-text">Learn More</a>
+							<Link to="/collabs" className="white-text">Learn More</Link>
 						</div>
 					</div>
 				</div>
@@ -328,7 +346,7 @@ class SEProfilePage extends Component {
 							Annyone who wants to quit smoking, we can do it together!
 						</div>
 						<div className="card-action light-green">
-							<a href="dummy3" className="white-text">Learn More</a>
+							<Link to="/collabs" className="white-text">Learn More</Link>
 						</div>
 					</div>
 				</div>
@@ -339,7 +357,11 @@ class SEProfilePage extends Component {
 	ask_mentee(){
 		if (this.state.askMentee){
 			return(
-				<p>editable message with send or cancel buttons</p>
+				<div className="input-field col s10 m10 l10 push-l1">
+					<textarea id="ask_message" className="materialize-textarea"></textarea>
+					<label for="ask_message" className="active">Tell Jane why you think she would be a good mentor for you</label>
+					<button onClick={() => this.toggle("requestSent")} className="btn-large waves-effect light-green"> Send Request! </button>
+				</div>
 			);
 		} else {
 			return(
@@ -351,7 +373,11 @@ class SEProfilePage extends Component {
 	invite_collab(){
 		if(this.state.inviteCollab){
 			return(
-				<p>editable message with send or cancel buttons</p>
+				<div className="input-field col s10 m10 l10 push-l1">
+					<textarea id="ask_message" className="materialize-textarea"></textarea>
+					<label for="ask_message" className="active">Tell Jane why you think she would be a good part of your team</label>
+					<button onClick={() => this.toggle("inviteSent")} className="btn-large waves-effect light-green"> Send Invitation! </button>
+				</div>
 			);
 		} else {
 			return(
@@ -400,6 +426,42 @@ class SEProfilePage extends Component {
 		}
 	}
 
+	ask_button(){
+		if(this.state.askMentee){
+			return(
+				<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green darken-3"> Cancel </button>
+			);
+		} else {
+			if(this.state.requestSent){
+				return(
+					<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green disabled"> Mentor Request Sent </button>
+				);
+			} else {
+				return(
+					<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green"> Become their Mentee </button>
+				);
+			}
+		}
+	}
+
+	invite_button(){
+		if(this.state.inviteCollab){
+			return(
+				<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green darken-3"> Cancel </button>
+			);
+		} else {
+			if(this.state.inviteSent){
+				return(
+					<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green disabled"> Invitation to collab Sent </button>
+				);
+			} else {
+				return(
+					<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green"> Invite to Collaborate </button>
+				);
+			}
+		}
+	}
+
 	displayDesktop(){
 		return(
 			<div>
@@ -421,10 +483,10 @@ class SEProfilePage extends Component {
 						<div className="row"> <p> </p> </div>
 						<div className="row">
 							<div className="col s4 m4 l4">
-								<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green"> Become their Mentee </button>
+								{this.ask_button()}
 							</div>
 							<div className="col s4 m4 l4">
-								<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green"> Invite to Collaborate </button>
+								{this.invite_button()}
 							</div>
 							{this.follow("desktop")}
 						</div>
@@ -489,10 +551,10 @@ class SEProfilePage extends Component {
 
 						<div className="col s6 m6 l6 ">
 							<div className="row">
-								<button onClick={() => this.toggle("askMentee")} className="btn waves-effect light-green"> Become Mentee </button>
+								{this.ask_button()}
 							</div>
 							<div className="row">
-								<button onClick={() => this.toggle("inviteCollab")} className="btn waves-effect light-green"> Invite to Collab </button>
+								{this.invite_button()}
 							</div>
 							{this.follow("mobile")}
 						</div>

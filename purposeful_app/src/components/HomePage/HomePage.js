@@ -19,31 +19,33 @@ class HomePage extends Component {
 	}
 
 
+
 	componentDidMount () {
 
 		// TODO: retrieve the data to be displayed - mentors, mentees, 
 		this.props.fetchData();
+
+
 	}
 
-
-	render () {
+	render = () => {
 
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
 			<div id="home-content" className="row">
+				<NavBar />
 				{
-					this.state.isLoggedIn ?
-					<p> you are logged in {this.props.userName}, and this is your home page. </p>
-					: <p> you are NOT logged in, and this is your home page. </p>
+					this.props.isLoggedIn ?
+					<p className="logged-in-p">User Name: {this.props.userName}, UserID: {this.props.userId} </p>
+					: <p className="logged-in-p"> you are NOT logged in, and this is your home page. </p>
 				}
 				<div className="activity-feeds col l10 push-l1">
-					{
+				{ /*
 						this.state.isLoggedIn  &&
 						<MentorFeed title="Mentors you may like"
 							feedItems={this.props.mentors} 
 						/>
-					}
-
+					*/}
 					<ActivityFeed title="Activity in Your Network" linkTo="/mentorship" />
 					<ActivityFeed title="Mentees" linkTo="/mentorship" />
 					<ActivityFeed title="Collaborations" linkTo="/home" />

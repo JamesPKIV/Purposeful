@@ -111,9 +111,6 @@ function add_mentorship(mentee_uid, mentor_uid) {
 
 /* this function returns user information for all of the given user's mentors */
 function get_mentors(mentee_uid) {
-
-	
-
 	console.log("(CLIENT.JS->GET_MENTORS) called with mentee_uid: ", mentee_uid);
 
 	return fetch(prepend_path + "api/mentorship/mentors/" + mentee_uid, {

@@ -1,5 +1,6 @@
 .profile-name{
   font-size: 4vh;
+  margin: 0px;
 }
 
 .small-name{
@@ -20,4 +21,17 @@
 .collabCard-text{
   text-overflow: ellipsis;
   max-height: 12vh;
+}
+
+.main-content{
+  margin-top: 175px;
+}
+
+div.row{
+  margin-bottom: 10;
+}
+
+div.left-content{
+  padding-left:50px;
+  width: 100%;
 }

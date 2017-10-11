@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import ActivityFeed from "../ActivityFeed/ActivityFeed";
 import MentorFeed from "../MentorFeed/MentorFeed";
-
 import Search from 'react-icons/lib/fa/search';
-
+import NavBar from '../NavBar/NavBar';
+import './MentorshipPage.css';
 
 class MentorshipPage extends Component {
 
@@ -15,7 +16,6 @@ class MentorshipPage extends Component {
 			show: "main",
 		};
 	}
-
 
 	componentDidMount() {
 
@@ -46,6 +46,7 @@ class MentorshipPage extends Component {
 					});
 				});
 		}
+
 	}
 
 
@@ -97,11 +98,9 @@ class MentorshipPage extends Component {
 					</p>
 				</article>
 			);
-
-			
-
 		}
 	}
 }
 
-export default MentorshipPage;
+
+export default withRouter(MentorshipPage);
