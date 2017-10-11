@@ -574,7 +574,7 @@ class ProfilePage extends Component {
 	displayMobile(){
 		return(
 			<div>
-				<div className="row fullrow"> <p> </p></div>
+				<div className="row fullrow main-content"> <p> </p></div>
 				<div className="row fullrow">
 					<div className="col s5 m5 l5">
 						<img className="responsive-img circle" src={profile_pic} alt=""/>
