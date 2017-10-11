@@ -27,7 +27,7 @@ class App extends Component {
 
 		this.state = {
 			isLoggedIn : false,
-			userName: "",
+			userName: "James",
 			userEmail: "",
 			userId: "",
 			skills: [],
@@ -42,8 +42,45 @@ class App extends Component {
 		this.footer = this.footer.bind(this);
 		this.footerDesktop = this.footerDesktop.bind(this);
 		this.footerMobile = this.footerMobile.bind(this);
-		this.fetchMentorship = this.fetchMentorship.bind(this);
+		this.handleCreateUser = this.handleCreateUser.bind(this);
+		this.handleSubmitSI = this.handleSubmitSI.bind(this);
 		this.fetchHome = this.fetchHome.bind(this);
+		this.fetchMentorship = this.fetchMentorship.bind(this);
+		this.searchBySkill = this.searchBySkill.bind(this);
+		this.setStateAttr = this.setStateAttr.bind(this);
+		this.pushToStateAttrArr = this.pushToStateAttrArr.bind(this);
+	}
+
+
+	handleCreateUser (password) {
+		var name = this.state.userName;
+		var email = this.state.userEmail;
+
+		return Client.add_new_user(name, email, password)
+			.then(user_obj => {
+				this.setState({
+					userId: user_obj.id,
+					isLoggedIn: true,
+				}); 
+				return user_obj;
+			})
+			.catch(err => {
+				throw err;
+			});
+	}
+
+
+	handleSubmitSI() {
+		var interests = this.state.interests;
+		var skills = this.state.skills;
+		var user_id = this.state.userId;
+		return Client.add_skills_and_interests(user_id, skills, interests)
+			.then( skillsIntrs => {
+				console.log("Successfully added skills/interests:", skillsIntrs);
+			})
+			.catch( error => {
+				throw error;
+			});
 	}
 
 
@@ -54,13 +91,16 @@ class App extends Component {
 				var mentors = dash_data["mentors"];
 				var recommended = dash_data["recommended"];
 
-				console.log("MENTORSHIP DASH RECIEVED: ", dash_data);
+				console.log("HOME DASH RECIEVED: ", dash_data);
 
 				this.setState({
 					mentees: mentees,
 					mentors: mentors,
 					recommended: recommended,
 				});
+			})
+			.catch (err => {
+				throw err;
 			});
 	}
 
@@ -80,9 +120,7 @@ class App extends Component {
 					recommended: recommended,
 				});
 			});
-
 	}
-
 
 
 	searchBySkill (skill_name) {
@@ -102,8 +140,28 @@ class App extends Component {
 			.catch( err => {
 				throw err;
 			});
-
 	}
+
+
+	setStateAttr(key, value) {
+		this.setState({
+			[key]: value
+		});
+	}
+
+	pushToStateAttrArr(key, value) {
+
+		var attr_arr = this.state[key];
+
+		console.log("pushToStateAttrArr:", attr_arr);
+
+		attr_arr.push(value);
+		this.setState({
+			[key]: attr_arr,
+		});
+	}
+
+
 
 
 footerDesktop(){
@@ -174,21 +232,57 @@ footerDesktop(){
 								render={ () => <Redirect to="/landing" /> } 
 							/>
 							<Route 
+								path="/landing" 
+								render={ () => <LandingPage 
+									userName={this.state.userName}
+									userEmail={this.state.userEmail}
+									handleCreateUser={this.handleCreateUser} 
+									handleNameSet={this.setStateAttr.bind(this,"userName") }
+									handleEmailSet={this.setStateAttr.bind(this, "userEmail") }
+								/>} 
+							/>
+
+							<Route 
+								path="/interestskills" 
+								render={ ()=> 
+									<InterestSkills
+										userName={this.state.userName}
+										userEmail={this.state.userEmail}
+										interests={this.state.interests}
+										skills={this.state.skills}
+										handleAddSkill={this.pushToStateAttrArr.bind(this, "skills") }
+										handleAddInterest={this.pushToStateAttrArr.bind(this, "interests") }
+										handleSubmit={this.handleSubmitSI}
+									/> 
+								} 
+							/> 
+
+							<Route 
 								path="/home" 
-								render={ () => <HomePage /> }
-								userName={this.state.userName}
-								fetchData={ () => this.fetchHome()}
-								mentors={this.state.mentors}
+								render={ () => 
+									<HomePage 
+										userName={this.state.userName}
+										userId={this.state.userId}
+										fetchData={this.fetchHome}
+										isLoggedIn={this.state.isLoggedIn}
+										mentors={this.state.mentors}
+										mentees={this.state.mentees}
+										recommended={this.state.recommended}
+									/> 
+								}	
 							/>
 							<Route 
 								path="/mentorship"
-								render={ () => <MentorshipPage /> }
-								fetchData={() => this.fetchMentorship()}
-								handleSearchBySkill={(skill) => this.searchBySkill(skill)}
-								mentors={this.state.mentors}
-								mentees={this.state.mentees}
-								recommended={this.state.recommended}
-								skillUsersMap={this.state.skillUsersMap}
+								render={ () => 
+									<MentorshipPage 
+										fetchData={this.fetchMentorship}
+										handleSearchBySkill={this.searchBySkill}
+										mentors={this.state.mentors}
+										mentees={this.state.mentees}
+										recommended={this.state.recommended}
+										skillUsersMap={this.state.skillUsersMap}
+									/> 
+								}
 							/>
 							<Route 
 								path="/profile" 
@@ -198,18 +292,12 @@ footerDesktop(){
 								path="/login" 
 								render={ () => <SignupPage /> } 
 							/>
-							<Route 
-								path="/landing" 
-									render={ () => <LandingPage /> } 
-							/>
+							
 							<Route 
 								path="/SEprofile" 
 								render={ () => <SEProfilePage /> } 
 							/>
-							<Route 
-								path="/interestskills" 
-								render={ ()=> <InterestSkills/> } 
-							/> 
+							
               <Route path="/stories" render={()=> <StoriesPage/>} />
               <Route path="/collabs" render={()=> <CollabPage/>} />
 

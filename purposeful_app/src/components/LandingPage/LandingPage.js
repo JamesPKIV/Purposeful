@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { Link, withRouter} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Client from '../../Client.js';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
@@ -12,68 +12,67 @@ class LandingPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isLoggedIn: false,
 			inputInfo: false,
 			nameSet: false,
-			userName: '',
-			userEmail: "",
 			userPwd: "",
+			redirToSkills: false,
 		};
-		this.userNameSet = this.userNameSet.bind(this);
-		this.userInfoSet = this.userEmailSet.bind(this);
+		this.handleContinue = this.handleContinue.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.purposeful_Signup = this.purposeful_Signup.bind(this);
+		this.handleNameSet = this.handleNameSet.bind(this);
+		this.handleEmailSet = this.handleEmailSet.bind(this);
 		this.userPwdSet = this.userPwdSet.bind(this);
 	}
 
-	userNameSet = (e) => {
+
+	handleNameSet (ev) {
+		var name = ev.target.value;
+		this.props.handleNameSet(name);
+	}
+
+
+	handleEmailSet (ev) {
+		var name = ev.target.value;
+		this.props.handleEmailSet(name);
+	}
+	
+	userPwdSet (ev) {
 		this.setState({
-			userName: e.target.value,
+			userPwd: ev.target.value,
 		});
 	}
 
-	userEmailSet = (e) => {
-		this.setState({
-			userEmail: e.target.value,
-		});
-	}
-
-	userPwdSet = (e) => {
-		this.setState({
-			userPwd: e.target.value,
-		});
-	}
-
-	handleContinue = (e) => {
-		e.preventDefault();
+	handleContinue (ev) {
+		ev.preventDefault();
 		this.setState({
 			nameSet: !this.state.nameSet,
 		});
 	}
 
-	handleSubmit = (e) => {
-		e.preventDefault();
-				// Create user and redirect to skills/interests page
-		alert("Name: " + this.state.userName + " " +
-			"Email: " + this.state.userEmail + " " +
-			"Password: " + this.state.userPwd);
 
-		const name = this.state.userName;
-		const email = this.state.userEmail;
+	handleSubmit(ev) {
+		ev.preventDefault();
+
 		const pwd = this.state.userPwd;
+		this.setState({	userPwd: "" });
 
-		Client.add_new_user(name, email, pwd)
-			.then(data => {
+		this.props.handleCreateUser(pwd)
+			.then((data) => {
 				console.log("(LandingPage) user account created! new user data: ", data);
-				alert("user account created! new user id: "+ data.id);
 				/* programmatically navigate to interests & skills page, with state object */
-				this.props.history.push('/interestskills', {isLoggedIn: true, user_id: data.id, user_name: data.name}); 
+				this.setState({
+					redirToSkills: true
+				});
 			})
 			.catch(err => {
-				console.log("(LandingPage) user account creation failed with error: ", JSON.stringify(err));
-				alert("Error creating new user account: " + err.message);
+				console.log("(LandingPage) user account creation failed with error: ", err);
+				alert("Error creating new user account: " + err);
 			});
 	}
 
-	purposeful_Signup = () => {
+
+	purposeful_Signup () {
 		if (!this.state.nameSet) {
 			return (
 				<div>
@@ -83,8 +82,8 @@ class LandingPage extends Component {
 								<input
 									type="text"
 									placeholder="What is your name?"
-									value={this.state.userName}
-									onChange={this.userNameSet}
+									value={this.props.userName}
+									onChange={this.handleNameSet}
 									name="fullName" />
 								<input className="btn light-green" type="submit" value="Continue " />
 							</div>
@@ -98,7 +97,7 @@ class LandingPage extends Component {
 					<form>
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
-								<input placeholder="Email" onChange={this.userEmailSet} type="text" name="Email" className="active validate" required />
+								<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
 						<div className="row fullrow">
@@ -108,8 +107,8 @@ class LandingPage extends Component {
 						</div>
 						<div className="row fullrow">
 							<div className="col s4 push-s4">
-								<Link onClick={this.handleSubmit} to={{pathname:"/interestskills", state:{}}}>
-									<div  type="submit" className="btn light-green">Sign In </div>
+								<Link onClick={this.handleSubmit} to={{ pathname:"/interestskills" }}>
+									<div className="btn light-green">Sign Up </div>
 								</Link>
 							</div>
 						</div>
@@ -119,12 +118,12 @@ class LandingPage extends Component {
 		}
 	}
 
-	purposeful_Login = () => {
+	purposeful_Login () {
 		return (
 			<div>
 				<div className="row fullrow">
 					<div className="col s4 push-s4">
-						<Link to={{ "pathname": "/home", "state": { "isLoggedIn": true } }}>
+						<Link to={{ "pathname": "/home" }}>
 							<h2 className="login-h2">Login</h2>
 						</Link>
 					</div>
@@ -147,6 +146,13 @@ class LandingPage extends Component {
 	}
 
 	render() {
+
+		if (this.state.redirToSkills) {
+			return (
+				<Redirect to="/interestskills" />
+			);
+		}
+
 		return (
 			<div className="valign LandingBack">
 				<div className="row fullrow">
@@ -168,4 +174,4 @@ class LandingPage extends Component {
 	}
 }
 
-export default withRouter(LandingPage);
+export default LandingPage;

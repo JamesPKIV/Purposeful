@@ -168,7 +168,6 @@ function add_user_skill(user_id, skill_name) {
 
 /* this function adds an array of skills to a user's profile 
 *
-* NOT CURRENTLY FUNCTIONAL - OUR API DOESNT YET SUPPORT AN ARRAY OF SKILLS
  */
 function add_user_skills(user_id, skill_name_arr) {
 
@@ -294,7 +293,7 @@ function checkStatus(response)  {
 		error.status = response.statusText;
 		return parseJSON(response)
 			.then((res) => {
-				error.body = res;
+				error.body = res.body;
 				console.log("CheckStatus Error Code ", response.status,": ", error.status); //
 				console.log(error.body); //
 				throw error;
