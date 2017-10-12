@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './SEProfilePage.css';
+import NavBar from '../NavBar/NavBar';
 import profile_pic from './profile-pic-default.jpg';
 import project_pic from './project-pic-default.jpg';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
@@ -465,9 +466,8 @@ class SEProfilePage extends Component {
 	displayDesktop(){
 		return(
 			<div>
-				<div className="row fullrow"> <p> </p> </div>
-				<div className="row fullrow">
-
+				<NavBar/>
+				<div className="row fullrow main-content">
 					<div className="col s4 m4 l4">
 						<img className="responsive-img circle" src={profile_pic} alt=""/>
 						<p className="profile-name"> Jane Doe </p>
@@ -542,8 +542,8 @@ class SEProfilePage extends Component {
 	displayMobile(){
 		return(
 			<div>
-				<div className="row fullrow"> <p> </p></div>
-				<div className="row fullrow">
+				<NavBar/>
+				<div className="row fullrow main-content">
 						<div className="col s5 m5 l5">
 							<img className="responsive-img circle" src={profile_pic} alt=""/>
 							<p className="profile-name"> Jane Doe </p>

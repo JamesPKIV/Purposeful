@@ -17,6 +17,7 @@ import DonateForm from '../DonateForm/DonateForm';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import StoriesPage from '../StoriesPage/StoriesPage';
 import CollabPage from '../CollabPage/CollabPage';
+import EditProfile from '../EditProfile/EditProfile';
 
 import Client from "../../Client";
 
@@ -212,7 +213,6 @@ footerDesktop(){
     }
   }
 
-
 	render() {
 		return (
 			<Router>
@@ -292,19 +292,38 @@ footerDesktop(){
 								path="/login" 
 								render={ () => <SignupPage /> } 
 							/>
-							
 							<Route 
 								path="/SEprofile" 
 								render={ () => <SEProfilePage /> } 
 							/>
-							
-              <Route path="/stories" render={()=> <StoriesPage/>} />
-              <Route path="/collabs" render={()=> <CollabPage/>} />
-
-              <Route path="/about" render={()=> <AboutPurposeful/>} />
-              <Route path="/team" render={()=> <OurTeam/>} />
-              <Route path="/donate" render={()=> <DonateForm/>} />
-              <Route path="/privacy" render={()=> <PrivacyPolicy/>} />
+              <Route 
+                path="/stories" 
+                render={ () => <StoriesPage /> } 
+              />
+              <Route 
+                path="/collabs" 
+                render={ () => <CollabPage /> }
+              />
+              <Route 
+                path="/editProfile" 
+                render={ () => <EditProfile /> } 
+              />
+              <Route 
+                path="/about" 
+                render={ () => <AboutPurposeful /> } 
+              />
+              <Route 
+                path="/team" 
+                render={ () => <OurTeam /> } 
+              />
+              <Route 
+                path="/donate" 
+                render={ () => <DonateForm /> } 
+              />
+              <Route 
+                path="/privacy" 
+                render={ () => <PrivacyPolicy /> } 
+              />
 					</main>
 					{this.footer()}
 				</div>
