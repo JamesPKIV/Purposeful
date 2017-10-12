@@ -112,7 +112,20 @@ router.post("/login", (req, res, next) => {
 	const entry_email = req.body.email;
 	const entry_pwd = req.body.pwd;
 	/* insert new entry into users table */
-	const query = db_tables.Users.findOne({where: {email: entry_email, p})
+	return db_tables.Users.findOne({
+			where: {
+				email: entry_email, 
+				password:entry_pwd,
+			}
+		})
+		.then(user => {
+			console.log("User logged in:", user );
+			res.json({message: "ok", data: user});
+		})
+		.catch(err => {
+			console.log("Error logging user in: ", err);
+			res.status(401).json({message: "Error logging in", Error: err.message });
+		});
 })
 
 module.exports = router;

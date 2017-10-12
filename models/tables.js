@@ -21,7 +21,6 @@ const User = db.define('users', {
 		    }
 		}
 	}
-  }
 );
 
 
