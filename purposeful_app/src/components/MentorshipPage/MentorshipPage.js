@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import ActivityFeed from "../ActivityFeed/ActivityFeed";
+import MentorFeed from "../MentorFeed/MentorFeed";
+import Search from 'react-icons/lib/fa/search';
 import NavBar from '../NavBar/NavBar';
 import './MentorshipPage.css';
 
@@ -8,49 +10,95 @@ class MentorshipPage extends Component {
 
 	constructor (props) {
 		super(props);
+
 		this.state = {
-			isLoggedIn : true
+			searchInput: "",
+			show: "main",
 		};
 	}
 
-	componentWillMount = () => {
-		var recieved_state = this.props.history.location.state;
+	componentDidMount() {
 
-		console.log("(Mentorship Page) componentDidMount state: ", recieved_state);
-		if (recieved_state !== null) {
-			this.setState( recieved_state );
-			console.log ("(Mentorship Page) state recieved. New state: ", this.state);
+		//make API calls to populate this page's data
+		this.props.fetchData();
+
+	}
+
+
+	handleSearchChange (event) {
+		this.setState({
+			searchInput: event.target.value,
+		});
+	}
+
+
+	handleSearchSubmit () {
+		if (this.state.searchInput !== "") {
+			this.props.handleSearchBySkill(this.state.searchInput)
+				.then ( () => {
+					this.setState({ 
+						show: "searchResults",
+					});
+				})
+				.catch ( () => {
+					this.setState({
+						show: "SearchError",
+					});
+				});
 		}
 
-
-		//TODO: change this later to maybe randomly select a skill?
-		//for now just grab the first skill the user selected
-		/*
-		Client.get_users_with_skill( recieved_state.chosen_interests[1] )
-			.then(users => {
-				this.setState({
-					mentors_list: users 
-				});
-			});
-			*/
 	}
 
 
 	render () {
+		
 		/* conditionally render form content depending on whether youve signed up or not */
-		return (
-			<div>
-				<NavBar /> 
-				<div className="mentorship-content">
-					{
-						this.state.isLoggedIn ?
-						<p className="logged-in-p">User Name: {this.state.user_name}, UserID: {this.state.user_id} </p>
-						:
-						<p> you are NOT logged in, and this is your mentorship page. </p>
-					}
-				</div>
-			</div>
-        );
+		switch(this.state.show) {
+
+		case "main":
+			return(
+				<article className="mentorship-content">
+					<div> 
+						<h4> Find someone who knows about: </h4>
+						<input  className="searchInput" 
+							placeholder="Something, Anything!"
+							value={this.state.searchInput}
+							onChange={this.handleSearchChange} 
+						/>		
+						<button onClick={this.handleSearchSubmit}>
+							<Search /> {/*search icon */}
+						</button>
+					</div>
+
+					<ActivityFeed linkTo="" title="My Mentorship Activity"/> 
+					<ActivityFeed linkTo="" title="My Mentees" feedItems={this.props.mentees} /> 
+					<ActivityFeed linkTo="" title="My Mentors" feedItems={this.props.mentors} /> 
+				</article>
+			);
+
+
+		case "searchResults":
+			return (
+				<article >
+					<MentorFeed 
+						title="Search Results"
+						feedItems={this.props.SkillUsersMap[this.state.searchInput]} 
+					/>
+				</article>
+			);
+
+
+		case "searchError": 
+			return (
+				<article >
+					<p> 
+						There was an error retrieving your search results.  
+						<br/> 
+						Please try again later.
+					</p>
+				</article>
+			);
+		}
 	}
 }
 

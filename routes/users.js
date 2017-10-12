@@ -23,9 +23,14 @@ router.post('/new', function(req, res, next) {
 	console.log("serving /api/users/new request: ", new_entry);
 	const entry_name = req.body.name;
 	const entry_email = req.body.email;
+	const entry_pwd = req.body.password;
 
 	/* insert new entry into users table */
-	const query = db_tables.Users.create({name: entry_name, email: entry_email})
+	const query = db_tables.Users.create({
+			name: entry_name, 
+			email: entry_email, 
+			password:entry_pwd
+		})
 	  	.then( query_data => { 
 			console.log("USERS.JS: New User inserted:", new_entry);
 			return query_data;
@@ -98,5 +103,29 @@ router.get('/user/:uid', function(req, res, next) {
 	}
 })
 
+
+
+
+router.post("/login", (req, res, next) => {
+	const new_entry = req.body;
+	console.log("serving /api/users/new request: ", new_entry);
+	const entry_email = req.body.email;
+	const entry_pwd = req.body.pwd;
+	/* insert new entry into users table */
+	return db_tables.Users.findOne({
+			where: {
+				email: entry_email, 
+				password:entry_pwd,
+			}
+		})
+		.then(user => {
+			console.log("User logged in:", user );
+			res.json({message: "ok", data: user});
+		})
+		.catch(err => {
+			console.log("Error logging user in: ", err);
+			res.status(401).json({message: "Error logging in", Error: err.message });
+		});
+})
 
 module.exports = router;

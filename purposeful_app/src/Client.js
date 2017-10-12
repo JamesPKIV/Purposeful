@@ -36,7 +36,7 @@ function add_new_user(name, email, pwd) {
 		body: JSON.stringify({
 			name: name,
 			email: email,
-			pwd: pwd,
+			password: pwd,
 		})
 	})
 	.then(checkStatus)
@@ -168,7 +168,6 @@ function add_user_skill(user_id, skill_name) {
 
 /* this function adds an array of skills to a user's profile 
 *
-* NOT CURRENTLY FUNCTIONAL - OUR API DOESNT YET SUPPORT AN ARRAY OF SKILLS
  */
 function add_user_skills(user_id, skill_name_arr) {
 
@@ -253,11 +252,34 @@ function get_users_with_skill(skill_name) {
 /* STUB: simply adds all interests as skills for now until interests are implemented
 */
 function add_skills_and_interests(user_id, skills, interests) {
-	return add_user_skills(user_id, skills.concat(interests) );
+	var si_list = skills.concat(interests);
+
+	return add_user_skills(user_id, Array.from(new Set(si_list)));
 }
 
 
+function get_mentorship_dash(mentee_uid) {
+	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called with mentee_uid: ", mentee_uid);
 
+	return fetch(prepend_path + "api/mentorship/dash/" + mentee_uid, {
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+		},
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(result => {
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Response OK with new user data obj: ", result.data);
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) responded with status OK"); 
+		return result.data;
+	})
+	.catch(error => {  
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Request Error:", error);
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Request Failed with Errors.");
+		throw error.body;  
+	});
+}
 
 
 
@@ -273,7 +295,7 @@ function checkStatus(response)  {
 		error.status = response.statusText;
 		return parseJSON(response)
 			.then((res) => {
-				error.body = res;
+				error.body = res.body;
 				console.log("CheckStatus Error Code ", response.status,": ", error.status); //
 				console.log(error.body); //
 				throw error;
@@ -294,5 +316,5 @@ function parseJSON(response) {
 
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
 	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
-	add_skills_and_interests};
+	add_skills_and_interests, get_mentorship_dash };
 
