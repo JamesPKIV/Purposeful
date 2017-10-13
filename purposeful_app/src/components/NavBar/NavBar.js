@@ -10,8 +10,8 @@ class NavBar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
-      activeNav: true, 
+    this.state = {
+      activeNav: true,
       searchInput: "",
      };
     this.navBarDesktop = this.navBarDesktop.bind(this);
@@ -51,7 +51,7 @@ class NavBar extends Component {
       alert(e.target.value +" the value of search input \nsend request to server" );
       // Make client.js call to search the database with value input
     }
-  } 
+  }
 
   handleNav = (val) => {
     console.log(val + " was selected");
@@ -70,16 +70,16 @@ class NavBar extends Component {
       <nav className="NavBar">
         <ul>
           <li><button onClick={() => this.handleNav("home")} className="navEntry"><img width="50" height="50" src={logo} className="plogo" alt="Purposeful"></img></button></li>
-          <li><button onClick={() => this.handleNav("collaborations")}  className="hvr-sweep-to-top navEntry">Collaborations </button></li>
+          <li><button onClick={() => this.handleNav("collabs")}  className="hvr-sweep-to-top navEntry">Collaborations </button></li>
           <li><button onClick={() => this.handleNav("/mentorship")}  className="hvr-sweep-to-top navEntry">Mentorship </button></li>
           <li><button onClick={() => this.handleNav("stories")}  className="hvr-sweep-to-top navEntry">Stories </button></li>
           { /* Right side of navbar */}
           <li className="navRight"><DropDown/></li>
           <li className="navRight"><button onClick={() => this.handleNav("/profile")} className="navEntry" >Profile </button></li>
-          <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />  
-            <input  className="searchInput" 
+          <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />
+            <input  className="searchInput"
                     placeholder="Search"
-                    onChange={this.handleUpdate} 
+                    onChange={this.handleUpdate}
                     onKeyPress={this.handleSearch}
                 />
             </div>
@@ -119,7 +119,7 @@ class NavBar extends Component {
       );
     }
   }
-  
+
 
   render() {
     //console.log("CONSOLE LOG: " + window.location);
