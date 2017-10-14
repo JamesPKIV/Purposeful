@@ -3,7 +3,6 @@ import { Link, Route, Redirect, BrowserRouter as Router } from 'react-router-dom
 import Dimensions from 'react-dimensions';
 
 import './App.css';
-import NavBar from '../NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import MentorshipPage from '../MentorshipPage/MentorshipPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
@@ -219,11 +218,6 @@ footerDesktop(){
 				<div className="App">
 
 					<header className="head-content">
-						{/*
-							NOTE: to be congruent with materialize the nav bar would need to
-							be within the same container as the one that renders the pages.
-							<NavBar containerWidth={this.props.containerWidth}/>
-						*/}
 					</header>
 
 					<main className="valign-wrapper"> {/*used to be page-content*/}
@@ -286,7 +280,14 @@ footerDesktop(){
 							/>
 							<Route 
 								path="/profile" 
-								render={ () => <ProfilePage /> } 
+								render={ () => <ProfilePage 
+									userName={this.state.userName}
+									userId={this.state.userId}
+									fetchData={this.fetchHome}
+									isLoggedIn={this.state.isLoggedIn}
+									mentors={this.state.mentors}
+									mentees={this.state.mentees}
+								/> } 
 							/>
 							<Route
 								path="/login" 
