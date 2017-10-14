@@ -166,12 +166,11 @@ function add_user_skill(user_id, skill_name) {
 
 
 
-/* this function adds an array of skills to a user's profile 
-*
- */
-function add_user_skills(user_id, skill_name_arr) {
+/* this function adds an array of skills to a user's profile */
+function add_skills_and_interests(user_id, skills, interests) {
+	const si_list = skills.concat(interests);
+	const skill_name_arr = Array.from(new Set(si_list));
 
-	
 	console.log("(CLIENT.JS->ADD_USER_SKILLS) called!");
 	return fetch(prepend_path + "api/skills/add_skills", {
 		method: "POST",
@@ -248,14 +247,6 @@ function get_users_with_skill(skill_name) {
 	});
 }
 
-
-/* STUB: simply adds all interests as skills for now until interests are implemented
-*/
-function add_skills_and_interests(user_id, skills, interests) {
-	var si_list = skills.concat(interests);
-
-	return add_user_skills(user_id, Array.from(new Set(si_list)));
-}
 
 
 function get_mentorship_dash(mentee_uid) {

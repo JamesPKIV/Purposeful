@@ -31,18 +31,19 @@ class HomePage extends Component {
 		return (
 			<div id="home-content" className="row">
 				<NavBar />
+			
 				{
 					this.props.isLoggedIn ?
 					<p className="logged-in-p">User Name: {this.props.userName}, UserID: {this.props.userId} </p>
 					: <p className="logged-in-p"> you are NOT logged in, and this is your home page. </p>
 				}
 				<div className="activity-feeds col l10 push-l1">
-				{ 
+				{
 						this.state.isLoggedIn  &&
 						<MentorFeed title="Mentors you may like"
 							feedItems={this.props.mentors} 
 						/>
-					}
+				}
 					<ActivityFeed title="Activity in Your Network" linkTo="/mentorship" />
 					<ActivityFeed title="Mentees" linkTo="/mentorship" />
 					<ActivityFeed title="Collaborations" linkTo="/home" />
