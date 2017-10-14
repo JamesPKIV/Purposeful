@@ -4,9 +4,6 @@ import './HomePage.css';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
 import MentorFeed from "../MentorFeed/MentorFeed";
 import NavBar from '../NavBar/NavBar';
-import Client from "../../Client.js";
-
-
 
 class HomePage extends Component {
 
@@ -40,12 +37,12 @@ class HomePage extends Component {
 					: <p className="logged-in-p"> you are NOT logged in, and this is your home page. </p>
 				}
 				<div className="activity-feeds col l10 push-l1">
-				{ /*
+				{ 
 						this.state.isLoggedIn  &&
 						<MentorFeed title="Mentors you may like"
 							feedItems={this.props.mentors} 
 						/>
-					*/}
+					}
 					<ActivityFeed title="Activity in Your Network" linkTo="/mentorship" />
 					<ActivityFeed title="Mentees" linkTo="/mentorship" />
 					<ActivityFeed title="Collaborations" linkTo="/home" />

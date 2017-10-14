@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import './NavBar.css';
 import FaAlignJustify from 'react-icons/lib/fa/align-justify';
 import FaSearch from 'react-icons/lib/fa/search';
@@ -47,7 +47,7 @@ class NavBar extends Component {
 
   // make the api call to the database with the search value input
   handleSearch = (e) =>{
-    if(e.key == 'Enter'){
+    if(e.key === 'Enter'){
       alert(e.target.value +" the value of search input \nsend request to server" );
       // Make client.js call to search the database with value input
     }

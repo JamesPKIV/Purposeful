@@ -24,7 +24,7 @@ class SEProfilePage extends Component {
 		this.pull_stories = this.pull_stories.bind(this);
 		this.pull_collab = this.pull_collab.bind(this);
 		this.ask_mentee = this.ask_mentee.bind(this);
-		this.invite_collab - this.invite_collab.bind(this);
+		this.invite_collab = this.invite_collab.bind(this);
 		this.follow = this.follow.bind(this);
 		this.state = {
 			isLoggedIn : false,
@@ -90,7 +90,8 @@ class SEProfilePage extends Component {
 				});
 				this.setState({
 					inviteCollab: !this.state.inviteCollab
-				})
+				});
+				break;
 			default:
 				break;
 		}
