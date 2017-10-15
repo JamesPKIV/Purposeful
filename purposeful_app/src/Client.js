@@ -47,9 +47,39 @@ function add_new_user(name, email, pwd) {
 		return result.data;
 	})
 	.catch(error => {  
-		console.log("(CLIENT.JS->ADD_NEW_USER) Request Error:", error);
+		console.log("(CLIENT.JS->ADD_NEW_USER) Request Error:", error.message);
 		console.log("(CLIENT.JS->ADD_NEW_USER) Request Failed with Errors.");
-		throw error.body;
+		throw error;
+
+	});
+}
+
+
+
+function login(email, pwd) {
+
+	return fetch(prepend_path + "api/users/login", {
+		method: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			email: email,
+			password: pwd,
+		})
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(result => {
+		console.log("(CLIENT.JS->LOGIN) Response OK with new user data obj: ", result.data);
+		console.log("(CLIENT.JS->LOGIN) responded with status OK"); 
+		return result.data;
+	})
+	.catch(error => {  
+		console.log("(CLIENT.JS->LOGIN) Request Error:", error);
+		console.log("(CLIENT.JS->LOGIN) Request Failed with Errors.");
+		throw error;
 
 	});
 }
@@ -260,11 +290,9 @@ function add_skills_and_interests(user_id, skills, interests) {
 
 function get_mentorship_dash(mentee_uid) {
 	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called with mentee_uid: ", mentee_uid);
-
 	return fetch(prepend_path + "api/mentorship/dash/" + mentee_uid, {
 		headers: {
 			"Accept": "application/json",
-			"Content-Type": "application/json",
 		},
 	})
 	.then(checkStatus)
@@ -283,6 +311,34 @@ function get_mentorship_dash(mentee_uid) {
 
 
 
+function update_profile(user_id, past_str, present_str, future_str) {
+	return fetch("api/users/profile", {
+		method: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			user_id: user_id,
+			past: past_str,
+			present: present_str,
+			future: future_str,
+		}),
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(user_data => {
+		console.log("(CLIENT.JS->UPDATE_PROFILE) Recieved user data obj: ", user_data.data);
+		console.log("(CLIENT.JS->UPDATE_PROFILE) Response recieved without error.");
+		return user_data.data;
+	})
+	.catch(error => {  
+		console.log("(CLIENT.JS->UPDATE_PROFILE) Error: ", error);
+		console.log("(CLIENT.JS->UPDATE_PROFILE) Request failed with errors. ");
+		throw error.body;  
+	});
+
+}
 
 /** this middleware function is a adapted from: 
 https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
@@ -295,9 +351,9 @@ function checkStatus(response)  {
 		error.status = response.statusText;
 		return parseJSON(response)
 			.then((res) => {
-				error.body = res.body;
+				error.message = res.message;
 				console.log("CheckStatus Error Code ", response.status,": ", error.status); //
-				console.log(error.body); //
+				console.log(res); //
 				throw error;
 			})
 			.catch(function(error) {
@@ -316,5 +372,7 @@ function parseJSON(response) {
 
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
 	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
-	add_skills_and_interests, get_mentorship_dash };
+	add_skills_and_interests, get_mentorship_dash, update_profile, 
+	login,	
+};
 

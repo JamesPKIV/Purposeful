@@ -41,7 +41,7 @@ router.post('/new', function(req, res, next) {
 		.catch( err => {
 	    	console.log("USERS.JS->/new): Error creating new user:", err.message );
 
-	    	if (err instanceof Sequelize.ValidationError) {
+	    	if (err instanceof Sequelize.ValidationError && err.errors) {
 	    		var err_msgs = [];
 	    		var message = "";
 	    		var each_err = "";
@@ -61,9 +61,9 @@ router.post('/new', function(req, res, next) {
 	    		}
 	    		if (VERBOSE) console.log ("err_msgs: ", err_msgs);
 
-				return res.status(400).json({message: "nok", reason: err_msgs.join(", ")});
+				return res.status(400).json({message: err_msgs.join(", ")});
 	    	}
-	    	return res.status(500).json({message: "nok", reason: err.message});
+	    	return res.status(500).json({message: err.message});
 	    });
 });
 
@@ -88,7 +88,7 @@ router.get('/user/:uid', function(req, res, next) {
 	else {
 		/* query users table */
 		return db_tables.Users.findById(uid)
-			.then((query_data) => {
+			.then(user => {
 				console.log("USERS.JS->/user/:uid) query data:", query_data);
 				return query_data;
 			})
@@ -105,12 +105,80 @@ router.get('/user/:uid', function(req, res, next) {
 
 
 
+router.post("/profile", function(req, res, next ) {
+	var update_attrs = {};
+	var user_id = req.body.user_id;
+
+	if (req.body.present) {
+		update_attrs["present"] = req.body.present;
+	}
+	if (req.body.past) {
+		update_attrs["past"] = req.body.past;
+	}
+	if (req.body.future) {
+		update_attrs["future"] = req.body.future;
+	}
+
+	db_tables.Users.findById(user_id)
+		.then( user => {
+			return user.update(update_attrs, {
+					fields: Object.keys(update_attrs),
+				})
+				.then(user => {
+					res.status(201).json({message:"ok", data:user})
+				})
+		})
+		.catch((err) => {
+				console.err("USERS.JS->/profile POST): Error updating user profile:", err.message );
+				res.status(400).send({message: err.message});
+				next(err);
+			});
+
+
+
+
+})
+
+
+
+router.get('/profile/:uid', function(req, res, next) {
+
+	if (VERBOSE) {
+		console.log("USERS.JS->/user/:uid) reached. req.params:", req.params);
+	}
+	var uid = req.params.uid;
+
+	/* check to ensure user id was provided */
+	if ( !uid) {
+		var err_msg = 'No user ID provided in request params: '+ req.params;
+		console.err("USERS.JS->/user/:uid): ", err_msg );
+		return res.status(400).send({message: err_msg});
+	}
+	else {
+		/* query users table */
+		return db_tables.Users.findById(uid)
+			.then(user => {
+				console.log("USERS.JS->/user/:uid) query data:", query_data);
+				return query_data;
+			})
+			.then((query_data) => {
+			  	return res.json({msg: 'ok', data:query_data});
+			})
+			.catch((err) => {
+				console.err("USERS.JS->/user/:uid): Error retrieving user by id:", err.message );
+				res.status(400).send({message: "Unable to retrieve user", "error": err.message});
+				next(err);
+			});
+	}
+})
+
+
 
 router.post("/login", (req, res, next) => {
 	const new_entry = req.body;
-	console.log("serving /api/users/new request: ", new_entry);
+	console.log("serving /api/users/login request: ", new_entry);
 	const entry_email = req.body.email;
-	const entry_pwd = req.body.pwd;
+	const entry_pwd = req.body.password;
 	/* insert new entry into users table */
 	return db_tables.Users.findOne({
 			where: {
@@ -119,12 +187,20 @@ router.post("/login", (req, res, next) => {
 			}
 		})
 		.then(user => {
-			console.log("User logged in:", user );
-			res.json({message: "ok", data: user});
+
+			if (user === null) {
+				return res.status(401).json({
+					message: "Log in failed: Email or password was not correct."
+				});
+			}
+			else {
+				console.log("User logged in:", user );
+				return res.json({message: "ok", data: user});
+			}
 		})
 		.catch(err => {
 			console.log("Error logging user in: ", err);
-			res.status(401).json({message: "Error logging in", Error: err.message });
+			res.status(500).json({message: "Log in failed", error: err.message });
 		});
 })
 
