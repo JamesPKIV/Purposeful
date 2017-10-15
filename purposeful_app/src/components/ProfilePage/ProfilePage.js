@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import './ProfilePage.css';
 import NavBar from '../NavBar/NavBar';
 
@@ -33,6 +33,9 @@ class ProfilePage extends Component {
 		this.pull_stories = this.pull_stories.bind(this);
 		this.pull_collab = this.pull_collab.bind(this);
 
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleSubmitChange = this.handleSubmitChange.bind(this);
+
 		this.state = {
 			userName: "",
 			userId: "",
@@ -47,6 +50,17 @@ class ProfilePage extends Component {
 		};
 	}
 
+
+	handleSubmitChange(to_toggle) {
+		this.props.handleSubmitChange();
+		this.toggle(to_toggle);
+	}
+
+	handleInputChange (updateFn, event) {
+		var input = event.target.value;
+		updateFn(input);
+  }
+
 	componentDidMount () {
 		this.props.fetchData();
 
@@ -54,11 +68,6 @@ class ProfilePage extends Component {
 
 	toggle(to_toggle){
 		switch(to_toggle){
-			case "isLoggedIn":
-				this.setState({
-					isLoggedIn: !this.state.isLoggedIn
-				});
-				break;
 			case "purposeDisplay":
 				this.setState({
 					purposeDisplay: !this.state.purposeDisplay
@@ -113,28 +122,33 @@ class ProfilePage extends Component {
 
 	loadLoggedOut(){
 		return(
-			<div>
-			<p> you are NOT logged in, and this is your profile page. Dummy button to log in:</p>
-			<button onClick={() => this.toggle("isLoggedIn")}> LOGIN </button>
-			</div>
+			<Redirect to="/landing" />
 		);
 	}
 
 	edit_or_save(to_toggle, button_or_text){
 		var toggle_state;
 		var text;
+		var value;
+		var onEdit;
 		switch(to_toggle){
 			case "purposeEdit":
 				toggle_state = this.state.purposeEdit;
 				text = "Write in this space current personal, inter-personal, professional, or organizational projects you are working on. Try to explain why these projects make you excited, and the ways they relate to your experience, skills, and interests.";
+				value = this.props.present;
+				onEdit = this.props.handleChangePresent;
 				break;
 			case "goalsEdit":
 				toggle_state = this.state.goalsEdit;
 				text = "Write in this space anything that you wish to do in the future. They can be ready-to-start ideas, half-baked ideas, long-term goals, personal goals, new-year resolutions, crazy dreams, or anything you wish you knew more about!";
+				value = this.props.future;
+				onEdit = this.props.handleChangeFuture;
 				break;
 			case "accomplishEdit":
 				toggle_state = this.state.accomplishEdit;
 				text = "Write in this space anything that you feel proud you have accomplished. It could include your academic achievements, personal challenges that you have defeated, places you have traveled to, hobbies you have learned, or anything else you can think about!";
+				value = this.props.past;
+				onEdit = this.props.handleChangePast;
 				break;
 			default:
 				break;
@@ -142,14 +156,20 @@ class ProfilePage extends Component {
 		if(toggle_state){
 			if(button_or_text === "button"){
 				return(
-					<button onClick={() => this.toggle(to_toggle)} className="btn-flat profile-text right">
+					<button onClick={() => this.handleSubmitChange(to_toggle) } className="btn-flat profile-text right">
 						Save <FaFloppyO className="profile-text"></FaFloppyO>
 					</button>
 				);
 			} else {
 				return(
 					<div className="input-field">
-						<input value={text} type="text" className="active"></input>
+						<textarea 
+							defaultValue={value} 
+							onChange={ ev => this.handleInputChange(onEdit, ev) }
+							editable="true"
+							rows={6}
+							className="active">
+						</textarea>
 					</div>
 				);
 			}
@@ -162,7 +182,7 @@ class ProfilePage extends Component {
 				);
 			} else {
 				return(
-					<p className="profile-text valign">{text}</p>
+					<p className="profile-text valign">{(value !== "") ? value : text}</p>
 				);
 			}
 		}
@@ -192,10 +212,16 @@ class ProfilePage extends Component {
 							</button>
 							{this.edit_or_save("purposeEdit", "button")}
 						</p>
+						{this.props.present ? 
+						<p className="profile-text truncate valign">
+							{this.props.present}
+						</p>
+						:
 						<p className="profile-text truncate valign">Write in this space current personal,
 						inter-personal, professional, or organizational projects you are working
 						on. Try to explain why these projects make you excited, and the ways
 						they relate to your experience, skills, and interests.</p>
+					}
 					</div>
 				);
 			}
@@ -225,10 +251,18 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("goalsEdit", "button")}
 					</p>
-					<p className="profile-text truncate valign">Write in this space anything that
-					you wish to do in the future. They can be ready-to-start
-					ideas, half-baked ideas, long-term goals, personal goals, new-year
-					resolutions, crazy dreams, or anything you wish you knew more about!</p>
+					{this.props.future ? 
+						<p className="profile-text truncate valign">
+							{this.props.future}
+						</p>
+						:
+						<p className="profile-text truncate valign">
+							Write in this space anything that
+							you wish to do in the future. They can be ready-to-start
+							ideas, half-baked ideas, long-term goals, personal goals, new-year
+							resolutions, crazy dreams, or anything you wish you knew more about!
+						</p>
+					}
 				</div>
 			);
 		}
@@ -258,11 +292,19 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("accomplishEdit", "button")}
 					</p>
-					<p className="profile-text truncate valign">Write in this space anything that
-					you feel proud you have accomplished. It could include your academic
-					achievements, personal challenges that you have defeated, places you
-					have traveled to, hobbies you have learned, or anything else you can
-					think about!</p>
+					{ this.props.past ? 
+						<p className="profile-text truncate valign">
+							{this.props.past}
+						</p>
+						:
+						<p className="profile-text truncate valign">
+						Write in this space anything that
+						you feel proud you have accomplished. It could include your academic
+						achievements, personal challenges that you have defeated, places you
+						have traveled to, hobbies you have learned, or anything else you can
+						think about!
+						</p>
+					}
 				</div>
 			);
 		}

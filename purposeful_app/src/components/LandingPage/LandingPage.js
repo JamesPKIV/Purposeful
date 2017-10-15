@@ -21,9 +21,11 @@ class LandingPage extends Component {
 
 		this.purposeful_Login = this.purposeful_Login.bind(this);
 		this.purposeful_Signup = this.purposeful_Signup.bind(this);
+		this.purposeful_Login = this.purposeful_Login.bind(this);
 		this.handleNameSet = this.handleNameSet.bind(this);
 		this.handleEmailSet = this.handleEmailSet.bind(this);
 		this.userPwdSet = this.userPwdSet.bind(this);
+
 		this.handleContinue = this.handleContinue.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -54,6 +56,29 @@ class LandingPage extends Component {
 			userPwd: ev.target.value,
 		});
 	}
+
+	handleLogin (ev) {
+		ev.preventDefault();
+		const pwd = this.state.userPwd;
+		this.setState({	userPwd: "" });
+
+		this.props.handleLogin(pwd)
+			.then((data) => {
+				console.log("(LandingPage) user logged in! new user data: ", data);
+				/* programmatically navigate to interests & skills page, with state object */
+				this.setState({
+					redirTo: "/home"
+				});
+			})
+			.catch(err => {
+				console.log("(LandingPage) user login failed with error: ", err);
+				alert(err.message);
+				this.setState({
+					userPwd: "",
+				});
+			});
+	}
+
 
 	handleContinue (ev) {
 		ev.preventDefault();
@@ -91,6 +116,11 @@ class LandingPage extends Component {
 		}
 	}
 
+	setShow(content_to_show) {
+		this.setState({
+			show: content_to_show
+		});
+	}
 
 	purposeful_Signup () {
 		if(!this.state.userLogin){
@@ -167,12 +197,35 @@ class LandingPage extends Component {
 
 	purposeful_Login () {
 		return (
+
 			<div className="col s6 social-column">
 				<div className="row fullrow">
 					<div className="col s4 div-btn" >
 					<button className="btn social-btn purpose-btn" onClick={this.handleUserLogin}> Login with Purposeful!</button>
 					</div>
-				</div>
+					<div className="row fullrow">
+						<div className="input-field col s4 push-s4">
+							<input 
+								placeholder="Password" 
+								onChange={this.userPwdSet} 
+								value={this.state.userPwd}
+								className="active validate" 
+								type="password" 
+								name="Password" 
+								required 
+							/>
+						</div><br />
+					</div>
+					<div className="row fullrow">
+						<div className="col s4 push-s4">
+							<button 
+								onClick={this.handleLogin} 
+								className="btn light-green"
+							> Log in 
+							</button>
+						</div>
+					</div>
+				</form>
 				<div className="row fullrow">
 					<div className="col s4 div-btn">
 						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
@@ -193,10 +246,9 @@ class LandingPage extends Component {
 	}
 
 	render() {
-
 		if ( this.state.redirTo === "skills") {
 			return (
-				<Redirect to="/interestskills" />
+				<Redirect to={this.state.redirTo} />
 			);
 		}else if(this.state.redirTo === "home"){
 			return(
@@ -204,13 +256,7 @@ class LandingPage extends Component {
 			);
 		}
 
-		return (
-			<div className="valign LandingBack">
-				<div className="row fullrow">
-					<div className="col s4 push-s4">
-						<img className="logo" src={logo} alt="purposeful logo here" />
-					</div>
-				</div>
+			</div>
 				<div className="row fullrow">
 					<h1>Welcome to Purposeful</h1>
 				</div>

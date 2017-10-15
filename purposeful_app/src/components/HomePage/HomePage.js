@@ -37,12 +37,13 @@ class HomePage extends Component {
 				{
 						this.state.isLoggedIn  &&
 						<MentorFeed title="Mentors you may like"
-							feedItems={this.props.mentors} 
+							feedItems={this.props.recommended} 
 						/>
 				}
-					<ActivityFeed title="Activity in Your Network" linkTo="/mentorship" />
-					<ActivityFeed title="Mentees" linkTo="/mentorship" />
-					<ActivityFeed title="Collaborations" linkTo="/home" />
+					<ActivityFeed title="Activity in Your Network" linkTo="/home" />
+					<MentorFeed title="Mentees" linkTo="/mentorship" feedItems={this.props.mentees}/>
+					<ActivityFeed title="Collaborations" linkTo="/collaborations" />
+
 				</div>
 			</div>
 		);
