@@ -34,8 +34,8 @@ class ProfilePage extends Component {
 		this.pull_collab = this.pull_collab.bind(this);
 
 		this.state = {
-			user_name: "",
-			user_id: "",
+			userName: "",
+			userId: "",
 			isLoggedin : false,
 			purposeDisplay : false,
 			goalsDisplay : false,
@@ -48,13 +48,8 @@ class ProfilePage extends Component {
 	}
 
 	componentDidMount () {
-		var recieved_state = this.props.history.location.state;
+		this.props.fetchData();
 
-		console.log("(Profile.JS) componentDidMount state: ", recieved_state);
-		if (recieved_state !== null) {
-			this.setState( recieved_state );
-			console.log ("Profile.js) state recieved. New state: ", this.state);
-		};
 	}
 
 	toggle(to_toggle){
@@ -463,7 +458,7 @@ class ProfilePage extends Component {
 					<div className="col s4">
 						<div className="row">
 							<img className="responsive-img circle" src={profile_pic} alt=""/>
-							<p className="profile-name"> {this.state.user_name} </p>
+							<p className="profile-name"> {this.props.userName} </p>
 						</div>
 						{this.change_picture()}
 						<div className="row">
@@ -689,7 +684,7 @@ class ProfilePage extends Component {
 		return (
 			<div>
 				<NavBar />
-				{this.state.isLoggedIn ?
+				{this.props.isLoggedIn ?
 				this.loadLoggedIn() :/* desktop version */
 				this.loadLoggedOut() /*mobile version */}
 			</div>

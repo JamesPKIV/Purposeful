@@ -18,11 +18,8 @@ class HomePage extends Component {
 
 
 	componentDidMount () {
-
 		// TODO: retrieve the data to be displayed - mentors, mentees, 
 		this.props.fetchData();
-
-
 	}
 
 	render = () => {
@@ -31,7 +28,6 @@ class HomePage extends Component {
 		return (
 			<div id="home-content" className="row">
 				<NavBar />
-			
 				{
 					this.props.isLoggedIn ?
 					<p className="logged-in-p">User Name: {this.props.userName}, UserID: {this.props.userId} </p>

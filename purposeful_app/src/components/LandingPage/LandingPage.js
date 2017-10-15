@@ -14,22 +14,35 @@ class LandingPage extends Component {
 			inputInfo: false,
 			nameSet: false,
 			userPwd: "",
-			redirToSkills: false,
+			redirTo: false,
+			userLogin: false,
 		};
-		this.handleContinue = this.handleContinue.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleUserLogin = this.handleUserLogin.bind(this);
+
+		this.purposeful_Login = this.purposeful_Login.bind(this);
 		this.purposeful_Signup = this.purposeful_Signup.bind(this);
 		this.handleNameSet = this.handleNameSet.bind(this);
 		this.handleEmailSet = this.handleEmailSet.bind(this);
 		this.userPwdSet = this.userPwdSet.bind(this);
+		this.handleContinue = this.handleContinue.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 
+	// User logging in helper methods
+	handleUserLogin (ev) { 
+		this.setState({
+			userLogin: !this.state.userLogin
+		});
+		console.log('user is logging in with his/her account');
+	}
+
+
+	// User signing up helper methods
 	handleNameSet (ev) {
 		var name = ev.target.value;
 		this.props.handleNameSet(name);
 	}
-
 
 	handleEmailSet (ev) {
 		var name = ev.target.value;
@@ -50,63 +63,99 @@ class LandingPage extends Component {
 	}
 
 	handleSubmit(ev) {
-		ev.preventDefault();
-
-		const pwd = this.state.userPwd;
-		this.setState({	userPwd: "" });
-
-		this.props.handleCreateUser(pwd)
-			.then((data) => {
-				console.log("(LandingPage) user account created! new user data: ", data);
-				/* programmatically navigate to interests & skills page, with state object */
-				this.setState({
-					redirToSkills: true
-				});
-			})
-			.catch(err => {
-				console.log("(LandingPage) user account creation failed with error: ", err);
-				alert("Error creating new user account: " + err);
-			});
+		// If { // creates a new user }
+		// Else {// user is attempting to login }
+		if(!this.state.userLogin){
+			ev.preventDefault();
+			
+					const pwd = this.state.userPwd;
+					this.setState({	userPwd: "" });
+			
+					this.props.handleCreateUser(pwd)
+						.then((data) => {
+							console.log("(LandingPage) user account created! new user data: ", data);
+							/* programmatically navigate to interests & skills page, with state object */
+							this.setState({
+								redirTo: "skills"
+							});
+						})
+						.catch(err => {
+							console.log("(LandingPage) user account creation failed with error: ", err);
+							alert("Error creating new user account: " + err);
+						});
+		}else {
+			ev.preventDefault();
+			this.setState({	redirTo: "home"});	
+			// fetch user profile from database
+			console.log('user is trying to login');
+		}
 	}
 
 
 	purposeful_Signup () {
-		if (!this.state.nameSet) {
-			return (
-				<div>
-					<div className="row fullrow">
-						<form onSubmit={this.handleContinue}>
-							<div className="input-field col s4 push-s4">
-								<input
-									type="text"
-									placeholder="What is your name?"
-									value={this.props.userName}
-									onChange={this.handleNameSet}
-									name="fullName" />
-								<input className="btn light-green" type="submit" value="Continue " />
+		if(!this.state.userLogin){
+			if (!this.state.nameSet) {
+				return (
+					<div>
+						<h5> Sign up </h5>
+						<div className="col s6">
+							<form onSubmit={this.handleContinue}>
+								<div className="input-field col s12">
+									<input
+										type="text"
+										placeholder="What is your name?"
+										value={this.props.userName}
+										onChange={this.handleNameSet}
+										name="fullName" />
+									<input className="btn light-green" type="submit" value="Continue " />
+								</div>
+							</form>
+						</div>
+					</div>
+				);
+			} else if (this.state.nameSet) {
+				return (
+					<div className="col s6">
+						<form>
+							<div className="row fullrow">
+								<div className="input-field col s4">
+									<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+								</div>
+							</div>
+							<div className="row fullrow">
+								<div className="input-field col s4">
+									<input placeholder="Password" onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
+								</div><br />
+							</div>
+							<div className="row fullrow">
+								<div className="col s4">
+									<Link onClick={this.handleSubmit} to={{ pathname:"/interestskills" }}>
+										<div className="btn light-green">Sign Up </div>
+									</Link>
+								</div>
 							</div>
 						</form>
 					</div>
-				</div>
-			);
-		} else if (this.state.nameSet) {
+				);
+			}
+		}else{
 			return (
-				<div>
+				<div className="col s6">
 					<form>
 						<div className="row fullrow">
-							<div className="input-field col s4 push-s4">
+							<div className="input-field col s4">
 								<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
 						<div className="row fullrow">
-							<div className="input-field col s4 push-s4">
+							<div className="input-field col s4">
 								<input placeholder="Password" onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
 							</div><br />
 						</div>
 						<div className="row fullrow">
-							<div className="col s4 push-s4">
-								<Link onClick={this.handleSubmit} to={{ pathname:"/interestskills" }}>
-									<div className="btn light-green">Sign Up </div>
+							<div className="col s4">
+								<Link onClick={this.handleSubmit} to={{ pathname:"/home" }}>
+									<div className="btn light-green">Login </div>
 								</Link>
 							</div>
 						</div>
@@ -118,25 +167,25 @@ class LandingPage extends Component {
 
 	purposeful_Login () {
 		return (
-			<div>
+			<div className="col s6 social-column">
 				<div className="row fullrow">
-					<div className="col s4 push-s4">
-						<Link to={{ "pathname": "/home" }}>
-							<h2 className="login-h2">Login</h2>
-						</Link>
+					<div className="col s4 div-btn" >
+					<button className="btn social-btn purpose-btn" onClick={this.handleUserLogin}> Login with Purposeful!</button>
 					</div>
 				</div>
 				<div className="row fullrow">
-					<div className="col s8 push-s5">
-						<div className="col s1">
-							<a href="https://facebook.com"> <FaFacebook className="facebook-icon" /></a>
-						</div>
-						<div className="col s1" >
-							<a href="https://google.com"> <FaGoogle className="google-icon" /></a>
-						</div>
-						<div className="col s1" >
-							<a href="https://linkedin.com"> <FaLinkedin className="linkedin-icon" /></a>
-						</div>
+					<div className="col s4 div-btn">
+						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
+					</div>
+				</div>
+				<div className="row fullrow">
+					<div className="col s4 div-btn" >
+					<button className="btn social-btn google-btn"> Continue with Google&nbsp;&nbsp;&nbsp;&nbsp;<FaGoogle className="s-icon" /></button>
+					</div>
+				</div>
+				<div className="row fullrow">
+					<div className="col s4 div-btn" >
+					<button className="btn social-btn link-btn"> Continue with Linkedin&nbsp;&nbsp;&nbsp;<FaLinkedin className="s-icon" /></button>
 					</div>
 				</div>
 			</div>
@@ -145,9 +194,13 @@ class LandingPage extends Component {
 
 	render() {
 
-		if (this.state.redirToSkills) {
+		if ( this.state.redirTo === "skills") {
 			return (
 				<Redirect to="/interestskills" />
+			);
+		}else if(this.state.redirTo === "home"){
+			return(
+				<Redirect to="/home" />
 			);
 		}
 
@@ -161,11 +214,11 @@ class LandingPage extends Component {
 				<div className="row fullrow">
 					<h1>Welcome to Purposeful</h1>
 				</div>
-				<div className="row fullrow">
-					{this.purposeful_Signup()}
-				</div>
-				<div className="row fullrow">
-					{this.purposeful_Login()}
+				<div className="container">
+					<div className="row">
+					    {this.purposeful_Login()}
+						{this.purposeful_Signup()}
+					</div>
 				</div>
 			</div>
 		);
