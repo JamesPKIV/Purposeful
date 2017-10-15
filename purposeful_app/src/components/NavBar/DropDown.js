@@ -17,7 +17,7 @@ class DropDown extends Component{
         this.setState({
             toggle: !this.state.toggle
         });
-        // need to create a dropdown bar in React 
+        // need to create a dropdown bar in React
       }
 
     render(){
@@ -33,9 +33,9 @@ class DropDown extends Component{
                     </div>
                     <div className="div-dropdown">
                         <ul className="ul-dropdown">
-                            <li className="li-dropdown"><NavLink to='../profile' className="li-navs" >Donate</NavLink> </li>
-                            <li className="li-dropdown"><NavLink to='../profile' className="li-navs">Settings</NavLink></li>
-                            <li className="li-dropdown"><NavLink to='../profile' className="li-navs">Help</NavLink></li>
+                            <li className="li-dropdown"><NavLink to='/donate' className="li-navs" >Donate</NavLink> </li>
+                            <li className="li-dropdown"><NavLink to='/settings' className="li-navs">Settings</NavLink></li>
+                            <li className="li-dropdown"><NavLink to='/help' className="li-navs">Help</NavLink></li>
                             <li className="li-dropdown"><NavLink to='../profile' className="li-navs">Logout</NavLink></li>
                         </ul>
                     </div>

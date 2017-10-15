@@ -39,7 +39,7 @@ class LandingPage extends Component {
 		var name = ev.target.value;
 		this.props.handleEmailSet(name);
 	}
-	
+
 	userPwdSet (ev) {
 		this.setState({
 			userPwd: ev.target.value,
@@ -87,7 +87,7 @@ class LandingPage extends Component {
 				console.log("(LandingPage) user account created! new user data: ", data);
 				/* programmatically navigate to interests & skills page, with state object */
 				this.setState({
-					redirTo: "/skillsinterests"
+					redirTo: "/interestSkills"
 				});
 			})
 			.catch(err => {
@@ -130,36 +130,36 @@ class LandingPage extends Component {
 					<form>
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
-								<input 
-									placeholder="Email" 
+								<input
+									placeholder="Email"
 									value={this.props.userEmail}
-									onChange={this.handleEmailSet} 
-									type="text" 
-									name="Email" 
-									className="active validate" 
-									required 
+									onChange={this.handleEmailSet}
+									type="text"
+									name="Email"
+									className="active validate"
+									required
 								/>
 							</div>
 						</div>
 						<div className="row fullrow">
 							<div className="input-field col s4 push-s4">
-								<input 
-									placeholder="Password" 
+								<input
+									placeholder="Password"
 									value={this.state.userPwd}
-									onChange={this.userPwdSet} 
-									className="active validate" 
-									type="password" 
-									name="Password" 
-									required 
+									onChange={this.userPwdSet}
+									className="active validate"
+									type="password"
+									name="Password"
+									required
 								/>
 							</div><br />
 						</div>
 						<div className="row fullrow">
 							<div className="col s4 push-s4">
-								<button 
-									onClick={this.handleSubmit} 
+								<button
+									onClick={this.handleSubmit}
 									className="btn light-green"
-								> Sign Up 
+								> Sign Up
 								</button>
 							</div>
 						</div>
@@ -175,36 +175,36 @@ class LandingPage extends Component {
 				<form>
 					<div className="row fullrow">
 						<div className="input-field col s4 push-s4">
-							<input 
-								placeholder="Email" 
-								onChange={this.handleEmailSet} 
+							<input
+								placeholder="Email"
+								onChange={this.handleEmailSet}
 								value={this.props.userEmail}
-								type="text" 
-								name="Email" 
-								className="active validate" 
-								required 
+								type="text"
+								name="Email"
+								className="active validate"
+								required
 							/>
 						</div>
 					</div>
 					<div className="row fullrow">
 						<div className="input-field col s4 push-s4">
-							<input 
-								placeholder="Password" 
-								onChange={this.userPwdSet} 
+							<input
+								placeholder="Password"
+								onChange={this.userPwdSet}
 								value={this.state.userPwd}
-								className="active validate" 
-								type="password" 
-								name="Password" 
-								required 
+								className="active validate"
+								type="password"
+								name="Password"
+								required
 							/>
 						</div><br />
 					</div>
 					<div className="row fullrow">
 						<div className="col s4 push-s4">
-							<button 
-								onClick={this.handleLogin} 
+							<button
+								onClick={this.handleLogin}
 								className="btn light-green"
-							> Log in 
+							> Log in
 							</button>
 						</div>
 					</div>
@@ -235,7 +235,7 @@ class LandingPage extends Component {
 		}
 
 		switch (this.state.show) {
-			case "signup": 
+			case "signup":
 				return (
 					<div className="valign LandingBack">
 						<div className="row fullrow">
@@ -251,18 +251,18 @@ class LandingPage extends Component {
 						</div>
 						<div className="row fullrow">
 							<h5 className="col s4 push-s4"> Or </h5>
-							
+
 						</div>
 						<div className="row fullrow">
-							<button 
+							<button
 								className="btn light-green"
-								onClick={() => this.setShow("login")} 
+								onClick={() => this.setShow("login")}
 							> Login
 							</button>
 						</div>
 					</div>
 				);
-				case "login": 
+				case "login":
 				return (
 					<div className="valign LandingBack">
 						<div className="row fullrow">
@@ -280,9 +280,9 @@ class LandingPage extends Component {
 							<h5 className="col s4 push-s4"> Or </h5>
 						</div>
 						<div className="row fullrow">
-							<button 
+							<button
 								className="btn light-green"
-								onClick={() => this.setShow("signup")} 
+								onClick={() => this.setShow("signup")}
 							>Sign up
 							</button>
 						</div>
@@ -290,7 +290,7 @@ class LandingPage extends Component {
 				);
 
 		}
-		
+
 	}
 }
 

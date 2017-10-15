@@ -49,7 +49,7 @@ class EditProfile extends Component {
 			return_code =
 					<span>
 						{return_code}
-						<div className="col s3 m3 l3 chip">
+						<div className="col s3 m3 l3 chip light-green lighten-4">
 							{array[i]}<i id={array[i]} onClick={boundClick} className="close material-icons">close</i>
 						</div>
 					</span>
@@ -70,10 +70,43 @@ class EditProfile extends Component {
 		if(index > -1){
 			array.splice(index, 1);
 		}
-
-		console.log(this.state.interests);
-		console.log(this.state.skills);
+		if(which_array === "interests"){
+			this.setState({
+				interests: array
+			});
+		} else {
+			this.setState({
+				skills: array
+			});
+		}
 	}
+
+	add_skill_or_interest(new_tag, skill_bool){
+		var array = [];
+		if(skill_bool){
+			array = this.state.skills;
+			array.push(new_tag);
+			this.setState({
+				skills: array
+			});
+		} else {
+			array = this.state.interests;
+			array.push(new_tag);
+			this.setState({
+				interests: array
+			});
+		}
+	}
+
+	handleSubmit(new_categ){
+		this.state.categories.push(new_categ);
+		var new_array = this.state.categories;
+		this.setState({
+		  categories: new_array
+		});
+	}
+
+
 
   Desktop(){
     return(
@@ -129,13 +162,35 @@ class EditProfile extends Component {
 					<div className="row">
 						<h6 className="col s1 m1 l1 push-l2">Skills:</h6>
 						<div className="col s8 m8 l8 push-l2">
-							{this.pull("skills")}
+							<div className="row">
+								{this.pull("skills")}
+							</div>
+							<div className="row">
+								<div className="input-field col s9 m9 l9">
+									<input id="new_skill" type="text"></input>
+									<label className="active" for="new_skill">Insert a new skill</label>
+								</div>
+								<div className="col s2 m2 l2">
+									<div onClick={() => this.add_skill_or_interest(document.getElementById("new_skill").value, true)} className="btn light-green">Add</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className="row">
 						<h6 className="col s1 m1 l1 push-l2">Interests:</h6>
 						<div className="col s8 m8 l8 push-l2">
-							{this.pull("interests")}
+							<div className="row">
+								{this.pull("interests")}
+							</div>
+							<div className="row">
+								<div className="input-field col s9 m9 l9">
+									<input id="new_interest" type="text"></input>
+									<label className="active" for="new_interest">Insert a new interest</label>
+								</div>
+								<div className="col s2 m2 l2">
+									<div onClick={() => this.add_skill_or_interest(document.getElementById("new_interest").value, false)} className="btn light-green">Add</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className="row"> <p> </p> </div>

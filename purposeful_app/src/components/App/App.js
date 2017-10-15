@@ -17,6 +17,8 @@ import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import StoriesPage from '../StoriesPage/StoriesPage';
 import CollabPage from '../CollabPage/CollabPage';
 import EditProfile from '../EditProfile/EditProfile';
+import SettingsPage from '../SettingsPage/SettingsPage';
+import HelpPage from '../HelpPage/HelpPage';
 
 import Client from "../../Client";
 
@@ -64,7 +66,7 @@ class App extends Component {
 				this.setState({
 					userId: user_obj.id,
 					isLoggedIn: true,
-				}); 
+				});
 				return user_obj;
 			})
 			.catch(err => {
@@ -85,13 +87,13 @@ class App extends Component {
 					prof_present: user_obj.present,
 					prof_future: user_obj.future,
 					isLoggedIn: true,
-				}); 
+				});
 				return user_obj;
 			})
 			.catch(err => {
 				throw err;
 			});
-	} 
+	}
 
 
 	handleSubmitSI() {
@@ -152,7 +154,7 @@ class App extends Component {
 
 		var SU_Map = this.state.skillUsersMap;
 
-		//retrieve users with the given skill and update the react state  
+		//retrieve users with the given skill and update the react state
 		return Client.get_users_with_skill(skill_name)
 			.then(users  => {
 				SU_Map[skill_name] = users;
@@ -271,25 +273,25 @@ footerDesktop(){
 					</header>
 
 					<main className="valign-wrapper"> {/*used to be page-content*/}
-							<Route 
-								exact path="/" 
-								render={ () => <Redirect to="/landing" /> } 
+							<Route
+								exact path="/"
+								render={ () => <Redirect to="/landing" /> }
 							/>
-							<Route 
-								path="/landing" 
-								render={ () => <LandingPage 
+							<Route
+								path="/landing"
+								render={ () => <LandingPage
 									userName={this.state.userName}
 									userEmail={this.state.userEmail}
-									handleCreateUser={this.handleCreateUser} 
+									handleCreateUser={this.handleCreateUser}
 									handleLogin={this.handleLogin}
 									handleNameSet={this.setStateAttr.bind(this,"userName") }
 									handleEmailSet={this.setStateAttr.bind(this, "userEmail") }
-								/>} 
+								/>}
 							/>
 
-							<Route 
-								path="/interestskills" 
-								render={ ()=> 
+							<Route
+								path="/interestskills"
+								render={ ()=>
 									<InterestSkills
 										userName={this.state.userName}
 										userEmail={this.state.userEmail}
@@ -298,14 +300,14 @@ footerDesktop(){
 										handleAddSkill={this.pushToStateAttrArr.bind(this, "skills") }
 										handleAddInterest={this.pushToStateAttrArr.bind(this, "interests") }
 										handleSubmit={this.handleSubmitSI}
-									/> 
-								} 
-							/> 
+									/>
+								}
+							/>
 
-							<Route 
-								path="/home" 
-								render={ () => 
-									<HomePage 
+							<Route
+								path="/home"
+								render={ () =>
+									<HomePage
 										userName={this.state.userName}
 										userId={this.state.userId}
 										fetchData={this.fetchHome}
@@ -313,24 +315,24 @@ footerDesktop(){
 										mentors={this.state.mentors}
 										mentees={this.state.mentees}
 										recommended={this.state.recommended}
-									/> 
-								}	
+									/>
+								}
 							/>
-							<Route 
+							<Route
 								path="/mentorship"
-								render={ () => 
-									<MentorshipPage 
+								render={ () =>
+									<MentorshipPage
 										fetchData={this.fetchMentorship}
 										handleSearchBySkill={this.searchBySkill}
 										mentors={this.state.mentors}
 										mentees={this.state.mentees}
 										recommended={this.state.recommended}
 										skillUsersMap={this.state.skillUsersMap}
-									/> 
+									/>
 								}
 							/>
-							<Route 
-								path="/profile" 
+							<Route
+								path="/profile"
 								render={ () => <ProfilePage
 										isLoggedIn={this.state.isLoggedIn}
 										userName={this.state.userName}
@@ -350,41 +352,49 @@ footerDesktop(){
 								  /> }
 							/>
 							<Route
-								path="/login" 
-								render={ () => <SignupPage /> } 
+								path="/login"
+								render={ () => <SignupPage /> }
 							/>
-							<Route 
-								path="/SEprofile" 
-								render={ () => <SEProfilePage /> } 
+							<Route
+								path="/SEprofile"
+								render={ () => <SEProfilePage /> }
 							/>
-              <Route 
-                path="/stories" 
-                render={ () => <StoriesPage /> } 
+              <Route
+                path="/stories"
+                render={ () => <StoriesPage /> }
               />
-              <Route 
-                path="/collabs" 
+              <Route
+                path="/collabs"
                 render={ () => <CollabPage /> }
               />
-              <Route 
-                path="/editProfile" 
-                render={ () => <EditProfile /> } 
+              <Route
+                path="/editProfile"
+                render={ () => <EditProfile /> }
               />
-              <Route 
-                path="/about" 
-                render={ () => <AboutPurposeful /> } 
+              <Route
+                path="/about"
+                render={ () => <AboutPurposeful /> }
               />
-              <Route 
-                path="/team" 
-                render={ () => <OurTeam /> } 
+              <Route
+                path="/team"
+                render={ () => <OurTeam /> }
               />
-              <Route 
-                path="/donate" 
-                render={ () => <DonateForm /> } 
+              <Route
+                path="/donate"
+                render={ () => <DonateForm /> }
               />
-              <Route 
-                path="/privacy" 
-                render={ () => <PrivacyPolicy /> } 
+              <Route
+                path="/privacy"
+                render={ () => <PrivacyPolicy /> }
               />
+							<Route
+								path="/settings"
+								render={ () => <SettingsPage /> }
+							/>
+							<Route
+								path="/help"
+								render={ () => <HelpPage /> }
+							/>
 					</main>
 					{this.footer()}
 				</div>
