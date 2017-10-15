@@ -21,3 +21,7 @@
   text-overflow: ellipsis;
   max-height: 12vh;
 }
+
+.main-content{
+  margin-top: 175px;
+}

@@ -10,6 +10,9 @@ const User = db.define('users', {
 		name: {type: Sequelize.STRING, allowNull: false}, 
 		email: {type: Sequelize.STRING, allowNull: false, unique: true},
 		password: {type: Sequelize.STRING, allowNull: false},
+		future: {type: Sequelize.TEXT},
+		present: {type: Sequelize.TEXT},
+		past: {type: Sequelize.TEXT},
 	},
 	{
 		//remove password field when returning from query

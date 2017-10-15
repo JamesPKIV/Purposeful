@@ -17,6 +17,7 @@ import DonateForm from '../DonateForm/DonateForm';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import StoriesPage from '../StoriesPage/StoriesPage';
 import CollabPage from '../CollabPage/CollabPage';
+import EditProfile from '../EditProfile/EditProfile';
 
 import Client from "../../Client";
 
@@ -27,7 +28,7 @@ class App extends Component {
 
 		this.state = {
 			isLoggedIn : false,
-			userName: "James",
+			userName: "",
 			userEmail: "",
 			userId: "",
 			skills: [],
@@ -36,12 +37,15 @@ class App extends Component {
 			mentees: [],
 			recommended: [],
 			skillUsersMap: {},
-
+			prof_past: "",
+			prof_present: "",
+			prof_future: "",
 		};
 
 		this.footer = this.footer.bind(this);
 		this.footerDesktop = this.footerDesktop.bind(this);
 		this.footerMobile = this.footerMobile.bind(this);
+		this.handleLogin = this.handleLogin.bind(this);
 		this.handleCreateUser = this.handleCreateUser.bind(this);
 		this.handleSubmitSI = this.handleSubmitSI.bind(this);
 		this.fetchHome = this.fetchHome.bind(this);
@@ -49,13 +53,13 @@ class App extends Component {
 		this.searchBySkill = this.searchBySkill.bind(this);
 		this.setStateAttr = this.setStateAttr.bind(this);
 		this.pushToStateAttrArr = this.pushToStateAttrArr.bind(this);
+		this.handleSubmitProfileChange = this.handleSubmitProfileChange.bind(this);
 	}
 
 
 	handleCreateUser (password) {
 		var name = this.state.userName;
 		var email = this.state.userEmail;
-
 		return Client.add_new_user(name, email, password)
 			.then(user_obj => {
 				this.setState({
@@ -68,6 +72,27 @@ class App extends Component {
 				throw err;
 			});
 	}
+
+
+	handleLogin(password) {
+		var email = this.state.userEmail;
+
+		return Client.login(email, password)
+			.then(user_obj => {
+				this.setState({
+					userId: user_obj.id,
+					userName: user_obj.name,
+					prof_past: user_obj.past,
+					prof_present: user_obj.present,
+					prof_future: user_obj.future,
+					isLoggedIn: true,
+				}); 
+				return user_obj;
+			})
+			.catch(err => {
+				throw err;
+			});
+	} 
 
 
 	handleSubmitSI() {
@@ -143,6 +168,32 @@ class App extends Component {
 	}
 
 
+
+	handleSubmitProfileChange () {
+		var past_str = this.state.prof_past;
+		var present_str = this.state.prof_present;
+		var future_str = this.state.prof_future;
+		var uid = this.state.userId;
+		return Client.update_profile(uid, past_str, present_str, future_str)
+			.then (profile_data => {
+				var past = profile_data["past"];
+				var present = profile_data["present"];
+				var future = profile_data["future"];
+
+				console.log("Profile Updated: ", profile_data);
+
+				this.setState({
+					prof_past: past,
+					prof_present: present,
+					prof_future: future,
+				});
+			})
+			.catch (err => {
+				throw err;
+			});
+	}
+
+
 	setStateAttr(key, value) {
 		this.setState({
 			[key]: value
@@ -212,7 +263,6 @@ footerDesktop(){
     }
   }
 
-
 	render() {
 		return (
 			<Router>
@@ -237,6 +287,7 @@ footerDesktop(){
 									userName={this.state.userName}
 									userEmail={this.state.userEmail}
 									handleCreateUser={this.handleCreateUser} 
+									handleLogin={this.handleLogin}
 									handleNameSet={this.setStateAttr.bind(this,"userName") }
 									handleEmailSet={this.setStateAttr.bind(this, "userEmail") }
 								/>} 
@@ -286,25 +337,54 @@ footerDesktop(){
 							/>
 							<Route 
 								path="/profile" 
-								render={ () => <ProfilePage /> } 
+								render={ () => <ProfilePage 
+										isLoggedIn={this.state.isLoggedIn}
+										userName={this.state.userName}
+										past={this.state.prof_past}
+										present={this.state.prof_present}
+										future={this.state.prof_future}
+										handleChangePast={this.setStateAttr.bind(this, "prof_past")}
+										handleChangePresent={this.setStateAttr.bind(this, "prof_present")}
+										handleChangeFuture={this.setStateAttr.bind(this, "prof_future")}
+										handleSubmitChange={this.handleSubmitProfileChange}
+									/> } 
 							/>
 							<Route
 								path="/login" 
 								render={ () => <SignupPage /> } 
 							/>
-							
 							<Route 
 								path="/SEprofile" 
 								render={ () => <SEProfilePage /> } 
 							/>
-							
-              <Route path="/stories" render={()=> <StoriesPage/>} />
-              <Route path="/collabs" render={()=> <CollabPage/>} />
-
-              <Route path="/about" render={()=> <AboutPurposeful/>} />
-              <Route path="/team" render={()=> <OurTeam/>} />
-              <Route path="/donate" render={()=> <DonateForm/>} />
-              <Route path="/privacy" render={()=> <PrivacyPolicy/>} />
+              <Route 
+                path="/stories" 
+                render={ () => <StoriesPage /> } 
+              />
+              <Route 
+                path="/collabs" 
+                render={ () => <CollabPage /> }
+              />
+              <Route 
+                path="/editProfile" 
+                render={ () => <EditProfile /> } 
+              />
+              <Route 
+                path="/about" 
+                render={ () => <AboutPurposeful /> } 
+              />
+              <Route 
+                path="/team" 
+                render={ () => <OurTeam /> } 
+              />
+              <Route 
+                path="/donate" 
+                render={ () => <DonateForm /> } 
+              />
+              <Route 
+                path="/privacy" 
+                render={ () => <PrivacyPolicy /> } 
+              />
 					</main>
 					{this.footer()}
 				</div>
