@@ -50,7 +50,7 @@ class LandingPage extends Component {
 		var name = ev.target.value;
 		this.props.handleEmailSet(name);
 	}
-	
+
 	userPwdSet (ev) {
 		this.setState({
 			userPwd: ev.target.value,
@@ -173,6 +173,7 @@ class LandingPage extends Component {
 				<div className="col s6">
 					<form>
 						<div className="row fullrow">
+
 							<div className="input-field col s4">
 								<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
@@ -227,6 +228,7 @@ class LandingPage extends Component {
 				<Redirect to="/home" />
 			);
 		}
+
 
 		return(
 			<div>

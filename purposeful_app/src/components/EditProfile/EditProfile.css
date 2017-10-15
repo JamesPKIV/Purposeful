@@ -3,6 +3,11 @@
 }
 
 .cancel_btn{
-  bottom: 75vh;
+  bottom: 73vh;
   right: 18vw;
+}
+
+.line {
+  color: #F9F9F9;
+  width: 65vw;
 }
