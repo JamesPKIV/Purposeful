@@ -25,27 +25,47 @@ h1 {
   color:black;
 }
 
-.facebook-icon{
-  color:#3B5998;
-  background-color: white;
-  width: 4vw;
-  height: auto;
+.div-btn{
+  margin-bottom: 20px;
 }
 
-.google-icon{
-  color:#d34836;
-  background-color: white;
-  width: 4vw;
-  height: auto;
+
+.social-btn{
+  height: 50px;
+  padding-bottom: 20px;
+  width: 60%;
 }
 
-.linkedin-icon{
-  color: #007bb6;
-  background-color: white;
-  width: 4vw;
-  height: auto;
+.purpose-btn{
+  background-color: #8ac34b;
 }
 
+.face-btn{
+  background-color:#3B5998;
+}
+.google-btn {
+  background-color: #d34836;
+}
+
+.link-btn{
+  background-color: #007bb6;
+}
+
+.s-icon{
+  color:white; 
+  width: 2vw;
+  height: 2vw;
+}
+
+input[type=text]{
+  font-size: 24px !important;
+  text-align: center;
+}
+
+input[type=password]{
+  font-size: 24px !important;
+  text-align: center;
+}
 
 .LandingBack {
     /*OPTIONS FOR BACKGROUND*/

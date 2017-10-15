@@ -37,8 +37,9 @@ class ProfilePage extends Component {
 		this.handleSubmitChange = this.handleSubmitChange.bind(this);
 
 		this.state = {
-			user_name: "",
-			user_id: "",
+			userName: "",
+			userId: "",
+			isLoggedin : false,
 			purposeDisplay : false,
 			goalsDisplay : false,
 			accomplishDisplay: false,
@@ -58,6 +59,11 @@ class ProfilePage extends Component {
 	handleInputChange (updateFn, event) {
 		var input = event.target.value;
 		updateFn(input);
+  }
+
+	componentDidMount () {
+		this.props.fetchData();
+
 	}
 
 	toggle(to_toggle){
