@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import './InterestSkills.css';
-import Client from "../../Client.js";
 import working from "../App/still_working.png";
 
 class InterestSkills extends Component {
