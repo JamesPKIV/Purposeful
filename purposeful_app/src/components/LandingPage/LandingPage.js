@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
 import { Link, Redirect } from "react-router-dom";
-import Client from '../../Client.js';
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
@@ -76,7 +75,6 @@ class LandingPage extends Component {
 			nameSet: !this.state.nameSet,
 		});
 	}
-
 
 	handleSubmit(ev) {
 		ev.preventDefault();

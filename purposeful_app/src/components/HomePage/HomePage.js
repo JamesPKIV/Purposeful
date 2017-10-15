@@ -4,9 +4,6 @@ import './HomePage.css';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
 import MentorFeed from "../MentorFeed/MentorFeed";
 import NavBar from '../NavBar/NavBar';
-import Client from "../../Client.js";
-
-
 
 class HomePage extends Component {
 

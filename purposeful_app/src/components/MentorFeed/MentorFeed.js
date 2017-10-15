@@ -8,9 +8,8 @@
 **/
 
 
-
-import React, { Component } from 'react';
-import { Collection, Card} from 'react-materialize';
+import React from 'react';
+import { Card } from 'react-materialize';
 import { Link } from 'react-router-dom';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
 

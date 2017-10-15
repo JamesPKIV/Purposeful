@@ -57,6 +57,8 @@ class MentorshipPage extends Component {
 
 		case "main":
 			return(
+				<div>
+				<NavBar /> 
 				<article className="mentorship-content">
 					<div> 
 						<h4> Find someone who knows about: </h4>
@@ -74,8 +76,8 @@ class MentorshipPage extends Component {
 					<ActivityFeed linkTo="" title="My Mentees" feedItems={this.props.mentees} /> 
 					<ActivityFeed linkTo="" title="My Mentors" feedItems={this.props.mentors} /> 
 				</article>
+				</div>
 			);
-
 
 		case "searchResults":
 			return (
@@ -88,6 +90,7 @@ class MentorshipPage extends Component {
 			);
 
 
+
 		case "searchError": 
 			return (
 				<article >
@@ -98,6 +101,9 @@ class MentorshipPage extends Component {
 					</p>
 				</article>
 			);
+		
+		default: 
+			// do nothing
 		}
 	}
 }

@@ -3,7 +3,6 @@ import { Link, Route, Redirect, BrowserRouter as Router } from 'react-router-dom
 import Dimensions from 'react-dimensions';
 
 import './App.css';
-import NavBar from '../NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import MentorshipPage from '../MentorshipPage/MentorshipPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
@@ -269,11 +268,6 @@ footerDesktop(){
 				<div className="App">
 
 					<header className="head-content">
-						{/*
-							NOTE: to be congruent with materialize the nav bar would need to
-							be within the same container as the one that renders the pages.
-							<NavBar containerWidth={this.props.containerWidth}/>
-						*/}
 					</header>
 
 					<main className="valign-wrapper"> {/*used to be page-content*/}
@@ -337,7 +331,7 @@ footerDesktop(){
 							/>
 							<Route 
 								path="/profile" 
-								render={ () => <ProfilePage 
+								render={ () => <ProfilePage
 										isLoggedIn={this.state.isLoggedIn}
 										userName={this.state.userName}
 										past={this.state.prof_past}
@@ -347,7 +341,13 @@ footerDesktop(){
 										handleChangePresent={this.setStateAttr.bind(this, "prof_present")}
 										handleChangeFuture={this.setStateAttr.bind(this, "prof_future")}
 										handleSubmitChange={this.handleSubmitProfileChange}
-									/> } 
+			              /* these were in the merge conflict so I am not sure if they
+                    are still needed:*/
+									  userId={this.state.userId}
+									  fetchData={this.fetchHome}
+									  mentors={this.state.mentors}
+									  mentees={this.state.mentees}
+								  /> }
 							/>
 							<Route
 								path="/login" 
