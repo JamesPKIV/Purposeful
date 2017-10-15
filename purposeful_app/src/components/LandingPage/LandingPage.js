@@ -197,35 +197,7 @@ class LandingPage extends Component {
 
 	purposeful_Login () {
 		return (
-
 			<div className="col s6 social-column">
-				<div className="row fullrow">
-					<div className="col s4 div-btn" >
-					<button className="btn social-btn purpose-btn" onClick={this.handleUserLogin}> Login with Purposeful!</button>
-					</div>
-					<div className="row fullrow">
-						<div className="input-field col s4 push-s4">
-							<input 
-								placeholder="Password" 
-								onChange={this.userPwdSet} 
-								value={this.state.userPwd}
-								className="active validate" 
-								type="password" 
-								name="Password" 
-								required 
-							/>
-						</div><br />
-					</div>
-					<div className="row fullrow">
-						<div className="col s4 push-s4">
-							<button 
-								onClick={this.handleLogin} 
-								className="btn light-green"
-							> Log in 
-							</button>
-						</div>
-					</div>
-				</form>
 				<div className="row fullrow">
 					<div className="col s4 div-btn">
 						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
@@ -248,7 +220,7 @@ class LandingPage extends Component {
 	render() {
 		if ( this.state.redirTo === "skills") {
 			return (
-				<Redirect to={this.state.redirTo} />
+				<Redirect to="/interestskills" />
 			);
 		}else if(this.state.redirTo === "home"){
 			return(
@@ -256,7 +228,8 @@ class LandingPage extends Component {
 			);
 		}
 
-			</div>
+		return(
+			<div>
 				<div className="row fullrow">
 					<h1>Welcome to Purposeful</h1>
 				</div>
