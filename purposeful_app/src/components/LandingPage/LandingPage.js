@@ -98,8 +98,7 @@ class LandingPage extends Component {
 				});
 		}
 	}
-
-
+	
 	setShow(content_to_show) {
 		this.setState({
 			show: content_to_show
