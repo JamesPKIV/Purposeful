@@ -18,11 +18,8 @@ class HomePage extends Component {
 
 
 	componentDidMount () {
-
 		// TODO: retrieve the data to be displayed - mentors, mentees,
 		this.props.fetchData();
-
-
 	}
 
 	render = () => {
@@ -46,6 +43,7 @@ class HomePage extends Component {
 					<ActivityFeed title="Activity in Your Network" linkTo="/home" />
 					<MentorFeed title="Mentees" linkTo="/mentorship" feedItems={this.props.mentees}/>
 					<ActivityFeed title="Collaborations" linkTo="/collaborations" />
+
 				</div>
 			</div>
 		);
