@@ -130,7 +130,6 @@ class App extends Component {
 			});
 	}
 
-
 	fetchMentorship () {
 		return Client.get_mentorship_dash()
 			.then (dash_data => {
@@ -147,7 +146,6 @@ class App extends Component {
 				});
 			});
 	}
-
 
 	searchBySkill (skill_name) {
 		//todo: validate input
@@ -167,8 +165,6 @@ class App extends Component {
 				throw err;
 			});
 	}
-
-
 
 	handleSubmitProfileChange () {
 		var past_str = this.state.prof_past;

@@ -65,33 +65,36 @@ class LandingPage extends Component {
 	}
 
 	handleSubmit(ev) {
-		// If { // creates a new user }
-		// Else {// user is attempting to login }
+		ev.preventDefault();
+		const pwd = this.state.userPwd;
+		this.setState({	userPwd: "" });
+
 		if(!this.state.userLogin){
-			ev.preventDefault();
-			
-					const pwd = this.state.userPwd;
-					this.setState({	userPwd: "" });
-			
-					this.props.handleCreateUser(pwd)
-						.then((data) => {
-							console.log("(LandingPage) user account created! new user data: ", data);
-							/* programmatically navigate to interests & skills page, with state object */
-							this.setState({
-								redirTo: "skills"
-							});
-						})
-						.catch(err => {
-							console.log("(LandingPage) user account creation failed with error: ", err);
-							alert("Error creating new user account: " + err);
-						});
-		}else {
-			ev.preventDefault();
-			this.setState({	redirTo: "home"});	
+			this.props.handleCreateUser(pwd)
+				.then((data) => {
+					console.log("(LandingPage) user account created! new user data: ", data);
+					/* programmatically navigate to interests & skills page, with state object */
+					this.setState({ redirTo: "skills" });
+				})
+				.catch(err => {
+					console.log("(LandingPage) user account creation failed with error: ", err);
+					alert("Error creating new user account: " + err);
+				});
+		} else {
 			// fetch user profile from database
-			console.log('user is trying to login');
+			alert("User is attempting to login, setup db");
+			this.props.handleLogin(pwd)
+				.then((data) => { 
+					console.log("(Landing Page) User has logged! User data is: ", data);
+					this.setState({	redirTo: "home" });	
+				})
+				.catch(err => {
+					console.log("(LandingPage) user account login failed with error: ", err);
+					alert("Error logging user into app: " + err);
+				});
 		}
 	}
+
 
 	setShow(content_to_show) {
 		this.setState({
