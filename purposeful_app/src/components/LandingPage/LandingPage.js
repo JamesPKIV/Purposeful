@@ -57,29 +57,6 @@ class LandingPage extends Component {
 		});
 	}
 
-	handleLogin (ev) {
-		ev.preventDefault();
-		const pwd = this.state.userPwd;
-		this.setState({	userPwd: "" });
-
-		this.props.handleLogin(pwd)
-			.then((data) => {
-				console.log("(LandingPage) user logged in! new user data: ", data);
-				/* programmatically navigate to interests & skills page, with state object */
-				this.setState({
-					redirTo: "/home"
-				});
-			})
-			.catch(err => {
-				console.log("(LandingPage) user login failed with error: ", err);
-				alert(err.message);
-				this.setState({
-					userPwd: "",
-				});
-			});
-	}
-
-
 	handleContinue (ev) {
 		ev.preventDefault();
 		this.setState({
@@ -173,7 +150,6 @@ class LandingPage extends Component {
 				<div className="col s6">
 					<form>
 						<div className="row fullrow">
-
 							<div className="input-field col s4">
 								<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
@@ -199,6 +175,11 @@ class LandingPage extends Component {
 	purposeful_Login () {
 		return (
 			<div className="col s6 social-column">
+				<div className="row fullrow">
+					<div className="col s4 div-btn">
+						<button className="btn social-btn purpose-btn" onClick={this.handleUserLogin}> Login to Purposeful</button>
+					</div>
+				</div>
 				<div className="row fullrow">
 					<div className="col s4 div-btn">
 						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
@@ -232,7 +213,8 @@ class LandingPage extends Component {
 
 		return(
 			<div>
-				<div className="row fullrow">
+				<div className="row fullrow ">
+					<img src={logo} />
 					<h1>Welcome to Purposeful</h1>
 				</div>
 				<div className="container">
