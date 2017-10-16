@@ -5,6 +5,8 @@ import NavBar from '../NavBar/NavBar';
 
 import profile_pic from '../SEProfilePage/profile-pic-default.jpg';
 import project_pic from '../SEProfilePage/project-pic-default.jpg';
+import ActivityFeed from '../ActivityFeed/ActivityFeed';
+
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
@@ -163,8 +165,8 @@ class ProfilePage extends Component {
 			} else {
 				return(
 					<div className="input-field">
-						<textarea 
-							defaultValue={value} 
+						<textarea
+							defaultValue={value}
 							onChange={ ev => this.handleInputChange(onEdit, ev) }
 							editable="true"
 							rows={6}
@@ -212,7 +214,7 @@ class ProfilePage extends Component {
 							</button>
 							{this.edit_or_save("purposeEdit", "button")}
 						</p>
-						{this.props.present ? 
+						{this.props.present ?
 						<p className="profile-text truncate valign">
 							{this.props.present}
 						</p>
@@ -251,7 +253,7 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("goalsEdit", "button")}
 					</p>
-					{this.props.future ? 
+					{this.props.future ?
 						<p className="profile-text truncate valign">
 							{this.props.future}
 						</p>
@@ -292,7 +294,7 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("accomplishEdit", "button")}
 					</p>
-					{ this.props.past ? 
+					{ this.props.past ?
 						<p className="profile-text truncate valign">
 							{this.props.past}
 						</p>
@@ -313,10 +315,11 @@ class ProfilePage extends Component {
 	pull_mentors(){
 		return(
 			<div className="row valign-wrapper">
+				<ActivityFeed linkTo="/SEProfile" />
 			{/*This will be the format used but profiles will be drawn
 				dynamically from database and horizontal scroll will only
 				happen if there are more than 5 mentors. If there are
-				less than 5 col size will adjust so they are not so tiny*/}
+				less than 5 col size will adjust so they are not so tiny
 				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Pancho</p>
@@ -341,7 +344,7 @@ class ProfilePage extends Component {
 					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Eve</p>
 					<p className="small-name">Moneypenny</p>
-				</div>
+				</div>*/}
 				<div className="col s2 m2 l2valign">
 					<button className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
@@ -354,10 +357,11 @@ class ProfilePage extends Component {
 	pull_mentees(){
 		return(
 			<div className="row valign-wrapper">
+				<ActivityFeed linkTo="/SEProfile" />
 			{/*This will be the format used but profiles will be drawn
 				dynamically from database and horizontal scroll will only
 				happen if there are more than 5 mentees. If there are
-				less than 5 col size will adjust so they are not so tiny*/}
+				less than 5 col size will adjust so they are not so tiny
 				<div className="col s2 m2 l2">
 					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Leonard</p>
@@ -382,7 +386,7 @@ class ProfilePage extends Component {
 					<img className="responsive-img circle" src={profile_pic} alt=""/>
 					<p className="small-name">Spud</p>
 					<p className="small-name">McKenzie</p>
-				</div>
+				</div>*/}
 				<div className="col s2 m2 l2 valign">
 					<button className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
@@ -565,12 +569,12 @@ class ProfilePage extends Component {
 									<div className="row valign-wrapper">
 										<p className="col s2 m2 l2 profile-titles valign">Stories</p>
 										<div className="col s4 m4 l4">
-											<Link to="/stories" className="btn waves-effect light-green">
+											<Link to="/managestories" className="btn waves-effect light-green">
 												Manage your stories  <FaPencil> </FaPencil>
 											</Link>
 										</div>
 										<div className="col s5 m5 l5">
-											<Link to="/stories" className="btn waves-effect light-green">
+											<Link to="/newstories" className="btn waves-effect light-green">
 												Write a new story or article!  <FaPencil> </FaPencil>
 											</Link>
 										</div>
