@@ -116,19 +116,19 @@ class EditProfile extends Component {
 					<h5 className="row">Edit Personal Information:</h5>
 					<div className="row">
 						<div className="input-field col s6 m6 l6 push-l3">
-							<input placeholder="GET NAME FROM DATABASE" id="first_name" type="text" className="validate"/>
+							<input placeholder="GET NAME FROM DATABASE" id="first_name" type="text" className="active validate"/>
 							<label for="first_name" className="active">First Name *</label>
 						</div>
 					</div>
 					<div className="row">
 						<div className="input-field col s6 m6 l6 push-l3">
-							<input placeholder="GET LASTNAME IF ANY" id="last_name" type="text" className="validate"/>
+							<input placeholder="GET LASTNAME IF ANY" id="last_name" type="text" className="validate active"/>
 							<label for="last_name" className="active">Last Name (optional)</label>
 						</div>
 					</div>
 					<div className="row">
 						<div className="input-field col s6 m6 l6 push-l3">
-							<input placeholder="GET EMAIL FROM DATABASE" id="email_input" type="email" className="validate"/>
+							<input placeholder="GET EMAIL FROM DATABASE" id="email_input" type="email" className="validate active"/>
 							<label for="email_input" className="active">Email *</label>
 						</div>
 					</div>
@@ -141,13 +141,13 @@ class EditProfile extends Component {
 					<h5 className="row">Change Password:</h5>
 					<div className="row">
 						<div className="input-field col s6 m6 l6 push-l3">
-							<input id="old_pw" type="password" className="validate"/>
+							<input id="old_pw" type="password" className="validate active"/>
 							<label for="old_pw" className="active">Type your current password *</label>
 						</div>
 					</div>
 					<div className="row">
 						<div className="input-field col s6 m6 l6 push-l3">
-							<input id="new_pw" type="password" className="validate"/>
+							<input id="new_pw" type="password" className="validate active"/>
 							<label for="new_pw" className="active">Type your new password *</label>
 						</div>
 					</div>

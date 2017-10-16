@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
@@ -70,33 +70,42 @@ class LandingPage extends Component {
 
 
 	handleContinue (ev) {
-		ev.preventDefault();
-		this.setState({
-			nameSet: !this.state.nameSet,
-		});
+		if(this.props.userName===""){
+			alert("Please enter a valid name");
+		}else{
+			ev.preventDefault();
+			this.setState({
+				nameSet: !this.state.nameSet,
+			});
+		}
 	}
 
 	handleSubmit(ev) {
-		ev.preventDefault();
+		if(this.state.userPwd === "" || this.props.userEmail === ""){
+			alert("Please enter valid email and password");
+		} else {
 
-		const pwd = this.state.userPwd;
-		this.setState({	userPwd: "" });
+			ev.preventDefault();
 
-		this.props.handleCreateUser(pwd)
-			.then((data) => {
-				console.log("(LandingPage) user account created! new user data: ", data);
-				/* programmatically navigate to interests & skills page, with state object */
-				this.setState({
-					redirTo: "/interestSkills"
+			const pwd = this.state.userPwd;
+			this.setState({	userPwd: "" });
+
+			this.props.handleCreateUser(pwd)
+				.then((data) => {
+					console.log("(LandingPage) user account created! new user data: ", data);
+					/* programmatically navigate to interests & skills page, with state object */
+					this.setState({
+						redirTo: "/interestSkills"
+					});
+				})
+				.catch(err => {
+					console.log("(LandingPage) user account creation failed with error: ", err);
+					alert("Error creating new account: " + err.message);
+					this.setState({
+						userPwd: "",
+					});
 				});
-			})
-			.catch(err => {
-				console.log("(LandingPage) user account creation failed with error: ", err);
-				alert("Error creating new account: " + err.message);
-				this.setState({
-					userPwd: "",
-				});
-			});
+			}
 	}
 
 	setShow(content_to_show) {
@@ -117,8 +126,9 @@ class LandingPage extends Component {
 									placeholder="What is your name?"
 									value={this.props.userName}
 									onChange={this.handleNameSet}
+									id="name_in"
 									name="fullName" />
-								<input className="btn light-green" type="submit" value="Continue " />
+								<input className="btn light-green" type="submit" value="Continue"/>
 							</div>
 						</form>
 					</div>
@@ -227,7 +237,11 @@ class LandingPage extends Component {
 	}
 
 	render() {
-
+		if(this.props.isLoggedIn){
+			this.setState({
+				redirTo: "/home"
+			});
+		}
 		if (this.state.redirTo !== "") {
 			return (
 				<Redirect to={this.state.redirTo} />
@@ -262,6 +276,7 @@ class LandingPage extends Component {
 						</div>
 					</div>
 				);
+				break;
 				case "login":
 				return (
 					<div className="valign LandingBack">
@@ -288,7 +303,9 @@ class LandingPage extends Component {
 						</div>
 					</div>
 				);
-
+				break;
+				default:
+				break;
 		}
 
 	}
