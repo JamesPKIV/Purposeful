@@ -1,3 +1,62 @@
-.main-content{
-  margin-top: 175px;
+@media (min-width: 700px){
+  .main-about{
+    margin: 0 auto;
+    margin-top: 50px !important;
+    width: 50%;
+  }
+
+  .ul-about li{ 
+    display: block; 
+    margin: auto;
+  }
+
+  .div-about {
+    margin: 0 5%;
+    padding: 5px 5%;
+  }
+  .ul-about {
+    padding-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .ul-about li {
+    flex: 0 1 30%;
+    background-color: white;
+    color: black;
+    margin: 5px;
+  }
+  .about-pic {
+    box-shadow: 0 0 0 6px #b4d458;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    width: 280px;
+    height: 310px;
+  }
+  .name {
+    font-weight: 900;
+    font-size: 20px;
+    text-align: center;
+  }
+  .role-desc {
+    font-size: 1.0em;
+    color: #7d7d7d;
+  }
+  .icon {
+    margin: 10px 5px;
+    font-size: 30px;
+    color: #7d7d7d;
+  }
+  .chevron-div {
+    font-size: 18px;
+    width: 200px;
+    margin: -20px auto 10px auto;
+    transition: transform .3s;
+    color: black;
+  }
+  .chevron-div:hover {
+    color: #3b3b3b;
+    cursor: pointer;
+    transform: translate(0px, 3px);
+  }
 }

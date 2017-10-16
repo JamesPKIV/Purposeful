@@ -57,29 +57,6 @@ class LandingPage extends Component {
 		});
 	}
 
-	handleLogin (ev) {
-		ev.preventDefault();
-		const pwd = this.state.userPwd;
-		this.setState({	userPwd: "" });
-
-		this.props.handleLogin(pwd)
-			.then((data) => {
-				console.log("(LandingPage) user logged in! new user data: ", data);
-				/* programmatically navigate to interests & skills page, with state object */
-				this.setState({
-					redirTo: "/home"
-				});
-			})
-			.catch(err => {
-				console.log("(LandingPage) user login failed with error: ", err);
-				alert(err.message);
-				this.setState({
-					userPwd: "",
-				});
-			});
-	}
-
-
 	handleContinue (ev) {
 		if(this.props.userName===""){
 			alert("Please enter a valid name");
@@ -92,38 +69,36 @@ class LandingPage extends Component {
 	}
 
 	handleSubmit(ev) {
-		// If { // creates a new user }
-		// Else {// user is attempting to login }
+		ev.preventDefault();
+		const pwd = this.state.userPwd;
+		this.setState({	userPwd: "" });
+
 		if(!this.state.userLogin){
-			if(this.state.userPwd === "" || this.props.userEmail === ""){
-				alert("Please enter valid email and password");
-			} else {
-				ev.preventDefault();
-				const pwd = this.state.userPwd;
-				this.setState({	userPwd: "" });
-				this.props.handleCreateUser(pwd)
+			this.props.handleCreateUser(pwd)
 				.then((data) => {
 					console.log("(LandingPage) user account created! new user data: ", data);
 					/* programmatically navigate to interests & skills page, with state object */
-					this.setState({
-						redirTo: "/interestSkills"
-					});
+					this.setState({ redirTo: "skills" });
 				})
 				.catch(err => {
 					console.log("(LandingPage) user account creation failed with error: ", err);
-					alert("Error creating new user account: " + err.menssage);
-					this.setState({
-						userPwd: ""
-					});
+					alert("Error creating new user account: " + err);
 				});
-			}
 		} else {
-			ev.preventDefault();
-			this.setState({	redirTo: "home"});
 			// fetch user profile from database
-			console.log('user is trying to login');
+			alert("User is attempting to login, setup db");
+			this.props.handleLogin(pwd)
+				.then((data) => { 
+					console.log("(Landing Page) User has logged! User data is: ", data);
+					this.setState({	redirTo: "home" });	
+				})
+				.catch(err => {
+					console.log("(LandingPage) user account login failed with error: ", err);
+					alert("Error logging user into app: " + err);
+				});
 		}
 	}
+
 
 	setShow(content_to_show) {
 		this.setState({
@@ -182,7 +157,6 @@ class LandingPage extends Component {
 				<div className="col s6">
 					<form>
 						<div className="row fullrow">
-
 							<div className="input-field col s4">
 								<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
@@ -208,6 +182,11 @@ class LandingPage extends Component {
 	purposeful_Login () {
 		return (
 			<div className="col s6 social-column">
+				<div className="row fullrow">
+					<div className="col s4 div-btn">
+						<button className="btn social-btn purpose-btn" onClick={this.handleUserLogin}> Login to Purposeful</button>
+					</div>
+				</div>
 				<div className="row fullrow">
 					<div className="col s4 div-btn">
 						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
@@ -246,7 +225,8 @@ class LandingPage extends Component {
 
 		return(
 			<div>
-				<div className="row fullrow">
+				<div className="row fullrow ">
+					<img src={logo} />
 					<h1>Welcome to Purposeful</h1>
 				</div>
 				<div className="container">
