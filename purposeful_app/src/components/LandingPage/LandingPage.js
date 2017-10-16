@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
@@ -32,7 +32,7 @@ class LandingPage extends Component {
 
 
 	// User logging in helper methods
-	handleUserLogin (ev) { 
+	handleUserLogin (ev) {
 		this.setState({
 			userLogin: !this.state.userLogin
 		});
@@ -58,10 +58,14 @@ class LandingPage extends Component {
 	}
 
 	handleContinue (ev) {
-		ev.preventDefault();
-		this.setState({
-			nameSet: !this.state.nameSet,
-		});
+		if(this.props.userName===""){
+			alert("Please enter a valid name");
+		}else{
+			ev.preventDefault();
+			this.setState({
+				nameSet: !this.state.nameSet,
+			});
+		}
 	}
 
 	handleSubmit(ev) {
@@ -202,7 +206,12 @@ class LandingPage extends Component {
 	}
 
 	render() {
-		if ( this.state.redirTo === "skills") {
+		if(this.props.isLoggedIn){
+			this.setState({
+				redirTo: "/home"
+			});
+		}
+		if (this.state.redirTo !== "") {
 			return (
 				<Redirect to="/interestskills" />
 			);
