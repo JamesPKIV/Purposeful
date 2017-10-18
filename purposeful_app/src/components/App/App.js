@@ -15,6 +15,8 @@ import OurTeam from '../OurTeam/OurTeam';
 import DonateForm from '../DonateForm/DonateForm';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import StoriesPage from '../StoriesPage/StoriesPage';
+import StoriesManage from '../StoriesManage/StoriesManage';
+import StoriesNew from '../StoriesNew/StoriesNew';
 import CollabPage from '../CollabPage/CollabPage';
 import EditProfile from '../EditProfile/EditProfile';
 import SettingsPage from '../SettingsPage/SettingsPage';
@@ -209,9 +211,6 @@ class App extends Component {
 		});
 	}
 
-
-
-
 footerDesktop(){
     return(
       <footer className="page-footer grey darken-4">
@@ -282,6 +281,7 @@ footerDesktop(){
 									handleLogin={this.handleLogin}
 									handleNameSet={this.setStateAttr.bind(this,"userName") }
 									handleEmailSet={this.setStateAttr.bind(this, "userEmail") }
+									isLoggedIn={this.state.isLoggedIn}
 								/>}
 							/>
 
@@ -358,6 +358,14 @@ footerDesktop(){
               <Route
                 path="/stories"
                 render={ () => <StoriesPage /> }
+              />
+							<Route
+                path="/newstories"
+                render={ () => <StoriesNew /> }
+              />
+							<Route
+                path="/managestories"
+                render={ () => <StoriesManage /> }
               />
               <Route
                 path="/collabs"

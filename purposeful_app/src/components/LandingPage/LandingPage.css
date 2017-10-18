@@ -36,7 +36,8 @@ h1 {
   width: 60%;
 }
 
-.purpose-btn{
+.login-btn{
+  font-size: 1rem;
   background-color: #8ac34b;
 }
 
@@ -58,12 +59,12 @@ h1 {
 }
 
 input[type=text]{
-  font-size: 24px !important;
+  font-size: 20px !important;
   text-align: center;
 }
 
 input[type=password]{
-  font-size: 24px !important;
+  font-size: 20px !important;
   text-align: center;
 }
 
@@ -77,8 +78,48 @@ input[type=password]{
     background-size: cover;
 }
 
-
 .light-green{
   padding-top: 0;
   padding-bottom: 10px;
+}
+.input-field{ 
+  margin-bottom: 20px;
+}
+
+.hr-tag{ 
+  border: 2px solid;
+  border-color: black;
+}
+
+.div-login{
+  text-align: left;
+  font-size: 24px; 
+}
+
+.login-link{
+  color:#33A1DE; 
+}
+
+.header-sign{ 
+  margin-left: 8px;
+  text-align: left;
+}
+
+.header-login{
+  display: inline-block;
+  margin-right: 75%;
+}
+
+.li-login{
+  float: left;
+  padding-right: 10px;
+}
+
+.exit-icon{ 
+  font-size: 20px;
+}
+
+.close-login{
+  padding-top: 0px !important;
+  margin-top: 8px;
 }

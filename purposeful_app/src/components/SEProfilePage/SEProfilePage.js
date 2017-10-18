@@ -9,7 +9,7 @@ import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaUserTimes from 'react-icons/lib/fa/user-times';
 import FaUserPlus from 'react-icons/lib/fa/user-plus';
-
+import ActivityFeed from '../ActivityFeed/ActivityFeed';
 
 class SEProfilePage extends Component {
 
@@ -204,37 +204,9 @@ class SEProfilePage extends Component {
 	pull_mentors(){
 		return(
 			<div className="row valign-wrapper">
-			{/*This will be the format used but profiles will be drawn
-				dynamically from database and horizontal scroll will only
-				happen if there are more than 5 mentors. If there are
-				less than 5 col size will adjust so they are not so tiny*/}
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Pancho</p>
-					<p className="small-name">Pantera</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Henri</p>
-					<p className="small-name">Poincare</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Ada</p>
-					<p className="small-name">Lovelace</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Edgar Allan</p>
-					<p className="small-name">Poe</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Eve</p>
-					<p className="small-name">Moneypenny</p>
-				</div>
+				<ActivityFeed linkTo="/SEProfile" />
 				<div className="col s2 m2 l2valign">
-					<button onClick={console.log("arrow")}  className="btn-flat">
+					<button  className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
 					</button>
 				</div>
@@ -245,37 +217,9 @@ class SEProfilePage extends Component {
 	pull_mentees(){
 		return(
 			<div className="row valign-wrapper">
-			{/*This will be the format used but profiles will be drawn
-				dynamically from database and horizontal scroll will only
-				happen if there are more than 5 mentees. If there are
-				less than 5 col size will adjust so they are not so tiny*/}
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Leonard</p>
-					<p className="small-name">Nemoy</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Hermione</p>
-					<p className="small-name">Granger</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Xenia</p>
-					<p className="small-name">Onatopp</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Ealinor</p>
-					<p className="small-name">Rigby</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Spud</p>
-					<p className="small-name">McKenzie</p>
-				</div>
+				<ActivityFeed linkTo="/SEProfile" />
 				<div className="col s2 m2 l2 valign">
-					<button onClick={console.log("arrow")}  className="btn-flat">
+					<button className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
 					</button>
 				</div>

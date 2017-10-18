@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
 import logo from './logo.png';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
+import Exit from 'react-icons/lib/fa/arrows-alt';
 
 class LandingPage extends Component {
 
@@ -14,7 +15,7 @@ class LandingPage extends Component {
 			inputInfo: false,
 			nameSet: false,
 			userPwd: "",
-			redirTo: false,
+			redirTo: "",
 			userLogin: false,
 		};
 		this.handleUserLogin = this.handleUserLogin.bind(this);
@@ -32,11 +33,12 @@ class LandingPage extends Component {
 
 
 	// User logging in helper methods
-	handleUserLogin (ev) { 
+	handleUserLogin (ev) {
+		ev.preventDefault();
 		this.setState({
 			userLogin: !this.state.userLogin
 		});
-		console.log('user is logging in with his/her account');
+		console.log('user is logging in with his/her account' + this.state.userLogin);
 	}
 
 
@@ -58,10 +60,14 @@ class LandingPage extends Component {
 	}
 
 	handleContinue (ev) {
-		ev.preventDefault();
-		this.setState({
-			nameSet: !this.state.nameSet,
-		});
+		if(this.props.userName===""){
+			alert("Please enter a valid name");
+		}else{
+			ev.preventDefault();
+			this.setState({
+				nameSet: !this.state.nameSet,
+			});
+		}
 	}
 
 	handleSubmit(ev) {
@@ -84,9 +90,9 @@ class LandingPage extends Component {
 			// fetch user profile from database
 			alert("User is attempting to login, setup db");
 			this.props.handleLogin(pwd)
-				.then((data) => { 
+				.then((data) => {
 					console.log("(Landing Page) User has logged! User data is: ", data);
-					this.setState({	redirTo: "home" });	
+					this.setState({	redirTo: "home" });
 				})
 				.catch(err => {
 					console.log("(LandingPage) user account login failed with error: ", err);
@@ -94,8 +100,7 @@ class LandingPage extends Component {
 				});
 		}
 	}
-
-
+	
 	setShow(content_to_show) {
 		this.setState({
 			show: content_to_show
@@ -107,8 +112,8 @@ class LandingPage extends Component {
 			if (!this.state.nameSet) {
 				return (
 					<div>
-						<h5> Sign up </h5>
 						<div className="col s6">
+						<h5 className="header-sign"> Sign up </h5>
 							<form onSubmit={this.handleContinue}>
 								<div className="input-field col s12">
 									<input
@@ -120,6 +125,11 @@ class LandingPage extends Component {
 									<input className="btn light-green" type="submit" value="Continue " />
 								</div>
 							</form>
+							<hr className="hr-tag"/>
+							<div className="div-login">
+								Have and account already? 
+								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link> 
+							</div>
 						</div>
 					</div>
 				);
@@ -151,6 +161,10 @@ class LandingPage extends Component {
 		}else{
 			return (
 				<div className="col s6">
+					<ul className="header-login">
+						<li className="li-login"><h5 className="header-sign">Login </h5></li>
+						<li className="li-login"><button onClick={this.handleUserLogin} className="btn close-login"><Exit className="exit-icon"/></button></li>
+					</ul>
 					<form>
 						<div className="row fullrow">
 							<div className="input-field col s4">
@@ -180,11 +194,6 @@ class LandingPage extends Component {
 			<div className="col s6 social-column">
 				<div className="row fullrow">
 					<div className="col s4 div-btn">
-						<button className="btn social-btn purpose-btn" onClick={this.handleUserLogin}> Login to Purposeful</button>
-					</div>
-				</div>
-				<div className="row fullrow">
-					<div className="col s4 div-btn">
 						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
 					</div>
 				</div>
@@ -203,7 +212,7 @@ class LandingPage extends Component {
 	}
 
 	render() {
-		if ( this.state.redirTo === "skills") {
+		if (this.state.redirTo === "skills") {
 			return (
 				<Redirect to="/interestskills" />
 			);
@@ -212,7 +221,6 @@ class LandingPage extends Component {
 				<Redirect to="/home" />
 			);
 		}
-
 
 		return(
 			<div>

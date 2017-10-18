@@ -18,7 +18,7 @@ class HomePage extends Component {
 
 
 	componentDidMount () {
-		// TODO: retrieve the data to be displayed - mentors, mentees, 
+		// TODO: retrieve the data to be displayed - mentors, mentees,
 		this.props.fetchData();
 	}
 
@@ -37,7 +37,7 @@ class HomePage extends Component {
 				{
 						this.state.isLoggedIn  &&
 						<MentorFeed title="Mentors you may like"
-							feedItems={this.props.recommended} 
+							feedItems={this.props.recommended}
 						/>
 				}
 					<ActivityFeed title="Activity in Your Network" linkTo="/home" />
