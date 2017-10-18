@@ -211,9 +211,6 @@ class App extends Component {
 		});
 	}
 
-
-
-
 footerDesktop(){
     return(
       <footer className="page-footer grey darken-4">
