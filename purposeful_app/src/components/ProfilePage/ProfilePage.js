@@ -48,7 +48,9 @@ class ProfilePage extends Component {
 			purposeEdit: false,
 			goalsEdit: false,
 			accomplishEdit: false,
-			changePicture: false
+			changePicture: false,
+			skills: ["skill1", "skill2", "skill3", "skill4"],
+			interests: ["interest1", "interest2", "interest3", "interest4", "interest5"]
 		};
 	}
 
@@ -316,35 +318,6 @@ class ProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-			{/*This will be the format used but profiles will be drawn
-				dynamically from database and horizontal scroll will only
-				happen if there are more than 5 mentors. If there are
-				less than 5 col size will adjust so they are not so tiny
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Pancho</p>
-					<p className="small-name">Pantera</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Henri</p>
-					<p className="small-name">Poincare</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Ada</p>
-					<p className="small-name">Lovelace</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Edgar Allan</p>
-					<p className="small-name">Poe</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Eve</p>
-					<p className="small-name">Moneypenny</p>
-				</div>*/}
 				<div className="col s2 m2 l2valign">
 					<button className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
@@ -358,35 +331,6 @@ class ProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-			{/*This will be the format used but profiles will be drawn
-				dynamically from database and horizontal scroll will only
-				happen if there are more than 5 mentees. If there are
-				less than 5 col size will adjust so they are not so tiny
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Leonard</p>
-					<p className="small-name">Nemoy</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Hermione</p>
-					<p className="small-name">Granger</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Xenia</p>
-					<p className="small-name">Onatopp</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Ealinor</p>
-					<p className="small-name">Rigby</p>
-				</div>
-				<div className="col s2 m2 l2">
-					<img className="responsive-img circle" src={profile_pic} alt=""/>
-					<p className="small-name">Spud</p>
-					<p className="small-name">McKenzie</p>
-				</div>*/}
 				<div className="col s2 m2 l2 valign">
 					<button className="btn-flat">
 						<FaAngleRight className="profile-name"></FaAngleRight>
@@ -494,6 +438,29 @@ class ProfilePage extends Component {
 		}
 	}
 
+	pull(to_pull){
+		var array = [];
+		if(to_pull === "skills"){
+			array = this.state.skills;
+		} else {
+			array = this.state.interests;
+		}
+		var i;
+		let return_code = null;
+		for (i = 0; i < array.length; i++){
+			return_code =
+				<span>
+					{return_code}
+					<div className="col s2 m2 l2 chip light-green lighten-4">{array[i]}</div>
+				</span>
+		}
+		return (
+			<span>
+				{return_code}
+			</span>
+		);
+	}
+
 	displayDesktop(){
 		return(
 			<div>
@@ -521,6 +488,30 @@ class ProfilePage extends Component {
 									{this.purpose_content()}
 									{this.goals_content()}
 									{this.accomplish_content()}
+							</div>
+						</div>
+						<div className="row"> <p> </p> </div>
+						<div className="row">
+							<div className="container left-content">
+								<div className="card-panel">
+									<div className="row">
+										<Link to="/editProfile" className="btn-flat profile-text right">
+											Edit <FaPencil className="profile-text"></FaPencil>
+										</Link>
+									</div>
+									<hr className="col s12 m12 l12"></hr>
+									<div className="row"> <p> </p> </div>
+									<div className="row">
+										<p className="profile-titles"> Your Skills </p>
+										{this.pull("skills")}
+									</div>
+									<hr className="col s12 m12 l12"></hr>
+									<div className="row"> <p> </p> </div>
+									<div className="row">
+										<p className="profile-titles"> Your Interests </p>
+										{this.pull("interests")}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

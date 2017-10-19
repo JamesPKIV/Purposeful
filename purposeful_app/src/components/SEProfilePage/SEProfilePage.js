@@ -35,7 +35,9 @@ class SEProfilePage extends Component {
 			inviteCollab: false,
 			follow: false,
 			requestSent: false,
-			inviteSent: false
+			inviteSent: false,
+			skills: ["skill1", "skill2", "skill3","skill4"],
+			interests: ["interest1", "interest2","interest3", "interest4", "interest5"]
 		};
   }
 
@@ -408,6 +410,29 @@ class SEProfilePage extends Component {
 		}
 	}
 
+	pull(to_pull){
+		var array = [];
+		if(to_pull === "skills"){
+			array = this.state.skills;
+		} else {
+			array = this.state.interests;
+		}
+		var i;
+		let return_code = null;
+		for (i = 0; i < array.length; i++){
+			return_code =
+				<span>
+					{return_code}
+					<div className="col s2 m2 l2 chip light-green lighten-4">{array[i]}</div>
+				</span>
+		}
+		return (
+			<span>
+				{return_code}
+			</span>
+		);
+	}
+
 	displayDesktop(){
 		return(
 			<div>
@@ -420,6 +445,25 @@ class SEProfilePage extends Component {
 								{this.purpose_content()}
 								{this.goals_content()}
 								{this.accomplish_content()}
+						</div>
+						<div className="row"> <p> </p> </div>
+						<div className="row">
+							<div className="container left-content">
+								<div className="card-panel">
+									
+									<div className="row"> <p> </p> </div>
+									<div className="row">
+										<p className="profile-titles"> Jane Skills </p>
+										{this.pull("skills")}
+									</div>
+									<hr className="col s12 m12 l12"></hr>
+									<div className="row"> <p> </p> </div>
+									<div className="row">
+										<p className="profile-titles"> Jane Interests </p>
+										{this.pull("interests")}
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
