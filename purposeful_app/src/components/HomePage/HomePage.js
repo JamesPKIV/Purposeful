@@ -18,7 +18,6 @@ class HomePage extends Component {
 
 
 	componentDidMount () {
-		// TODO: retrieve the data to be displayed - mentors, mentees,
 		this.props.fetchData();
 	}
 
@@ -35,7 +34,7 @@ class HomePage extends Component {
 				}
 				<div className="activity-feeds col l10 push-l1">
 				{
-						this.state.isLoggedIn  &&
+						this.props.isLoggedIn  &&
 						<MentorFeed title="Mentors you may like"
 							feedItems={this.props.recommended}
 						/>
