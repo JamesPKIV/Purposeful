@@ -4,23 +4,23 @@ var VERBOSE = require("../models/pg_database.js").VERBOSE;
 var Sequelize = require("../models/pg_database.js").Sequelize;
 var express = require('express');
 var router = express.Router();
-
+var restrict_access = require("./route_utils.js").restrict_access;
 
 
 /**	
 	This HTTP POST function creates a new skill entry for the user with the 
-* user id and skill name provided in the request.
+* skill name provided in the request.
 *
-* Arguments: new user's skill name and user id must be sent in the body of the request as JSON:
-*		{ uid: "user's email", skill_name: "new skill name"}
-
+* Precondition: user must be logged in (session must exist for the user)
+* Arguments: the user's skill name must be sent in the body of the request as JSON:
+*		{skill_name: "new skill name"}
 * Returns: if successful, a response is sent with status code 200 containing the 
 	JSON encoded object with the created user-skill relation.
 **/
-router.post("/new", function(req, res, next) {
+router.post("/new", restrict_access, function(req, res, next) {
 	const new_entry = req.body;
 	console.log("serving /api/skills/new request with body: ", new_entry);
-	const entry_uid = new_entry.user_id;
+	const entry_uid =req.session.user_id;
 	const entry_skill_name = new_entry.skill_name;
 
 
@@ -75,17 +75,17 @@ router.post("/new", function(req, res, next) {
 /**	
 	This HTTP POST function creates a set of new skill entries for the user with the 
 * user id and skill names provided in the request.
-*
-* Arguments: new user's skill names array and user id must be sent in the body of the request as JSON:
-*		{ uid: "user's email", skill_names: ["new skill 1", "new skill 2",...] }
+* Precondition: user must be logged in (session must exist for the user)
+* Arguments: new user's skill names array must be sent in the body of the request as JSON:
+*		{ skill_names: ["new skill 1", "new skill 2",...] }
 
 * Returns: if successful, a response is sent with status code 200 containing the 
 	JSON encoded object with the created user-skill relations.
 **/
-router.post("/add_skills", function(req, res, next) {
+router.post("/add_skills", restrict_access, function(req, res, next) {
 	const new_entry = req.body;
 	console.log("serving /api/skills/add_skills request with body: ", new_entry);
-	const entry_uid = new_entry.user_id;
+	const entry_uid = req.session.user_id;
 	const entry_skill_arr = new_entry.skill_names;
 
 

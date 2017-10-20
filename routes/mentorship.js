@@ -27,12 +27,12 @@ router.post('/new', restrict_access, function(req, res, next) {
 	const new_entry = req.body;
 	if (VERBOSE) console.log ("request body:", new_entry);
 
-	const mentee_uid = req.session.userID;
+	const mentee_uid = req.session.user_id;
 	const mentor_uid = new_entry.mentor_uid;
 
-	if ( (!mentor_uid) || (!mentee_uid) ) {
-		console.log ("ERROR: Request body must contain mentor_uid and mentee_uid.");
-		handleError(new Error("Request body must contain mentor_uid and mentee_uid"), res);
+	if ( (!mentor_uid) ) {
+		console.log ("ERROR: Request body must contain mentor_uid.");
+		handleError(new Error("Request body must contain mentor_uid."), res);
 		return null;
 	}
 	if (VERBOSE) {
@@ -81,12 +81,7 @@ router.get("/dash", restrict_access, (req, res, next) => {
 	if (VERBOSE) console.log("MENTORSHIP.JS->/dash reached. ");
 	if (VERBOSE) console.log ("request params:", req.params);
 
-	const user_id = req.session.userID;
-
-	if (!user_id) {
-		var msg = "No user_uid provided in session."
-		return handleError( new Error(msg), res );
-	}
+	const user_id = req.session.user_id;
 
 	/* lookup mentee in users table, then get mentors */
 	return db_tables.Users.findById(user_id)
@@ -117,6 +112,7 @@ router.get("/dash", restrict_access, (req, res, next) => {
 		    					console.log("Successfully fetched mentees: ", mentee_list);
 		    				
 		    				var data = {
+		    					user: user,
 		    					mentees:mentee_list, 
 		    					mentors:mentor_list, 
 		    					recommended:recomm_mentors

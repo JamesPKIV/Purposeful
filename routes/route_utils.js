@@ -1,7 +1,7 @@
 
 function restrict_access(req, res, next) {
-  if (req.session.userID) {
-  	console.log("Access granted- user is logged in with ID: " + req.session.userID);
+  if (req.session.user_id) {
+  	console.log("Access granted- user is logged in with ID: " + req.session.user_id);
     return next();
   } else {
   	var err = new Error("access is restricted to logged in users.");

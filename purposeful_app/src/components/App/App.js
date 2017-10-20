@@ -119,6 +119,7 @@ class App extends Component {
 	fetchHome () {
 		return Client.get_mentorship_dash()
 			.then (dash_data => {
+				var user_obj = dash_data["user"];
 				var mentees = dash_data["mentees"];
 				var mentors = dash_data["mentors"];
 				var recommended = dash_data["recommended"];
@@ -129,7 +130,12 @@ class App extends Component {
 					mentees: mentees,
 					mentors: mentors,
 					recommended: recommended,
-					isLoggedIn: true
+					userId: user_obj.id,
+					userName: user_obj.name,
+					prof_past: user_obj.past,
+					prof_present: user_obj.present,
+					prof_future: user_obj.future,
+					isLoggedIn: true,
 				});
 			})
 			.catch (err => {

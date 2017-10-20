@@ -32,9 +32,12 @@ router.post('/new', function(req, res, next) {
 			email: entry_email, 
 			password:entry_pwd
 		})
-	  	.then( query_data => { 
+	  	.then( new_entry => { 
 			console.log("USERS.JS: New User inserted:", new_entry);
-			return query_data;
+
+				req.session.user_id = new_entry.id;
+				req.session.user_name = new_entry.name;
+			return new_entry;
 		})
 		.then( query_data => {
 		  	res.json({message: 'ok', data:query_data});
@@ -92,9 +95,8 @@ router.post("/login", (req, res, next) => {
 			else {
 				console.log("User logged in:", user );
 				//set session to store userID
-				req.session.userID = user.id;
-				req.session.userName = user.name;
-				req.session.save();
+				req.session.user_id = user.id;
+				req.session.user_name = user.name;
 				console.log("session saved: " + JSON.stringify(req.session));
 				return res.json({message: "login successful", data: user});
 			}
@@ -145,7 +147,7 @@ router.get('/user/:uid', function(req, res, next) {
 
 router.post("/profile", restrict_access, function(req, res, next ) {
 	var update_attrs = {};
-	var user_id = req.session.userID;
+	var user_id = req.session.user_id;
 
 	if (req.body.present) {
 		update_attrs["present"] = req.body.present;

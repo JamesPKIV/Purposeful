@@ -24,6 +24,7 @@
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
-    "concurrently": "^3.5.0"
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.12.1"
   }
 }
