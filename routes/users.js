@@ -2,6 +2,7 @@ var db_tables =require("../models/tables.js").db_tables;
 var VERBOSE = require("../models/pg_database.js").VERBOSE;
 var Sequelize = require("../models/pg_database.js").Sequelize;
 var express = require('express');
+var restrict_access = require("./route_utils.js").restrict_access;
 var router = express.Router();
 
 
@@ -31,9 +32,12 @@ router.post('/new', function(req, res, next) {
 			email: entry_email, 
 			password:entry_pwd
 		})
-	  	.then( query_data => { 
+	  	.then( new_entry => { 
 			console.log("USERS.JS: New User inserted:", new_entry);
-			return query_data;
+
+				req.session.user_id = new_entry.id;
+				req.session.user_name = new_entry.name;
+			return new_entry;
 		})
 		.then( query_data => {
 		  	res.json({message: 'ok', data:query_data});
@@ -68,9 +72,45 @@ router.post('/new', function(req, res, next) {
 });
 
 
+
+router.post("/login", (req, res, next) => {
+	const new_entry = req.body;
+	console.log("serving /api/users/login request: ", new_entry);
+	const entry_email = req.body.email;
+	const entry_pwd = req.body.password;
+	/* insert new entry into users table */
+	return db_tables.Users.findOne({
+			where: {
+				email: entry_email, 
+				password:entry_pwd,
+			}
+		})
+		.then(user => {
+
+			if (user === null) {
+				return res.status(401).json({
+					message: "Log in failed: Email or password was not correct."
+				});
+			}
+			else {
+				console.log("User logged in:", user );
+				//set session to store userID
+				req.session.user_id = user.id;
+				req.session.user_name = user.name;
+				console.log("session saved: " + JSON.stringify(req.session));
+				return res.json({message: "login successful", data: user});
+			}
+		})
+		.catch(err => {
+			console.log("Error logging user in: ", err);
+			res.status(500).json({message: "Log in failed", error: err.message });
+		});
+})
+
+
 /* GET user listing by user id.  
-* If successful, sends a response with a JSON body containing name and 
-* email properties for the given id.
+* If successful, sends a response with a JSON body containing profile
+* properties for the given id.
 */
 router.get('/user/:uid', function(req, res, next) {
 
@@ -105,9 +145,9 @@ router.get('/user/:uid', function(req, res, next) {
 
 
 
-router.post("/profile", function(req, res, next ) {
+router.post("/profile", restrict_access, function(req, res, next ) {
 	var update_attrs = {};
-	var user_id = req.body.user_id;
+	var user_id = req.session.user_id;
 
 	if (req.body.present) {
 		update_attrs["present"] = req.body.present;
@@ -174,34 +214,6 @@ router.get('/profile/:uid', function(req, res, next) {
 
 
 
-router.post("/login", (req, res, next) => {
-	const new_entry = req.body;
-	console.log("serving /api/users/login request: ", new_entry);
-	const entry_email = req.body.email;
-	const entry_pwd = req.body.password;
-	/* insert new entry into users table */
-	return db_tables.Users.findOne({
-			where: {
-				email: entry_email, 
-				password:entry_pwd,
-			}
-		})
-		.then(user => {
 
-			if (user === null) {
-				return res.status(401).json({
-					message: "Log in failed: Email or password was not correct."
-				});
-			}
-			else {
-				console.log("User logged in:", user );
-				return res.json({message: "ok", data: user});
-			}
-		})
-		.catch(err => {
-			console.log("Error logging user in: ", err);
-			res.status(500).json({message: "Log in failed", error: err.message });
-		});
-})
 
 module.exports = router;

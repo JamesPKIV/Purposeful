@@ -15,6 +15,8 @@ class MentorshipPage extends Component {
 			searchInput: "",
 			show: "main",
 		};
+		this.handleSearchChange = this.handleSearchChange.bind(this);
+		this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
 	}
 
 	componentDidMount() {
