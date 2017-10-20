@@ -43,6 +43,8 @@ class App extends Component {
 			prof_past: "",
 			prof_present: "",
 			prof_future: "",
+			SE_userId: "",
+			SE_profile: {},
 		};
 
 		this.footer = this.footer.bind(this);
@@ -57,6 +59,8 @@ class App extends Component {
 		this.setStateAttr = this.setStateAttr.bind(this);
 		this.pushToStateAttrArr = this.pushToStateAttrArr.bind(this);
 		this.handleSubmitProfileChange = this.handleSubmitProfileChange.bind(this);
+		this.fetchSEProfile = this.fetchSEProfile.bind(this);
+		this.handleMentorRequest = this.handleMentorRequest.bind(this);
 	}
 
 
@@ -133,6 +137,7 @@ class App extends Component {
 			});
 	}
 
+
 	fetchMentorship () {
 		return Client.get_mentorship_dash(this.state.userId)
 			.then (dash_data => {
@@ -149,6 +154,28 @@ class App extends Component {
 				});
 			});
 	}
+
+
+	fetchSEProfile () {
+		var SEuserId = this.state.SE_userId;
+
+		if (!SEuserId){
+			var msg = "No user was specified";
+			throw new Error(msg);
+		}
+		
+		return Client.get_user_by_id(SEuserId)
+			.then( SE_data => {
+				this.setState({
+					SE_profile: SE_data
+				});
+			})
+			.catch(err => {
+				throw err;
+			});
+	}
+
+
 
 	searchBySkill (skill_name) {
 		//todo: validate input
@@ -191,6 +218,16 @@ class App extends Component {
 			.catch (err => {
 				throw err;
 			});
+	}
+
+	/* this function makes a mentor request with the message argument */
+	handleMentorRequest (messageFromMentee) {
+		var se_user_id = this.state.SE_userId;
+		if (!se_user_id) {
+			var err_msg = "No mentor was specified";
+			throw new Error(err_msg);
+		}
+		return Client.add_mentor_request(se_user_id, messageFromMentee);
 	}
 
 
@@ -312,6 +349,7 @@ footerDesktop(){
 										mentors={this.state.mentors}
 										mentees={this.state.mentees}
 										recommended={this.state.recommended}
+										handleSetSEUserID={this.setStateAttr.bind(this, "SE_userId")}
 									/>
 								}
 							/>
@@ -325,12 +363,14 @@ footerDesktop(){
 										mentees={this.state.mentees}
 										recommended={this.state.recommended}
 										skillUsersMap={this.state.skillUsersMap}
+										handleSetSEUserID={this.setStateAttr.bind(this, "SE_userId")}
 									/>
 								}
 							/>
 							<Route
 								path="/profile"
-								render={ () => <ProfilePage
+								render={ () => 
+									<ProfilePage
 										isLoggedIn={this.state.isLoggedIn}
 										userName={this.state.userName}
 										past={this.state.prof_past}
@@ -340,21 +380,19 @@ footerDesktop(){
 										handleChangePresent={this.setStateAttr.bind(this, "prof_present")}
 										handleChangeFuture={this.setStateAttr.bind(this, "prof_future")}
 										handleSubmitChange={this.handleSubmitProfileChange}
-			              /* these were in the merge conflict so I am not sure if they
-                    are still needed:*/
-									  userId={this.state.userId}
-									  fetchData={this.fetchHome}
-									  mentors={this.state.mentors}
-									  mentees={this.state.mentees}
+										userId={this.state.userId}
+										fetchData={this.fetchHome}
+										mentors={this.state.mentors}
+										mentees={this.state.mentees}
 								  /> }
 							/>
 							<Route
-								path="/login"
-								render={ () => <SignupPage /> }
-							/>
-							<Route
 								path="/SEprofile"
-								render={ () => <SEProfilePage /> }
+								render={ () => <SEProfilePage 
+										fetchSEProfile={this.fetchSEProfile}
+										SE_profile={this.state.SE_profile}
+										handleMentorRequest={this.handleMentorRequest}
+									/> }
 							/>
               <Route
                 path="/stories"
