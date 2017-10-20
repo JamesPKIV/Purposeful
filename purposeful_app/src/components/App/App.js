@@ -113,7 +113,7 @@ class App extends Component {
 
 
 	fetchHome () {
-		return Client.get_mentorship_dash(this.state.userId)
+		return Client.get_mentorship_dash()
 			.then (dash_data => {
 				var mentees = dash_data["mentees"];
 				var mentors = dash_data["mentors"];
@@ -125,6 +125,7 @@ class App extends Component {
 					mentees: mentees,
 					mentors: mentors,
 					recommended: recommended,
+					isLoggedIn: true
 				});
 			})
 			.catch (err => {

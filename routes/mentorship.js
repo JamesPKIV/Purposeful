@@ -5,6 +5,7 @@ var VERBOSE = require("../models/pg_database.js").VERBOSE;
 var db_tables = require("../models/tables.js").db_tables;
 var db = require("../models/pg_database.js").db;
 var Sequelize = require("../models/pg_database.js").Sequelize;
+var restrict_access = require("./route_utils.js").restrict_access;
 
 /**	
 	This HTTP POST function creates a new entry in the mentorship table with the 
@@ -20,13 +21,13 @@ var Sequelize = require("../models/pg_database.js").Sequelize;
 	 accessible as the "data" property of the response body:
 *		{data: {id: "123", name: "John Doe", email:"..."  ...}}	
 **/
-router.post('/new', function(req, res, next) {
+router.post('/new', restrict_access, function(req, res, next) {
 	console.log("serving /api/mentorship/new request.");
 
 	const new_entry = req.body;
 	if (VERBOSE) console.log ("request body:", new_entry);
 
-	const mentee_uid = new_entry.mentee_uid;
+	const mentee_uid = req.session.userID;
 	const mentor_uid = new_entry.mentor_uid;
 
 	if ( (!mentor_uid) || (!mentee_uid) ) {
@@ -72,6 +73,63 @@ router.post('/new', function(req, res, next) {
 	})
 	
 });
+
+
+
+router.get("/dash", restrict_access, (req, res, next) => {
+
+	if (VERBOSE) console.log("MENTORSHIP.JS->/dash reached. ");
+	if (VERBOSE) console.log ("request params:", req.params);
+
+	const user_id = req.session.userID;
+
+	if (!user_id) {
+		var msg = "No user_uid provided in session."
+		return handleError( new Error(msg), res );
+	}
+
+	/* lookup mentee in users table, then get mentors */
+	return db_tables.Users.findById(user_id)
+		.then(user => {
+			if (VERBOSE) console.log("MENTORSHIP.JS->/dash) user retrieved: ", user);
+			
+			var user_queries = [
+				user.getMentees(),
+				user.getMentors(),
+				user.getSkills(),
+			]
+
+			return Promise.all(user_queries)	
+		    	.then(results => {
+
+		    		console.log()
+		    		var mentee_list = results[0];
+		    		var mentor_list = results[1];
+		    		var skill_list = results[2];
+
+		    		
+		    		var rand_idx = Math.floor(skill_list.length * Math.random());
+		    		var rand_skill = skill_list[rand_idx];
+		    		//get a random skill to return recommended mentors for 
+		    		return rand_skill.getUsers()
+		    			.then ( recomm_mentors => {
+		    				if (VERBOSE) 
+		    					console.log("Successfully fetched mentees: ", mentee_list);
+		    				
+		    				var data = {
+		    					mentees:mentee_list, 
+		    					mentors:mentor_list, 
+		    					recommended:recomm_mentors
+		    				};
+
+		    				res.json({msg: "ok", data: data})
+		    			});
+
+			    	
+		    	})
+		})
+		.catch(error => {  handleError(error, res) });	
+})
 
 
 
@@ -145,63 +203,7 @@ router.get('/mentees/:mentor_uid', function(req, res, next) {
 
 
 
-router.get("/dash/:user_id", (req, res, next) => {
 
-	if (VERBOSE) console.log("MENTORSHIP.JS->/dash reached. ");
-	if (VERBOSE) console.log ("request params:", req.params);
-
-	const user_id = req.params.user_id;
-
-
-	/* TODO: validate that user is who they claim to be with sessions */
-	if (!user_id) {
-		var msg = "No user_uid provided in request json body."
-		return handleError( new Error(msg), res );
-	}
-
-	/* lookup mentee in users table, then get mentors */
-	return db_tables.Users.findById(user_id)
-
-		.then(user => {
-			if (VERBOSE) console.log("MENTORSHIP.JS->/dash) user retrieved: ", user);
-			
-			var user_queries = [
-				user.getMentees(),
-				user.getMentors(),
-				user.getSkills(),
-			]
-
-			return Promise.all(user_queries)	
-		    	.then(results => {
-
-		    		console.log()
-		    		var mentee_list = results[0];
-		    		var mentor_list = results[1];
-		    		var skill_list = results[2];
-
-		    		
-		    		var rand_idx = Math.floor(skill_list.length * Math.random());
-		    		var rand_skill = skill_list[rand_idx];
-		    		//get a random skill to return recommended mentors for 
-		    		return rand_skill.getUsers()
-		    			.then ( recomm_mentors => {
-		    				if (VERBOSE) 
-		    					console.log("Successfully fetched mentees: ", mentee_list);
-		    				
-		    				var data = {
-		    					mentees:mentee_list, 
-		    					mentors:mentor_list, 
-		    					recommended:recomm_mentors
-		    				};
-
-		    				res.json({msg: "ok", data: data})
-		    			});
-
-			    	
-		    	})
-		})
-		.catch(error => {  handleError(error, res) });	
-})
 
 
 function handleError (err, response) {

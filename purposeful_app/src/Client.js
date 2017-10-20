@@ -60,6 +60,7 @@ function login(email, pwd) {
 
 	return fetch(prepend_path + "api/users/login", {
 		method: "POST",
+        credentials: "same-origin",
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
@@ -86,7 +87,7 @@ function login(email, pwd) {
 
 
 
-/* this function gets a user's information by uid */
+/* this function gets someone else's profile information by uid */
 function get_user_by_uid (uid) {
 
 	return fetch(prepend_path + "api/users/user/" + uid, {
@@ -107,9 +108,10 @@ function get_user_by_uid (uid) {
 }
 
 
-/* this function creates a mentorship relation between two users */
-function add_mentorship(mentee_uid, mentor_uid) {
-
+/* this function creates a mentorship relation between two users 
+* Precondition: user must be logged in
+*/
+function add_mentorship(mentor_uid) {
 	
 	console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) called!");
 	return fetch(prepend_path + "api/mentorship/new", {
@@ -120,7 +122,6 @@ function add_mentorship(mentee_uid, mentor_uid) {
 		},
 		body: JSON.stringify({
 			mentor_uid: mentor_uid,
-			mentee_uid: mentee_uid,
 		})
 	})
 	.then(checkStatus)
@@ -135,15 +136,16 @@ function add_mentorship(mentee_uid, mentor_uid) {
 			console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) Request Failed with Errors.");
 			throw error.body;  
 		});
-	
 }
 
 
-/* this function returns user information for all of the given user's mentors */
-function get_mentors(mentee_uid) {
-	console.log("(CLIENT.JS->GET_MENTORS) called with mentee_uid: ", mentee_uid);
+/* this function returns user information for all of the given user's mentors 
+* Precondition: user must be logged in
+*/
+function get_mentors() {
+	console.log("(CLIENT.JS->GET_MENTORS) called.");
 
-	return fetch(prepend_path + "api/mentorship/mentors/" + mentee_uid, {
+	return fetch(prepend_path + "api/mentorship/mentors/", {
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
@@ -164,8 +166,10 @@ function get_mentors(mentee_uid) {
 }
 
 
-/* this function adds a new skill to a user's profile */
-function add_user_skill(user_id, skill_name) {
+/* this function adds a new skill to a user's profile 
+* Precondition: user must be logged in
+*/
+function add_user_skill(skill_name) {
 
 	
 	console.log("(CLIENT.JS->ADD_USER_SKILL) called!");
@@ -176,7 +180,6 @@ function add_user_skill(user_id, skill_name) {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-			user_id: user_id,
 			skill_name: skill_name,
 		})
 	})
@@ -195,8 +198,9 @@ function add_user_skill(user_id, skill_name) {
 }
 
 
-
-/* this function adds an array of skills to a user's profile */
+/* this function adds an array of skills to a user's profile 
+* Precondition: user must be logged in
+*/
 function add_skills_and_interests(user_id, skills, interests) {
 	const si_list = skills.concat(interests);
 	const skill_name_arr = Array.from(new Set(si_list));
@@ -228,7 +232,9 @@ function add_skills_and_interests(user_id, skills, interests) {
 }
 
 
-/* this function returns user information for all of the given user's mentors */
+/* this function returns user information for all of the given user's mentors 
+* Precondition: user must be logged in
+*/
 function get_user_skills(user_id) {
 
 	console.log("(CLIENT.JS->GET_USER_SKILLS) called with user_id: ", user_id);
@@ -253,7 +259,9 @@ function get_user_skills(user_id) {
 }
 
 
-/* this function returns user information for all users with the requested skill */
+/* this function returns user information for all users with the requested skill
+* Precondition: user must be logged in
+ */
 function get_users_with_skill(skill_name) {
 
 	console.log("(CLIENT.JS->GET_USERS_WITH_SKILL) called with skill_name: ", skill_name);
@@ -279,12 +287,14 @@ function get_users_with_skill(skill_name) {
 
 
 
-function get_mentorship_dash(mentee_uid) {
-	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called with mentee_uid: ", mentee_uid);
-	return fetch(prepend_path + "api/mentorship/dash/" + mentee_uid, {
+function get_mentorship_dash() {
+	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called. ");
+	return fetch(prepend_path + "api/mentorship/dash", {
+		credentials: "same-origin",
 		headers: {
 			"Accept": "application/json",
 		},
+
 	})
 	.then(checkStatus)
 	.then(parseJSON)
@@ -300,8 +310,9 @@ function get_mentorship_dash(mentee_uid) {
 	});
 }
 
-
-
+/*
+* Precondition: user must be logged in
+*/
 function update_profile(user_id, past_str, present_str, future_str) {
 	return fetch("api/users/profile", {
 		method: "POST",

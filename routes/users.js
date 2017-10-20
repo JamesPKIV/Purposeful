@@ -2,6 +2,7 @@ var db_tables =require("../models/tables.js").db_tables;
 var VERBOSE = require("../models/pg_database.js").VERBOSE;
 var Sequelize = require("../models/pg_database.js").Sequelize;
 var express = require('express');
+var restrict_access = require("./route_utils.js").restrict_access;
 var router = express.Router();
 
 
@@ -69,8 +70,8 @@ router.post('/new', function(req, res, next) {
 
 
 /* GET user listing by user id.  
-* If successful, sends a response with a JSON body containing name and 
-* email properties for the given id.
+* If successful, sends a response with a JSON body containing profile
+* properties for the given id.
 */
 router.get('/user/:uid', function(req, res, next) {
 
@@ -105,9 +106,9 @@ router.get('/user/:uid', function(req, res, next) {
 
 
 
-router.post("/profile", function(req, res, next ) {
+router.post("/profile", restrict_access, function(req, res, next ) {
 	var update_attrs = {};
-	var user_id = req.body.user_id;
+	var user_id = req.session.userID;
 
 	if (req.body.present) {
 		update_attrs["present"] = req.body.present;
@@ -195,7 +196,12 @@ router.post("/login", (req, res, next) => {
 			}
 			else {
 				console.log("User logged in:", user );
-				return res.json({message: "ok", data: user});
+				//set session to store userID
+				req.session.userID = user.id;
+				req.session.userName = user.name;
+				req.session.save();
+				console.log("session saved: " + JSON.stringify(req.session));
+				return res.json({message: "login successful", data: user});
 			}
 		})
 		.catch(err => {
@@ -203,5 +209,8 @@ router.post("/login", (req, res, next) => {
 			res.status(500).json({message: "Log in failed", error: err.message });
 		});
 })
+
+
+
 
 module.exports = router;
