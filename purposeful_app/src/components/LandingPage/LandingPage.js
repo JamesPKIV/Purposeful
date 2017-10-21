@@ -100,7 +100,7 @@ class LandingPage extends Component {
 				});
 		}
 	}
-	
+
 	setShow(content_to_show) {
 		this.setState({
 			show: content_to_show
@@ -127,8 +127,8 @@ class LandingPage extends Component {
 							</form>
 							<hr className="hr-tag"/>
 							<div className="div-login">
-								Have and account already? 
-								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link> 
+								Have and account already?
+								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link>
 							</div>
 						</div>
 					</div>
@@ -225,7 +225,7 @@ class LandingPage extends Component {
 		return(
 			<div>
 				<div className="row fullrow ">
-					<img src={logo} />
+					<img src={logo} alt="logo"/>
 					<h1>Welcome to Purposeful</h1>
 				</div>
 				<div className="container">

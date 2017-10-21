@@ -6,7 +6,6 @@ import profile_pic from './profile-pic-default.jpg';
 import project_pic from './project-pic-default.jpg';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
-
 import FaUserTimes from 'react-icons/lib/fa/user-times';
 import FaUserPlus from 'react-icons/lib/fa/user-plus';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';

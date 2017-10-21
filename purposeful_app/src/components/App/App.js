@@ -6,7 +6,7 @@ import './App.css';
 import HomePage from '../HomePage/HomePage';
 import MentorshipPage from '../MentorshipPage/MentorshipPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
-import SignupPage from '../SignupPage/SignupPage';
+/*import SignupPage from '../SignupPage/SignupPage';*/
 import LandingPage from '../LandingPage/LandingPage';
 import SEProfilePage from '../SEProfilePage/SEProfilePage';
 import InterestSkills from '../InterestSkills/InterestSkills';
@@ -169,7 +169,7 @@ class App extends Component {
 			var msg = "No user was specified";
 			throw new Error(msg);
 		}
-		
+
 		return Client.get_user_by_id(SEuserId)
 			.then( SE_data => {
 				this.setState({
@@ -375,7 +375,7 @@ footerDesktop(){
 							/>
 							<Route
 								path="/profile"
-								render={ () => 
+								render={ () =>
 									<ProfilePage
 										isLoggedIn={this.state.isLoggedIn}
 										userName={this.state.userName}
@@ -394,7 +394,7 @@ footerDesktop(){
 							/>
 							<Route
 								path="/SEprofile"
-								render={ () => <SEProfilePage 
+								render={ () => <SEProfilePage
 										fetchSEProfile={this.fetchSEProfile}
 										SE_profile={this.state.SE_profile}
 										handleMentorRequest={this.handleMentorRequest}
