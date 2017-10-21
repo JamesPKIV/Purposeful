@@ -14,6 +14,7 @@ import Github from 'react-icons/lib/fa/github';
 import Linkedin from 'react-icons/lib/fa/linkedin';
 
 import ChevronUP from 'react-icons/lib/fa/chevron-up';
+import ChevronDOWN from 'react-icons/lib/fa/chevron-down';
 
 class OurTeam extends Component {
 
@@ -81,6 +82,7 @@ class OurTeam extends Component {
 					</ul>
 				</div>
 				<div className="chevron-div" onClick={this.toggle}>
+						<span>Boeard of Advisors</span>
 						<br/>
 						<span><ChevronUP className="icon " /></span>
 				</div>
@@ -122,7 +124,7 @@ class OurTeam extends Component {
 				<div className="chevron-div" onClick={this.toggle}>
 					<span>Our Team</span>
 					<br/>
-					<span><ChevronUP className="icon " /></span>
+					<span><ChevronDOWN className="icon " /></span>
 				</div>
 		</div>
 		)
