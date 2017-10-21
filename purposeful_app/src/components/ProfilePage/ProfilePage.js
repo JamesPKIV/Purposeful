@@ -318,11 +318,6 @@ class ProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-				<div className="col s2 m2 l2valign">
-					<button className="btn-flat">
-						<FaAngleRight className="profile-name"></FaAngleRight>
-					</button>
-				</div>
 			</div>
 		);
 	}
@@ -331,11 +326,6 @@ class ProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-				<div className="col s2 m2 l2 valign">
-					<button className="btn-flat">
-						<FaAngleRight className="profile-name"></FaAngleRight>
-					</button>
-				</div>
 			</div>
 		);
 	}
