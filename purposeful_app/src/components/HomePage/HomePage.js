@@ -33,17 +33,17 @@ class HomePage extends Component {
 					: <p className="logged-in-p"> you are NOT logged in, and this is your home page. </p>
 				}
 				<div className="activity-feeds col l10 push-l1">
-				{
+				{/*
 						this.props.isLoggedIn  &&
 						<MentorFeed title="Mentors you may like"
 							feedItems={this.props.recommended}
 						/>
-				}
+				*/}
 					<ActivityFeed title="Activity in Your Network" linkTo="/home" />
 					<MentorFeed title="Mentees" linkTo="/mentorship" feedItems={this.props.mentees}/>
 					<ActivityFeed title="Collaborations" linkTo="/collaborations" />
 
-				</div>
+				</div> 
 			</div>
 		);
 	}

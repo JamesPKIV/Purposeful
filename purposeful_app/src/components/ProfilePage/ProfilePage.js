@@ -54,7 +54,6 @@ class ProfilePage extends Component {
 		};
 	}
 
-
 	handleSubmitChange(to_toggle) {
 		this.props.handleSubmitChange();
 		this.toggle(to_toggle);
@@ -67,7 +66,6 @@ class ProfilePage extends Component {
 
 	componentDidMount () {
 		this.props.fetchData();
-
 	}
 
 	toggle(to_toggle){
@@ -722,8 +720,8 @@ class ProfilePage extends Component {
 			<div>
 				<NavBar />
 				{this.props.isLoggedIn ?
-				this.loadLoggedIn() :/* desktop version */
-				this.loadLoggedOut() /*mobile version */}
+				this.loadLoggedIn() :/* User is logged in*/
+				this.loadLoggedOut() /* User happens to be logged out */}
 			</div>
         );
 	}

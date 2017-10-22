@@ -86,10 +86,6 @@ input[type=password]{
   margin-bottom: 20px;
 }
 
-.hr-tag{ 
-  border: 2px solid;
-  border-color: black;
-}
 
 .div-login{
   text-align: left;

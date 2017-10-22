@@ -141,7 +141,6 @@ class LandingPage extends Component {
 									<input className="btn light-green" type="submit"  value="Continue " />
 								</div>
 							</form>
-							<hr className="hr-tag"/>
 							<div className="div-login">
 								Have and account already? 
 								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link> 
