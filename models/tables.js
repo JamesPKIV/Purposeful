@@ -40,7 +40,42 @@ const Skill = db.define('skills', {
 });
 
 
-const Mentorship = db.define('mentorships', {
+const Story = db.define("stories", {
+	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+	title: {type: Sequelize.STRING, allowNull: false}, 
+	body: {type: Sequelize.STRING, allowNull: false},
+});
+
+const Message = db.define("user_messages", {
+	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+	body: {type: Sequelize.STRING, allowNull:false},
+});
+
+const Chat = db.define('chats', {
+	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+});
+
+const User_Chat_Map = db.define("user_chat_map", {
+	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+});
+Chat.belongsToMany(User, {through: User_Chat_Map, });
+
+const Message_Chat_Map = db.define("user_chat_map", {
+	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+});
+Chat.belongsToMany(Message, {through: Message_Chat_Map, });
+
+
+const User_Request_Map = db.define("user_request_map", {
+	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+	mentee_message:{type: Sequelize.STRING},
+})
+User.belongsToMany(User, {through: User_Request_Map, as:"MentorRequests", foreignKey: "mentee_uid"});
+User.belongsToMany(User, {through: User_Request_Map, as:"MenteeRequests", foreignKey: "mentor_uid"});
+User_Request_Map.belongsTo(Chat, {through: User_Request_Map});
+
+
+const Mentorship = db.define('mentorship_map', {
 	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
 });
 /* the foreignKey values are intentionally switched, though this may seem incorrect.
@@ -49,7 +84,6 @@ const Mentorship = db.define('mentorships', {
 */
 User.belongsToMany(User, { through: Mentorship, as: "Mentors", foreignKey: "mentee_uid"});
 User.belongsToMany(User, { through: Mentorship, as: "Mentees", foreignKey: "mentor_uid"});
-
 
 const User_Skill_Map = db.define('user_skill_map', {
 	level: {type: Sequelize.STRING}
@@ -64,11 +98,23 @@ User.belongsToMany(Interest, { through: User_Inter_Map });
 Interest.belongsToMany(User, { through: User_Inter_Map });
 
 
+const User_Story_Map = db.define('user_story_map', {
+});
+User.belongsToMany(Story,{ 
+	through: User_Story_Map,
+	as:"Author",
+});
+
+
 const db_tables = {
 	Users: User,
 	Skills: Skill,
 	Interests: Interest, 
+	Stories: Story,
+	Chats: Chat,
+	Messages: Message,
 	Mentorships: Mentorship,
+	User_Request_Map: User_Request_Map,
 	User_Skill_Map: User_Skill_Map,
 	User_Inter_Map: User_Inter_Map,
 };

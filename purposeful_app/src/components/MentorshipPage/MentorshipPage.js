@@ -44,7 +44,7 @@ class MentorshipPage extends Component {
 				})
 				.catch ( () => {
 					this.setState({
-						show: "SearchError",
+						show: "searchError",
 					});
 				});
 		}

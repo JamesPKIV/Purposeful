@@ -21,6 +21,7 @@
     "pg-hstore": "^2.3.2",
     "react-icons": "^2.2.7",
     "sequelize": "^4.11.0",
+    "sequelize-cli": "^3.0.0",
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {

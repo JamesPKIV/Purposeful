@@ -149,7 +149,8 @@ function add_mentor_request(mentor_uid, message_from_mentee) {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-				mentor_userid: mentor_uid
+				mentor_uid: mentor_uid,
+				mentee_message: message_from_mentee,
 		}),
 		
 
