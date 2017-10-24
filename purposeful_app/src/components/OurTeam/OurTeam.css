@@ -1,12 +1,12 @@
 @media (min-width: 700px){
   .main-about{
     margin: 0 auto;
-    margin-top: 50px !important;
     width: 50%;
+    margin-top: 175px;
   }
 
-  .ul-about li{ 
-    display: block; 
+  .ul-about li{
+    display: block;
     margin: auto;
   }
 

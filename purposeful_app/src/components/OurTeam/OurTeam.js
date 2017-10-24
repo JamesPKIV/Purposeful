@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './OurTeam.css';
 import NavBar from '../NavBar/NavBar';
-import working from "../App/still_working.png";
 
 // importing images
 import oscar from './oscar.png';
@@ -16,6 +14,7 @@ import Github from 'react-icons/lib/fa/github';
 import Linkedin from 'react-icons/lib/fa/linkedin';
 
 import ChevronUP from 'react-icons/lib/fa/chevron-up';
+import ChevronDOWN from 'react-icons/lib/fa/chevron-down';
 
 class OurTeam extends Component {
 
@@ -25,13 +24,13 @@ class OurTeam extends Component {
 			showTeam: true
 		};
 		/*bind functions here*/
-		this.toggle = this.toggle.bind(this); 
+		this.toggle = this.toggle.bind(this);
 		this.teamDesc = this.teamDesc.bind(this);
 		this.boardDesc = this.boardDesc.bind(this);
 	}
 
-	toggle(){ 
-		this.setState({ 
+	toggle(){
+		this.setState({
 			showTeam: !this.state.showTeam
 		});
 	}
@@ -82,7 +81,8 @@ class OurTeam extends Component {
 						</li>
 					</ul>
 				</div>
-				<div className="chevron-div" onClick={this.toggle}> 
+				<div className="chevron-div" onClick={this.toggle}>
+						<span>Boeard of Advisors</span>
 						<br/>
 						<span><ChevronUP className="icon " /></span>
 				</div>
@@ -94,7 +94,7 @@ class OurTeam extends Component {
 		return (
 			<div className="main-about">
 				<NavBar />
-				<div> 
+				<div>
 				<h4 className="hd-leader">Board of Advisors</h4>
 				<ul className="ul-about">
 					<li>
@@ -121,10 +121,10 @@ class OurTeam extends Component {
 					</li>
 				</ul>
 				</div>
-				<div className="chevron-div" onClick={this.toggle}> 
+				<div className="chevron-div" onClick={this.toggle}>
 					<span>Our Team</span>
 					<br/>
-					<span><ChevronUP className="icon " /></span>
+					<span><ChevronDOWN className="icon " /></span>
 				</div>
 		</div>
 		)
