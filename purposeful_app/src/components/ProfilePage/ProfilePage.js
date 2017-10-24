@@ -9,7 +9,6 @@ import ActivityFeed from '../ActivityFeed/ActivityFeed';
 
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
-import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaCamera from 'react-icons/lib/fa/camera';
 import FaPencil from 'react-icons/lib/fa/pencil';
 import FaGroup from 'react-icons/lib/fa/group';
@@ -316,11 +315,6 @@ class ProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-				<div className="col s2 m2 l2valign">
-					<button className="btn-flat">
-						<FaAngleRight className="profile-name"></FaAngleRight>
-					</button>
-				</div>
 			</div>
 		);
 	}
@@ -329,11 +323,6 @@ class ProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-				<div className="col s2 m2 l2 valign">
-					<button className="btn-flat">
-						<FaAngleRight className="profile-name"></FaAngleRight>
-					</button>
-				</div>
 			</div>
 		);
 	}

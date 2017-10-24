@@ -116,7 +116,7 @@ class LandingPage extends Component {
 				});
 		}
 	}
-	
+
 	setShow(content_to_show) {
 		this.setState({
 			show: content_to_show
@@ -128,7 +128,7 @@ class LandingPage extends Component {
 			if (!this.state.nameSet) {
 				return (
 					<div>
-						<div className="col s6">
+						<div className="col s5 m5 l5">
 						<h5 className="header-sign"> Sign up </h5>
 							<form onSubmit={this.handleContinue} >
 								<div className="input-field col s12">
@@ -142,27 +142,27 @@ class LandingPage extends Component {
 								</div>
 							</form>
 							<div className="div-login">
-								Have and account already? 
-								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link> 
+								Have and account already?
+								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link>
 							</div>
 						</div>
 					</div>
 				);
 			} else if (this.state.nameSet) {
 				return (
-					<div className="col s6">
+					<div className="col s5 m5 l5">
 						<form>
-							<div className="row fullrow">
+							<div className="row ">
 								<div className="input-field col s4">
 									<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate " required />
 								</div>
 							</div>
-							<div className="row fullrow">
+							<div className="row ">
 								<div className="input-field col s4">
 									<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate pwd" type="password" name="Password" required />
 								</div><br />
 							</div>
-							<div className="row fullrow">
+							<div className="row ">
 								<div className="col s4">
 									<Link onClick={this.handleSubmit} to={{ pathname:"/interestskills" }}>
 										<div className="btn light-green">Sign Up </div>
@@ -175,23 +175,23 @@ class LandingPage extends Component {
 			}
 		}else{
 			return (
-				<div className="col s6">
+				<div className="col s6 m6 l6">
 					<ul className="header-login">
 						<li className="li-login"><h5 className="header-sign">Login </h5></li>
 						<li className="li-login"><button onClick={this.handleUserLogin} className="btn close-login"><Exit className="exit-icon"/></button></li>
 					</ul>
 					<form>
-						<div className="row fullrow">
+						<div className="row ">
 							<div className="input-field col s4">
 								<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
-						<div className="row fullrow">
+						<div className="row ">
 							<div className="input-field col s4">
 								<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate" type="password" name="Password" required />
 							</div><br />
 						</div>
-						<div className="row fullrow">
+						<div className="row ">
 							<div className="col s4">
 								<Link onClick={this.handleSubmit} to={{ pathname:"/home" }}>
 									<div className="btn light-green">Login </div>
@@ -206,19 +206,19 @@ class LandingPage extends Component {
 
 	purposeful_Login () {
 		return (
-			<div className="col s6 social-column">
-				<div className="row fullrow">
-					<div className="col s4 div-btn">
+			<div className="col s6 m6 l6 social-column">
+				<div className="row">
+					<div className="col s9 m9 l9 push-l4 div-btn">
 						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
 					</div>
 				</div>
-				<div className="row fullrow">
-					<div className="col s4 div-btn" >
+				<div className="row">
+					<div className="col s9 m9 l9 push-l4 div-btn" >
 					<button className="btn social-btn google-btn"> Continue with Google&nbsp;&nbsp;&nbsp;&nbsp;<FaGoogle className="s-icon" /></button>
 					</div>
 				</div>
-				<div className="row fullrow">
-					<div className="col s4 div-btn" >
+				<div className="row ">
+					<div className="col s9 m9 l9 push-l4 div-btn" >
 					<button className="btn social-btn link-btn"> Continue with Linkedin&nbsp;&nbsp;&nbsp;<FaLinkedin className="s-icon" /></button>
 					</div>
 				</div>
@@ -238,18 +238,16 @@ class LandingPage extends Component {
 		}
 
 		return(
-			<div>
-				<div className="row fullrow ">
-					<img src={logo} />
+			<span >
+				<div className="row fullrow">
+					<img src={logo} alt="logo"/>
 					<h1>Welcome to Purposeful</h1>
 				</div>
-				<div className="container">
-					<div className="row">
-					    {this.purposeful_Login()}
-						{this.purposeful_Signup()}
-					</div>
+				<div className="row fullrow">
+			  	{this.purposeful_Login()}
+					{this.purposeful_Signup()}
 				</div>
-			</div>
+			</span>
 		);
 	}
 }

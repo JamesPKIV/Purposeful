@@ -6,7 +6,6 @@ import profile_pic from './profile-pic-default.jpg';
 import project_pic from './project-pic-default.jpg';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
-import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaUserTimes from 'react-icons/lib/fa/user-times';
 import FaUserPlus from 'react-icons/lib/fa/user-plus';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
@@ -207,11 +206,7 @@ class SEProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-				<div className="col s2 m2 l2valign">
-					<button  className="btn-flat">
-						<FaAngleRight className="profile-name"></FaAngleRight>
-					</button>
-				</div>
+
 			</div>
 		);
 	}
@@ -220,11 +215,7 @@ class SEProfilePage extends Component {
 		return(
 			<div className="row valign-wrapper">
 				<ActivityFeed linkTo="/SEProfile" />
-				<div className="col s2 m2 l2 valign">
-					<button className="btn-flat">
-						<FaAngleRight className="profile-name"></FaAngleRight>
-					</button>
-				</div>
+
 			</div>
 		);
 	}
@@ -450,7 +441,7 @@ class SEProfilePage extends Component {
 						<div className="row">
 							<div className="container left-content">
 								<div className="card-panel">
-									
+
 									<div className="row"> <p> </p> </div>
 									<div className="row">
 										<p className="profile-titles"> Jane Skills </p>
