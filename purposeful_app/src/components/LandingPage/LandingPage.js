@@ -29,18 +29,33 @@ class LandingPage extends Component {
 
 		this.handleContinue = this.handleContinue.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleKey = this.handleKey.bind(this);
 	}
 
 
-	// User logging in helper methods
+	// User sign up/login failed, handle reset
+	handleReset(){
+		this.props.handleEmailSet("");
+		document.getElementById("email").value = "";
+		document.getElementById("pwd").value = "";
+	}
+
+	// User pressed enter, continue
+	handleKey(ev){ 
+		console.log(this.state.userPwd);
+		if(ev.key === "Enter"){
+			this.handleEmailSet(ev);
+			this.handleSubmit(ev);
+		}
+	}
+
+	// User logging in helper method
 	handleUserLogin (ev) {
 		ev.preventDefault();
 		this.setState({
 			userLogin: !this.state.userLogin
 		});
-		console.log('user is logging in with his/her account' + this.state.userLogin);
 	}
-
 
 	// User signing up helper methods
 	handleNameSet (ev) {
@@ -85,10 +100,10 @@ class LandingPage extends Component {
 				.catch(err => {
 					console.log("(LandingPage) user account creation failed with error: ", err);
 					alert("Error creating new user account: " + err);
+					this.handleReset();
 				});
 		} else {
 			// fetch user profile from database
-			alert("User is attempting to login, setup db");
 			this.props.handleLogin(pwd)
 				.then((data) => {
 					console.log("(Landing Page) User has logged! User data is: ", data);
@@ -97,6 +112,7 @@ class LandingPage extends Component {
 				.catch(err => {
 					console.log("(LandingPage) user account login failed with error: ", err);
 					alert("Error logging user into app: " + err);
+					this.handleReset();
 				});
 		}
 	}
@@ -114,7 +130,7 @@ class LandingPage extends Component {
 					<div>
 						<div className="col s5 m5 l5">
 						<h5 className="header-sign"> Sign up </h5>
-							<form onSubmit={this.handleContinue}>
+							<form onSubmit={this.handleContinue} >
 								<div className="input-field col s12">
 									<input
 										type="text"
@@ -122,7 +138,7 @@ class LandingPage extends Component {
 										value={this.props.userName}
 										onChange={this.handleNameSet}
 										name="fullName" />
-									<input className="btn light-green" type="submit" value="Continue " />
+									<input className="btn light-green" type="submit"  value="Continue " />
 								</div>
 							</form>
 							<div className="div-login">
@@ -138,12 +154,12 @@ class LandingPage extends Component {
 						<form>
 							<div className="row ">
 								<div className="input-field col s4">
-									<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+									<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate " required />
 								</div>
 							</div>
 							<div className="row ">
 								<div className="input-field col s4">
-									<input placeholder="Password" onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
+									<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate pwd" type="password" name="Password" required />
 								</div><br />
 							</div>
 							<div className="row ">
@@ -167,12 +183,12 @@ class LandingPage extends Component {
 					<form>
 						<div className="row ">
 							<div className="input-field col s4">
-								<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+								<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
 						<div className="row ">
 							<div className="input-field col s4">
-								<input placeholder="Password" onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
+								<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate" type="password" name="Password" required />
 							</div><br />
 						</div>
 						<div className="row ">
@@ -228,7 +244,7 @@ class LandingPage extends Component {
 					<h1>Welcome to Purposeful</h1>
 				</div>
 				<div className="row fullrow">
-			  	{this.purposeful_Login()}
+			  		{this.purposeful_Login()}
 					{this.purposeful_Signup()}
 				</div>
 			</span>

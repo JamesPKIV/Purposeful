@@ -15,8 +15,6 @@ class HomePage extends Component {
 		};
 	}
 
-
-
 	componentDidMount () {
 		this.props.fetchData();
 	}
@@ -26,7 +24,7 @@ class HomePage extends Component {
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
 			<div id="home-content" className="row">
-				<NavBar />
+				<NavBar logout={this.props.logout}/>
 				{
 					this.props.isLoggedIn ?
 					<p className="logged-in-p">User Name: {this.props.userName}, UserID: {this.props.userId} </p>
@@ -43,7 +41,7 @@ class HomePage extends Component {
 					<MentorFeed title="Mentees" linkTo="/mentorship" feedItems={this.props.mentees}/>
 					<ActivityFeed title="Collaborations" linkTo="/collaborations" />
 
-				</div>
+				</div> 
 			</div>
 		);
 	}

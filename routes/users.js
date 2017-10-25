@@ -108,6 +108,14 @@ router.post("/login", (req, res, next) => {
 })
 
 
+
+router.post("/logout", (req, res, next) => {
+	console.log("serving /api/users/logout request: ");
+	/* Destroy the current session */
+	req.session.destroy();
+	return res.json({loggedout: true});
+})
+
 /* GET user listing by user id.  
 * If successful, sends a response with a JSON body containing profile
 * properties for the given id.

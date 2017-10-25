@@ -209,32 +209,32 @@ class InterestSkills extends Component {
 			if (this.state.interests) {
 				return (
 					<div className="row valign-wrapper">
-						<div className="col s5 m5 l5 valign">
+						{/*<div className="col s5 m5 l5 valign">
 							<h4 className="row">Create your own category!</h4>
 							<div className="row input-field">
 								<input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7" />
 								<button onClick={() => this.addCategory(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
 									Add Category
-					</button>
-							</div>
-						</div>
+								</button>
+							</div> 
+						</div> */}
 						<button onClick={() => this.continueFrom("interests")} className="col s5 m5 l5 btn-large light-green darken-1 valign">
 							Continue
-				</button>
+						</button>
 					</div>
 				);
 			} else {
 				return (
 					<div className="row valign-wrapper">
-						<div className="col s5 m5 l5 valign">
+						{/*<div className="col s5 m5 l5 valign">
 							<h4 className="row">Create your own category!</h4>
 							<div className="row input-field">
 								<input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7" />
 								<button onClick={() => this.addCategory(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
 									Add Category
-					</button>
+								</button>
 							</div>
-						</div>
+						</div> */}
 						<span className="col s5 m5 l5 ">
 							<button onClick={() => this.continueFrom("skills")} className="col s12 m12 l12 btn-large light-green darken-1 valign">
 								Continue
@@ -248,22 +248,22 @@ class InterestSkills extends Component {
 			// Show button as disabled
 			return (
 				<div className="row valign-wrapper">
-					<div className="col s5 m5 l5 valign">
+					{/*<div className="col s5 m5 l5 valign">
 						<h4 className="row">Create your own category!</h4>
-						<div className="row input-field">
-							<input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7" />
-							<button onClick={() => this.addCategory(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
-								Add Category
-				  </button>
-						</div>
-					</div>
+							<div className="row input-field">
+								<input placeholder="New Category" id="new_categ" type="text" className="validate col s7 m7 l7" />
+								<button onClick={() => this.addCategory(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
+									Add Category
+								</button>
+							</div>
+						</div> */}
 					<div className="col s5 m5 l5 valign">
+					<p className="row"> Select at least three categories</p>
 						<span className="row">
 							<button className="col s12 m12 l12 btn-large light-green darken-1 disabled">
 								Continue
-				  </button>
+				  		</button>
 						</span>
-						<p className="row">HINT: Choose at least three categories</p>
 					</div>
 				</div>
 			);
