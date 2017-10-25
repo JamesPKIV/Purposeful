@@ -244,7 +244,7 @@ class LandingPage extends Component {
 					<h1>Welcome to Purposeful</h1>
 				</div>
 				<div className="row fullrow">
-			  	{this.purposeful_Login()}
+			  		{this.purposeful_Login()}
 					{this.purposeful_Signup()}
 				</div>
 			</span>

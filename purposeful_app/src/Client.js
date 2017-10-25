@@ -85,6 +85,28 @@ function login(email, pwd) {
 	});
 }
 
+function logout(){
+  return fetch(prepend_path + "api/users/logout", {
+	method: "POST", 
+	credentials: "same-origin", 
+	headers: {
+		"Accept": "application/json",
+		"Content-Type": "application/json"
+	}
+  })
+  .then(checkStatus)
+  .then(parseJSON)
+  .then(res => {
+	return res;
+  })
+  .catch(error => {
+	console.log("(CLIENT.JS->LOGOUT) Request Error:", error);
+	console.log("(CLIENT.JS->LOGOUT) Request Failed with Errors.");
+	throw error;
+  });	
+
+}
+
 
 /* this function gets someone else's profile information by uid */
 function get_user_by_uid (uid) {
@@ -405,6 +427,6 @@ function parseJSON(response) {
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
 	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
 	add_skills_and_interests, get_mentorship_dash, update_profile, 
-	login,	
+	login, logout
 };
 

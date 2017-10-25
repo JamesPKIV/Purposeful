@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import FaCog from 'react-icons/lib/fa/cog';
 import './DropDown.css';
 
@@ -10,6 +10,7 @@ class DropDown extends Component{
             toggle: true
         }
         this.toggleSettings = this.toggleSettings.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     toggleSettings = () => {
@@ -18,7 +19,13 @@ class DropDown extends Component{
             toggle: !this.state.toggle
         });
         // need to create a dropdown bar in React
-      }
+    }
+    
+    handleLogout = (ev) =>{
+        ev.preventDefault();
+        this.props.logout();
+        this.props.history.push('/landing', this.props.history.location.state);
+    }
 
     render(){
         if(this.state.toggle){
@@ -36,7 +43,7 @@ class DropDown extends Component{
                             <li className="li-dropdown"><NavLink to='/donate' className="li-navs" >Donate</NavLink> </li>
                             <li className="li-dropdown"><NavLink to='/settings' className="li-navs">Settings</NavLink></li>
                             <li className="li-dropdown"><NavLink to='/help' className="li-navs">Help</NavLink></li>
-                            <li className="li-dropdown"><NavLink to='../profile' className="li-navs">Logout</NavLink></li>
+                            <li className="li-dropdown"><NavLink to='/' onClick={this.handleLogout} className="li-navs">Logout</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -45,4 +52,4 @@ class DropDown extends Component{
     }
 }
 
-export default DropDown;
+export default withRouter(DropDown);
