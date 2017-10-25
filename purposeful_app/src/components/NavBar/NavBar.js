@@ -55,8 +55,8 @@ class NavBar extends Component {
 
   handleNav = (val) => {
     console.log(val + " was selected");
+    console.log(this.props.history);
     this.props.history.push(val, this.props.history.location.state);
-
   }
 
   toggle = () => {
@@ -71,10 +71,10 @@ class NavBar extends Component {
         <ul>
           <li><button onClick={() => this.handleNav("home")} className="navEntry"><img width="50" height="50" src={logo} className="plogo" alt="Purposeful"></img></button></li>
           <li><button onClick={() => this.handleNav("collabs")}  className="hvr-sweep-to-top navEntry">Collaborations </button></li>
-          <li><button onClick={() => this.handleNav("/mentorship")}  className="hvr-sweep-to-top navEntry">Mentorship </button></li>
+          <li><button onClick={() => this.handleNav("mentorship")}  className="hvr-sweep-to-top navEntry">Mentorship </button></li>
           <li><button onClick={() => this.handleNav("stories")}  className="hvr-sweep-to-top navEntry">Stories </button></li>
           { /* Right side of navbar */}
-          <li className="navRight"><DropDown/></li>
+          <li className="navRight"><DropDown logout={this.props.logout}/></li>
           <li className="navRight"><button onClick={() => this.handleNav("/profile")} className="navEntry" >Profile </button></li>
           <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />
             <input  className="searchInput"

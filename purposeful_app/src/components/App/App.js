@@ -52,6 +52,7 @@ class App extends Component {
 		this.footerDesktop = this.footerDesktop.bind(this);
 		this.footerMobile = this.footerMobile.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
+		this.handleLogout = this.handleLogout.bind(this);
 		this.handleCreateUser = this.handleCreateUser.bind(this);
 		this.handleSubmitSI = this.handleSubmitSI.bind(this);
 		this.fetchHome = this.fetchHome.bind(this);
@@ -63,7 +64,6 @@ class App extends Component {
 		this.fetchSEProfile = this.fetchSEProfile.bind(this);
 		this.handleMentorRequest = this.handleMentorRequest.bind(this);
 	}
-
 
 	handleCreateUser (password) {
 		var name = this.state.userName;
@@ -102,6 +102,12 @@ class App extends Component {
 			});
 	}
 
+
+	handleLogout(){
+		 return Client.logout().then(res => {
+			console.log("Session was destroyed and user should be logged out.");
+		 })
+	}
 
 	handleSubmitSI() {
 		var interests = this.state.interests;
@@ -328,8 +334,7 @@ footerDesktop(){
 									handleEmailSet={this.setStateAttr.bind(this, "userEmail") }
 									isLoggedIn={this.state.isLoggedIn}
 								/>}
-							/>
-
+							/> 
 							<Route
 								path="/interestskills"
 								render={ ()=>
@@ -344,7 +349,6 @@ footerDesktop(){
 									/>
 								}
 							/>
-
 							<Route
 								path="/home"
 								render={ () =>
@@ -357,6 +361,7 @@ footerDesktop(){
 										mentees={this.state.mentees}
 										recommended={this.state.recommended}
 										handleSetSEUserID={this.setStateAttr.bind(this, "SE_userId")}
+										logout={this.handleLogout}
 									/>
 								}
 							/>
