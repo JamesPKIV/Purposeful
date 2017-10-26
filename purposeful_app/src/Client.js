@@ -4,12 +4,12 @@
 /* THIS MUST BE SET FALSE TO OPERATE THIS FILE THROUGH REACT IN A BROWSER,
 * AND MUST BE SET TRUE TO OPERATE THIS FILE FROM THE COMMAND LINE USING NODE
 */
-const COMMAND_LINE_TESTING = false;
+const COMMAND_LINE_TESTING = true;
 
 /* duct tape for testing from command line node environment  */
 var prepend_path = "";
 if (COMMAND_LINE_TESTING) {
-	//fetch = require("node-fetch");
+	fetch = require("node-fetch");
 	prepend_path = "http://localhost:3001/";
 }
 
@@ -139,8 +139,8 @@ function add_mentorship(mentor_uid) {
 }
 
 
-function add_mentor_request(mentor_uid, message_from_mentee) {
-	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called. ");
+function add_mentor_request(mentee_uid, mentor_uid, message_from_mentee) {
+	console.log("(CLIENT.JS->ADD_MENTOR_REQUEST) called. ");
 	return fetch(prepend_path + "api/mentorship/add_mentor_request", {
 		method: "POST",
 		credentials: "same-origin",
@@ -149,6 +149,7 @@ function add_mentor_request(mentor_uid, message_from_mentee) {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
+				user_id: mentee_uid,
 				mentor_uid: mentor_uid,
 				mentee_message: message_from_mentee,
 		}),
@@ -158,8 +159,8 @@ function add_mentor_request(mentor_uid, message_from_mentee) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(result => {
-		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Response OK with new user data obj: ", result.data);
-		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) responded with status OK"); 
+		console.log("(CLIENT.JS->ADD_MENTOR_REQUEST) Response OK with new user data obj: ", result.data);
+		console.log("(CLIENT.JS->ADD_MENTOR_REQUEST) responded with status OK"); 
 		return result.data;
 	})
 	.catch(error => {  
@@ -406,6 +407,6 @@ function parseJSON(response) {
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
 	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
 	add_skills_and_interests, get_mentorship_dash, update_profile, 
-	login,	
+	login, add_mentor_request,	
 };
 

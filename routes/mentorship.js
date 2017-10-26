@@ -8,8 +8,8 @@ var Sequelize = require("../models/pg_database.js").Sequelize;
 var restrict_access = require("./route_utils.js").restrict_access;
 
 /**	
-	This HTTP POST function creates a new entry in the mentorship table with the 
-* user id's to be added, passed as thementor_id and mentee_id arguments provided
+	This HTTP POST method creates a new entry in the mentorship table with the 
+* user id's to be added, passed as the mentor_id and mentee_id arguments provided
 * in the request.
 *
 * Arguments: mentor's user id and mentee's user id must be sent in the body of
@@ -32,8 +32,7 @@ router.post('/new', restrict_access, function(req, res, next) {
 
 	if ( (!mentor_uid) ) {
 		console.log ("ERROR: Request body must contain mentor_uid.");
-		handleError(new Error("Request body must contain mentor_uid."), res);
-		return null;
+		return handleError(new Error("Request body must contain mentor_uid."), res);
 	}
 	if (VERBOSE) {
 		console.log ("Uids check out.");
@@ -72,6 +71,99 @@ router.post('/new', restrict_access, function(req, res, next) {
 		    });	
 	})
 	
+});
+
+
+
+/**	
+	This HTTP POST method creates a new entry in the mentorship request table with the 
+* user id's to be added, passed as thementor_id and mentee_id arguments provided
+* in the request.
+*
+* Arguments: mentor's user id and mentee's user id must be sent in the body of
+*	 the request as JSON:
+*		{"mentee_uid": "123", "mentor_uid": "456"}
+
+* Returns: if successful, a response is sent with status code 200 containing the 
+	JSON encoded object with the created mentorship relation's attributes,
+	 accessible as the "data" property of the response body:
+*		{data: {id: "123", name: "John Doe", email:"..."  ...}}	
+**/
+router.post('/add_mentor_request', function(req, res, next) {
+	console.log("serving /api/mentorship/add_mentor_request request.");
+
+	const new_entry = req.body;
+	if (VERBOSE) console.log ("request body:", new_entry);
+
+	const mentee_uid = new_entry.user_id;
+	const mentor_uid = new_entry.mentor_uid;
+	const msg = new_entry.mentee_message || "";
+
+	if ( (!mentor_uid) ) {
+		console.log ("ERROR: Request body must contain mentor_uid.");
+		return handleError(new Error("Request body must contain mentor_uid."), res);
+	}
+	if (VERBOSE) {
+		console.log ("Uids check out.");
+	}
+
+	/* transaction to add mentor and mentee relations */
+	return db.transaction(function(tr) { 
+
+		console.log ("transaction started.");
+		
+		var finds = [
+			db_tables.Users.findById(mentee_uid, {transaction: tr}),
+			db_tables.Users.findById(mentor_uid, {transaction: tr}),
+		];
+
+		return Promise.all(finds)
+		    .then(entries => { 
+		    	console.log ("Users created: ", entries);
+
+		    	var mentee = entries[0];
+		    	var mentor = entries[1];
+
+		    	chat_msg_creates = [
+		    		db_tables.Chats.create({},{transaction: tr}),
+		    		db_tables.Messages.create({
+			    			userId: mentee.id,
+			    			body: msg,
+		    			}, 
+		    			{transaction: tr}
+	    			)
+		    	]
+		    	return Promise.all(chat_msg_creates)
+		    		.then(chat_msg => {
+		    			var chat = chat_msg[0];
+		    			var msg = chat_msg[1];
+
+		    			var relation_links = [
+		    				db_tables.User_Request_Map.create({
+			    					menteeUid: mentee.id,
+			    					mentorUid: mentor.id,
+			    					chatId: chat.id,
+			    				},
+				    			{ transaction: tr, }
+		    				),
+		    				chat.addMessage( msg,
+		    					{ transaction: tr }
+		    				),
+		    				mentee.addChat(chat, {transaction: tr}),
+		    				mentor.addChat(chat, {transaction: tr}),
+		    			];
+						return Promise.all(relation_links)
+							.then(ment_req => {
+						    	if (VERBOSE) console.log("Added new mentorship request relation: ", JSON.stringify(ment_req));
+								return res.json({msg: "add mentor request was successful", data: ment_req});
+					    	})
+		    		})		    		
+			})
+			
+		    .catch(error => { 
+		    	return handleError(error, res); 
+		    });	
+	})
 });
 
 
@@ -233,7 +325,7 @@ function handleError (err, response) {
 		
 	}
 	else {
-		response.status(400).json({msg: "nok", "error": err});
+		response.status(err.status || 400).json({msg: "nok", "error": err});
 	}
 
 }
