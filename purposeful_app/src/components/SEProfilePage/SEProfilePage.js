@@ -432,7 +432,9 @@ class SEProfilePage extends Component {
 					<div className="col s4 m4 l4">
 						<img className="responsive-img circle" src={profile_pic} alt=""/>
 						<p className="profile-name"> Jane Doe </p>
-						<div className="container">
+						<div className="row"><p> </p></div>
+						<div className="row"><p> </p></div>
+						<div className="container left-content">
 								{this.purpose_content()}
 								{this.goals_content()}
 								{this.accomplish_content()}
