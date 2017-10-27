@@ -5,7 +5,6 @@ import { Redirect, Link } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
-import Exit from 'react-icons/lib/fa/arrows-alt';
 
 class LandingPage extends Component {
 
@@ -41,7 +40,7 @@ class LandingPage extends Component {
 	}
 
 	// User pressed enter, continue
-	handleKey(ev){ 
+	handleKey(ev){
 		console.log(this.state.userPwd);
 		if(ev.key === "Enter"){
 			this.handleEmailSet(ev);
@@ -176,10 +175,6 @@ class LandingPage extends Component {
 		}else{
 			return (
 				<div className="col s6 m6 l6">
-					<ul className="header-login">
-						<li className="li-login"><h5 className="header-sign">Login </h5></li>
-						<li className="li-login"><button onClick={this.handleUserLogin} className="btn close-login"><Exit className="exit-icon"/></button></li>
-					</ul>
 					<form>
 						<div className="row ">
 							<div className="input-field col s4">
@@ -199,6 +194,10 @@ class LandingPage extends Component {
 							</div>
 						</div>
 					</form>
+					<div className="row">
+						<div className="li-login col"><h5 className="header-sign">New to purposeful? </h5></div>
+						<div className="li-login col"><button onClick={this.handleUserLogin} className="btn close-login light-green">Sign up</button></div>
+					</div>
 				</div>
 			);
 		}

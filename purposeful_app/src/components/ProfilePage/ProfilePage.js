@@ -471,7 +471,7 @@ class ProfilePage extends Component {
 						<div className="row"> <p> </p> </div>
 						<div className="row"> <p> </p> </div>
 						<div className="row">
-							<div className="container left-content">
+							<div className="container left-content" >
 									{this.purpose_content()}
 									{this.goals_content()}
 									{this.accomplish_content()}

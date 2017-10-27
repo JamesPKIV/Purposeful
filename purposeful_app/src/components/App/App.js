@@ -21,6 +21,7 @@ import CollabPage from '../CollabPage/CollabPage';
 import EditProfile from '../EditProfile/EditProfile';
 import SettingsPage from '../SettingsPage/SettingsPage';
 import HelpPage from '../HelpPage/HelpPage';
+import ChatPage from '../ChatPage/ChatPage';
 
 import Client from "../../Client";
 
@@ -448,6 +449,10 @@ footerDesktop(){
 							<Route
 								path="/help"
 								render={ () => <HelpPage /> }
+							/>
+							<Route
+							  path="/chat"
+								render={ () => <ChatPage /> }
 							/>
 					</main>
 					{this.footer()}
