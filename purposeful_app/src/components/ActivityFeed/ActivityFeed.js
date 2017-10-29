@@ -47,7 +47,7 @@ class ActivityFeed extends Component {
 	*/
 	create_feed_item(item, idx) {
 		return (
-				<Link to="/SEprofile" key={idx}>
+			<Link to="/SEprofile" key={idx}>
 					<span className="feed-item col s2 m2 l2 push-l1" key={idx}>
 						<img className="responsive-img circle picture" src={profile_pic} alt=""/>
 						<p className="small-name">{item.name}</p>

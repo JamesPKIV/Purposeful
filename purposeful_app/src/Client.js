@@ -10,7 +10,7 @@ const COMMAND_LINE_TESTING = false;
 var prepend_path = "";
 if (COMMAND_LINE_TESTING) {
 	//fetch = require("node-fetch");
-	prepend_path = "http://localhost:3001/";
+	prepend_path = "http://localhost:3001";
 }
 
 
@@ -27,7 +27,7 @@ if (COMMAND_LINE_TESTING) {
 */
 function add_new_user(name, email, pwd) {
 
-	return fetch(prepend_path + "api/users/new", {
+	return fetch(prepend_path + "/api/users/new", {
 		method: "POST",
 		credentials: "same-origin",
 		headers: {
@@ -58,7 +58,7 @@ function add_new_user(name, email, pwd) {
 
 function login(email, pwd) {
 
-	return fetch(prepend_path + "api/users/login", {
+	return fetch(prepend_path + "/api/users/login", {
 		method: "POST",
         credentials: "same-origin",
 		headers: {
@@ -111,8 +111,10 @@ function logout(){
 /* this function gets someone else's profile information by uid */
 function get_user_by_uid (uid) {
 
-	return fetch(prepend_path + "api/users/user/" + uid, {
-			headers: {accept: "application/json"}
+	return fetch("/api/users/user/" + uid, {
+			method: "GET",
+			headers: {accept: "application/json"},
+        	credentials: "same-origin",
 		})
 		.then(checkStatus)
 		.then(parseJSON)
@@ -135,7 +137,7 @@ function get_user_by_uid (uid) {
 function add_mentorship(mentor_uid) {
 	
 	console.log("(CLIENT.JS->ADD_NEW_MENTORSHIP) called!");
-	return fetch(prepend_path + "api/mentorship/new", {
+	return fetch(prepend_path + "/api/mentorship/new", {
 		method: "POST",
 		credentials: "same-origin",
 		headers: {
@@ -162,8 +164,8 @@ function add_mentorship(mentor_uid) {
 
 
 function add_mentor_request(mentor_uid, message_from_mentee) {
-	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called. ");
-	return fetch(prepend_path + "api/mentorship/add_mentor_request", {
+	console.log("(CLIENT.JS->ADD_MENTOR_REQUEST) called. ");
+	return fetch(prepend_path + "/api/mentorship/add_mentor_request", {
 		method: "POST",
 		credentials: "same-origin",
 		headers: {
@@ -171,7 +173,8 @@ function add_mentor_request(mentor_uid, message_from_mentee) {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-				mentor_userid: mentor_uid
+				mentor_uid: mentor_uid,
+				mentee_message: message_from_mentee,
 		}),
 		
 
@@ -179,8 +182,8 @@ function add_mentor_request(mentor_uid, message_from_mentee) {
 	.then(checkStatus)
 	.then(parseJSON)
 	.then(result => {
-		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Response OK with new user data obj: ", result.data);
-		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) responded with status OK"); 
+		console.log("(CLIENT.JS->ADD_MENTOR_REQUEST) Response OK with new user data obj: ", result.data);
+		console.log("(CLIENT.JS->ADD_MENTOR_REQUEST) responded with status OK"); 
 		return result.data;
 	})
 	.catch(error => {  
@@ -197,7 +200,7 @@ function add_mentor_request(mentor_uid, message_from_mentee) {
 function get_mentors() {
 	console.log("(CLIENT.JS->GET_MENTORS) called.");
 
-	return fetch(prepend_path + "api/mentorship/mentors/", {
+	return fetch(prepend_path + "/api/mentorship/mentors/", {
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
@@ -208,12 +211,12 @@ function get_mentors() {
 	.then(parseJSON)
 	.then(result => {
 			console.log("(CLIENT.JS->GET_MENTORS) Response OK with new user data obj: ", result.data);
-			console.log("(CLIENT.JS->GET_USER_BY_UID) responded with status OK"); 
+			console.log("(CLIENT.JS->GET_MENTORS) responded with status OK"); 
 			return result.data;
 		} )
 		.catch(function(error) {  
-			console.log("(CLIENT.JS->GET_USER_BY_UID) Request Error:", error);
-			console.log("(CLIENT.JS->GET_USER_BY_UID) Request Failed with Errors.");
+			console.log("(CLIENT.JS-GET_MENTORS) Request Error:", error);
+			console.log("(CLIENT.JS->GET_MENTORS) Request Failed with Errors.");
 			throw error.body;  
 		});
 }
@@ -226,7 +229,7 @@ function add_user_skill(skill_name) {
 
 	
 	console.log("(CLIENT.JS->ADD_USER_SKILL) called!");
-	return fetch(prepend_path +"api/skills/new", {
+	return fetch(prepend_path +"/api/skills/new", {
 		method: "POST",
 		credentials: "same-origin",
 		headers: {
@@ -260,7 +263,7 @@ function add_skills_and_interests(user_id, skills, interests) {
 	const skill_name_arr = Array.from(new Set(si_list));
 
 	console.log("(CLIENT.JS->ADD_USER_SKILLS) called!");
-	return fetch(prepend_path + "api/skills/add_skills", {
+	return fetch(prepend_path + "/api/skills/add_skills", {
 		method: "POST",
 		credentials: "same-origin",
 		headers: {
@@ -292,7 +295,7 @@ function get_user_skills(user_id) {
 
 	console.log("(CLIENT.JS->GET_USER_SKILLS) called with user_id: ", user_id);
 
-	return fetch(prepend_path + "api/skills/get_skills/" + user_id, {
+	return fetch(prepend_path + "/api/skills/get_skills/" + user_id, {
 		headers: {
 			"Accept": "application/json",
 		},
@@ -318,7 +321,7 @@ function get_users_with_skill(skill_name) {
 
 	console.log("(CLIENT.JS->GET_USERS_WITH_SKILL) called with skill_name: ", skill_name);
 
-	return fetch(prepend_path + "api/skills/get_users_with_skill/" + skill_name, {
+	return fetch(prepend_path + "/api/skills/get_users_with_skill/" + skill_name, {
 		headers: {
 			"Accept": "application/json",
 		},
@@ -341,7 +344,7 @@ function get_users_with_skill(skill_name) {
 
 function get_mentorship_dash() {
 	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called. ");
-	return fetch(prepend_path + "api/mentorship/dash", {
+	return fetch(prepend_path + "/api/mentorship/dash", {
 		credentials: "same-origin",
 		headers: {
 			"Accept": "application/json",
@@ -366,7 +369,7 @@ function get_mentorship_dash() {
 * Precondition: user must be logged in
 */
 function update_profile(past_str, present_str, future_str) {
-	return fetch("api/users/profile", {
+	return fetch("/api/users/profile", {
 		method: "POST",
 		credentials: "same-origin",
 		headers: {
@@ -427,6 +430,6 @@ function parseJSON(response) {
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
 	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
 	add_skills_and_interests, get_mentorship_dash, update_profile, 
-	login, logout
+	login, logout, add_mentor_request
 };
 
