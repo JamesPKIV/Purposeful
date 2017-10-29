@@ -26,20 +26,54 @@ class SEProfilePage extends Component {
 		this.ask_mentee = this.ask_mentee.bind(this);
 		this.invite_collab = this.invite_collab.bind(this);
 		this.follow = this.follow.bind(this);
+		this.handleSendMentorRequest = this.handleSendMentorRequest.bind(this);
+		this.handleChangeMessage = this.handleChangeMessage.bind(this);
 		this.state = {
-			isLoggedIn : false,
 			purposeDisplay : false,
 			goalsDisplay : false,
-			accomplisDisplay: false,
+			accomplishDisplay: false,
 			askMentee: false,
 			inviteCollab: false,
 			follow: false,
 			requestSent: false,
 			inviteSent: false,
+			message:"",
 			skills: ["skill1", "skill2", "skill3","skill4"],
 			interests: ["interest1", "interest2","interest3", "interest4", "interest5"]
 		};
-  }
+	}
+
+
+	componentDidMount() {
+		var se_uid = this.props.match.params.id;
+
+		if (se_uid) {
+			this.props.fetchSEProfile(se_uid);
+		}
+
+	}
+
+
+	handleSendMentorRequest() {
+
+		var mentee_msg = this.state.message;
+		this.props.handleMentorRequest(mentee_msg)
+			.then( result => {
+				this.toggle("requestSent");
+			})
+			.catch( err => {
+				console.log(err);
+				alert("We weren't able to complete your request this time, but don't give up. Try again later!");
+			});
+		
+	}
+
+	handleChangeMessage(ev) {
+		var msg = ev.target.value;
+		this.setState({
+			message: msg
+		});
+	}
 
 	toggle(to_toggle){
 		switch(to_toggle){
@@ -109,10 +143,9 @@ class SEProfilePage extends Component {
 								<FaAngleUp className="profile-titles"></FaAngleUp>
 							</button>
 						</p>
-						<p className="profile-text valign">Write in this space current personal,
-						inter-personal, professional, or organizational projects you are working
-						on. Try to explain why these projects make you excited, and the ways
-						they relate to your experience, skills, and interests.</p>
+						<p className="profile-text valign">
+							{this.props.SEProfile.present}
+						</p>
 					</div>
 				);
 			} else {
@@ -124,10 +157,9 @@ class SEProfilePage extends Component {
 								<FaAngleDown className="profile-titles"></FaAngleDown>
 							</button>
 						</p>
-						<p className="profile-text truncate valign">Write in this space current personal,
-						inter-personal, professional, or organizational projects you are working
-						on. Try to explain why these projects make you excited, and the ways
-						they relate to your experience, skills, and interests.</p>
+						<p className="profile-text valign">
+							{this.props.SEProfile.present}
+						</p>
 					</div>
 				);
 			}
@@ -143,10 +175,9 @@ class SEProfilePage extends Component {
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
 					</p>
-					<p className="profile-text valign">Write in this space anything that
-					you wish to do in the future. They can be ready-to-start
-					ideas, half-baked ideas, long-term goals, personal goals, new-year
-					resolutions, crazy dreams, or anything you wish you knew more about!</p>
+					<p className="profile-text valign">
+						{this.props.SEProfile.future}
+					</p>
 				</div>
 			);
 		} else {
@@ -158,10 +189,9 @@ class SEProfilePage extends Component {
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
-					<p className="profile-text truncate valign">Write in this space anything that
-					you wish to do in the future. They can be ready-to-start
-					ideas, half-baked ideas, long-term goals, personal goals, new-year
-					resolutions, crazy dreams, or anything you wish you knew more about!</p>
+					<p className="profile-text valign">
+						{this.props.SEProfile.future}
+					</p>
 				</div>
 			);
 		}
@@ -177,11 +207,9 @@ class SEProfilePage extends Component {
 							<FaAngleUp className="profile-titles"></FaAngleUp>
 						</button>
 					</p>
-					<p className="profile-text valign">Write in this space anything that
-					you feel proud you have accomplished. It could include your academic
-					achievements, personal challenges that you have defeated, places you
-					have traveled to, hobbies you have learned, or anything else you can
-					think about!</p>
+					<p className="profile-text valign">
+						{this.props.SEProfile.past}
+					</p>
 				</div>
 			);
 		} else {
@@ -193,11 +221,9 @@ class SEProfilePage extends Component {
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
-					<p className="profile-text truncate valign">Write in this space anything that
-					you feel proud you have accomplished. It could include your academic
-					achievements, personal challenges that you have defeated, places you
-					have traveled to, hobbies you have learned, or anything else you can
-					think about!</p>
+					<p className="profile-text valign">
+						{this.props.SEProfile.past}
+					</p>
 				</div>
 			);
 		}
@@ -306,9 +332,15 @@ class SEProfilePage extends Component {
 		if (this.state.askMentee){
 			return(
 				<div className="input-field col s10 m10 l10 push-l1">
-					<textarea id="ask_message" className="materialize-textarea"></textarea>
-					<label for="ask_message" className="active">Tell Jane why you think she would be a good mentor for you</label>
-					<button onClick={() => this.toggle("requestSent")} className="btn-large waves-effect light-green"> Send Request! </button>
+					<textarea 
+						id="ask_message" 
+						value={this.state.message} 
+						onChange={this.handleChangeMessage}
+						className="materialize-textarea"
+					/>
+
+					<label labelFor="ask_message" className="active">Tell Jane why you think she would be a good mentor for you</label>
+					<button onClick={this.handleSendMentorRequest} className="btn-large waves-effect light-green"> Send Request! </button>
 				</div>
 			);
 		} else {
@@ -440,7 +472,7 @@ class SEProfilePage extends Component {
 				<div className="row fullrow main-content">
 					<div className="col s4 m4 l4">
 						<img className="responsive-img circle" src={profile_pic} alt=""/>
-						<p className="profile-name"> Jane Doe </p>
+						<p className="profile-name"> {this.props.SEProfile.name} </p>
 						<div className="container">
 								{this.purpose_content()}
 								{this.goals_content()}
@@ -453,13 +485,13 @@ class SEProfilePage extends Component {
 									
 									<div className="row"> <p> </p> </div>
 									<div className="row">
-										<p className="profile-titles"> Jane Skills </p>
+										<p className="profile-titles"> Skills </p>
 										{this.pull("skills")}
 									</div>
 									<hr className="col s12 m12 l12"></hr>
 									<div className="row"> <p> </p> </div>
 									<div className="row">
-										<p className="profile-titles"> Jane Interests </p>
+										<p className="profile-titles"> Interests </p>
 										{this.pull("interests")}
 									</div>
 								</div>

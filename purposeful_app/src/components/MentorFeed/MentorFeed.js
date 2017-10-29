@@ -34,7 +34,9 @@ class MentorFeed extends ActivityFeed {
 	create_feed_item(item, idx) {
 		return (
 			<div className="col l2" key={idx}>
-				<Link to={{ pathname: "/SEprofile", state: item }} >
+				<Link to={{
+					pathname: "/SEprofile/" + item.id
+				}}>
 					<Card className="feed-item" key={idx}>
 						<img className="responsive-img circle" src={profile_pic} alt=""/>
 						<p className="small-name">{item.name}</p>

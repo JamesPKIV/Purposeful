@@ -41,14 +41,17 @@ class ActivityFeed extends Component {
 	*/
 	create_feed_item(item, idx) {
 		return (
-
-				<Link to="/SEprofile">
+			<div className="col l2" key={idx}>
+				<Link to={{
+					pathname: "/SEprofile",
+				}}>
 					<span className="feed-item col s2 m2 l2" key={idx}>
 						<img className="responsive-img circle picture" src={profile_pic} alt=""/>
 						<p className="small-name">{item.name}</p>
 						<p className="desc">other content </p>
 					</span>
 				</Link>
+			</div>
 
 		);
 	}

@@ -89,13 +89,13 @@ router.post('/new', restrict_access, function(req, res, next) {
 	 accessible as the "data" property of the response body:
 *		{data: {id: "123", name: "John Doe", email:"..."  ...}}	
 **/
-router.post('/add_mentor_request', function(req, res, next) {
+router.post('/add_mentor_request', restrict_access, function(req, res, next) {
 	console.log("serving /api/mentorship/add_mentor_request request.");
 
 	const new_entry = req.body;
 	if (VERBOSE) console.log ("request body:", new_entry);
 
-	const mentee_uid = new_entry.user_id;
+	const mentee_uid = req.session.user_id;
 	const mentor_uid = new_entry.mentor_uid;
 	const msg = new_entry.mentee_message || "";
 
@@ -161,7 +161,8 @@ router.post('/add_mentor_request', function(req, res, next) {
 			})
 			
 		    .catch(error => { 
-		    	return handleError(error, res); 
+		    	handleError(error, res); 
+		    	throw error;
 		    });	
 	})
 });
