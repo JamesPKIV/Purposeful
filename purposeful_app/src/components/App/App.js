@@ -39,7 +39,7 @@ class App extends Component {
 			mentors: [],
 			mentees: [],
 			recommended: [],
-			skillUsersMap: {},
+			skillsUsersMap: {},
 			prof_past: "",
 			prof_present: "",
 			prof_future: "",
@@ -187,18 +187,20 @@ class App extends Component {
 	searchBySkill (skill_name) {
 		//todo: validate input
 
-		var SU_Map = this.state.skillUsersMap;
 
 		//retrieve users with the given skill and update the react state
 		return Client.get_users_with_skill(skill_name)
 			.then(users  => {
+				var SU_Map = this.state.skillsUsersMap;
 				SU_Map[skill_name] = users;
 				this.setState ({
-					skillUsersMap: SU_Map,
+					skillsUsersMap: SU_Map,
 				});
 			})
 			//throw errors on down to the calling page
 			.catch( err => {
+				console.log("(App.js) Error getting user with skill "+ skill_name +":");
+				console.log(err);
 				throw err;
 			});
 	}
@@ -375,7 +377,7 @@ footerDesktop(){
 									mentors={this.state.mentors}
 									mentees={this.state.mentees}
 									recommended={this.state.recommended}
-									skillUsersMap={this.state.skillUsersMap}
+									skillsUsersMap={this.state.skillsUsersMap}
 									handleSetSEUserID={this.setStateAttr.bind(this, "SE_userId")}
 								/>
 							}

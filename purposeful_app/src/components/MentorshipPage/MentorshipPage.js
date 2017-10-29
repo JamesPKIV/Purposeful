@@ -40,9 +40,11 @@ class MentorshipPage extends Component {
 				.then ( () => {
 					this.setState({ 
 						show: "searchResults",
-					});
+					});	
 				})
-				.catch ( () => {
+				.catch (err => {
+
+					console.log("(MentorshipPage.js) Error after searching:" + err);
 					this.setState({
 						show: "searchError",
 					});
@@ -86,7 +88,7 @@ class MentorshipPage extends Component {
 				<article >
 					<MentorFeed 
 						title="Search Results"
-						feedItems={this.props.SkillUsersMap[this.state.searchInput]} 
+						feedItems={this.props.skillsUsersMap[this.state.searchInput]} 
 					/>
 				</article>
 			);
@@ -97,7 +99,7 @@ class MentorshipPage extends Component {
 			return (
 				<article >
 					<p> 
-						There was an error retrieving your search results.  
+						There was an error retrieving your search results, but don't give up!  
 						<br/> 
 						Please try again later.
 					</p>
