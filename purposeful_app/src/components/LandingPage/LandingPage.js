@@ -5,7 +5,6 @@ import { Redirect, Link } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
-import Exit from 'react-icons/lib/fa/arrows-alt';
 
 class LandingPage extends Component {
 
@@ -29,18 +28,33 @@ class LandingPage extends Component {
 
 		this.handleContinue = this.handleContinue.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleKey = this.handleKey.bind(this);
 	}
 
 
-	// User logging in helper methods
+	// User sign up/login failed, handle reset
+	handleReset(){
+		this.props.handleEmailSet("");
+		document.getElementById("email").value = "";
+		document.getElementById("pwd").value = "";
+	}
+
+	// User pressed enter, continue
+	handleKey(ev){
+		console.log(this.state.userPwd);
+		if(ev.key === "Enter"){
+			this.handleEmailSet(ev);
+			this.handleSubmit(ev);
+		}
+	}
+
+	// User logging in helper method
 	handleUserLogin (ev) {
 		ev.preventDefault();
 		this.setState({
 			userLogin: !this.state.userLogin
 		});
-		console.log('user is logging in with his/her account' + this.state.userLogin);
 	}
-
 
 	// User signing up helper methods
 	handleNameSet (ev) {
@@ -85,10 +99,10 @@ class LandingPage extends Component {
 				.catch(err => {
 					console.log("(LandingPage) user account creation failed with error: ", err);
 					alert("Error creating new user account: " + err);
+					this.handleReset();
 				});
 		} else {
 			// fetch user profile from database
-			alert("User is attempting to login, setup db");
 			this.props.handleLogin(pwd)
 				.then((data) => {
 					console.log("(Landing Page) User has logged! User data is: ", data);
@@ -97,10 +111,11 @@ class LandingPage extends Component {
 				.catch(err => {
 					console.log("(LandingPage) user account login failed with error: ", err);
 					alert("Error logging user into app: " + err);
+					this.handleReset();
 				});
 		}
 	}
-	
+
 	setShow(content_to_show) {
 		this.setState({
 			show: content_to_show
@@ -112,9 +127,9 @@ class LandingPage extends Component {
 			if (!this.state.nameSet) {
 				return (
 					<div>
-						<div className="col s6">
+						<div className="col s5 m5 l5">
 						<h5 className="header-sign"> Sign up </h5>
-							<form onSubmit={this.handleContinue}>
+							<form onSubmit={this.handleContinue} >
 								<div className="input-field col s12">
 									<input
 										type="text"
@@ -122,32 +137,31 @@ class LandingPage extends Component {
 										value={this.props.userName}
 										onChange={this.handleNameSet}
 										name="fullName" />
-									<input className="btn light-green" type="submit" value="Continue " />
+									<input className="btn light-green" type="submit"  value="Continue " />
 								</div>
 							</form>
-							<hr className="hr-tag"/>
 							<div className="div-login">
-								Have and account already? 
-								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link> 
+								Have and account already?
+								<Link onClick={this.handleUserLogin} to="/"  className="login-link"> Login</Link>
 							</div>
 						</div>
 					</div>
 				);
 			} else if (this.state.nameSet) {
 				return (
-					<div className="col s6">
+					<div className="col s5 m5 l5">
 						<form>
-							<div className="row fullrow">
+							<div className="row ">
 								<div className="input-field col s4">
-									<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+									<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate " required />
 								</div>
 							</div>
-							<div className="row fullrow">
+							<div className="row ">
 								<div className="input-field col s4">
-									<input placeholder="Password" onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
+									<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate pwd" type="password" name="Password" required />
 								</div><br />
 							</div>
-							<div className="row fullrow">
+							<div className="row ">
 								<div className="col s4">
 									<Link onClick={this.handleSubmit} to={{ pathname:"/interestskills" }}>
 										<div className="btn light-green">Sign Up </div>
@@ -160,23 +174,19 @@ class LandingPage extends Component {
 			}
 		}else{
 			return (
-				<div className="col s6">
-					<ul className="header-login">
-						<li className="li-login"><h5 className="header-sign">Login </h5></li>
-						<li className="li-login"><button onClick={this.handleUserLogin} className="btn close-login"><Exit className="exit-icon"/></button></li>
-					</ul>
+				<div className="col s6 m6 l6">
 					<form>
-						<div className="row fullrow">
+						<div className="row ">
 							<div className="input-field col s4">
-								<input placeholder="Email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+								<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
-						<div className="row fullrow">
+						<div className="row ">
 							<div className="input-field col s4">
-								<input placeholder="Password" onChange={this.userPwdSet} className="active validate" type="password" name="Password" required />
+								<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate" type="password" name="Password" required />
 							</div><br />
 						</div>
-						<div className="row fullrow">
+						<div className="row ">
 							<div className="col s4">
 								<Link onClick={this.handleSubmit} to={{ pathname:"/home" }}>
 									<div className="btn light-green">Login </div>
@@ -184,6 +194,10 @@ class LandingPage extends Component {
 							</div>
 						</div>
 					</form>
+					<div className="row">
+						<div className="li-login col"><h5 className="header-sign">New to purposeful? </h5></div>
+						<div className="li-login col"><button onClick={this.handleUserLogin} className="btn close-login light-green">Sign up</button></div>
+					</div>
 				</div>
 			);
 		}
@@ -191,19 +205,19 @@ class LandingPage extends Component {
 
 	purposeful_Login () {
 		return (
-			<div className="col s6 social-column">
-				<div className="row fullrow">
-					<div className="col s4 div-btn">
+			<div className="col s6 m6 l6 social-column">
+				<div className="row">
+					<div className="col s9 m9 l9 push-l4 div-btn">
 						<button className="btn social-btn face-btn"> Continue with Facebook&nbsp;&nbsp;&nbsp;<FaFacebook className="s-icon" /></button>
 					</div>
 				</div>
-				<div className="row fullrow">
-					<div className="col s4 div-btn" >
+				<div className="row">
+					<div className="col s9 m9 l9 push-l4 div-btn" >
 					<button className="btn social-btn google-btn"> Continue with Google&nbsp;&nbsp;&nbsp;&nbsp;<FaGoogle className="s-icon" /></button>
 					</div>
 				</div>
-				<div className="row fullrow">
-					<div className="col s4 div-btn" >
+				<div className="row ">
+					<div className="col s9 m9 l9 push-l4 div-btn" >
 					<button className="btn social-btn link-btn"> Continue with Linkedin&nbsp;&nbsp;&nbsp;<FaLinkedin className="s-icon" /></button>
 					</div>
 				</div>
@@ -223,18 +237,16 @@ class LandingPage extends Component {
 		}
 
 		return(
-			<div>
-				<div className="row fullrow ">
-					<img src={logo} />
+			<span >
+				<div className="row fullrow">
+					<img src={logo} alt="logo"/>
 					<h1>Welcome to Purposeful</h1>
 				</div>
-				<div className="container">
-					<div className="row">
-					    {this.purposeful_Login()}
-						{this.purposeful_Signup()}
-					</div>
+				<div className="row fullrow">
+			  		{this.purposeful_Login()}
+					{this.purposeful_Signup()}
 				</div>
-			</div>
+			</span>
 		);
 	}
 }

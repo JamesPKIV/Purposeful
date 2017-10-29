@@ -10,12 +10,11 @@
 
 
 import React, { Component } from 'react';
-import { Collection, Card} from 'react-materialize';
 import { Link } from 'react-router-dom';
 import './ActivityFeed.css';
-
+import FaAngleRight from 'react-icons/lib/fa/angle-right';
+import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 // importing icons
-import User from 'react-icons/lib/fa/user';
 import profile_pic from '../SEProfilePage/profile-pic-default.jpg';
 
 class ActivityFeed extends Component {
@@ -23,17 +22,24 @@ class ActivityFeed extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			title: this.props.title || "feed title",
+			title: this.props.title || "",
 			feed_items: this.props.feedItems ||
 				//default feed items
-				[ {"name":"Name", "desc":"availability, skills and interests"},
-				{"name":"Name", "desc":"availability, skills and interests"},
-				{"name":"Name", "desc":"availability, skills and interests"},
-				{"name":"Name", "desc":"availability, skills and interests"},
-				{"name":"Name", "desc":"availability, skills and interests"} ]
+				[ {"name":"Pancho", "desc":"milk, skateboards"},
+				{"name":"Ada", "desc":"programming, mathematics"},
+				{"name":"Hermione", "desc":"runes, muggles"},
+				{"name":"Roald", "desc":"writing, chocolate"},
+				{"name":"Aretha", "desc":"singing, human rights"},
+			  {"name":"Pele", "desc":"soccer, brazilian food"},
+			  {"name":"Paris", "desc":"fashion, entretainment"},
+			  {"name":"Ash", "desc":"catchin' 'em all, traveling"} ],
+			start: 0,
+			end: 5
 		};
 
 		this.create_feed_item = this.create_feed_item.bind(this);
+		this.hor_scroll = this.hor_scroll.bind(this);
+		this.scroll_arrow = this.scroll_arrow.bind(this);
 	}
 
 	/** this function creates an individual feed component to be rendered in the feed.
@@ -41,19 +47,70 @@ class ActivityFeed extends Component {
 	*/
 	create_feed_item(item, idx) {
 		return (
-			<div className="col l2" key={idx}>
-				<Link to={{
-					pathname: "/SEprofile",
-				}}>
-					<span className="feed-item col s2 m2 l2" key={idx}>
+			<Link to="/SEprofile" key={idx}>
+					<span className="feed-item col s2 m2 l2 push-l1" key={idx}>
 						<img className="responsive-img circle picture" src={profile_pic} alt=""/>
 						<p className="small-name">{item.name}</p>
-						<p className="desc">other content </p>
+						{/*If we include a last name it needs to go here.*/}
+						<p className="desc">{item.desc}</p>
 					</span>
 				</Link>
-			</div>
-
 		);
+	}
+
+	get_title(){
+		if(this.state.title === ""){
+			return(
+				<span/>
+			);
+		} else{
+			return(
+				<div className="row">
+					<h4> {this.state.title} </h4>
+				</div>
+			);
+		}
+	}
+
+	hor_scroll(scroll){
+		this.setState({
+			start: this.state.start + scroll,
+			end: this.state.end + scroll
+		});
+	}
+
+	scroll_arrow(feed_items, scroll){
+		if(feed_items.length >= 5){
+			if(scroll === -1){
+				if(this.state.start <= 0){
+					return(
+						<button onClick={()=> this.hor_scroll(scroll)} className="btn blue-gray lighten-4 disabled valign">
+							<FaAngleLeft className="profile-name"></FaAngleLeft>
+						</button>
+					);
+				} else {
+					return(
+						<button onClick={()=> this.hor_scroll(scroll)} className="btn-flat light-green lighten-4 valign">
+							<FaAngleLeft className="profile-name"></FaAngleLeft>
+						</button>
+					);
+				}
+			} else {
+				if(this.state.end >= feed_items.length){
+					return(
+						<button onClick={()=> this.hor_scroll(scroll)} className="btn blue-gray lighten-4 disabled valign">
+							<FaAngleRight className="profile-name"></FaAngleRight>
+						</button>
+					);
+				} else {
+					return(
+						<button onClick={()=> this.hor_scroll(scroll)} className="btn-flat light-green lighten-4 valign">
+							<FaAngleRight className="profile-name"></FaAngleRight>
+						</button>
+					);
+				}
+			}
+		}
 	}
 
 	render () {
@@ -62,13 +119,26 @@ class ActivityFeed extends Component {
 			: this.state.feed_items;
 
 		//render a feed component to display for each item in the feed_items array
-		const feed_components = feed_items.map( (item, idx) =>
+		console.log("start: "+this.state.start +", end: "+ this.state.end);
+		var this_feed = feed_items.slice(this.state.start, this.state.end);
+		const feed_components = this_feed.map( (item, idx) =>
 			this.create_feed_item(item, idx) );
 
 		return (
-			<div className="row">
-				{feed_components} {/* Feed_components is an array where each array index holds a list of f */}
-			</div>
+			<span>
+				{this.get_title()}
+				<div className="row valign-wrapper">
+					<div className="col s1 m1 l1">
+						{this.scroll_arrow(feed_items, -1)}
+					</div>
+					<div className="col s10 m10 l10">
+						{feed_components} {/* Feed_components is an array where each array index holds a list of f */}
+					</div>
+					<div className="col s1 l1 m1">
+						{this.scroll_arrow(feed_items, 1)}
+					</div>
+				</div>
+			</span>
 		);
 
 	}

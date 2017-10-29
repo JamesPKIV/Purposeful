@@ -19,11 +19,10 @@ class HomePage extends Component {
 		this.handleSEProfileClick = this.handleSEProfileClick.bind(this);
 	}
 
-
-
 	componentDidMount () {
 		this.props.fetchData();
 	}
+
 
 	handleSEProfileClick(se_user_id) {
 		this.setState({
@@ -43,13 +42,16 @@ class HomePage extends Component {
 		else {
 			/* conditionally render form content depending on whether youve signed up or not */
 			return (
-				<div id="home-content" className="row">
-					<NavBar />
+        <div id="home-content" className="row">
+				<NavBar logout={this.props.logout}/>
+            /* conditionally render form content depending on whether youve signed up or not */  
+
 					{
 						this.props.isLoggedIn ?
 						<p className="logged-in-p">User Name: {this.props.userName}, UserID: {this.props.userId} </p>
 						: <p className="logged-in-p"> you are NOT logged in, and this is your home page. </p>
 					}
+
 					<div className="activity-feeds col l10 push-l1">
 					{
 							this.props.isLoggedIn  &&
@@ -66,7 +68,7 @@ class HomePage extends Component {
 				</div>
 			);
 		}
-	}
+
 }
 
 export default HomePage;

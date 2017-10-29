@@ -6,7 +6,7 @@ import './App.css';
 import HomePage from '../HomePage/HomePage';
 import MentorshipPage from '../MentorshipPage/MentorshipPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
-import SignupPage from '../SignupPage/SignupPage';
+/*import SignupPage from '../SignupPage/SignupPage';*/
 import LandingPage from '../LandingPage/LandingPage';
 import SEProfilePage from '../SEProfilePage/SEProfilePage';
 import InterestSkills from '../InterestSkills/InterestSkills';
@@ -21,6 +21,7 @@ import CollabPage from '../CollabPage/CollabPage';
 import EditProfile from '../EditProfile/EditProfile';
 import SettingsPage from '../SettingsPage/SettingsPage';
 import HelpPage from '../HelpPage/HelpPage';
+import ChatPage from '../ChatPage/ChatPage';
 
 import Client from "../../Client";
 
@@ -50,6 +51,7 @@ class App extends Component {
 		this.footerDesktop = this.footerDesktop.bind(this);
 		this.footerMobile = this.footerMobile.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
+		this.handleLogout = this.handleLogout.bind(this);
 		this.handleCreateUser = this.handleCreateUser.bind(this);
 		this.handleSubmitSI = this.handleSubmitSI.bind(this);
 		this.fetchHome = this.fetchHome.bind(this);
@@ -61,7 +63,6 @@ class App extends Component {
 		this.fetchSEProfile = this.fetchSEProfile.bind(this);
 		this.handleMentorRequest = this.handleMentorRequest.bind(this);
 	}
-
 
 	handleCreateUser (password) {
 		var name = this.state.userName;
@@ -100,6 +101,12 @@ class App extends Component {
 			});
 	}
 
+
+	handleLogout(){
+		 return Client.logout().then(res => {
+			console.log("Session was destroyed and user should be logged out.");
+		 })
+	}
 
 	handleSubmitSI() {
 		var interests = this.state.interests;
@@ -167,7 +174,6 @@ class App extends Component {
 			var msg = "No user was specified";
 			throw new Error(msg);
 		}
-		
 		return Client.get_user_by_uid(SEuserId)
 			.then( SE_data => {
 				this.setState({
@@ -353,6 +359,7 @@ footerDesktop(){
 							}
 						/>
 
+
 						<Route
 							path="/home"
 							render={ (props) =>
@@ -361,14 +368,17 @@ footerDesktop(){
 									userId={this.state.userId}
 									fetchData={this.fetchHome}
 									isLoggedIn={this.state.isLoggedIn}
-									mentors={this.state.mentors}
+                  mentors={this.state.mentors}
 									mentees={this.state.mentees}
 									recommended={this.state.recommended}
-									{...props}
-								/>
+									logout={this.handleLogout}
+                  {...props}
+								/>	
 							}
 						/>
-						<Route
+
+
+            <Route
 							path="/mentorship"
 							render={ () =>
 								<MentorshipPage
@@ -382,6 +392,8 @@ footerDesktop(){
 								/>
 							}
 						/>
+
+
 						<Route
 							path="/profile"
 							render={ () => 
@@ -401,6 +413,8 @@ footerDesktop(){
 									mentees={this.state.mentees}
 							  /> }
 						/>
+                  
+                  
 						<Route
 							path="/SEprofile/:id"
 							render={ ({ match }) => 
@@ -413,6 +427,7 @@ footerDesktop(){
 								/> 
 							}
 						/>
+
               <Route
                 path="/stories"
                 render={ () => <StoriesPage /> }
@@ -456,6 +471,10 @@ footerDesktop(){
 							<Route
 								path="/help"
 								render={ () => <HelpPage /> }
+							/>
+							<Route
+							  path="/chat"
+								render={ () => <ChatPage /> }
 							/>
 					</main>
 					{this.footer()}

@@ -9,12 +9,10 @@
 
 
 import React from 'react';
-import { Card } from 'react-materialize';
 import { Link } from 'react-router-dom';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
 
 // importing icons
-import User from 'react-icons/lib/fa/user';
 import profile_pic from '../SEProfilePage/profile-pic-default.jpg';
 
 /** Class MentorFeed extends the ActivityFeed class to provide custom feed items
@@ -34,19 +32,24 @@ class MentorFeed extends ActivityFeed {
 	create_feed_item(item, idx) {
 		return (
 			<div className="col l2" key={idx}>
-				<Link to={{
-					pathname: "/SEprofile/" + item.id
-				}}>
-					<Card className="feed-item" key={idx}>
-						<img className="responsive-img circle" src={profile_pic} alt=""/>
+				<Link 
+          to={{ pathname: "/SEprofile/" + item.id }} 
+          key={idx}
+        >
+					<span className="feed-item col s2 m2 l2 push-l1" key={idx}>
+						<img className="responsive-img circle picture" src={profile_pic} alt=""/>
 						<p className="small-name">{item.name}</p>
-						<p className="small-name">Pantera</p>
-						<p className="desc"> skills and interests or some other content </p>
-					</Card>
+            {/*If we include a last name it needs to go here.*/}
+            <p className="desc">{item.present}</p>
+					</span>
 				</Link>
 			</div>
 		);
 	}
 }
+
+
+
+
 
 export default MentorFeed;
