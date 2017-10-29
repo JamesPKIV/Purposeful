@@ -75,6 +75,7 @@ class NavBar extends Component {
           <li><button onClick={() => this.handleNav("stories")}  className="hvr-sweep-to-top navEntry">Stories </button></li>
           { /* Right side of navbar */}
           <li className="navRight"><DropDown logout={this.props.logout}/></li>
+          <li className="navRight"><button onClick={() => this.handleNav("/chat")} className="navEntry" >Messages </button></li>
           <li className="navRight"><button onClick={() => this.handleNav("/profile")} className="navEntry" >Profile </button></li>
           <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />
             <input  className="searchInput"
