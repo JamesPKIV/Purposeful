@@ -31,12 +31,15 @@ class MentorFeed extends ActivityFeed {
 	*/
 	create_feed_item(item, idx) {
 		return (
-			<Link to={{ pathname: "/SEprofile", state: item }} key={idx}>
+			<Link 
+	          to={{ pathname: "/SEprofile/" + item.id }} 
+	          key={idx}
+	        >
 				<span className="feed-item col s2 m2 l2 push-l1" key={idx}>
 					<img className="responsive-img circle picture" src={profile_pic} alt=""/>
 					<p className="small-name">{item.name}</p>
-					{/*If we include a last name it needs to go here.*/}
-					<p className="desc">{item.desc}</p>
+		            {/*If we include a last name it needs to go here.*/}
+		            <p className="desc">{item.present}</p>
 				</span>
 			</Link>
 		);

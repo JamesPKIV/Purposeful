@@ -135,17 +135,22 @@ router.get('/user/:uid', function(req, res, next) {
 	}
 	else {
 		/* query users table */
-		return db_tables.Users.findById(uid)
+		return db_tables.Users.findById(uid, {
+				attributes:{
+					exclude:['password']
+				}
+			})
 			.then(user => {
-				console.log("USERS.JS->/user/:uid) query data:", query_data);
-				return query_data;
+				console.log("USERS.JS->/user/:uid) query data:", user);
+
+				return user;
 			})
 			.then((query_data) => {
 			  	return res.json({msg: 'ok', data:query_data});
 			})
 			.catch((err) => {
-				console.err("USERS.JS->/user/:uid): Error retrieving user by id:", err.message );
-				res.status(400).send({msg: "nok", "error": err.message});
+				console.log("USERS.JS->/user/:uid): Error retrieving user by id:", err.message );
+				res.status(400).send({msg: "failed to retrieve user", "error": err.message});
 				next(err);
 			});
 	}

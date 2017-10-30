@@ -40,11 +40,10 @@ class App extends Component {
 			mentors: [],
 			mentees: [],
 			recommended: [],
-			skillUsersMap: {},
+			skillsUsersMap: {},
 			prof_past: "",
 			prof_present: "",
 			prof_future: "",
-			SE_userId: "",
 			SE_profile: {},
 		};
 
@@ -169,19 +168,20 @@ class App extends Component {
 	}
 
 
-	fetchSEProfile () {
-		var SEuserId = this.state.SE_userId;
+	fetchSEProfile (SEuserId) {
 
 		if (!SEuserId){
 			var msg = "No user was specified";
 			throw new Error(msg);
 		}
-
-		return Client.get_user_by_id(SEuserId)
+		return Client.get_user_by_uid(SEuserId)
 			.then( SE_data => {
 				this.setState({
 					SE_profile: SE_data
 				});
+
+
+				console.log("MENTORSHIP DASH RECIEVED: ", SE_data);
 			})
 			.catch(err => {
 				throw err;
@@ -193,18 +193,20 @@ class App extends Component {
 	searchBySkill (skill_name) {
 		//todo: validate input
 
-		var SU_Map = this.state.skillUsersMap;
 
 		//retrieve users with the given skill and update the react state
 		return Client.get_users_with_skill(skill_name)
 			.then(users  => {
+				var SU_Map = this.state.skillsUsersMap;
 				SU_Map[skill_name] = users;
 				this.setState ({
-					skillUsersMap: SU_Map,
+					skillsUsersMap: SU_Map,
 				});
 			})
 			//throw errors on down to the calling page
 			.catch( err => {
+				console.log("(App.js) Error getting user with skill "+ skill_name +":");
+				console.log(err);
 				throw err;
 			});
 	}
@@ -213,8 +215,7 @@ class App extends Component {
 		var past_str = this.state.prof_past;
 		var present_str = this.state.prof_present;
 		var future_str = this.state.prof_future;
-		var uid = this.state.userId;
-		return Client.update_profile(uid, past_str, present_str, future_str)
+		return Client.update_profile(past_str, present_str, future_str)
 			.then (profile_data => {
 				var past = profile_data["past"];
 				var present = profile_data["present"];
@@ -235,13 +236,20 @@ class App extends Component {
 
 	/* this function makes a mentor request with the message argument */
 	handleMentorRequest (messageFromMentee) {
-		var se_user_id = this.state.SE_userId;
+		var se_user_id = this.state.SE_profile.id;
 		if (!se_user_id) {
 			var err_msg = "No mentor was specified";
 			throw new Error(err_msg);
 		}
 		return Client.add_mentor_request(se_user_id, messageFromMentee);
 	}
+
+
+
+	handleSEProfileClick(se_uid) {
+		this.setStateAttr("SE_userId", se_uid);
+	}
+
 
 
 	setStateAttr(key, value) {
@@ -319,93 +327,107 @@ footerDesktop(){
 					</header>
 
 					<main className="valign-wrapper"> {/*used to be page-content*/}
-							<Route
-								exact path="/"
-								render={ () => <Redirect to="/landing" /> }
-							/>
-							<Route
-								path="/landing"
-								render={ () => <LandingPage
+						<Route
+							exact path="/"
+							render={ () => <Redirect to="/landing" /> }
+						/>
+						<Route
+							path="/landing"
+							render={ () => <LandingPage
+								userName={this.state.userName}
+								userEmail={this.state.userEmail}
+								handleCreateUser={this.handleCreateUser}
+								handleLogin={this.handleLogin}
+								handleNameSet={this.setStateAttr.bind(this,"userName") }
+								handleEmailSet={this.setStateAttr.bind(this, "userEmail") }
+								isLoggedIn={this.state.isLoggedIn}
+							/>}
+						/>
+
+						<Route
+							path="/interestskills"
+							render={ ()=>
+								<InterestSkills
 									userName={this.state.userName}
 									userEmail={this.state.userEmail}
-									handleCreateUser={this.handleCreateUser}
-									handleLogin={this.handleLogin}
-									handleNameSet={this.setStateAttr.bind(this,"userName") }
-									handleEmailSet={this.setStateAttr.bind(this, "userEmail") }
+									interests={this.state.interests}
+									skills={this.state.skills}
+									handleAddSkill={this.pushToStateAttrArr.bind(this, "skills") }
+									handleAddInterest={this.pushToStateAttrArr.bind(this, "interests") }
+									handleSubmit={this.handleSubmitSI}
+								/>
+							}
+						/>
+
+
+						<Route
+							path="/home"
+							render={ (props) =>
+								<HomePage
+									userName={this.state.userName}
+									userId={this.state.userId}
+									fetchData={this.fetchHome}
 									isLoggedIn={this.state.isLoggedIn}
-								/>}
-							/> 
-							<Route
-								path="/interestskills"
-								render={ ()=>
-									<InterestSkills
-										userName={this.state.userName}
-										userEmail={this.state.userEmail}
-										interests={this.state.interests}
-										skills={this.state.skills}
-										handleAddSkill={this.pushToStateAttrArr.bind(this, "skills") }
-										handleAddInterest={this.pushToStateAttrArr.bind(this, "interests") }
-										handleSubmit={this.handleSubmitSI}
-									/>
-								}
-							/>
-							<Route
-								path="/home"
-								render={ () =>
-									<HomePage
-										userName={this.state.userName}
-										userId={this.state.userId}
-										fetchData={this.fetchHome}
-										isLoggedIn={this.state.isLoggedIn}
-										mentors={this.state.mentors}
-										mentees={this.state.mentees}
-										recommended={this.state.recommended}
-										handleSetSEUserID={this.setStateAttr.bind(this, "SE_userId")}
-										logout={this.handleLogout}
-									/>
-								}
-							/>
-							<Route
-								path="/mentorship"
-								render={ () =>
-									<MentorshipPage
-										fetchData={this.fetchMentorship}
-										handleSearchBySkill={this.searchBySkill}
-										mentors={this.state.mentors}
-										mentees={this.state.mentees}
-										recommended={this.state.recommended}
-										skillUsersMap={this.state.skillUsersMap}
-										handleSetSEUserID={this.setStateAttr.bind(this, "SE_userId")}
-									/>
-								}
-							/>
-							<Route
-								path="/profile"
-								render={ () =>
-									<ProfilePage
-										isLoggedIn={this.state.isLoggedIn}
-										userName={this.state.userName}
-										past={this.state.prof_past}
-										present={this.state.prof_present}
-										future={this.state.prof_future}
-										handleChangePast={this.setStateAttr.bind(this, "prof_past")}
-										handleChangePresent={this.setStateAttr.bind(this, "prof_present")}
-										handleChangeFuture={this.setStateAttr.bind(this, "prof_future")}
-										handleSubmitChange={this.handleSubmitProfileChange}
-										userId={this.state.userId}
-										fetchData={this.fetchHome}
-										mentors={this.state.mentors}
-										mentees={this.state.mentees}
-								  /> }
-							/>
-							<Route
-								path="/SEprofile"
-								render={ () => <SEProfilePage
-										fetchSEProfile={this.fetchSEProfile}
-										SE_profile={this.state.SE_profile}
-										handleMentorRequest={this.handleMentorRequest}
-									/> }
-							/>
+                  mentors={this.state.mentors}
+									mentees={this.state.mentees}
+									recommended={this.state.recommended}
+									logout={this.handleLogout}
+                  {...props}
+								/>	
+							}
+						/>
+
+
+            <Route
+							path="/mentorship"
+							render={ () =>
+								<MentorshipPage
+									fetchData={this.fetchMentorship}
+									handleSearchBySkill={this.searchBySkill}
+									mentors={this.state.mentors}
+									mentees={this.state.mentees}
+									recommended={this.state.recommended}
+									skillsUsersMap={this.state.skillsUsersMap}
+									handleSetSEUserID={this.setStateAttr.bind(this, "SE_userId")}
+								/>
+							}
+						/>
+
+
+						<Route
+							path="/profile"
+							render={ () => 
+								<ProfilePage
+									isLoggedIn={this.state.isLoggedIn}
+									userName={this.state.userName}
+									past={this.state.prof_past}
+									present={this.state.prof_present}
+									future={this.state.prof_future}
+									handleChangePast={this.setStateAttr.bind(this, "prof_past")}
+									handleChangePresent={this.setStateAttr.bind(this, "prof_present")}
+									handleChangeFuture={this.setStateAttr.bind(this, "prof_future")}
+									handleSubmitChange={this.handleSubmitProfileChange}
+									userId={this.state.userId}
+									fetchData={this.fetchHome}
+									mentors={this.state.mentors}
+									mentees={this.state.mentees}
+							  /> }
+						/>
+                  
+                  
+						<Route
+							path="/SEprofile/:id"
+							render={ ({ match }) => 
+								<SEProfilePage 
+									fetchHome={this.fetchHome}
+									fetchSEProfile={this.fetchSEProfile}
+									match={match}
+									SEProfile={this.state.SE_profile}
+									handleMentorRequest={this.handleMentorRequest}
+								/> 
+							}
+						/>
+
               <Route
                 path="/stories"
                 render={ () => <StoriesPage /> }
