@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './DonateForm.css';
 import NavBar from '../NavBar/NavBar';
 import working from "../App/still_working.png";
+import teamwork from './teamwork.jpg';
 
 
 const info = ["One time"];
@@ -14,8 +15,10 @@ class DonateForm extends Component {
 		/* Need to bind this keyword to function before */ 
 		this.proceed = this.proceed.bind(this);
 		this.setInfo = this.setInfo.bind(this);
+		this.setCheck = this.setCheck.bind(this);
 		this.state = {
-			content: <Amount proceed={this.proceed} setInfo={this.setInfo} />
+			content: <Amount proceed={this.proceed} setInfo={this.setInfo} setCheck={this.setCheck} setCheck={this.setCheck} />
+
 		};
 	}
 
@@ -35,7 +38,7 @@ class DonateForm extends Component {
 		switch (value) {
 			case 'amount':
 				this.setState({
-					content: <Amount proceed={this.proceed} setInfo={this.setInfo}  /> 
+					content: <Amount proceed={this.proceed} setInfo={this.setInfo} /> 
 				})
 				break;
 			case 'details':
@@ -56,16 +59,24 @@ class DonateForm extends Component {
 		}
 	}
 
+	setCheck(e){
+		console.log(e.target.value);
+	}
+
+
 	Desktop() {
 		return (
 			<div className="donate-container">
 				<NavBar />
 				<div className="container">
 					<div className="row valign-wrapper ">
-						<div className="col s6"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-						</div>
-						<div className="col s6">
+						<div className="col s12">
+							<div className="col s6">
+
+							</div>
+							<div className="col s6">
 							{this.state.content}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -99,10 +110,24 @@ class DonateForm extends Component {
 }
 
 class Amount extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			selectedOp: "one-time"
+		};
+		this.handleOptionChange = this.handleOptionChange.bind(this);
+	}
+	
+	handleOptionChange(e){
+		alert("Function called");
+		this.setState({
+			selectedOP: e.target.value
+		})
+	}
+
 	render() {
 		return (
 			<div>
-				 Donation Amount
 			  <div className="row">
 					<div className="col s4">
 						<button className="btn amounts" onClick={() => this.props.setInfo(1, 25)}> $25 </button>
@@ -114,20 +139,19 @@ class Amount extends Component {
 						<button className="btn amounts" onClick={() => this.props.setInfo(1, 100)}> $100 </button>
 					</div>
 				</div>
-				<div className="row">
+				<div className="row" >
 					<div className="col s4">
-						<input name="group1" type="radio" id="one-time"/>
-						<label for="one-time" >One time</label>
+						<input type="radio" id="one-time" value="one-time" checked={this.state.selectedOp === "one-time"}  onChange={this.handleOptionChange} />
+						<label labelFor="one-time"> One time </label>
 					</div>
 					<div className="col s4">
-						<input name="group1" type="radio" id="recurring"/>
-						<label for="recurring" >Recurring</label> 
+						<input type="radio" id="recurring" value="recurring" checked={this.state.selectedOp === "recurring"}  onChange={this.handleOptionChange} />
+						<label labelFor="recurring"> Recurring </label>
 					</div>
 				</div>
 				<div> 
-					<input className="other-amount" placeholder="Other Amount"/> 
+					<input className="other-amount" placeholder="Other Amount" /> 
 				</div> 
-
 				<button className="btn" onClick={() => this.props.proceed('details')}> Next</button>
 			</div>
 		);

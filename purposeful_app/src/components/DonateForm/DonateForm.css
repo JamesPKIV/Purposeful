@@ -5,7 +5,10 @@
   margin-top: -250px !important;
 }
 
-
+.teamwork-img{
+  width: inherit;
+  height: 400px;
+}
 
 .btn.amounts{
   width: 100%;
