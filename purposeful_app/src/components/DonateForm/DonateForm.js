@@ -27,29 +27,10 @@ class DonateForm extends Component {
     );
   }
 
-  Mobile(){
-    return(
-      <span>
-				<NavBar/>
-				<div>
-					<img src={working} alt="working" width="100vw" className="row center"/>
-					<p className="row"> Thanks for your support, this option will be open soon!</p>
-					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
-				</div>
-			</span>
-    );
-  }
-
   render() {
-		if(window.innerWidth > 700){
-			return(
-				this.Desktop()
-			);
-		} else {
-			return(
-				this.Mobile()
-			);
-		}
+		return(
+			this.Desktop()
+		);
 	}
 }
 

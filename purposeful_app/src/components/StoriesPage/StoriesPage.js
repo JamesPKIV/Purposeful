@@ -18,7 +18,7 @@ class StoriesPage extends Component {
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="300vw" className="row center"/>
 					<p className="row">  Soon you will be able to find stories here!</p>
 					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
@@ -28,10 +28,11 @@ class StoriesPage extends Component {
   }
 
   Mobile(){
+		console.log("here");
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="100vw" className="row center"/>
 					<p className="row"> Soon you will be able to find stories here!</p>
 					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
@@ -47,7 +48,7 @@ class StoriesPage extends Component {
 			);
 		} else {
 			return(
-				this.sMobile()
+				this.Mobile()
 			);
 		}
 	}

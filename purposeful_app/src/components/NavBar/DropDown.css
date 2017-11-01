@@ -1,46 +1,52 @@
-.settingsBtn{
-    border-color: #212121;
+/*desktop*/
+@media screen and (min-width: 700px){
+  .settingsBtn{
+      padding-right: 2.5vw;
+  }
+
+  .settingsIcon{
+    margin-top: 1vw;
+    background-color: #212121;
     border: none;
+  }
+
+  .div-dropdown{
+      right: 0;
+      width: 14vw;
+      margin-right: 1vw;
+  }
+  .li-dropdown{
+      width: 14vw;
+  }
+
+  .li-navs{
+      font-size: 1vw;
+      color:black;
+      background-color: white;
+      text-align: left;
+      border: 1px solid;
+      border-color: #C9C9C9;
+  }
 }
 
+/*mobile*/
+@media screen and (max-width: 699px){
+  .settingsIcon{
+    margin-top: 7vw;
+    background-color: #212121;
+    border: none;
+  }
 
-.FaCog{
-    color: #f5f5f5;
-    margin-top: 12px;
-}
+  .li-navs{
+      font-size: 2.5vh;
+      color:black;
+      background-color: white;
+      text-align: left;
+      border: 1px solid;
+      border-color: #C9C9C9;
+  }
 
-.FaCog2{
-    color: #b4d458;
-    margin-top: 12px;
-}
-
-.div-dropdown{
-    position: absolute;
-    right: 0;
-    background-color: white !important;
-    z-index: 999;
-    width: 250px;
-    border: 3px solid;
-    border-radius: 10px;
-    border-color: black;
-}
-
-.ul-dropdown{
-    padding: 0 !important;
-}
-.li-dropdown{
-    width: 250px;
-}
-
-.li-navs{
-    padding-left: 5px;
-    font-size: 18px;
-    color:black;
-    transition: none;
-    display:block;
-    padding-right: 160px;
-    width: inherit;
-    border: 1px solid;
-    border-bottom: 1px;
-    border-color: #C9C9C9;
+  .li-dropdown{
+      width: 14vh;
+  }
 }

@@ -41,9 +41,10 @@ class ChatPage extends Component {
     var apos = "'"; /*to avoid editor complaining about non-closed apostrophe*/
     return(
       <span>
-        <NavBar/>
-        <div className="main-content">
-          <div className="row fullrow">
+        <span className="row">
+          <NavBar/>
+        </span>
+        <span className="row">
           <div className="col s3 m3 l3">
             <div className="col s10 m10 l10 push-l1">
               <div className="row">
@@ -66,8 +67,7 @@ class ChatPage extends Component {
               {this.current_conversation()}
             </div>
           </div>
-          </div>
-        </div>
+        </span>
       </span>
     );
   }

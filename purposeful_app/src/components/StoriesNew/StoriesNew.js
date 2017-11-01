@@ -18,7 +18,7 @@ class StoriesNew extends Component {
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="300vw" className="row center"/>
 					<p className="row"> We want to hear your story! Soon you can create one here! </p>
 					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
@@ -31,7 +31,7 @@ class StoriesNew extends Component {
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="100vw" className="row center"/>
 					<p className="row"> We want to hear your story! Soon you can create one here!</p>
 					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>

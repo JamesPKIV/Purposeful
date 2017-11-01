@@ -2,7 +2,7 @@
   .main-about{
     margin: 0 auto;
     width: 50%;
-    margin-top: 175px;
+    min-height: 75vh;
   }
 
   .ul-about li{
