@@ -31,7 +31,7 @@ class DonateForm extends Component {
 	}
 
 	// change state content value
-	proceed(value){ 
+	proceed(value){
 		this.setState({
 			content: value
 		});
@@ -191,7 +191,7 @@ class DonateForm extends Component {
 		return (
 			<div className="donate-container">
 				<NavBar />
-				<div className="container">
+				<div className="container main-content">
 					<div className="row valign-wrapper ">
 						<div className="col s12 m12 l12">
 							<div className="col s6 m6 l6">
