@@ -1,194 +1,64 @@
-/* Universal settings*/
+/*desktop*/
+@media screen and (min-width: 700px){
+  .navLogo {
+    width: 6vw;
+    height: 6vw;
+    padding: 1vw;
+  }
 
-.NavBar li :active,
-.NavBar li :not(active) {
-    background-color: none;
+  .navEntry {
+    text-align: center;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 1vw;
+    font-size: 2vh;
+    font-family: 'Arvo', serif;
+    height: 5.5vw;
+  }
+
+  li input.searchInput{
+    width: 18vw;
+    font-size: 1vw;
+    font-family: 'Arvo', serif;
+    background:#E8E8E8;
+    border-radius: 5px;
+    color: black;
+    text-indent: 1.5vw;
+    margin-top: 1.5vw;
+    margin-left: 1vw;
+    margin-right: 2vw;
+  }
+
+  .searchIcon{
+    margin-left: 2vw;
+  }
+
+  .bar {
+    height: 6vw;
+  }
 }
 
+/*mobile*/
+@media screen and (max-width: 699px){
 
-/*Smartphone screens*/
+  .bar{
+    height: 12vh;
+  }
 
-@media screen and (max-width:700px) {
-    .NavBar {
-        width: 100%;
-        height: 100%;
-    }
-    .toggleBtn.closed {
-        width: 100%;
-        height: 100%;
-        border: none;
-        background-color: transparent;
-        font-size: 100%;
-        color: #cacaca;
-    }
-    .toggleBtn.open {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        min-width: 30px;
-        min-height: 30px;
-        border: none;
-        background-color: transparent;
-    }
-    .menuBtn {
-        width: 100%;
-        border: none;
-        background-color: transparent;
-    }
-    .NavBar ul {
-        margin-top: 11vh;
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        z-index: 10;
-        padding: 5px;
-        list-style: none;
-        background-color: #444;
-        text-align: center;
-        border-left: 3px solid white;
-        border-bottom: 3px solid white;
-    }
-    .NavBar li {
-        display: block;
-        margin: auto;
-    }
-    .NavBar li a {
-        display: block;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        font-size: large;
-        padding: 15px 20px;
-        font-family: 'Arvo', serif;
-    }
-   
-    .NavBar-open {
-        height: 100%;
-    }
-    .NavBar-open .toggleBtn.closed {
-        transition: color .3s;
-        color: #f0f0f0;
-    }
-    .learn-div {
-        border-top: 3px solid white;
-        background-color: #444;
-        max-height: 90px;
-    }
-    .learn-btn {
-        margin-top: 15px;
-        font-size: 16px;
-        height: 60px;
-        border-radius: 10px;
-        background-color: #C81C2D;
-        font-family: 'Arvo', serif;
-    }
-    .plogo {
-        width: 50px;
-        height: 50px;
-        padding: 15px 20px;
-    }
+  .navLogo {
+    width: 7vh;
+    height: 9vh;
+    margin-top: 1.5vh;
+  }
+
+  .title{
+    text-align: center;
+    color: white;
+    font-size: 4vh;
+    font-family: 'Arvo', serif;
+    height: 12vh;
+  }
 }
-
-
-/*desktop screens*/
-
-@media screen and (min-width:700px) {
-    .NavBar {
-        display: flex;
-        position: fixed;
-        top:0;
-        right:0;
-        left:0;
-        height: inherit;
-        background-color: #212121;
-        margin-bottom: 100%;
-        z-index: 5;
-        /*border-bottom: 5px solid white;*/
-    }
-    .NavBar ul {
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        flex: 1 1 auto;
-        list-style: none;
-        padding: 20px;
-    }
-    .NavBar li {
-        margin: auto;
-        display: inline-block;
-        padding-right: 10px;
-    }
-    .NavBar li :not(active) {
-        background-color: inherit;
-    }
-
-    .navEntry {
-        border: none;
-        display: block;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        padding: 10px 20px;
-        font-size: 18px;
-        font-family: 'Arvo', serif;
-    }
-
-    li input.searchInput{
-        width: 400px;
-        margin-top: 18px;
-        font-size: 18px;
-        font-family: 'Arvo', serif;
-        background:#E8E8E8;
-        border-radius: 5px;
-        color: black;
-        text-indent: 35px;
-    }
-
-    .divSearch{
-        position: relative;
-    }
-    
-    .FaSearchIcon{
-        position: absolute;
-        top: 31px; 
-        left: 10px;
-        color: black;
-    }
-
-    .navRight{
-        float:right;
-    }
-
-    .learnBtn {
-        flex: 0 1 auto;
-        margin: auto;
-        padding: 10px;
-        background-color: #bb2f3d;
-        border: none;
-        transition: background-color .3s;
-    }
-    .learnBtn:hover {
-        background-color: #d33444;
-    }
-    .learnBtn a {
-        color: white;
-        text-decoration: none;
-        padding: 10px;
-    }
-    .NavBar .menuIcon {
-        display: none;
-    }
-    .NavBar .icon {
-        font-size: 20px;
-    }
-    .plogo {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-
 /* Sweep To Top */
 
 .hvr-sweep-to-top {

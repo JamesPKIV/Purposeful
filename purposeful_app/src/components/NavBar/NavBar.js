@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import './NavBar.css';
-import FaAlignJustify from 'react-icons/lib/fa/align-justify';
 import FaSearch from 'react-icons/lib/fa/search';
 import logo from '../App/logo.png';
 import DropDown from './DropDown';
@@ -15,7 +14,6 @@ class NavBar extends Component {
       searchInput: "",
      };
     this.navBarDesktop = this.navBarDesktop.bind(this);
-    this.navBarMobile = this.navBarMobile.bind(this);
     this.toggle = this.toggle.bind(this);
     this.handleMenuSelection = this.handleMenuSelection.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -67,65 +65,54 @@ class NavBar extends Component {
 
   navBarDesktop() {
     return (
-      <nav className="NavBar">
-        <ul>
-          <li><button onClick={() => this.handleNav("home")} className="navEntry"><img width="50" height="50" src={logo} className="plogo" alt="Purposeful"></img></button></li>
-          <li><button onClick={() => this.handleNav("collabs")}  className="hvr-sweep-to-top navEntry">Collaborations </button></li>
-          <li><button onClick={() => this.handleNav("mentorship")}  className="hvr-sweep-to-top navEntry">Mentorship </button></li>
-          <li><button onClick={() => this.handleNav("stories")}  className="hvr-sweep-to-top navEntry">Stories </button></li>
-          { /* Right side of navbar */}
-          <li className="navRight"><DropDown logout={this.props.logout}/></li>
-          <li className="navRight"><button onClick={() => this.handleNav("/chat")} className="navEntry" >Messages </button></li>
-          <li className="navRight"><button onClick={() => this.handleNav("/profile")} className="navEntry" >Profile </button></li>
-          <li className="navRight"><div className="divSearch"><FaSearch className="FaSearchIcon" size={16} />
-            <input  className="searchInput"
-                    placeholder="Search"
-                    onChange={this.handleUpdate}
-                    onKeyPress={this.handleSearch}
+      <nav className="grey darken-4 bar">
+        <div className="nav-wrapper row fullrow">
+          <ul id="nav-left" className="left hide-on-med-and-down">
+            <li><div onClick={() => this.handleNav("home")}><img className="navLogo" src={logo} alt="Purposeful"></img></div></li>
+            <li><div onClick={() => this.handleNav("collabs")}  className="hvr-sweep-to-top navEntry">Collaborations </div></li>
+            <li><div onClick={() => this.handleNav("mentorship")}  className="hvr-sweep-to-top navEntry">Mentorship </div></li>
+            <li><div onClick={() => this.handleNav("stories")}  className="hvr-sweep-to-top navEntry">Stories </div></li>
+            <li><div onClick={() => this.handleNav("/chat")} className="hvr-sweep-to-top navEntry">Messages </div></li>
+            <li><div onClick={() => this.handleNav("/profile")} className="hvr-sweep-to-top navEntry" >Profile </div></li>
+          </ul>
+          <ul id="nav-right" className="right hide-on-med-and-down">
+            <li><DropDown logout={this.props.logout}/></li>
+            <li>
+              <div><FaSearch className="searchIcon"/>
+                <input className="searchInput"
+                  placeholder="Search"
+                  onChange={this.handleUpdate}
+                  onKeyPress={this.handleSearch}
                 />
-            </div>
-          </li>
-        </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
       </nav>
     );
   }
 
-  navBarMobile() {
-    if (this.state.activeNav) {
-      return (
-        <div className="NavBar-open">
-          <button className="toggleBtn closed" onClick={this.toggle}>
-            <div id="toggleBtn-inner">
-              <FaAlignJustify />
-            </div>
-          </button>
-          <nav className="NavBar">
-            <ul>
-              <button className="menuBtn open" onClick={this.handleMenuSelection} >
-                <li><NavLink to="/home" className="hvr-sweep-to-top navEntry">Home </NavLink></li>
-                <li><NavLink to="/mentorship" className="hvr-sweep-to-top navEntry">Mentorship </NavLink></li>
-              </button>
-            </ul>
-          </nav>
-        </div>
-      )
-    }
-    else {
-      return (
-        <button className="toggleBtn closed" onClick={this.toggle}>
-          <div id="toggleBtn-inner">
-            <FaAlignJustify />
-          </div>
-        </button>
-      );
-    }
+  navBarMobile(){
+    return(
+      <div className="row grey darken-4 bar">
+        <div onClick={() => this.handleNav("home")}><img className="navLogo col s3 m3 l3" src={logo} alt="Purposeful"></img></div>
+        <div className="col s6 m6 l6"><p className="title"> bePurposeful </p></div>
+        <div className="col s2 m2 l2"><DropDown logout={this.props.logout}/></div>
+      </div>
+    );
   }
-
 
   render() {
-    //console.log("CONSOLE LOG: " + window.location);
-    return (this.navBarDesktop()); /* desktop version */
-  }
+		if(window.innerWidth >= 700){
+			return(
+				this.navBarDesktop()
+			);
+		} else {
+			return(
+				this.navBarMobile()
+			);
+		}
+	}
 }
 
 export default withRouter(NavBar);

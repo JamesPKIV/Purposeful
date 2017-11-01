@@ -17,22 +17,9 @@ class CollabPage extends Component {
   Desktop(){
     return(
       <span>
-				<NavBar/>
+				<NavBar />
 				<div className="main-content">
-					<img src={working} alt="working" width="300vw" className="row center"/>
-					<p className="row"> This part is not ready, but you should still start a great project!</p>
-					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
-				</div>
-			</span>
-    );
-  }
-
-  Mobile(){
-    return(
-      <span>
-				<NavBar/>
-				<div className="main-content">
-					<img src={working} alt="working" width="100vw" className="row center"/>
+					<img src={working} alt="working" width="300vw"/>
 					<p className="row"> This part is not ready, but you should still start a great project!</p>
 					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
 				</div>
@@ -41,15 +28,9 @@ class CollabPage extends Component {
   }
 
   render() {
-		if(window.innerWidth > 700){
-			return(
-				this.Desktop()
-			);
-		} else {
-			return(
-				this.Mobile()
-			);
-		}
+		return(
+			this.Desktop()
+		);
 	}
 }
 

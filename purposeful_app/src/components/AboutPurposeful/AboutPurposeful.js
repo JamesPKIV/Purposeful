@@ -19,6 +19,7 @@ class AboutPurposeful extends Component {
 	}
 
   Desktop(){
+		var apos = "'"
     return(
 			<div>
 			<NavBar />
@@ -47,12 +48,12 @@ class AboutPurposeful extends Component {
 					<h4><span id="ideas-color2"> Interactions </span></h4>
 					<img src={teamImg} alt=""/>
 					<p className="pillar-desc">Come together with people who share your interests to see what you can create.
-					We're also working to set up office spaces where people can
+					We{apos}re also working to set up office spaces where people can
 					collaborate beyond the digital world.</p>
 				</div>
 			</section>
 		</section>
-		</div> 
+		</div>
     );
   }
 
@@ -60,7 +61,7 @@ class AboutPurposeful extends Component {
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="100vw" className="row center"/>
 					<p className="row"> We are hard at work to tell you more about us soon! </p>
 					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>

@@ -64,7 +64,7 @@ class SEProfilePage extends Component {
 				console.log(err);
 				alert("We weren't able to complete your request this time, but don't give up. Try again later!");
 			});
-		
+
 	}
 
 	handleChangeMessage(ev) {
@@ -323,9 +323,9 @@ class SEProfilePage extends Component {
 		if (this.state.askMentee){
 			return(
 				<div className="input-field col s10 m10 l10 push-l1">
-					<textarea 
-						id="ask_message" 
-						value={this.state.message} 
+					<textarea
+						id="ask_message"
+						value={this.state.message}
 						onChange={this.handleChangeMessage}
 						className="materialize-textarea"
 					/>
@@ -460,7 +460,7 @@ class SEProfilePage extends Component {
 		return(
 			<div>
 				<NavBar/>
-				<div className="row fullrow main-content">
+				<div className="row fullrow">
 					<div className="col s4 m4 l4">
 						<img className="responsive-img circle" src={profile_pic} alt=""/>
 						<p className="profile-name"> {this.props.SEProfile.name} </p>
@@ -557,7 +557,7 @@ class SEProfilePage extends Component {
 		return(
 			<div>
 				<NavBar/>
-				<div className="row fullrow main-content">
+				<div className="row fullrow">
 						<div className="col s5 m5 l5">
 							<img className="responsive-img circle" src={profile_pic} alt=""/>
 							<p className="profile-name"> Jane Doe </p>
