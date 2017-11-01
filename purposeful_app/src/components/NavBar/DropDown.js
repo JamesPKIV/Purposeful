@@ -24,7 +24,7 @@ class DropDown extends Component{
     handleLogout = (ev) =>{
         ev.preventDefault();
         this.props.logout();
-        this.props.history.push('/landing', this.props.history.location.state);
+        this.props.history.push('/landing');
     }
 
     render(){

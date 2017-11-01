@@ -368,17 +368,17 @@ footerDesktop(){
 									userId={this.state.userId}
 									fetchData={this.fetchHome}
 									isLoggedIn={this.state.isLoggedIn}
-                  mentors={this.state.mentors}
+                  					mentors={this.state.mentors}
 									mentees={this.state.mentees}
 									recommended={this.state.recommended}
 									logout={this.handleLogout}
-                  {...props}
+                  					{...props}
 								/>	
 							}
 						/>
 
 
-            <Route
+		            	<Route
 							path="/mentorship"
 							render={ () =>
 								<MentorshipPage
@@ -413,8 +413,8 @@ footerDesktop(){
 									mentees={this.state.mentees}
 							  /> }
 						/>
-                  
-                  
+		                  
+		                  
 						<Route
 							path="/SEprofile/:id"
 							render={ ({ match }) => 
@@ -428,54 +428,54 @@ footerDesktop(){
 							}
 						/>
 
-              <Route
-                path="/stories"
-                render={ () => <StoriesPage /> }
-              />
-							<Route
-                path="/newstories"
-                render={ () => <StoriesNew /> }
-              />
-							<Route
-                path="/managestories"
-                render={ () => <StoriesManage /> }
-              />
-              <Route
-                path="/collabs"
-                render={ () => <CollabPage /> }
-              />
-              <Route
-                path="/editProfile"
-                render={ () => <EditProfile /> }
-              />
-              <Route
-                path="/about"
-                render={ () => <AboutPurposeful /> }
-              />
-              <Route
-                path="/team"
-                render={ () => <OurTeam /> }
-              />
-              <Route
-                path="/donate"
-                render={ () => <DonateForm /> }
-              />
-              <Route
-                path="/privacy"
-                render={ () => <PrivacyPolicy /> }
-              />
-							<Route
-								path="/settings"
-								render={ () => <SettingsPage /> }
-							/>
-							<Route
-								path="/help"
-								render={ () => <HelpPage /> }
-							/>
-							<Route
-							  path="/chat"
-								render={ () => <ChatPage /> }
-							/>
+						<Route
+							path="/stories"
+							render={ () => <StoriesPage /> }
+						/>
+						<Route
+							path="/newstories"
+							render={ () => <StoriesNew /> }
+						/>
+						<Route
+							path="/managestories"
+							render={ () => <StoriesManage /> }
+						/>
+						<Route
+							path="/collabs"
+							render={ () => <CollabPage /> }
+						/>
+						<Route
+							path="/editProfile"
+							render={ () => <EditProfile /> }
+						/>
+						<Route
+							path="/about"
+							render={ () => <AboutPurposeful /> }
+						/>
+						<Route
+							path="/team"
+							render={ () => <OurTeam /> }
+						/>
+						<Route
+							path="/donate"
+							render={ () => <DonateForm /> }
+						/>
+						<Route
+							path="/privacy"
+							render={ () => <PrivacyPolicy /> }
+						/>
+						<Route
+							path="/settings"
+							render={ () => <SettingsPage /> }
+						/>
+						<Route
+							path="/help"
+							render={ () => <HelpPage /> }
+						/>
+						<Route
+							path="/chat"
+							render={ () => <ChatPage /> }
+						/>
 					</main>
 					{this.footer()}
 				</div>
