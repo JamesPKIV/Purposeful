@@ -110,7 +110,7 @@ class ProfilePage extends Component {
 	}
 
 	loadLoggedIn(){
-		if(window.innerWidth > 700){
+		if(window.innerWidth >= 700){
 			return(
 				this.displayDesktop()
 			);
@@ -450,136 +450,134 @@ class ProfilePage extends Component {
 
 	displayDesktop(){
 		return(
-			<div>
-				{/* Reason for the below line of code?
-					<div className="row fullrow"> <p> </p> </div> */
-				}
-				<div className="row fullrow">
-					<div className="col s4">
-						<div className="row">
-							<img className="responsive-img circle" src={profile_pic} alt=""/>
-							<p className="profile-name"> {this.props.userName} </p>
-						</div>
-						{this.change_picture()}
-						<div className="row">
-							<Link to="/editProfile" className="btn waves-effect light-green">
-								Edit your account information  <FaPencil> </FaPencil>
-							</Link>
-						</div>
-
-						<div className="row"> <p> </p> </div>
-						<div className="row"> <p> </p> </div>
-						<div className="row"> <p> </p> </div>
-						<div className="row">
-							<div className="container left-content" >
-									{this.purpose_content()}
-									{this.goals_content()}
-									{this.accomplish_content()}
+			<div className=" main-content">
+				<div className="row">
+					<div className="col s12 m12 l12">
+						<div className="col s4 m4 l4">
+							<div className="row">
+								<img className="responsive-img circle" src={profile_pic} alt=""/>
+								<p className="profile-name"> {this.props.userName} </p>
 							</div>
-						</div>
-						<div className="row"> <p> </p> </div>
-						<div className="row">
-							<div className="container left-content">
-								<div className="card-panel">
-									<div className="row">
-										<Link to="/editProfile" className="btn-flat profile-text right">
-											Edit <FaPencil className="profile-text"></FaPencil>
-										</Link>
-									</div>
-									<hr className="col s12 m12 l12"></hr>
-									<div className="row"> <p> </p> </div>
-									<div className="row">
-										<p className="profile-titles"> Your Skills </p>
-										{this.pull("skills")}
-									</div>
-									<hr className="col s12 m12 l12"></hr>
-									<div className="row"> <p> </p> </div>
-									<div className="row">
-										<p className="profile-titles"> Your Interests </p>
-										{this.pull("interests")}
-									</div>
+							{this.change_picture()}
+							<div className="row">
+								<Link to="/editProfile" className="btn waves-effect light-green">
+									Edit your account information  <FaPencil> </FaPencil>
+								</Link>
+							</div>
+
+							<div className="row"> <p> </p> </div>
+							<div className="row"> <p> </p> </div>
+							<div className="row"> <p> </p> </div>
+							<div className="row">
+								<div className="container left-content" >
+										{this.purpose_content()}
+										{this.goals_content()}
+										{this.accomplish_content()}
 								</div>
 							</div>
+							<div className="row"> <p> </p> </div>
+							<div className="row">
+								<div className="container left-content">
+									<div className="card-panel">
+										<div className="row">
+											<Link to="/editProfile" className="btn-flat profile-text right">
+												Edit <FaPencil className="profile-text"></FaPencil>
+											</Link>
+										</div>
+										<hr className="col s12 m12 l12"></hr>
+										<div className="row"> <p> </p> </div>
+										<div className="row">
+											<p className="profile-titles"> Your Skills </p>
+											{this.pull("skills")}
+										</div>
+										<hr className="col s12 m12 l12"></hr>
+										<div className="row"> <p> </p> </div>
+										<div className="row">
+											<p className="profile-titles"> Your Interests </p>
+											{this.pull("interests")}
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
+						<div className="col s8 m8 l8">
+							<div className="row"> <p> </p> </div>
+							<div className="row"> <p> </p> </div>
+							<div className="row">
+								<div className="col s10 m10 l10 push-l1">
 
-					<div className="col s8">
-						<div className="row"> <p> </p> </div>
-						<div className="row"> <p> </p> </div>
-						<div className="row">
-							<div className="col s10 m10 l10 push-l1">
-
-								<div className="card-panel">
-									<div className="row valign-wrapper">
-										<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
-										<div className="col s5 m5 l5 push-l1">
-											<Link to="/mentorship" className="btn waves-effect light-green">
-												Manage your current mentors  <FaGroup> </FaGroup>
-											</Link>
-										</div>
-										<div className="col s5 m5 l5">
-											<Link to="/mentorship" className="btn waves-effect light-green">
-												Find a mentor!  <FaMagic> </FaMagic>
-											</Link>
-										</div>
-									</div>
-									{this.pull_mentors()}
-								</div>
-
-								<div className="card-panel">
-									<div className="row valign-wrapper">
-										<p className="col s2 m2 l2 profile-titles valign">Mentees</p>
-										<div className="col s5 m5 l5 push-l1">
-											<Link to="/mentorship" className="btn waves-effect light-green">
-												Manage your current mentees  <FaGroup> </FaGroup>
-											</Link>
-										</div>
-										<div className="col s5 m5 l5">
-											<Link to="/mentorship" className="btn waves-effect light-green">
-												Find a mentee!  <FaMagic> </FaMagic>
-											</Link>
-										</div>
-									</div>
-									{this.pull_mentees()}
-								</div>
-
-								<div className="card-panel">
-									<div className="row valign-wrapper">
-										<p className="col s2 m2 l2 profile-titles valign">Stories</p>
-										<div className="col s4 m4 l4">
-											<Link to="/managestories" className="btn waves-effect light-green">
-												Manage your stories  <FaPencil> </FaPencil>
-											</Link>
-										</div>
-										<div className="col s5 m5 l5">
-											<Link to="/newstories" className="btn waves-effect light-green">
-												Write a new story or article!  <FaPencil> </FaPencil>
-											</Link>
-										</div>
-									</div>
-									{this.pull_stories()}
-								</div>
-								<div className="card-panel">
-									<div className="row">
-										<div className= "col s4 m4 l4">
-											<p className="row profile-titles">Collaborations</p>
-											<div className="row">
-												<Link to="/collabs" className="btn waves-effect light-green">
-													Manage your collabs  <FaGroup> </FaGroup>
+									<div className="card-panel">
+										<div className="row valign-wrapper">
+											<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
+											<div className="col s5 m5 l5 push-l1">
+												<Link to="/mentorship" className="btn waves-effect light-green">
+													Manage your current mentors  <FaGroup> </FaGroup>
 												</Link>
 											</div>
-											<div className="row">
-												<Link to="/collabs" className="btn waves-effect light-green">
-													Find collab!  <FaMagic> </FaMagic>
-												</Link>
-											</div>
-											<div className="row">
-												<Link to="/collabs" className="btn waves-effect light-green">
-													Start a collab!  <FaLightbulbO> </FaLightbulbO>
+											<div className="col s5 m5 l5">
+												<Link to="/mentorship" className="btn waves-effect light-green">
+													Find a mentor!  <FaMagic> </FaMagic>
 												</Link>
 											</div>
 										</div>
-										{this.pull_collab()}
+										{this.pull_mentors()}
+									</div>
+
+									<div className="card-panel">
+										<div className="row valign-wrapper">
+											<p className="col s2 m2 l2 profile-titles valign">Mentees</p>
+											<div className="col s5 m5 l5 push-l1">
+												<Link to="/mentorship" className="btn waves-effect light-green">
+													Manage your current mentees  <FaGroup> </FaGroup>
+												</Link>
+											</div>
+											<div className="col s5 m5 l5">
+												<Link to="/mentorship" className="btn waves-effect light-green">
+													Find a mentee!  <FaMagic> </FaMagic>
+												</Link>
+											</div>
+										</div>
+										{this.pull_mentees()}
+									</div>
+
+									<div className="card-panel">
+										<div className="row valign-wrapper">
+											<p className="col s2 m2 l2 profile-titles valign">Stories</p>
+											<div className="col s4 m4 l4">
+												<Link to="/managestories" className="btn waves-effect light-green">
+													Manage your stories  <FaPencil> </FaPencil>
+												</Link>
+											</div>
+											<div className="col s5 m5 l5">
+												<Link to="/newstories" className="btn waves-effect light-green">
+													Write a new story or article!  <FaPencil> </FaPencil>
+												</Link>
+											</div>
+										</div>
+										{this.pull_stories()}
+									</div>
+									<div className="card-panel">
+										<div className="row">
+											<div className= "col s4 m4 l4">
+												<p className="row profile-titles">Collaborations</p>
+												<div className="row">
+													<Link to="/collabs" className="btn waves-effect light-green">
+														Manage your collabs  <FaGroup> </FaGroup>
+													</Link>
+												</div>
+												<div className="row">
+													<Link to="/collabs" className="btn waves-effect light-green">
+														Find collab!  <FaMagic> </FaMagic>
+													</Link>
+												</div>
+												<div className="row">
+													<Link to="/collabs" className="btn waves-effect light-green">
+														Start a collab!  <FaLightbulbO> </FaLightbulbO>
+													</Link>
+												</div>
+											</div>
+											{this.pull_collab()}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -706,13 +704,13 @@ class ProfilePage extends Component {
 	render () {
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
-			<div>
-				<NavBar />
+			<span>
+				<NavBar/>
 				{this.props.isLoggedIn ?
 				this.loadLoggedIn() :/* User is logged in*/
 				this.loadLoggedOut() /* User happens to be logged out */}
-			</div>
-        );
+			</span>
+    );
 	}
 }
 

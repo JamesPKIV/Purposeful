@@ -18,7 +18,7 @@ class StoriesPage extends Component {
     return(
       <span>
 				<NavBar/>
-				<div>
+				<div className="main-content">
 					<img src={working} alt="working" width="300vw" className="row center"/>
 					<p className="row">  Soon you will be able to find stories here!</p>
 					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
@@ -27,30 +27,10 @@ class StoriesPage extends Component {
     );
   }
 
-  Mobile(){
-		console.log("here");
-    return(
-      <span>
-				<NavBar/>
-				<div>
-					<img src={working} alt="working" width="100vw" className="row center"/>
-					<p className="row"> Soon you will be able to find stories here!</p>
-					<Link to="/profile" className="center btn light-green row">Back to your profile </Link>
-				</div>
-			</span>
-    );
-  }
-
   render() {
-		if(window.innerWidth > 700){
-			return(
-				this.Desktop()
-			);
-		} else {
-			return(
-				this.Mobile()
-			);
-		}
+		return(
+			this.Desktop()
+		);
 	}
 }
 
