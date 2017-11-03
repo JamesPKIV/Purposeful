@@ -455,7 +455,7 @@ class ProfilePage extends Component {
 					<div className="col s12 m12 l12">
 						<div className="col s4 m4 l4">
 							<div className="row">
-								<img className="responsive-img circle" src={profile_pic} alt=""/>
+								<img className="responsive-img circle pic" src={profile_pic} alt=""/>
 								<p className="profile-name"> {this.props.userName} </p>
 							</div>
 							{this.change_picture()}
@@ -504,8 +504,6 @@ class ProfilePage extends Component {
 							<div className="row"> <p> </p> </div>
 							<div className="row"> <p> </p> </div>
 							<div className="row">
-								<div className="col s10 m10 l10 push-l1">
-
 									<div className="card-panel">
 										<div className="row valign-wrapper">
 											<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
@@ -579,7 +577,6 @@ class ProfilePage extends Component {
 											{this.pull_collab()}
 										</div>
 									</div>
-								</div>
 							</div>
 						</div>
 					</div>

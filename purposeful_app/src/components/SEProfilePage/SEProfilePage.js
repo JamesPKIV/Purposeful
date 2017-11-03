@@ -509,7 +509,7 @@ class SEProfilePage extends Component {
 							{this.invite_collab()}
 							<div className="row"> <p> </p> </div>
 							<div className="row">
-								<div className="col s10 m10 l10 push-l1">
+
 
 									<div className="card-panel">
 										<div className="row valign-wrapper">
@@ -546,7 +546,6 @@ class SEProfilePage extends Component {
 										</div>
 											{this.pull_collab()}
 									</div>
-								</div>
 							</div>
 						</div>
 					</div>

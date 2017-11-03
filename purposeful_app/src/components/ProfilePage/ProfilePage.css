@@ -22,12 +22,3 @@
   text-overflow: ellipsis;
   max-height: 12vh;
 }
-
-div.row{
-  margin-bottom: 10;
-}
-
-div.left-content{
-  padding-left:50px;
-  width: 100%;
-}
