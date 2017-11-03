@@ -460,91 +460,92 @@ class SEProfilePage extends Component {
 		return(
 			<div>
 				<NavBar/>
-				<div className="row fullrow">
-					<div className="col s4 m4 l4">
-						<img className="responsive-img circle" src={profile_pic} alt=""/>
-						<p className="profile-name"> {this.props.SEProfile.name} </p>
-						<div className="row"><p> </p></div>
-						<div className="row"><p> </p></div>
-						<div className="container left-content">
-								{this.purpose_content()}
-								{this.goals_content()}
-								{this.accomplish_content()}
-						</div>
-						<div className="row"> <p> </p> </div>
-						<div className="row">
+				<div className="row main-content">
+					<div className="col s12 m12 l12">
+						<div className="col s4 m4 l4">
+							<img className="responsive-img circle" src={profile_pic} alt=""/>
+							<p className="profile-name"> {this.props.SEProfile.name} </p>
+							<div className="row"><p> </p></div>
+							<div className="row"><p> </p></div>
 							<div className="container left-content">
-								<div className="card-panel">
+									{this.purpose_content()}
+									{this.goals_content()}
+									{this.accomplish_content()}
+							</div>
+							<div className="row"> <p> </p> </div>
+							<div className="row">
+								<div className="container left-content">
+									<div className="card-panel">
 
-									<div className="row"> <p> </p> </div>
-									<div className="row">
-										<p className="profile-titles"> Skills </p>
-										{this.pull("skills")}
-									</div>
-									<hr className="col s12 m12 l12"></hr>
-									<div className="row"> <p> </p> </div>
-									<div className="row">
-										<p className="profile-titles"> Interests </p>
-										{this.pull("interests")}
+										<div className="row"> <p> </p> </div>
+										<div className="row">
+											<p className="profile-titles"> Skills </p>
+											{this.pull("skills")}
+										</div>
+										<hr className="col s12 m12 l12"></hr>
+										<div className="row"> <p> </p> </div>
+										<div className="row">
+											<p className="profile-titles"> Interests </p>
+											{this.pull("interests")}
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
-					<div className="col s8 m8 l8">
-						<div className="row"> <p> </p> </div>
-						<div className="row"> <p> </p> </div>
-						<div className="row">
-							<div className="col s4 m4 l4">
-								{this.ask_button()}
+						<div className="col s8 m8 l8">
+							<div className="row"> <p> </p> </div>
+							<div className="row"> <p> </p> </div>
+							<div className="row">
+								<div className="col s4 m4 l4">
+									{this.ask_button()}
+								</div>
+								<div className="col s4 m4 l4">
+									{this.invite_button()}
+								</div>
+								{this.follow("desktop")}
 							</div>
-							<div className="col s4 m4 l4">
-								{this.invite_button()}
-							</div>
-							{this.follow("desktop")}
-						</div>
-						{this.ask_mentee()}
-						{this.invite_collab()}
-						<div className="row"> <p> </p> </div>
-						<div className="row">
-							<div className="col s10 m10 l10 push-l1">
+							{this.ask_mentee()}
+							{this.invite_collab()}
+							<div className="row"> <p> </p> </div>
+							<div className="row">
 
-								<div className="card-panel">
-									<div className="row valign-wrapper">
-										<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
-										<p className="col s10 m10 l10 profile-text valign">These are people who have
-										guided Jane towards her goals.</p>
-									</div>
-									{this.pull_mentors()}
-								</div>
 
-								<div className="card-panel">
-									<div className="row valign-wrapper">
-										<p className="col s2 m2 l2 profile-titles valign">Mentees</p>
-										<p className="col s10 m10 l10 profile-text valign">These are people who have
-										been supported by Jane to achieve their goals.</p>
+									<div className="card-panel">
+										<div className="row valign-wrapper">
+											<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
+											<p className="col s10 m10 l10 profile-text valign">These are people who have
+											guided Jane towards her goals.</p>
+										</div>
+										{this.pull_mentors()}
 									</div>
-									{this.pull_mentees()}
-								</div>
 
-								<div className="card-panel">
-									<div className="row valign-wrapper">
-										<p className="col s2 m2 l2 profile-titles valign">Stories</p>
-										<p className="col s10 m10 l10 profile-text valign">Learn more about how
-										Jane got to where she is today.</p>
+									<div className="card-panel">
+										<div className="row valign-wrapper">
+											<p className="col s2 m2 l2 profile-titles valign">Mentees</p>
+											<p className="col s10 m10 l10 profile-text valign">These are people who have
+											been supported by Jane to achieve their goals.</p>
+										</div>
+										{this.pull_mentees()}
 									</div>
-									{this.pull_stories()}
-								</div>
 
-								<div className="card-panel">
-									<div className="row valign-wrapper">
-										<p className="col s3 m3 l3 profile-titles valign">Collaborations</p>
-										<p className="col s9 m9 l9 profile-text valign">These are the projects
-										that Jane is currenly working on.</p>
+									<div className="card-panel">
+										<div className="row valign-wrapper">
+											<p className="col s2 m2 l2 profile-titles valign">Stories</p>
+											<p className="col s10 m10 l10 profile-text valign">Learn more about how
+											Jane got to where she is today.</p>
+										</div>
+										{this.pull_stories()}
 									</div>
-										{this.pull_collab()}
-								</div>
+
+									<div className="card-panel">
+										<div className="row valign-wrapper">
+											<p className="col s3 m3 l3 profile-titles valign">Collaborations</p>
+											<p className="col s9 m9 l9 profile-text valign">These are the projects
+											that Jane is currenly working on.</p>
+										</div>
+											{this.pull_collab()}
+									</div>
 							</div>
 						</div>
 					</div>

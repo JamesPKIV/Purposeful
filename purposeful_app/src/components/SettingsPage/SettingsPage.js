@@ -18,7 +18,7 @@ class SettingsPage extends Component {
     return(
       <span>
 				<NavBar/>
-				<div>
+				<div className="main-content">
 					<img src={working} alt="working" width="300vw" className="row center"/>
 					<p className="row"> Soon you will be able to personalize your settings! </p>
 					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
@@ -27,29 +27,10 @@ class SettingsPage extends Component {
     );
   }
 
-  Mobile(){
-    return(
-      <span>
-				<NavBar/>
-				<div>
-					<img src={working} alt="working" width="100vw" className="row center"/>
-					<p className="row"> Soon you will be able to personalize your settings!</p>
-					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
-				</div>
-			</span>
-    );
-  }
-
   render() {
-		if(window.innerWidth > 700){
-			return(
-				this.Desktop()
-			);
-		} else {
-			return(
-				this.Mobile()
-			);
-		}
+		return(
+			this.Desktop()
+		);
 	}
 }
 

@@ -39,53 +39,57 @@ class OurTeam extends Component {
 		return (
 			<span>
 				<NavBar />
-				<div className="main-about">
-						<h4>Our Team </h4>
-						<ul className="ul-about">
-							<li>
-								<figure className="whoEntry">
-									<img className="about-pic" alt="Oscar Parra" src={oscar} />
-									<figcaption className="about">
-										<span className="name"> Oscar Parra </span> <br />
-										<span className="role-desc">Co-Founder & Project Lead </span>
-										<br />
-										<a href="https://github.com/ogparra"><Github className="icon"/></a>
-										<a href="https://www.linkedin.com/in/ogparra/"><Linkedin className="icon" /></a>
-										<android/>
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure className="whoEntry">
-									<img className="about-pic" alt="James Kennedy" src={james} />
-									<figcaption className="about">
-										<span className="name"> James Kennedy </span><br />
-										<span className="role-desc">Co-Founder & Lead Engineer </span>
-										<br />
-										<a href="https://github.com/JamesPKIV"><Github className="icon" /></a>
-										<a href="https://www.linkedin.com/in/jpkiv/" ><Linkedin className="icon" /></a>
-									</figcaption>
-								</figure>
-							</li>
-							<li>
-								<figure className="whoEntry">
-									<img className="about-pic" alt="Diana Gonzalez Santillan" src={diana} />
-									<figcaption className="about">
-										<span className="name"> Diana Gonzalez Santillan</span> <br />
-										<span className="role-desc">Co-Founder & Software Engineer </span>
-										<br />
-										<a href="https://github.com/digonsan"><Github className="icon" /></a>
-										<a href="https://www.linkedin.com/in/diana-gonzalez-santillan-57739187/" ><Linkedin className="icon" /></a>
-									</figcaption>
-								</figure>
-							</li>
-						</ul>
+				<div className="container main-content">
+					<div className="row">
+						<div className="col s12 m12 l12">
+							<h4>Our Team </h4>
+						</div>
 					</div>
-					<div className="chevron-div" onClick={this.toggle}>
+					<div className="row">
+						<div className="col s4 m4 l4">
+							<div className="col s8 m8 l8 push-l2">
+								<img className="row about-pic" alt="Oscar Parra" src={oscar} />
+								<span className="row name"> Oscar Parra </span>
+								<span className="row role-desc">Co-Founder & Project Lead </span>
+								<span className="row">
+									<a href="https://github.com/ogparra"><Github className="icon"/></a>
+									<a href="https://www.linkedin.com/in/ogparra/"><Linkedin className="icon" /></a>
+								</span>
+							</div>
+						</div>
+
+						<div className="col s4 m4 l4">
+							<div className="col s8 m8 l8 push-l2">
+								<img className="row about-pic" alt="James Kennedy" src={james} />
+								<span className="row name"> James Kennedy </span>
+								<span className="row role-desc">Co-Founder & Lead Engineer </span>
+								<span className="row">
+									<a href="https://github.com/JamesPKIV"><Github className="icon"/></a>
+									<a href="https://www.linkedin.com/in/jpkiv/"><Linkedin className="icon" /></a>
+								</span>
+							</div>
+						</div>
+
+						<div className="col s4 m4 l4">
+							<div className="col s8 m8 l8 push-l2">
+								<img className="row about-pic" alt="Diana Gonzalez Santillan" src={diana} />
+								<span className="row name-diana"> Diana Gonzalez Santillan </span>
+								<span className="row role-desc">Co-Founder & Software Engineer </span>
+								<span className="row">
+									<a href="https://github.com/digonsan"><Github className="icon"/></a>
+									<a href="https://www.linkedin.com/in/diana-gonzalez-santillan-57739187/"><Linkedin className="icon" /></a>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div className="row" onClick={this.toggle}>
+						<div className="col s2 m2 l2 push-l5 chevron-div">
 							<span>Board of Advisors</span>
 							<br/>
-							<span><ChevronUP className="icon " /></span>
+							<span><ChevronUP className="icon" /></span>
+						</div>
 					</div>
+				</div>
 			</span>
 		);
 	}
@@ -93,41 +97,48 @@ class OurTeam extends Component {
 	boardDesc(){
 		return (
 			<span>
-				<NavBar />
-				<div className="main-about">
-					<div>
-					<h4 className="hd-leader">Board of Advisors</h4>
-					<ul className="ul-about">
-						<li>
-							<figure className="whoEntry">
-								<img className="about-pic" alt="Partha Baral" src={partha} />
-								<figcaption className="about">
-									<span className="name"> Partha Baral </span> <br />
-									<span className="role-desc"> Senior Director at VMware </span>
-									<br />
+				<NavBar/>
+
+				<div className="container main-content">
+
+					<span className="row">
+						<div className="col s12 m12 l12">
+							<h4>Board of Advisors</h4>
+						</div>
+					</span>
+
+					<div className="row">
+
+						<div className="col s4 m4 l4 push-l2">
+							<div className="col s8 m8 l8 push-l2">
+								<img className="row about-pic" alt="Partha Baral" src={partha} />
+								<span className="row name"> Partha Baral </span>
+								<span className="row role-desc">Senior Director at VMware </span>
+								<span className="row">
 									<a href="https://www.linkedin.com/in/parthabaral/"><Linkedin className="icon" /></a>
-								</figcaption>
-							</figure>
-						</li>
-						<li>
-							<figure className="whoEntry">
-								<img className="about-pic" alt="Kevin Jesse" src={kevin} />
-								<figcaption className="about">
-									<span className="name"> Kevin Jesse </span> <br />
-									<span className="role-desc"> Ph.D. CS at UC Davis </span>
-									<br />
+								</span>
+							</div>
+						</div>
+
+						<div className="col s4 m4 l4 push-l2">
+							<div className="col s8 m8 l8 push-l2">
+								<img className="row about-pic" alt="Kevin Jesse" src={kevin} />
+								<span className="row name"> Kevin Jesse </span>
+								<span className="row role-desc">Ph.D. C.S. at UC Davis </span>
+								<span className="row">
 									<a href="https://www.linkedin.com/in/kevinjesse/"><Linkedin className="icon" /></a>
-								</figcaption>
-							</figure>
-						</li>
-					</ul>
+								</span>
+							</div>
+						</div>
 					</div>
-					<div className="chevron-div" onClick={this.toggle}>
-						<span>Our Team</span>
-						<br/>
-						<span><ChevronDOWN className="icon " /></span>
+					<div className="row" onClick={this.toggle}>
+					  <div className="col s2 m2 l2 push-l5 chevron-div">
+							<span>Our Team</span>
+							<br/>
+							<span><ChevronDOWN className="icon" /></span>
+						</div>
 					</div>
-			</div>
+			  </div>
 			</span>
 		)
 	}

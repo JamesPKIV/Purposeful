@@ -45,7 +45,7 @@ class ChatPage extends Component {
           <NavBar/>
         </span>
         <span className="row">
-          <div className="col s3 m3 l3">
+          <div className="col s12 m3 l3">
             <div className="col s10 m10 l10 push-l1">
               <div className="row">
                 <h5>Find someone to chat with:</h5>
@@ -62,7 +62,7 @@ class ChatPage extends Component {
               </div>
             </div>
           </div>
-          <div className="col s9 m9 l9">
+          <div className="col s12 m9 l9">
             <div className="col s12 m12 l12 card-panel">
               {this.current_conversation()}
             </div>
