@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './EditProfile.css';
 import NavBar from '../NavBar/NavBar';
-import working from "../App/still_working.png";
+import FaClose from 'react-icons/lib/fa/close';
 
 class EditProfile extends Component {
 
@@ -49,8 +49,11 @@ class EditProfile extends Component {
 			return_code =
 					<span>
 						{return_code}
-						<div className="col s3 m3 l3 chip light-green lighten-4">
-							{array[i]}<i id={array[i]} onClick={boundClick} className="close material-icons">close</i>
+						<div className="col s5 m3 l3 chip light-green lighten-4">
+							{array[i]} <FaClose
+							           id={array[i]}
+												 onClick={boundClick}
+												 />
 						</div>
 					</span>
 		}
@@ -113,97 +116,117 @@ class EditProfile extends Component {
 			<span>
 				<NavBar/>
 			  <div className="container">
-					<form className="col s12 m12 l12 card-panel">
-						<h5 className="row">Edit Personal Information:</h5>
-						<div className="row">
-							<div className="input-field col s6 m6 l6 push-l3">
-								<input placeholder="GET NAME FROM DATABASE" id="first_name" type="text" className="active validate"/>
-								<label for="first_name" className="active">First Name *</label>
+					<form className="col s12 m12 l12">
+
+						<div className="card-panel">
+							<div className="col s12 m12 l12">
+								<h5 className="row">Edit Personal Information:</h5>
 							</div>
-						</div>
-						<div className="row">
-							<div className="input-field col s6 m6 l6 push-l3">
-								<input placeholder="GET LASTNAME IF ANY" id="last_name" type="text" className="validate active"/>
-								<label for="last_name" className="active">Last Name (optional)</label>
-							</div>
-						</div>
-						<div className="row">
-							<div className="input-field col s6 m6 l6 push-l3">
-								<input placeholder="GET EMAIL FROM DATABASE" id="email_input" type="email" className="validate active"/>
-								<label for="email_input" className="active">Email *</label>
-							</div>
-						</div>
-						<div className="row">
-							<button onClick={()=> this.handleSave("personal")} className="col s3 m3 l3 push-l6 btn light-green">
-								Save Personal Info
-							</button>
-						</div>
-						<hr className="line"></hr>
-						<h5 className="row">Change Password:</h5>
-						<div className="row">
-							<div className="input-field col s6 m6 l6 push-l3">
-								<input id="old_pw" type="password" className="validate active"/>
-								<label for="old_pw" className="active">Type your current password *</label>
-							</div>
-						</div>
-						<div className="row">
-							<div className="input-field col s6 m6 l6 push-l3">
-								<input id="new_pw" type="password" className="validate active"/>
-								<label for="new_pw" className="active">Type your new password *</label>
-							</div>
-						</div>
-						<div className="row">
-							<button onClick={()=> this.handleSave("password")} className="col s3 m3 l3 push-l6 btn light-green">
-								Save New Password
-							</button>
-						</div>
-						<hr className="line"></hr>
-						<h5 className="row">Edit Skills and Interests:</h5>
-						<div className="row"> <p> </p> </div>
-						<div className="row">
-							<h6 className="col s1 m1 l1 push-l2">Skills:</h6>
-							<div className="col s8 m8 l8 push-l2">
-								<div className="row">
-									{this.pull("skills")}
-								</div>
-								<div className="row">
-									<div className="input-field col s9 m9 l9">
-										<input id="new_skill" type="text"></input>
-										<label className="active" for="new_skill">Insert a new skill</label>
-									</div>
-									<div className="col s2 m2 l2">
-										<div onClick={() => this.add_skill_or_interest(document.getElementById("new_skill").value, true)} className="btn light-green">Add</div>
-									</div>
+							<div className="row">
+								<div className="input-field col s12 m6 l6 push-l3">
+									<input placeholder="GET NAME FROM DATABASE" id="first_name" type="text" className="active validate"/>
+									<label htmlFor="first_name" className="active">First Name *</label>
 								</div>
 							</div>
-						</div>
-						<div className="row">
-							<h6 className="col s1 m1 l1 push-l2">Interests:</h6>
-							<div className="col s8 m8 l8 push-l2">
-								<div className="row">
-									{this.pull("interests")}
+							<div className="row">
+								<div className="input-field col s12 m6 l6 push-l3">
+									<input placeholder="GET LASTNAME IF ANY" id="last_name" type="text" className="validate active"/>
+									<label htmlFor="last_name" className="active">Last Name (optional)</label>
 								</div>
-								<div className="row">
-									<div className="input-field col s9 m9 l9">
-										<input id="new_interest" type="text"></input>
-										<label className="active" for="new_interest">Insert a new interest</label>
+							</div>
+							<div className="row">
+								<div className="input-field col s12 m6 l6 push-l3">
+									<input placeholder="GET EMAIL FROM DATABASE" id="email_input" type="email" className="validate active"/>
+									<label htmlFor="email_input" className="active">Email *</label>
+								</div>
+							</div>
+							<div className="row">
+								<div className="btn light-green darken-3 col s3 m3 l3 push-l3">
+									<Link to="/profile">
+										Back to profile
+									</Link>
+								</div>
+								<button onClick={()=> this.handleSave("personal")} className="col s3 m3 l3 push-l4 push-s1 btn light-green">
+									Save Personal Info
+								</button>
+							</div>
+						</div>
+
+						<div className="card-panel">
+							<h5 className="row">Change Password:</h5>
+							<div className="row">
+								<div className="input-field col s12 m6 l6 push-l3">
+									<input id="old_pw" type="password" className="validate active"/>
+									<label htmlFor="old_pw" className="active">Type your current password *</label>
+								</div>
+							</div>
+							<div className="row">
+								<div className="input-field col s12 m6 l6 push-l3">
+									<input id="new_pw" type="password" className="validate active"/>
+									<label htmlFor="new_pw" className="active">Type your new password *</label>
+								</div>
+							</div>
+							<div className="row">
+								<div className="btn light-green darken-3 col s3 m3 l3 push-l3">
+									<Link to="/profile">
+										Back to profile
+									</Link>
+								</div>
+								<button onClick={()=> this.handleSave("password")} className="col s3 m3 l3 push-l4 push-s1 btn light-green">
+									Save New Password
+								</button>
+							</div>
+						</div>
+
+						<div className="card-panel">
+							<h5 className="row">Edit Skills and Interests:</h5>
+							<div className="row"> <p> </p> </div>
+							<div className="row">
+								<p className="col s1 m1 l1 push-l2 subtitle">Skills:</p>
+								<div className="col s12 m8 l8 push-l2">
+									<div className="row">
+										{this.pull("skills")}
 									</div>
-									<div className="col s2 m2 l2">
-										<div onClick={() => this.add_skill_or_interest(document.getElementById("new_interest").value, false)} className="btn light-green">Add</div>
+									<div className="row">
+										<div className="input-field col s12 m9 l9">
+											<input id="new_skill" type="text"></input>
+											<label className="active" htmlFor="new_skill">Insert a new skill</label>
+										</div>
+										<div className="col s2 m2 l2">
+											<div onClick={() => this.add_skill_or_interest(document.getElementById("new_skill").value, true)} className="btn light-green">Add</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div className="row"> <p> </p> </div>
-						<div className="row">
-							<button onClick={()=> this.handleSave("interestSkills")} className="col s3 m3 l3 push-l6 btn light-green">
-								Save Skills and Intersts
-							</button>
-						</div>
-						<div className="cancel_btn fixed-action-btn btn-large light-green darken-3">
-							<Link to="/profile">
-								Back to profile
-							</Link>
+							<hr className="line"></hr>
+							<div className="row">
+								<p className="col s1 m1 l1 push-l2 subtitle">Interests:</p>
+								<div className="col s12 m8 l8 push-l2">
+									<div className="row">
+										{this.pull("interests")}
+									</div>
+									<div className="row">
+										<div className="input-field col s12 m9 l9">
+											<input id="new_interest" type="text"></input>
+											<label className="active" htmlFor="new_interest">Insert a new interest</label>
+										</div>
+										<div className="col s2 m2 l2">
+											<div onClick={() => this.add_skill_or_interest(document.getElementById("new_interest").value, false)} className="btn light-green">Add</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className="row"> <p> </p> </div>
+							<div className="row">
+								<div className="btn light-green darken-3 col s3 m3 l3 push-l3">
+									<Link to="/profile">
+										Back to profile
+									</Link>
+								</div>
+								<button onClick={()=> this.handleSave("interestSkills")} className="col s3 m3 l3 push-l4 push-s1 btn light-green">
+									Save Skills and Intersts
+								</button>
+							</div>
 						</div>
 					</form>
 				</div>

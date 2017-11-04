@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './NavBar.css';
 import FaSearch from 'react-icons/lib/fa/search';
 import logo from '../App/logo.png';
