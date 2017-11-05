@@ -8,6 +8,7 @@ import james from './james.png';
 import diana from './diana.jpg';
 import kevin from './kevin.png';
 import partha from './partha.jpg';
+import gretchen from './gretchen.jpg';
 
 // importing React icons
 import Github from 'react-icons/lib/fa/github';
@@ -47,7 +48,7 @@ class OurTeam extends Component {
 					</div>
 					<div className="row">
 						<div className="col s12 m4 l4">
-							<div className="col s8 m8 l8 push-l2 push-s2">
+							<div className="col s10 m8 l8 push-l2 push-s1">
 								<img className="row about-pic" alt="Oscar Parra" src={oscar} />
 								<span className="row name"> Oscar Parra </span>
 								<span className="row role-desc">Co-Founder & Project Lead </span>
@@ -59,7 +60,7 @@ class OurTeam extends Component {
 						</div>
 
 						<div className="col s12 m4 l4">
-							<div className="col s8 m8 l8 push-l2 push-s2">
+							<div className="col s10 m8 l8 push-l2 push-s1">
 								<img className="row about-pic" alt="James Kennedy" src={james} />
 								<span className="row name"> James Kennedy </span>
 								<span className="row role-desc">Co-Founder & Lead Engineer </span>
@@ -71,7 +72,7 @@ class OurTeam extends Component {
 						</div>
 
 						<div className="col s12 m4 l4">
-							<div className="col s8 m8 l8 push-l2 push-s2">
+							<div className="col s10 m8 l8 push-l2 push-s1">
 								<img className="row about-pic" alt="Diana Gonzalez Santillan" src={diana} />
 								<span className="row name-diana"> Diana Gonzalez Santillan </span>
 								<span className="row role-desc">Co-Founder & Software Engineer </span>
@@ -109,8 +110,8 @@ class OurTeam extends Component {
 
 					<div className="row">
 
-						<div className="col s12 m4 l4 push-l2">
-							<div className="col s8 m8 l8 push-l2 push-s2">
+						<div className="col s12 m4 l4">
+							<div className="col s10 m8 l8 push-l2 push-s1">
 								<img className="row about-pic" alt="Partha Baral" src={partha} />
 								<span className="row name"> Partha Baral </span>
 								<span className="row role-desc">Senior Director at VMware </span>
@@ -120,11 +121,22 @@ class OurTeam extends Component {
 							</div>
 						</div>
 
-						<div className="col s12 m4 l4 push-l2">
-							<div className="col s8 m8 l8 push-l2 push-s2">
+						<div className="col s12 m4 l4">
+							<div className="col s10 m8 l8 push-l2 push-s1">
+								<img className="row about-pic" alt="Gretchen Andreasen" src={gretchen} />
+								<span className="row name"> Gretchen Andreasen </span>
+								<span className="row role-desc">Senior Director at UCSC CalTeach program </span>
+								<span className="row">
+									<a href=""><Linkedin className="icon" /></a>
+								</span>
+							</div>
+						</div>
+
+						<div className="col s12 m4 l4">
+							<div className="col s10 m8 l8 push-s1 push-l2">
 								<img className="row about-pic" alt="Kevin Jesse" src={kevin} />
 								<span className="row name"> Kevin Jesse </span>
-								<span className="row role-desc">Ph.D. C.S. at UC Davis </span>
+								<span className="row role-desc">Ph.D. Computer Science student at UC Davis </span>
 								<span className="row">
 									<a href="https://www.linkedin.com/in/kevinjesse/"><Linkedin className="icon" /></a>
 								</span>

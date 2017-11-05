@@ -141,12 +141,12 @@ class EditProfile extends Component {
 								</div>
 							</div>
 							<div className="row">
-								<div className="btn light-green darken-3 col s3 m3 l3 push-l3">
+								<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
 									<Link to="/profile">
 										Back to profile
 									</Link>
 								</div>
-								<button onClick={()=> this.handleSave("personal")} className="col s3 m3 l3 push-l4 push-s1 btn light-green">
+								<button onClick={()=> this.handleSave("personal")} className="col s4 m3 l3 push-l4 push-s1 btn light-green">
 									Save Personal Info
 								</button>
 							</div>
@@ -167,12 +167,12 @@ class EditProfile extends Component {
 								</div>
 							</div>
 							<div className="row">
-								<div className="btn light-green darken-3 col s3 m3 l3 push-l3">
+								<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
 									<Link to="/profile">
 										Back to profile
 									</Link>
 								</div>
-								<button onClick={()=> this.handleSave("password")} className="col s3 m3 l3 push-l4 push-s1 btn light-green">
+								<button onClick={()=> this.handleSave("password")} className="col s4 m3 l3 push-l4 push-s1 btn light-green">
 									Save New Password
 								</button>
 							</div>
@@ -218,12 +218,12 @@ class EditProfile extends Component {
 							</div>
 							<div className="row"> <p> </p> </div>
 							<div className="row">
-								<div className="btn light-green darken-3 col s3 m3 l3 push-l3">
+								<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
 									<Link to="/profile">
 										Back to profile
 									</Link>
 								</div>
-								<button onClick={()=> this.handleSave("interestSkills")} className="col s3 m3 l3 push-l4 push-s1 btn light-green">
+								<button onClick={()=> this.handleSave("interestSkills")} className="col s4 m3 l3 push-l4 push-s1 btn light-green">
 									Save Skills and Intersts
 								</button>
 							</div>

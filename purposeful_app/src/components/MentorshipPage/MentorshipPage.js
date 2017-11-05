@@ -71,7 +71,7 @@ class MentorshipPage extends Component {
 							value={this.state.searchInput}
 							onChange={this.handleSearchChange}
 						/>
-						<button onClick={this.handleSearchSubmit}>
+						<button className="btn light-green" onClick={this.handleSearchSubmit}>
 							<Search /> {/*search icon */}
 						</button>
 					</div>
@@ -85,12 +85,12 @@ class MentorshipPage extends Component {
 
 		case "searchResults":
 			return (
-				<article >
+				<div className="row fullrow">
 					<MentorFeed
 						title="Search Results"
 						feedItems={this.props.skillsUsersMap[this.state.searchInput]}
 					/>
-				</article>
+				</div>
 			);
 
 
