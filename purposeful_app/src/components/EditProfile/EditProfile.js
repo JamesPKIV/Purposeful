@@ -120,7 +120,7 @@ class EditProfile extends Component {
 
 						<div className="card-panel">
 							<div className="col s12 m12 l12">
-								<h5 className="row">Edit Personal Information:</h5>
+								<h5 className="row">Personal Information:</h5>
 							</div>
 							<div className="row">
 								<div className="input-field col s12 m6 l6 push-l3">

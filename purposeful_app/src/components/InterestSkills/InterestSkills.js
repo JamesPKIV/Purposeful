@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './InterestSkills.css';
-import working from "../App/still_working.png";
 
 class InterestSkills extends Component {
 
@@ -18,7 +17,6 @@ class InterestSkills extends Component {
 			],
 			redirToHome: false,
 		};
-		this.InterestSkillsDesktop = this.InterestSkillsDesktop.bind(this);
 		this.pullCategories = this.pullCategories.bind(this);
 		this.chosen = this.chosen.bind(this);
 	}
@@ -55,7 +53,7 @@ class InterestSkills extends Component {
 	}
 
 	// lighten is a specific class in Google Materialize
-	// for setting the shade of a specified color 
+	// for setting the shade of a specified color
 	setShade(i) {
 		var lighten = "";
 		switch (i % 6) {
@@ -83,16 +81,16 @@ class InterestSkills extends Component {
 		return lighten;
 	}
 
-	// Push is a specific class in Google Materialize 
+	// Push is a specific class in Google Materialize
 	// for pushing columns
 	setPush(j) {
 		var push = "";
 		switch (j % 4) {
 			case 0:
-				push = " push-l1";
+				push = " push-l1 push-s1";
 				break;
 			case 1:
-				push = " push-l2";
+				push = " push-l2 push-s3";
 				break;
 			case 2:
 				push = " push-l3";
@@ -106,13 +104,18 @@ class InterestSkills extends Component {
 		return push;
 	}
 
-	pullCategories() {
+	pullCategories(which) {
 		var num_categories = this.state.categories.length;
-		var num_cols = 4;
+		var num_cols;
+		if(which === "desktop"){
+			num_cols = 4;
+		} else{
+			num_cols = 2;
+		}
 		var num_rows = Math.floor(num_categories / num_cols);
 		var extra_cols = num_categories % num_cols;
-		var class_name = "light-green hoverable category z-depth-2 col s2 m2 l2";
-		var disabled_class_name = "blue-grey grey-text category z-depth-1 col s2 m2 l2";
+		var class_name = "light-green hoverable category z-depth-2 col s4 m2 l2";
+		var disabled_class_name = "blue-grey grey-text category z-depth-1 col s4 m2 l2";
 		var actual_class_name = "";
 		var extra_class = "";
 		var lighten = "";
@@ -120,19 +123,20 @@ class InterestSkills extends Component {
 		let return_code = null;
 
 		for (var i = 0; i <= num_rows; i++) {
+			var num_cols_now = num_cols;
 			if (i === num_rows) {
 				if (extra_cols === 0) {
 					break;
 				} else {
-					num_cols = extra_cols;
+					num_cols_now = extra_cols;
 				}
 			}
-			lighten = this.setShade(i); 
+			lighten = this.setShade(i);
 			var return_inside = null;
-			for (var j = 0; j < num_cols; j++) {
+			for (var j = 0; j < num_cols_now; j++) {
 				push = this.setPush(j);
 				extra_class = lighten + push;
-				var categ = this.state.categories[(i * 4) + j];
+				var categ = this.state.categories[(i * num_cols) + j];
 				actual_class_name = class_name + extra_class;
 				let boundClick = this.chosen.bind(this, disabled_class_name + extra_class);
 				var the_id = "";
@@ -216,9 +220,9 @@ class InterestSkills extends Component {
 								<button onClick={() => this.addCategory(document.getElementById("new_categ").value)} className="btn col s4 m4 l4 push-l1 light-green darken-1">
 									Add Category
 								</button>
-							</div> 
+							</div>
 						</div> */}
-						<button onClick={() => this.continueFrom("interests")} className="col s5 m5 l5 btn-large light-green darken-1 valign">
+						<button onClick={() => this.continueFrom("interests")} className="col s12 m5 l5 btn-large light-green darken-1 valign">
 							Continue
 						</button>
 					</div>
@@ -235,7 +239,7 @@ class InterestSkills extends Component {
 								</button>
 							</div>
 						</div> */}
-						<span className="col s5 m5 l5 ">
+						<span className="col s12 m5 l5 ">
 							<button onClick={() => this.continueFrom("skills")} className="col s12 m12 l12 btn-large light-green darken-1 valign">
 								Continue
 								</button>
@@ -257,7 +261,7 @@ class InterestSkills extends Component {
 								</button>
 							</div>
 						</div> */}
-					<div className="col s5 m5 l5 valign">
+					<div className="col s12 m5 l5 valign">
 					<p className="row"> Select at least three categories</p>
 						<span className="row">
 							<button className="col s12 m12 l12 btn-large light-green darken-1 disabled">
@@ -270,14 +274,14 @@ class InterestSkills extends Component {
 		}
 	}
 
-	interestsOrSkills() {
+	interestsOrSkills(which) {
 		if (this.state.interests) {
 			return (
 				<span>
 					<div className="row">
 						<h2> Tell Us Your Interests </h2>
 					</div>
-					{this.pullCategories()}
+					{this.pullCategories(which)}
 				</span>
 			);
 		} else {
@@ -286,28 +290,18 @@ class InterestSkills extends Component {
 					<div className="row">
 						<h2> Tell Us Your Skills </h2>
 					</div>
-					{this.pullCategories()}
+					{this.pullCategories(which)}
 				</span>
 			);
 		}
 	}
 
-	InterestSkillsDesktop() {
+	InterestSkillsBoth(which) {
 		return (
 			<div className="container">
-				{this.interestsOrSkills()}
+				{this.interestsOrSkills(which)}
 				{this.continueButton()}
 			</div>
-		);
-	}
-
-	InterestSkillsMobile() {
-		return (
-			<span>
-				<img src={working} alt="working" width="100vw" className="row center" />
-				<p className="row"> We are hard at work to bring this component to your mobile soon! </p>
-				<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
-			</span>
 		);
 	}
 
@@ -317,15 +311,13 @@ class InterestSkills extends Component {
 				<Redirect to="/home" />
 			);
 		}
-
-
 		if (window.innerWidth > 700) {
 			return (
-				this.InterestSkillsDesktop()
+				this.InterestSkillsBoth("desktop")
 			);
 		} else {
 			return (
-				this.InterestSkillsMobile()
+				this.InterestSkillsBoth("mobile")
 			);
 		}
 	}
