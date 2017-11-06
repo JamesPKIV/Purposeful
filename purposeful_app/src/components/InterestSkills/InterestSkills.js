@@ -13,7 +13,7 @@ class InterestSkills extends Component {
 				"Technology", "Music", "Food", "Travel", "Dance",
 				"Fitness", "Chemistry", "Physics", "Mathematics",
 				"Cars", "Literature", "Movies", "Education", "Psichology",
-				"Architecture", "Plants", "Fashion", "Health"
+				"Architecture", "Plants", "Fashion", "Health", "Environment"
 			],
 			redirToHome: false,
 		};
@@ -163,7 +163,7 @@ class InterestSkills extends Component {
 			return_code = <span>{return_code}<div className="row">{return_inside}</div></span>;
 		}
 		return (
-			<div className="row">
+			<div className="row main_area">
 				{return_code}
 			</div>
 		);
