@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './AboutPurposeful.css';
 import NavBar from '../NavBar/NavBar';
-import working from "../App/still_working.png";
 //importing images
 import interactionsImg from './interactions.jpg';
 import mentorImg from './mentorship.jpg';

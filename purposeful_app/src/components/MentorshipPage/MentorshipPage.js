@@ -38,9 +38,9 @@ class MentorshipPage extends Component {
 		if (this.state.searchInput !== "") {
 			this.props.handleSearchBySkill(this.state.searchInput)
 				.then ( () => {
-					this.setState({ 
+					this.setState({
 						show: "searchResults",
-					});	
+					});
 				})
 				.catch (err => {
 
@@ -55,58 +55,59 @@ class MentorshipPage extends Component {
 
 
 	render () {
-		
+
 		/* conditionally render form content depending on whether youve signed up or not */
 		switch(this.state.show) {
 
 		case "main":
 			return(
 				<div>
-				<NavBar /> 
+				<NavBar />
 				<article className="mentorship-content">
-					<div> 
+					<div className="container">
 						<h4> Find someone who knows about: </h4>
-						<input  className="searchInput" 
+						<input  className="searchInput"
 							placeholder="Something, Anything!"
 							value={this.state.searchInput}
-							onChange={this.handleSearchChange} 
-						/>		
-						<button onClick={this.handleSearchSubmit}>
+							onChange={this.handleSearchChange}
+						/>
+						<button className="btn light-green" onClick={this.handleSearchSubmit}>
 							<Search /> {/*search icon */}
 						</button>
 					</div>
 
-					<ActivityFeed linkTo="" title="My Mentorship Activity"/> 
-					<ActivityFeed linkTo="" title="My Mentees" feedItems={this.props.mentees} /> 
-					<ActivityFeed linkTo="" title="My Mentors" feedItems={this.props.mentors} /> 
+					<ActivityFeed linkTo="" title="My Mentorship Activity"/>
+					<ActivityFeed linkTo="" title="My Mentees" feedItems={this.props.mentees} />
+					<ActivityFeed linkTo="" title="My Mentors" feedItems={this.props.mentors} />
 				</article>
 				</div>
 			);
 
 		case "searchResults":
 			return (
-				<article >
-					<MentorFeed 
+				<div className="row fullrow">
+					<MentorFeed
 						title="Search Results"
-						feedItems={this.props.skillsUsersMap[this.state.searchInput]} 
+						feedItems={this.props.skillsUsersMap[this.state.searchInput]}
 					/>
-				</article>
+				</div>
 			);
 
 
 
-		case "searchError": 
+		case "searchError":
+			var a = "'";
 			return (
 				<article >
-					<p> 
-						There was an error retrieving your search results, but don't give up!  
-						<br/> 
+					<p>
+						There was an error retrieving your search results, but don{a}t give up!
+						<br/>
 						Please try again later.
 					</p>
 				</article>
 			);
-		
-		default: 
+
+		default:
 			// do nothing
 		}
 	}

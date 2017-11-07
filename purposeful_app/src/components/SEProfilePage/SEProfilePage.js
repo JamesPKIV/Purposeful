@@ -156,7 +156,7 @@ class SEProfilePage extends Component {
 								<FaAngleDown className="profile-titles"></FaAngleDown>
 							</button>
 						</p>
-						<p className="profile-text valign">
+						<p className="profile-text valign truncate">
 							{this.props.SEProfile.present}
 						</p>
 					</div>
@@ -188,7 +188,7 @@ class SEProfilePage extends Component {
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
-					<p className="profile-text valign">
+					<p className="profile-text valign truncate">
 						{this.props.SEProfile.future}
 					</p>
 				</div>
@@ -220,7 +220,7 @@ class SEProfilePage extends Component {
 							<FaAngleDown className="profile-titles"></FaAngleDown>
 						</button>
 					</p>
-					<p className="profile-text valign">
+					<p className="profile-text valign truncate">
 						{this.props.SEProfile.past}
 					</p>
 				</div>
@@ -322,7 +322,7 @@ class SEProfilePage extends Component {
 	ask_mentee(){
 		if (this.state.askMentee){
 			return(
-				<div className="input-field col s10 m10 l10 push-l1">
+				<div className="input-field col s12 m10 l10 push-l1">
 					<textarea
 						id="ask_message"
 						value={this.state.message}
@@ -330,7 +330,7 @@ class SEProfilePage extends Component {
 						className="materialize-textarea"
 					/>
 
-					<label labelFor="ask_message" className="active">Tell Jane why you think she would be a good mentor for you</label>
+					<label labelFor="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good mentor for you?</label>
 					<button onClick={this.handleSendMentorRequest} className="btn-large waves-effect light-green"> Send Request! </button>
 				</div>
 			);
@@ -344,9 +344,9 @@ class SEProfilePage extends Component {
 	invite_collab(){
 		if(this.state.inviteCollab){
 			return(
-				<div className="input-field col s10 m10 l10 push-l1">
+				<div className="input-field col s12 m10 l10 push-l1">
 					<textarea id="ask_message" className="materialize-textarea"></textarea>
-					<label for="ask_message" className="active">Tell Jane why you think she would be a good part of your team</label>
+					<label for="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good part of your team?</label>
 					<button onClick={() => this.toggle("inviteSent")} className="btn-large waves-effect light-green"> Send Invitation! </button>
 				</div>
 			);
@@ -357,77 +357,106 @@ class SEProfilePage extends Component {
 		}
 	}
 
-	follow(to_show){
-		if(this.state.follow){
-			if(to_show === "desktop"){
-				return(
-					<div className="col s4 m4 l4">
-						<button onClick={() => this.toggle("follow")} className="btn-large waves-effect light-green darken-3">
-							Stop Following <FaUserTimes className="profile-text"></FaUserTimes>
-						</button>
-					</div>
-				);
-			} else {
-				return(
-					<div className="row">
-						<button onClick={() => this.toggle("follow")} className="btn waves-effect light-green darken-3">
-							Unfollow <FaUserTimes className="profile-text"></FaUserTimes>
-						</button>
-					</div>
-				);
-			}
+	follow(scr){
+		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
+		var desktopStyle = "btn-large waves-effect light-green";
+		var mobileStyleCancel = "btn waves-effect light-green darken-3";
+		var mobileStyle = "btn waves-effect light-green";
+		var style;
+		var cancel;
+		if (scr === "mobile"){
+			style = mobileStyle;
+			cancel = mobileStyleCancel;
 		} else {
-			if(to_show === "desktop"){
-				return(
-					<div className="col s4 m4 l4">
-						<button onClick={() => this.toggle("follow")} className="btn-large waves-effect light-green">
-							Follow their Activity <FaUserPlus className="profile-text"></FaUserPlus>
-						</button>
-					</div>
-				);
-			} else {
-				return(
-					<div className="row">
-						<button onClick={() => this.toggle("follow")} className="btn waves-effect light-green">
-							Follow <FaUserPlus className="profile-text"></FaUserPlus>
-						</button>
-					</div>
-				);
-			}
+			style = desktopStyle;
+			cancel = desktopStyleCancel;
+		}
+		if(this.state.follow){
+			return(
+				<div className="row">
+					<button onClick={() => this.toggle("follow")} className={cancel}>
+						Unfollow <FaUserTimes className="profile-text"></FaUserTimes>
+					</button>
+				</div>
+			);
+		} else {
+			return(
+				<div className="row">
+					<button onClick={() => this.toggle("follow")} className={style}>
+						Follow <FaUserPlus className="profile-text"></FaUserPlus>
+					</button>
+				</div>
+			);
 		}
 	}
 
-	ask_button(){
+	ask_button(scr){
+		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
+		var desktopStyle = "btn-large waves-effect light-green";
+		var mobileStyleCancel = "btn waves-effect light-green darken-3";
+		var mobileStyle = "btn waves-effect light-green";
+		var disabledMobile = "btn waves-effect light-green disabled";
+		var disabledDesktop = "btn-large waves-effect light-green disabled";
+		var style;
+		var cancel;
+		var disabled;
+		if (scr === "mobile"){
+			style = mobileStyle;
+			cancel = mobileStyleCancel;
+			disabled = disabledMobile;
+		} else {
+			style = desktopStyle;
+			cancel = desktopStyleCancel;
+			disabled = disabledDesktop;
+		}
 		if(this.state.askMentee){
 			return(
-				<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green darken-3"> Cancel </button>
+				<button onClick={() => this.toggle("askMentee")} className={cancel}> Cancel </button>
 			);
 		} else {
 			if(this.state.requestSent){
 				return(
-					<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green disabled"> Mentor Request Sent </button>
+					<button onClick={() => this.toggle("askMentee")} className={disabled}> Request Sent </button>
 				);
 			} else {
 				return(
-					<button onClick={() => this.toggle("askMentee")} className="btn-large waves-effect light-green"> Become their Mentee </button>
+					<button onClick={() => this.toggle("askMentee")} className={style}> Become Mentee </button>
 				);
 			}
 		}
 	}
 
-	invite_button(){
+	invite_button(scr){
+		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
+		var desktopStyle = "btn-large waves-effect light-green";
+		var mobileStyleCancel = "btn waves-effect light-green darken-3";
+		var mobileStyle = "btn waves-effect light-green";
+		var disabledMobile = "btn waves-effect light-green disabled";
+		var disabledDesktop = "btn-large waves-effect light-green disabled";
+		var style;
+		var cancel;
+		var disabled;
+		if (scr === "mobile"){
+			style = mobileStyle;
+			cancel = mobileStyleCancel;
+			disabled = disabledMobile;
+		} else {
+			style = desktopStyle;
+			cancel = desktopStyleCancel;
+			disabled = disabledDesktop;
+		}
 		if(this.state.inviteCollab){
 			return(
-				<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green darken-3"> Cancel </button>
+				<button onClick={() => this.toggle("inviteCollab")} className={cancel}> Cancel </button>
 			);
 		} else {
 			if(this.state.inviteSent){
 				return(
-					<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green disabled"> Invitation to collab Sent </button>
+					<button onClick={() => this.toggle("inviteCollab")} className={disabled}> Invitation Sent </button>
 				);
 			} else {
 				return(
-					<button onClick={() => this.toggle("inviteCollab")} className="btn-large waves-effect light-green"> Invite to Collaborate </button>
+					<button onClick={() => this.toggle("inviteCollab")} className={style}> Collaborate </button>
 				);
 			}
 		}
@@ -457,6 +486,7 @@ class SEProfilePage extends Component {
 	}
 
 	displayDesktop(){
+		var a = "'";
 		return(
 			<div>
 				<NavBar/>
@@ -498,10 +528,10 @@ class SEProfilePage extends Component {
 							<div className="row"> <p> </p> </div>
 							<div className="row">
 								<div className="col s4 m4 l4">
-									{this.ask_button()}
+									{this.ask_button("desktop")}
 								</div>
 								<div className="col s4 m4 l4">
-									{this.invite_button()}
+									{this.invite_button("desktop")}
 								</div>
 								{this.follow("desktop")}
 							</div>
@@ -515,7 +545,7 @@ class SEProfilePage extends Component {
 										<div className="row valign-wrapper">
 											<p className="col s2 m2 l2 profile-titles valign">Mentors</p>
 											<p className="col s10 m10 l10 profile-text valign">These are people who have
-											guided Jane towards her goals.</p>
+											guided {this.props.SEProfile.name} to grow as a person.</p>
 										</div>
 										{this.pull_mentors()}
 									</div>
@@ -524,7 +554,7 @@ class SEProfilePage extends Component {
 										<div className="row valign-wrapper">
 											<p className="col s2 m2 l2 profile-titles valign">Mentees</p>
 											<p className="col s10 m10 l10 profile-text valign">These are people who have
-											been supported by Jane to achieve their goals.</p>
+											been supported by {this.props.SEProfile.name} to achieve their goals.</p>
 										</div>
 										{this.pull_mentees()}
 									</div>
@@ -532,8 +562,7 @@ class SEProfilePage extends Component {
 									<div className="card-panel">
 										<div className="row valign-wrapper">
 											<p className="col s2 m2 l2 profile-titles valign">Stories</p>
-											<p className="col s10 m10 l10 profile-text valign">Learn more about how
-											Jane got to where she is today.</p>
+											<p className="col s10 m10 l10 profile-text valign">Learn more about {this.props.SEProfile.name}{a}s world.</p>
 										</div>
 										{this.pull_stories()}
 									</div>
@@ -542,7 +571,7 @@ class SEProfilePage extends Component {
 										<div className="row valign-wrapper">
 											<p className="col s3 m3 l3 profile-titles valign">Collaborations</p>
 											<p className="col s9 m9 l9 profile-text valign">These are the projects
-											that Jane is currenly working on.</p>
+											that {this.props.SEProfile.name} is currenly working on.</p>
 										</div>
 											{this.pull_collab()}
 									</div>
@@ -555,23 +584,27 @@ class SEProfilePage extends Component {
 	}
 
 	displayMobile(){
+		var a = "'";
 		return(
 			<div>
 				<NavBar/>
 				<div className="row fullrow">
 						<div className="col s5 m5 l5">
 							<img className="responsive-img circle" src={profile_pic} alt=""/>
-							<p className="profile-name"> Jane Doe </p>
+							<p className="profile-name">{this.props.SEProfile.name}</p>
 						</div>
-
 						<div className="col s6 m6 l6 ">
 							<div className="row">
-								{this.ask_button()}
+								{this.ask_button("mobile")}
 							</div>
 							<div className="row">
-								{this.invite_button()}
+								{this.invite_button("mobile")}
 							</div>
 							{this.follow("mobile")}
+						</div>
+						<div className="col s12">
+							{this.ask_mentee()}
+							{this.invite_collab()}
 						</div>
 				</div>
 				<div className="row fullrow">
@@ -582,9 +615,22 @@ class SEProfilePage extends Component {
 				<div className="row fullrow">
 					<div className="card-panel">
 						<div className="row">
+							<p className="profile-titles"> Skills </p>
+							{this.pull("skills")}
+						</div>
+						<hr className="col s12 m12 l12"></hr>
+						<div className="row"> <p> </p> </div>
+						<div className="row">
+							<p className="profile-titles"> Interests </p>
+							{this.pull("interests")}
+						</div>
+					</div>
+				</div>
+				<div className="row fullrow">
+					<div className="card-panel">
+						<div className="row">
 							<p className="profile-titles">Mentors</p>
-							<p className="profile-text">These are people who have
-							guided Jane towards her goals.</p>
+							<p className="profile-text">These are people who have guided {this.props.SEProfile.name} to grow as a person.</p>
 						</div>
 						{this.pull_mentors()}
 					</div>
@@ -593,7 +639,7 @@ class SEProfilePage extends Component {
 						<div className="row">
 							<p className="profile-titles">Mentees</p>
 							<p className="profile-text">These are people who have
-							been supported by Jane to achieve their goals.</p>
+							been supported by {this.props.SEProfile.name} to achieve their goals.</p>
 						</div>
 						{this.pull_mentees()}
 					</div>
@@ -601,8 +647,7 @@ class SEProfilePage extends Component {
 					<div className="card-panel">
 						<div className="row">
 							<p className="profile-titles">Stories</p>
-							<p className="profile-text">Learn more about how
-							Jane got to where she is today.</p>
+							<p className="profile-text">Learn more about {this.props.SEProfile.name}{a}s world.</p>
 						</div>
 						{this.pull_stories()}
 					</div>
@@ -611,7 +656,7 @@ class SEProfilePage extends Component {
 						<div className="row">
 							<p className="profile-titles">Collaborations</p>
 							<p className="profile-text">These are the projects
-							that Jane is currenly working on.</p>
+							that {this.props.SEProfile.name} is currenly working on.</p>
 						</div>
 							{this.pull_collab()}
 					</div>

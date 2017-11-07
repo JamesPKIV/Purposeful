@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './NavBar.css';
 import FaSearch from 'react-icons/lib/fa/search';
 import logo from '../App/logo.png';
@@ -95,9 +95,15 @@ class NavBar extends Component {
   navBarMobile(){
     return(
       <div className="row grey darken-4 bar">
-        <div onClick={() => this.handleNav("home")}><img className="navLogo col s3 m3 l3" src={logo} alt="Purposeful"></img></div>
-        <div className="col s6 m6 l6"><p className="title"> bePurposeful </p></div>
-        <div className="col s2 m2 l2"><DropDown logout={this.props.logout}/></div>
+        <div className="col s2 mobile_col" onClick={() => this.handleNav("home")}>
+          <img className="NavLogo" src={logo} alt="Purposeful"></img>
+        </div>
+        <div className="col s8 mobile_col valign-wrapper">
+          <p className="title"> bePurposeful </p>
+        </div>
+        <div className="col s2 mobile_col">
+          <DropDown logout={this.props.logout}/>
+        </div>
       </div>
     );
   }

@@ -42,22 +42,26 @@
 @media screen and (max-width: 699px){
 
   .bar{
-    height: 12vh;
+    height: 13vh;
   }
 
-  .navLogo {
-    width: 7vh;
-    height: 9vh;
+  .mobile_col {
+    height: 13vh;
+  }
+
+  .NavLogo{
+    height: 10vh;
     margin-top: 1.5vh;
+    margin-left: -1vh;
   }
 
   .title{
-    text-align: center;
     color: white;
     font-size: 4vh;
     font-family: 'Arvo', serif;
-    height: 12vh;
+    padding-left: 2vh;
   }
+
 }
 /* Sweep To Top */
 

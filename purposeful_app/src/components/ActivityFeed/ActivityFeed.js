@@ -20,6 +20,14 @@ import profile_pic from '../SEProfilePage/profile-pic-default.jpg';
 class ActivityFeed extends Component {
 
 	constructor (props) {
+    var the_end;
+		if(window.innerWidth < 700){
+			the_end = 2;
+		} else {
+			the_end = 5;
+		}
+
+
 		super(props);
 		this.state = {
 			title: this.props.title || "",
@@ -34,7 +42,7 @@ class ActivityFeed extends Component {
 			  {"name":"Paris", "desc":"fashion, entretainment"},
 			  {"name":"Ash", "desc":"catchin' 'em all, traveling"} ],
 			start: 0,
-			end: 5
+			end: the_end
 		};
 
 		this.create_feed_item = this.create_feed_item.bind(this);
@@ -48,7 +56,7 @@ class ActivityFeed extends Component {
 	create_feed_item(item, idx) {
 		return (
 			<Link to="/SEprofile" key={idx}>
-				<span className="feed-item col s2 m2 l2 push-l1" key={idx}>
+				<span className="feed-item col s5 m2 l2 push-s2" key={idx}>
 					<img className="responsive-img circle picture" src={profile_pic} alt=""/>
 					<p className="small-name">{item.name}</p>
 					{/*If we include a last name it needs to go here.*/}
@@ -119,28 +127,47 @@ class ActivityFeed extends Component {
 			: this.state.feed_items;
 
 		//render a feed component to display for each item in the feed_items array
-		console.log("start: "+this.state.start +", end: "+ this.state.end);
 		var this_feed = feed_items.slice(this.state.start, this.state.end);
 		const feed_components = this_feed.map( (item, idx) =>
 			this.create_feed_item(item, idx) );
 
-		return (
-			<span>
-				{this.get_title()}
-				<div className="row valign-wrapper">
-					<div className="col s1 m1 l1">
-						{this.scroll_arrow(feed_items, -1)}
+		if(window.innerWidth >= 700){
+			return(
+				<span>
+					{this.get_title()}
+					<div className="row valign-wrapper">
+						<div className="col s1 m1 l1">
+							{this.scroll_arrow(feed_items, -1)}
+						</div>
+						<div className="col s10 m10 l10">
+							{feed_components} {/* Feed_components is an array where each array index holds a list of f */}
+						</div>
+						<div className="col s1 l1 m1">
+							{this.scroll_arrow(feed_items, 1)}
+						</div>
 					</div>
-					<div className="col s10 m10 l10">
-						{feed_components} {/* Feed_components is an array where each array index holds a list of f */}
+				</span>
+			);
+		} else {
+			return(
+				<span>
+					{this.get_title()}
+					<div className="row valign-wrapper">
+						<div className="col s12 m10 l10">
+							{feed_components} {/* Feed_components is an array where each array index holds a list of f */}
+						</div>
 					</div>
-					<div className="col s1 l1 m1">
-						{this.scroll_arrow(feed_items, 1)}
+					<div className="row valign-wrapper">
+						<div className="col s5 m1 l1">
+							{this.scroll_arrow(feed_items, -1)}
+						</div>
+						<div className="col s5 l1 m1 push-s1">
+							{this.scroll_arrow(feed_items, 1)}
+						</div>
 					</div>
-				</div>
-			</span>
-		);
-
+				</span>
+			);
+		}
 	}
 }
 

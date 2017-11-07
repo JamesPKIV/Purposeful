@@ -4,6 +4,7 @@
 
 .message_space{
   height: 55vh;
+  overflow: scroll;
 }
 
 .name-panel {
@@ -16,4 +17,10 @@
 
 .close {
   padding: 2vh !important;
+}
+
+.side {
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding: 7vw;
 }
