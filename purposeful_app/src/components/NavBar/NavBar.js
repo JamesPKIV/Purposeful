@@ -96,7 +96,7 @@ class NavBar extends Component {
     return(
       <div className="row grey darken-4 bar">
         <div onClick={() => this.handleNav("home")}><img className="navLogo col s3 m3 l3" src={logo} alt="Purposeful"></img></div>
-        <div className="col s6 m6 l6"><p className="title"> bePurposeful </p></div>
+        <div className="col s6 m6 l6"><p className="title"> Purposeful </p></div>
         <div className="col s2 m2 l2"><DropDown logout={this.props.logout}/></div>
       </div>
     );

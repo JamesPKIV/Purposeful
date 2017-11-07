@@ -1,22 +1,13 @@
 /*desktop*/
 @media screen and (min-width: 700px){
-  .settingsBtn{
-      padding-right: 2.5vw;
-  }
-
   .settingsIcon{
     margin-top: 1vw;
     background-color: #212121;
     border: none;
   }
 
-  .div-dropdown{
-      right: 0;
-      width: 14vw;
-      margin-right: 1vw;
-  }
-  .li-dropdown{
-      width: 14vw;
+  .ul-dropdown{
+      position: absolute;
   }
 
   .li-navs{
@@ -27,15 +18,26 @@
       border: 1px solid;
       border-color: #C9C9C9;
   }
+
+  .li-dropdown{
+    width: 14vw;
+}
 }
 
 /*mobile*/
 @media screen and (max-width: 699px){
   .settingsIcon{
-    margin-top: 7vw;
+    margin-top: 11vw;
     background-color: #212121;
     border: none;
   }
+
+  .ul-dropdown{
+    margin-top: 10px;
+    position: absolute;
+    right:20px;
+    width:110px;
+}
 
   .li-navs{
       font-size: 2.5vh;
@@ -44,9 +46,13 @@
       text-align: left;
       border: 1px solid;
       border-color: #C9C9C9;
+      padding-left: 8px;
+      padding-right: 15px !important;
+      width: inherit;
+      float: left;
   }
 
   .li-dropdown{
-      width: 14vh;
+      width: inherit;
   }
 }
