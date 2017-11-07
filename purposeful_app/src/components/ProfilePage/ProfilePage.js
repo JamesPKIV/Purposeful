@@ -127,7 +127,7 @@ class ProfilePage extends Component {
 		);
 	}
 
-	edit_or_save(to_toggle, button_or_text){
+	edit_or_save(to_toggle, button_or_text, truncate){
 		var toggle_state;
 		var text;
 		var value;
@@ -135,19 +135,19 @@ class ProfilePage extends Component {
 		switch(to_toggle){
 			case "purposeEdit":
 				toggle_state = this.state.purposeEdit;
-				text = "Write in this space current personal, inter-personal, professional, or organizational projects you are working on. Try to explain why these projects make you excited, and the ways they relate to your experience, skills, and interests.";
+				text = "[Write in this space current personal, inter-personal, professional, or organizational projects you are working on. Try to explain why these projects make you excited, and the ways they relate to your experience, skills, and interests.]";
 				value = this.props.present;
 				onEdit = this.props.handleChangePresent;
 				break;
 			case "goalsEdit":
 				toggle_state = this.state.goalsEdit;
-				text = "Write in this space anything that you wish to do in the future. They can be ready-to-start ideas, half-baked ideas, long-term goals, personal goals, new-year resolutions, crazy dreams, or anything you wish you knew more about!";
+				text = "[Write in this space anything that you wish to do in the future. They can be ready-to-start ideas, half-baked ideas, long-term goals, personal goals, new-year resolutions, crazy dreams, or anything you wish you knew more about!]";
 				value = this.props.future;
 				onEdit = this.props.handleChangeFuture;
 				break;
 			case "accomplishEdit":
 				toggle_state = this.state.accomplishEdit;
-				text = "Write in this space anything that you feel proud you have accomplished. It could include your academic achievements, personal challenges that you have defeated, places you have traveled to, hobbies you have learned, or anything else you can think about!";
+				text = "[Write in this space anything that you feel proud you have accomplished. It could include your academic achievements, personal challenges that you have defeated, places you have traveled to, hobbies you have learned, or anything else you can think about!]";
 				value = this.props.past;
 				onEdit = this.props.handleChangePast;
 				break;
@@ -182,8 +182,23 @@ class ProfilePage extends Component {
 					</button>
 				);
 			} else {
+				var style;
+				if(truncate){
+					if(value === null){
+						style = "profile-text valign truncate placeholder";
+					} else {
+						style = "profile-text valign truncate";
+					}
+				} else {
+					if(value === null){
+						style = "profile-text valign placeholder";
+					} else {
+						style = "profile-text valign";
+					}
+				}
+				console.log("value is: "+value);
 				return(
-					<p className="profile-text valign">{(value !== "") ? value : text}</p>
+					<p className={style}>{(value !== null) ? value : text}</p>
 				);
 			}
 		}
@@ -200,7 +215,7 @@ class ProfilePage extends Component {
 							</button>
 							{this.edit_or_save("purposeEdit","button")}
 						</p>
-						{this.edit_or_save("purposeEdit", "text")}
+						{this.edit_or_save("purposeEdit", "text", false)}
 					</div>
 				);
 			} else {
@@ -213,16 +228,9 @@ class ProfilePage extends Component {
 							</button>
 							{this.edit_or_save("purposeEdit", "button")}
 						</p>
-						{this.props.present ?
-						<p className="profile-text truncate valign">
-							{this.props.present}
-						</p>
-						:
-						<p className="profile-text truncate valign">Write in this space current personal,
-						inter-personal, professional, or organizational projects you are working
-						on. Try to explain why these projects make you excited, and the ways
-						they relate to your experience, skills, and interests.</p>
-					}
+						{this.edit_or_save("purposeEdit", "text", true)}
+
+
 					</div>
 				);
 			}
@@ -239,7 +247,7 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("goalsEdit", "button")}
 					</p>
-					{this.edit_or_save("goalsEdit", "text")}
+					{this.edit_or_save("goalsEdit", "text", false)}
 				</div>
 			);
 		} else {
@@ -252,18 +260,7 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("goalsEdit", "button")}
 					</p>
-					{this.props.future ?
-						<p className="profile-text truncate valign">
-							{this.props.future}
-						</p>
-						:
-						<p className="profile-text truncate valign">
-							Write in this space anything that
-							you wish to do in the future. They can be ready-to-start
-							ideas, half-baked ideas, long-term goals, personal goals, new-year
-							resolutions, crazy dreams, or anything you wish you knew more about!
-						</p>
-					}
+					{this.edit_or_save("goalsEdit", "text", true)}
 				</div>
 			);
 		}
@@ -280,7 +277,7 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("accomplishEdit", "button")}
 					</p>
-					{this.edit_or_save("accomplishEdit", "text")}
+					{this.edit_or_save("accomplishEdit", "text", false)}
 				</div>
 			);
 		} else {
@@ -293,19 +290,7 @@ class ProfilePage extends Component {
 						</button>
 						{this.edit_or_save("accomplishEdit", "button")}
 					</p>
-					{ this.props.past ?
-						<p className="profile-text truncate valign">
-							{this.props.past}
-						</p>
-						:
-						<p className="profile-text truncate valign">
-						Write in this space anything that
-						you feel proud you have accomplished. It could include your academic
-						achievements, personal challenges that you have defeated, places you
-						have traveled to, hobbies you have learned, or anything else you can
-						think about!
-						</p>
-					}
+					{this.edit_or_save("accomplishEdit", "text", true)}
 				</div>
 			);
 		}
@@ -405,12 +390,12 @@ class ProfilePage extends Component {
 			return(
 				<div className="row">
 					<div className="file-field input-field row">
-						<div className="btn waves-effect light-green col s6 m6 l6 push-l3">
-							<span>Browse For a New Picture</span> <input type="file"></input>
+						<div className="btn waves-effect light-green col s12 m6 l6 push-l3">
+							<span>Browse For Picture</span> <input type="file"></input>
 						</div>
 					</div>
 					<div className="row">
-						<button onClick={() => this.toggle("changePicture")} className="col s2 m2 l2 push-l8 btn waves-effect light-green darken-3">
+						<button onClick={() => this.toggle("changePicture")} className="col s12 m2 l2 push-l8 btn waves-effect light-green darken-3">
 							Cancel
 						</button>
 					</div>
@@ -419,7 +404,7 @@ class ProfilePage extends Component {
 		} else {
 			return(
 				<div className="row">
-					<button onClick={() => this.toggle("changePicture")} className="btn waves-effect light-green"> Edit your profile picture  <FaCamera> </FaCamera> </button>
+					<button onClick={() => this.toggle("changePicture")} className="btn waves-effect light-green">Change picture <FaCamera></FaCamera></button>
 				</div>
 			);
 		}
@@ -455,7 +440,7 @@ class ProfilePage extends Component {
 					<div className="col s12 m12 l12">
 						<div className="col s4 m4 l4">
 							<div className="row">
-								<img className="responsive-img circle pic" src={profile_pic} alt=""/>
+								<img className="responsive-img circle" src={profile_pic} alt=""/>
 								<p className="profile-name"> {this.props.userName} </p>
 							</div>
 							{this.change_picture()}
@@ -591,24 +576,45 @@ class ProfilePage extends Component {
 				<div className="row fullrow"> <p> </p></div>
 				<div className="row fullrow">
 					<div className="col s5 m5 l5">
-						<img className="responsive-img circle" src={profile_pic} alt=""/>
+						<img className="responsive-img circle" src={profile_pic} alt="profile_pic"/>
 					</div>
 					<div className="col s7 m7 l7 ">
 						<div className="row">
-							<button className="btn waves-effect light-green"> Edit account<FaPencil></FaPencil></button>
+							<Link to="/editProfile" className="btn waves-effect light-green">
+								Edit account<FaPencil></FaPencil>
+							</Link>
 						</div>
-						<div className="row">
-							<button className="btn waves-effect light-green"> Edit picture<FaCamera></FaCamera> </button>
-						</div>
+						{this.change_picture()}
 					</div>
 				</div>
 				<div className="row fullrow">
-					<p className="profile-name"> Your Name </p>
+					<p className="profile-name"> {this.props.userName} </p>
 				</div>
 				<div className="row fullrow">
 					{this.purpose_content()}
 					{this.goals_content()}
 					{this.accomplish_content()}
+				</div>
+				<div className="row fullrow">
+					<div className="card-panel">
+						<div className="row">
+							<Link to="/editProfile" className="btn-flat profile-text right">
+								Edit <FaPencil className="profile-text"></FaPencil>
+							</Link>
+						</div>
+						<hr className="col s12 m12 l12"></hr>
+						<div className="row"> <p> </p> </div>
+						<div className="row">
+							<p className="profile-titles"> Your Skills </p>
+							{this.pull("skills")}
+						</div>
+						<hr className="col s12 m12 l12"></hr>
+						<div className="row"> <p> </p> </div>
+						<div className="row">
+							<p className="profile-titles"> Your Interests </p>
+							{this.pull("interests")}
+						</div>
+					</div>
 				</div>
 				<div className="row fullrow">
 					<div className="card-panel">
@@ -655,12 +661,12 @@ class ProfilePage extends Component {
 						</div>
 						<div className="row">
 							<div className="col s6 m6 l6">
-								<Link to="/stories" className="btn waves-effect light-green">
+								<Link to="/managestories" className="btn waves-effect light-green">
 									Manage<FaPencil></FaPencil>
 								</Link>
 							</div>
 							<div className="col s6 m6 l6">
-								<Link to="/stories" className="btn waves-effect light-green">
+								<Link to="/newstories" className="btn waves-effect light-green">
 									Write<FaPencil></FaPencil>
 								</Link>
 							</div>

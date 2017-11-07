@@ -13,13 +13,10 @@ a {
   color: white;
 }
 
-.mobile-font{
-  font-size: 3vw;
-}
-
 .desktop-font{
   display: block;
   padding-right: 4vw;
+  font-size: 2vh;;
 }
 
 .footer-links{

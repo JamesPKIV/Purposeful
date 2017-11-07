@@ -3,3 +3,8 @@
   height: 18hv;
   color: black;
 }
+
+.main_area {
+  max-height: 60vh;
+  overflow: scroll;
+}

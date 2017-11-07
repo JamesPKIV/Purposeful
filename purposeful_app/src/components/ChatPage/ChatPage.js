@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './ChatPage.css';
 import NavBar from '../NavBar/NavBar';
 import FaClose from 'react-icons/lib/fa/close';
+import FaAngleDown from 'react-icons/lib/fa/angle-down';
+import FaAngleUp from 'react-icons/lib/fa/angle-up';
 
 class ChatPage extends Component {
   constructor(props) {
@@ -33,35 +35,83 @@ class ChatPage extends Component {
       active_array: [
         "2", "0", "1"
       ],
-      curr_conv: "1"
+      curr_conv: "1",
+      toggle: false
 		};
 	}
 
-  render = () => {
+  toggle = () => {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  }
+
+  side_panel(){
     var apos = "'"; /*to avoid editor complaining about non-closed apostrophe*/
+    var desktopStyle = "col s10 m10 l10 push-l1 side"
+    var mobileStyle = "container side"
+    var style;
+    if(window.innerWidth >= 700){
+      style = desktopStyle;
+    } else {
+      style = mobileStyle;
+    }
+
+    let displayed =
+      <div className="col s12 m3 l3">
+        <div className={style}>
+
+          <div className="row">
+            <h5>Active conversations:</h5>
+            <div>
+              {this.conversation_list()}
+            </div>
+          </div>
+
+          <div className="row">
+            <h5>Find someone to chat with:</h5>
+            <div className="input-field inline">
+              <input id="chat_search" type="text"></input>
+              <label for="chat_search" className="active">Start typing someone{apos}s name:</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    if(window.innerWidth >= 700){
+			return(
+        displayed
+			);
+		} else { /*MOBILE*/
+      if(this.state.toggle){
+        return(
+          <span>
+            <button className="btn-flat right" onClick={()=>this.toggle()}>
+              Hide Conversations <FaAngleUp/>
+            </button>
+            <div className="container">
+              {displayed}
+            </div>
+          </span>
+  			);
+      } else {
+        return(
+          <button className="btn-flat right" onClick={()=>this.toggle()}>
+            Other Conversations <FaAngleDown/>
+          </button>
+        );
+      }
+		}
+  }
+
+  render = () => {
     return(
       <span>
         <span className="row">
           <NavBar/>
         </span>
         <span className="row">
-          <div className="col s12 m3 l3">
-            <div className="col s10 m10 l10 push-l1">
-              <div className="row">
-                <h5>Find someone to chat with:</h5>
-                <div className="input-field inline">
-                  <input id="chat_search" type="text"></input>
-                  <label for="chat_search" className="active">Start typing someone{apos}s name:</label>
-                </div>
-              </div>
-              <div className="row">
-                <h5>Active conversations:</h5>
-                <div>
-                  {this.conversation_list()}
-                </div>
-              </div>
-            </div>
-          </div>
+          {this.side_panel()}
           <div className="col s12 m9 l9">
             <div className="col s12 m12 l12 card-panel">
               {this.current_conversation()}
@@ -137,12 +187,12 @@ class ChatPage extends Component {
   }
 
   current_conversation(){
-    var conv_id = parseInt(this.state.curr_conv);
+    var conv_id = parseInt(this.state.curr_conv, 10);
     if(conv_id >= 0){
       var array = this.state.conv_array;
       var conv = array[conv_id];
-      var your_style="col s5 m5 l5 left-align message light-green lighten-3";
-      var their_style="col s5 m5 l5 push-l6 left-align message blue-grey lighten-3";
+      var your_style="col s9 m5 l5 left-align message light-green lighten-3";
+      var their_style="col s9 m5 l5 right left-align message blue-grey lighten-3";
       var name;
       if(conv["user1"]==="me"){
         name = conv["user2"];
@@ -187,16 +237,18 @@ class ChatPage extends Component {
           <div className="row message_space">
             {return_code}
           </div>
-          <hr/>
-          <form className="row valign-wrapper">
-            <div className="col s10 m10 l10 input-field">
-              <textarea id="new_message" className="materialize-textarea"></textarea>
-              <label for="new_message" className="active">Type your message here</label>
-            </div>
-            <div className="col s2 m2 l2 btn valign light-green">
-              Send
-            </div>
-          </form>
+          <div className="divider"></div>
+          <div className="row">
+            <form className="col s12 m12 l12 valign-wrapper">
+              <div className="col s10 m10 l10 input-field">
+                <textarea id="new_message" className="materialize-textarea"></textarea>
+                <label for="new_message" className="active">Type your message bellow</label>
+              </div>
+              <div className="col s3 m2 l2 btn valign light-green">
+                Send
+              </div>
+            </form>
+          </div>
         </span>
       );
     } else {
