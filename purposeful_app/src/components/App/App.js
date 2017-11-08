@@ -99,7 +99,6 @@ class App extends Component {
 			});
 	}
 
-
 	handleLogout(){
 		 return Client.logout().then(res => {
 			console.log("Session was destroyed and user should be logged out.");
