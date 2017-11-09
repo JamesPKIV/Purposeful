@@ -8,7 +8,7 @@ import james from './james.png';
 import diana from './diana.jpg';
 import kevin from './kevin.png';
 import partha from './partha.jpg';
-import gretchen from './gretchen.jpg';
+import gretchen from './gretchen.png'
 
 // importing React icons
 import Github from 'react-icons/lib/fa/github';

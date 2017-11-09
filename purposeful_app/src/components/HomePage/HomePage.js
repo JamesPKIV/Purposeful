@@ -42,28 +42,28 @@ class HomePage extends Component {
 		else {
 			/* conditionally render form content depending on whether youve signed up or not */
 			return (
-        <div id="home-content" className="row">
-				<NavBar logout={this.props.logout}/>  
+        <span>
+					<NavBar logout={this.props.logout}/>
 					{
 						this.props.isLoggedIn ?
-						<p className="logged-in-p">User Name: {this.props.userName}, UserID: {this.props.userId} </p>
-						: <p className="logged-in-p"> you are NOT logged in, and this is your home page. </p>
+						console.log("User: " + this.props.userName + " has user id " + this.props.userId)
+						: console.log("No one is logged in")
 					}
-
-					<div className="activity-feeds col l10 push-l1">
-					{
-							this.props.isLoggedIn  &&
-							<MentorFeed title="Mentors you may like"
-								feedItems={this.props.recommended}
-								handleClick={this.handleSEProfileClick}
-							/>
-					}
-						<ActivityFeed title="Activity in Your Network" linkTo="/home" />
-						<MentorFeed title="Mentees" linkTo="/mentorship" feedItems={this.props.mentees}/>
-						<ActivityFeed title="Collaborations" linkTo="/collaborations" />
-
+					<div className="row">
+						<div className="col l10 push-l1">
+							{
+								this.props.isLoggedIn  &&
+								<MentorFeed title="Mentors you may like"
+									feedItems={this.props.recommended}
+									handleClick={this.handleSEProfileClick}
+								/>
+							}
+							<ActivityFeed title="Activity in Your Network" linkTo="/home" />
+							<MentorFeed title="Mentees" linkTo="/mentorship" feedItems={this.props.mentees}/>
+							<ActivityFeed title="Collaborations" linkTo="/collaborations" />
+						</div>
 					</div>
-				</div>
+				</span>
 			);
 		}
 	}

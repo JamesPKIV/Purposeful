@@ -270,7 +270,7 @@ class App extends Component {
 footer(){
     return(
       <footer className="page-footer grey darken-4">
-        <div className = "row ">
+        <div className = "row the-footer">
           <ul className="footer-links">
             <li><Link to="/about" className="desktop-font">About</Link></li>
             <li><Link to="/team" className="desktop-font">Our Team</Link></li>

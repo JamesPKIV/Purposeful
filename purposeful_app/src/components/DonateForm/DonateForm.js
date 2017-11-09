@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './DonateForm.css';
 import NavBar from '../NavBar/NavBar';
-import working from "../App/still_working.png";
 import interactionsImg from '../AboutPurposeful/interactions.jpg';
 import FaArrowLeft from 'react-icons/lib/fa/arrow-left';
 import FaArrowRight from 'react-icons/lib/fa/arrow-right';
@@ -64,6 +62,8 @@ class DonateForm extends Component {
 				return this.paymentContent();
 			case 'finalize':
 				return this.finalizeContent();
+			default:
+				break;
 		}
 	}
 
@@ -194,7 +194,7 @@ class DonateForm extends Component {
 				<div className="container main-content">
 						<div className="row">
 							<div className="col s12 m6">
-								<img id="interactions-img" src={interactionsImg} />
+								<img id="interactions-img" src={interactionsImg} alt=""/>
 								<div id="donation-desc">
 									Your donation will help continue to support the development and maintence of the website.
 								</div>

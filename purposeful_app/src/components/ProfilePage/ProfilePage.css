@@ -27,3 +27,7 @@
   font-style: italic;
   color: #7d7d7d;
 }
+
+.textarea-class{
+  height: 15vh;
+}

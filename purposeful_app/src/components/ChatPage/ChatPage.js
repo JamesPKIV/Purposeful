@@ -63,13 +63,13 @@ class ChatPage extends Component {
 
           <div className="row">
             <h5>Active conversations:</h5>
-            <div>
+            <div className="list-div">
               {this.conversation_list()}
             </div>
           </div>
-
           <div className="row">
             <h5>Find someone to chat with:</h5>
+            <div className="row"> <p> </p> </div>
             <div className="input-field inline">
               <input id="chat_search" type="text"></input>
               <label for="chat_search" className="active">Start typing someone{apos}s name:</label>
@@ -188,6 +188,7 @@ class ChatPage extends Component {
 
   current_conversation(){
     var conv_id = parseInt(this.state.curr_conv, 10);
+    var new_message_id = "new_message_" + this.state.curr_conv;
     if(conv_id >= 0){
       var array = this.state.conv_array;
       var conv = array[conv_id];
@@ -238,11 +239,16 @@ class ChatPage extends Component {
             {return_code}
           </div>
           <div className="divider"></div>
+          <div className="row"><p> </p></div>
           <div className="row">
             <form className="col s12 m12 l12 valign-wrapper">
               <div className="col s10 m10 l10 input-field">
-                <textarea id="new_message" className="materialize-textarea"></textarea>
-                <label for="new_message" className="active">Type your message bellow</label>
+                <textarea
+                  key={new_message_id}
+                  id={new_message_id}
+                  className="materialize-textarea">
+                </textarea>
+                <label for={new_message_id} className="active">Type your message bellow</label>
               </div>
               <div className="col s3 m2 l2 btn valign light-green">
                 Send
