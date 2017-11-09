@@ -8,6 +8,7 @@
 
   .ul-dropdown{
       position: absolute;
+      z-index: 1000; /*make it be on top of everything else so it doesn't go over pics in ourteam etc.*/
   }
 
   .li-navs{
@@ -36,7 +37,8 @@
     margin-top: 10px;
     position: absolute;
     right:20px;
-    width:110px;
+    z-index: 1000; /*make it be on top of everything else so it doesn't go over pics in ourteam etc.*/
+    width:35vw;
 }
 
   .li-navs{

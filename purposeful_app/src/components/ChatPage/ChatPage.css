@@ -7,6 +7,11 @@
   overflow: scroll;
 }
 
+.list-div{
+  max-height: 55vh;
+  overflow: scroll;
+}
+
 .name-panel {
   padding: 0vh !important;
 }

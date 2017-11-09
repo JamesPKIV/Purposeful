@@ -61,26 +61,31 @@ class MentorshipPage extends Component {
 
 		case "main":
 			return(
-				<div>
-				<NavBar />
-				<article className="mentorship-content">
-					<div className="container">
-						<h4> Find someone who knows about: </h4>
-						<input  className="searchInput"
-							placeholder="Something, Anything!"
-							value={this.state.searchInput}
-							onChange={this.handleSearchChange}
-						/>
-						<button className="btn light-green" onClick={this.handleSearchSubmit}>
-							<Search /> {/*search icon */}
-						</button>
+				<span>
+					<NavBar />
+					<div className="main-content">
+						<div className="container">
+							<div className="row">
+								<h4 className="col s12 m12 l12"> Find someone who knows about: </h4>
+							</div>
+							<div className="row">
+								<input  className="searchInput"
+									placeholder="Something, Anything!"
+									value={this.state.searchInput}
+									onChange={this.handleSearchChange}
+								/>
+								<button className="btn light-green" onClick={this.handleSearchSubmit}>
+									<Search /> {/*search icon */}
+								</button>
+							</div>
+							<div className="row">
+								<ActivityFeed linkTo="" title="My Mentorship Activity"/>
+								<ActivityFeed linkTo="" title="My Mentees" feedItems={this.props.mentees} />
+								<ActivityFeed linkTo="" title="My Mentors" feedItems={this.props.mentors} />
+							</div>
+						</div>
 					</div>
-
-					<ActivityFeed linkTo="" title="My Mentorship Activity"/>
-					<ActivityFeed linkTo="" title="My Mentees" feedItems={this.props.mentees} />
-					<ActivityFeed linkTo="" title="My Mentors" feedItems={this.props.mentors} />
-				</article>
-				</div>
+				</span>
 			);
 
 		case "searchResults":
@@ -98,13 +103,13 @@ class MentorshipPage extends Component {
 		case "searchError":
 			var a = "'";
 			return (
-				<article >
+				<span >
 					<p>
 						There was an error retrieving your search results, but don{a}t give up!
 						<br/>
 						Please try again later.
 					</p>
-				</article>
+				</span>
 			);
 
 		default:
