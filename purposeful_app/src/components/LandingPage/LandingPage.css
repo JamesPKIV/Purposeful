@@ -1,44 +1,7 @@
-.logo{
-  width: auto;
-  height: 13vh;
-}
-
 h1 {
   color: white;
   font-size: 7vh;
   text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
-}
-
-.buttonFont{
-  color: black;
-  bottom: 2vh;
-}
-
-.arrowIcon{
-  color: white;
-  font-size: 15px;
-  padding-left: 5px;
-}
-
-.login-h2{
-  font-size: 4vh;
-  color:black;
-}
-
-.div-btn{
-  margin-bottom: 20px;
-}
-
-
-.social-btn{
-  height: 6vh;
-  padding-bottom: 1vh;
-  padding-top: 1vh;
-}
-
-.login-btn{
-  font-size: 1rem;
-  background-color: #8ac34b;
 }
 
 .face-btn{
@@ -47,7 +10,6 @@ h1 {
 .google-btn {
   background-color: #d34836;
 }
-
 .link-btn{
   background-color: #007bb6;
 }
@@ -68,54 +30,28 @@ input[type=password]{
   text-align: center;
 }
 
-.LandingBack {
-    /*OPTIONS FOR BACKGROUND*/
-    /*background-image: url("jungle_bridge.jpg"); */
-    /* background-image: url("birds-flying-in-sky.jpg"); */
-    /*background-image: url("forest_bridge.jpg");*/
-    /*background-image: url("river_bridge.jpg");*/
-    /*background-image: url("whale.jpg");*/
-    background-size: cover;
-}
-
-.light-green{
-  padding-top: 0;
-  padding-bottom: 10px;
-}
 .input-field{
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
+  margin-top: 0vh;
 }
-
 
 .div-login{
-  text-align: left;
-  font-size: 24px;
+  text-align: center;
+  font-size: 3vh;
 }
 
 .login-link{
   color:#33A1DE;
 }
 
-.header-sign{
-  margin-left: 8px;
-  text-align: left;
-}
+@media screen and (max-width: 699px){
+  .logo-class{
+    height: 20vh;
+    margin-top: 2vh;
+  }
 
-.header-login{
-  display: inline-block;
-  margin-right: 75%;
-}
-
-.li-login{
-  float: left;
-  padding-right: 10px;
-}
-
-.exit-icon{
-  font-size: 20px;
-}
-
-.close-login{
-  padding-top: 0px !important;
-  margin-top: 8px;
+  .welcome-title{
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+  }
 }

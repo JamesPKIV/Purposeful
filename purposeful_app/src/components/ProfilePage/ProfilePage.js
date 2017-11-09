@@ -169,7 +169,7 @@ class ProfilePage extends Component {
 							onChange={ ev => this.handleInputChange(onEdit, ev) }
 							editable="true"
 							rows={6}
-							className="active">
+							className="active textarea-class profile-text">
 						</textarea>
 					</div>
 				);
