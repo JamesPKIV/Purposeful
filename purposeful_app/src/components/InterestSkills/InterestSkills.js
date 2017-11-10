@@ -35,21 +35,46 @@ class InterestSkills extends Component {
 
 	// Adds the chosen category to the state attribute array
 	// Sets the class name to disabled
-	chosen(some, e) {
+	chosen(disabled, enabled, e) {
 		var the_id = e.currentTarget.id;
 		var category = the_id.substr(1, the_id.length - 1);
-		document.getElementById(the_id).className = some;
 		if (this.state.interests) {
-			this.props.handleAddInterest(category);
-			if (this.props.interests.length === 3) {
-				this.toggle("continue");
+			if(this.props.interests.indexOf(category) >= 0){
+				document.getElementById(the_id).className = enabled;
+				this.props.handleDeleteInterest(category);
+			} else {
+				document.getElementById(the_id).className = disabled;
+				this.props.handleAddInterest(category);
+			}
+			if (this.props.interests.length >= 3) {
+				this.setState({
+					continue: true
+				});
+			} else {
+					this.setState({
+						continue: false
+					});
 			}
 		} else {
-			this.props.handleAddSkill(category);
-			if (this.props.skills.length === 3) {
-				this.toggle("continue");
+			if(this.props.skills.indexOf(category) >= 0){
+				document.getElementById(the_id).className = enabled;
+				this.props.handleDeleteSkill(category);
+			} else {
+				document.getElementById(the_id).className = disabled;
+				this.props.handleAddSkill(category);
+			}
+			if (this.props.skills.length >= 3) {
+				this.setState({
+					continue: true
+				});
+			} else {
+				this.setState({
+					continue: false
+				});
 			}
 		}
+		console.log("interests: " + this.props.interests);
+		console.log("skills: " + this.props.skills);
 	}
 
 	// lighten is a specific class in Google Materialize
@@ -138,7 +163,7 @@ class InterestSkills extends Component {
 				extra_class = lighten + push;
 				var categ = this.state.categories[(i * num_cols) + j];
 				actual_class_name = class_name + extra_class;
-				let boundClick = this.chosen.bind(this, disabled_class_name + extra_class);
+				let boundClick = this.chosen.bind(this, disabled_class_name + extra_class, actual_class_name);
 				var the_id = "";
 				if (this.state.interests) {
 					the_id = "i" + categ;
