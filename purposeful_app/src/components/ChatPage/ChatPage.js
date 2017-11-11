@@ -70,7 +70,7 @@ class ChatPage extends Component {
           <div className="row">
             <h5>Find someone to chat with:</h5>
             <div className="row"> <p> </p> </div>
-            <div className="input-field inline">
+            <div className="col s12 input-field inline">
               <input id="chat_search" type="text"></input>
               <label for="chat_search" className="active">Start typing someone{apos}s name:</label>
             </div>
@@ -102,24 +102,6 @@ class ChatPage extends Component {
         );
       }
 		}
-  }
-
-  render = () => {
-    return(
-      <span>
-        <span className="row">
-          <NavBar/>
-        </span>
-        <span className="row">
-          {this.side_panel()}
-          <div className="col s12 m9 l9">
-            <div className="col s12 m12 l12 card-panel">
-              {this.current_conversation()}
-            </div>
-          </div>
-        </span>
-      </span>
-    );
   }
 
   conversation_list(){
@@ -243,7 +225,7 @@ class ChatPage extends Component {
           <div className="row">
             <form className="col s12 m12 l12 valign-wrapper">
               <div className="col s10 m10 l10 input-field">
-                <textarea
+                <textarea autoFocus
                   key={new_message_id}
                   id={new_message_id}
                   className="materialize-textarea">
@@ -265,6 +247,25 @@ class ChatPage extends Component {
         </span>
       );
     }
+  }
+
+  render = () => {
+    window.scrollTo(0,0);
+    return(
+      <span>
+        <span className="row">
+          <NavBar/>
+        </span>
+        <span className="row">
+          {this.side_panel()}
+          <div className="col s12 m9 l9">
+            <div className="col s12 m12 l12 card-panel">
+              {this.current_conversation()}
+            </div>
+          </div>
+        </span>
+      </span>
+    );
   }
 }
 

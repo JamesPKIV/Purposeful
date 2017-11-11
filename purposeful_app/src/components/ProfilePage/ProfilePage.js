@@ -166,6 +166,7 @@ class ProfilePage extends Component {
 					<div className="input-field">
 						<textarea
 							defaultValue={value}
+							placeholder={text}
 							onChange={ ev => this.handleInputChange(onEdit, ev) }
 							editable="true"
 							rows={6}
@@ -465,7 +466,7 @@ class ProfilePage extends Component {
 								<div className="container left-content">
 									<div className="card-panel">
 										<div className="row">
-											<Link to="/editProfile" className="btn-flat profile-text right">
+											<Link to="/editProfile#editcateg" className="btn-flat profile-text right">
 												Edit <FaPencil className="profile-text"></FaPencil>
 											</Link>
 										</div>
@@ -705,6 +706,7 @@ class ProfilePage extends Component {
 
 
 	render () {
+		window.scrollTo(0,0);
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
 			<span>

@@ -55,7 +55,7 @@ class MentorshipPage extends Component {
 
 
 	render () {
-
+		window.scrollTo(0,0);
 		/* conditionally render form content depending on whether youve signed up or not */
 		switch(this.state.show) {
 
@@ -69,7 +69,8 @@ class MentorshipPage extends Component {
 								<h4 className="col s12 m12 l12"> Find someone who knows about: </h4>
 							</div>
 							<div className="row">
-								<input  className="searchInput"
+								<input autoFocus
+									className="searchInput"
 									placeholder="Something, Anything!"
 									value={this.state.searchInput}
 									onChange={this.handleSearchChange}

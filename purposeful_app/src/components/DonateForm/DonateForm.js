@@ -188,6 +188,7 @@ class DonateForm extends Component {
 	}
 
 	render() {
+		window.scrollTo(0,0);
 		return (
 			<div className="donate-container">
 				<NavBar />

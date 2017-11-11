@@ -156,6 +156,7 @@ class OurTeam extends Component {
 	}
 
 	render() {
+		window.scrollTo(0,0);
 		if (this.state.showTeam){
 			return (
 					this.teamDesc()

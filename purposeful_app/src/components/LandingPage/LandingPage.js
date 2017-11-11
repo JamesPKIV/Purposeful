@@ -135,7 +135,8 @@ class LandingPage extends Component {
 										placeholder="What is your name?"
 										value={this.props.userName}
 										onChange={this.handleNameSet}
-										name="fullName" />
+										name="fullName"
+										autoFocus />
 									<input className="btn light-green" type="submit"  value="Continue " />
 								</div>
 							</form>
@@ -153,7 +154,7 @@ class LandingPage extends Component {
 						<form>
 							<div className="row ">
 								<div className="input-field col s12 m12 l12">
-									<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate " required />
+									<input autoFocus placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 								</div>
 							</div>
 							<div className="row ">
@@ -188,7 +189,7 @@ class LandingPage extends Component {
 					<form>
 						<div className="row ">
 							<div className="input-field col s12 m12 l12">
-								<input placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+								<input autoFocus placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
 						<div className="row ">
