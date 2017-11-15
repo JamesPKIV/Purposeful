@@ -87,7 +87,21 @@ class ActivityFeed extends Component {
 		});
 	}
 
+	pressButton(style, e){
+		if (style === "btn light-green lighten-4 valign z-depth-3"){
+			console.log("onMouseUp");
+		} else {
+			console.log("onMouseDown");
+		}
+		e.currentTarget.className=style;
+	}
+
+
 	scroll_arrow(feed_items, scroll){
+		var activeClass = "btn light-green lighten-4 valign";
+		var pressedClass = "btn light-green valign z-depth-0"
+		let boundPressDown = this.pressButton.bind(this, pressedClass);
+		let boundPressUp = this.pressButton.bind(this, activeClass);
 		if(feed_items.length >= 5){
 			if(scroll === -1){
 				if(this.state.start <= 0){
@@ -98,8 +112,12 @@ class ActivityFeed extends Component {
 					);
 				} else {
 					return(
-						<button onClick={()=> this.hor_scroll(scroll)} className="btn-flat light-green lighten-4 valign">
-							<FaAngleLeft className="profile-name"></FaAngleLeft>
+						<button
+							onClick={()=> this.hor_scroll(scroll)}
+							onMouseDown={boundPressDown}
+							onMouseUp={boundPressUp}
+							className={activeClass}>
+								<FaAngleLeft className="profile-name black-text"></FaAngleLeft>
 						</button>
 					);
 				}
@@ -112,8 +130,13 @@ class ActivityFeed extends Component {
 					);
 				} else {
 					return(
-						<button onClick={()=> this.hor_scroll(scroll)} className="btn-flat light-green lighten-4 valign">
-							<FaAngleRight className="profile-name"></FaAngleRight>
+						<button
+							onClick={()=> this.hor_scroll(scroll)}
+							onMouseDown={boundPressDown}
+							onMouseUp={boundPressUp}
+							className={activeClass}
+							>
+							<FaAngleRight className="profile-name black-text"></FaAngleRight>
 						</button>
 					);
 				}
