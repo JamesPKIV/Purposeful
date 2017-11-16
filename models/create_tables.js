@@ -12,22 +12,11 @@ var VERBOSE = require("./pg_database.js").VERBOSE;
 var tables = require ("./tables.js").db_tables;
 
 /* if this flag is set true, overwrite existing tables */
-var SHOULD_DROP_TABLES = true;
+var SHOULD_DROP_TABLES = false;
 
 /* this function creates all tables defined in tables.js */
-function create_tables() {
-	return db.sync({force: SHOULD_DROP_TABLES})
-		.then(() => {
-			if(VERBOSE) 
-				console.log("Successfully created tables! ");
-		})
-		.catch((error) => {
-			if(VERBOSE) 
-				console.log("Error creating tables: ", error);
-			throw error;
-		})
-		.then(() => {db.close()});
-}
+var create_tables = require("./db_utils.js").create_tables;
+
 
 
 create_tables();
