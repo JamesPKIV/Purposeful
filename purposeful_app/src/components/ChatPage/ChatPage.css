@@ -1,11 +1,19 @@
-.main-content{
-  margin-top: 175px;
-}
-
 .message{
   border-radius: 1vw;
 }
 
 .message_space{
   height: 55vh;
+}
+
+.name-panel {
+  padding: 0vh !important;
+}
+
+.name {
+  padding: 2vh !important;
+}
+
+.close {
+  padding: 2vh !important;
 }

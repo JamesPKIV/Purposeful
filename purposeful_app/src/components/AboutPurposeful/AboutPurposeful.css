@@ -1,8 +1,7 @@
 
 .main-content-about{
-  margin: 0 auto; 
-  margin-top: 150px !important;
-  width: 80%;
+  margin: 0 auto;
+  width: 80vw;
 }
 
 .pillar-summary{
@@ -47,10 +46,10 @@
     color: #5c5c5c;
   }
 
-  #ideas-color0{ 
+  #ideas-color0{
     color: #bb2f3d;
   }
-  #ideas-color1{ 
+  #ideas-color1{
     color:#5c7a0a;
   }
   #ideas-color2{

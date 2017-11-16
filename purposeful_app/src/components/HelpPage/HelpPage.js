@@ -27,29 +27,11 @@ class HelpPage extends Component {
     );
   }
 
-  Mobile(){
-    return(
-      <span>
-				<NavBar/>
-				<div>
-					<img src={working} alt="working" width="100vw" className="row center"/>
-					<p className="row"> We want to help you! This feature will be available soon!</p>
-					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
-				</div>
-			</span>
-    );
-  }
-
   render() {
-		if(window.innerWidth > 700){
-			return(
-				this.Desktop()
-			);
-		} else {
-			return(
-				this.Mobile()
-			);
-		}
+		return(
+			this.Desktop()
+		);
+
 	}
 }
 

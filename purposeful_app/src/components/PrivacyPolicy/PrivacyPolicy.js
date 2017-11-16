@@ -18,7 +18,7 @@ class PrivacyPolicy extends Component {
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="300vw" className="row center"/>
 					<p className="row"> Your privacy is important, we will tell you how we take care of it soon! </p>
 					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>
@@ -31,7 +31,7 @@ class PrivacyPolicy extends Component {
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="100vw" className="row center"/>
 					<p className="row">  Your privacy is important, we will tell you how we take care of it soon!  </p>
 					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>

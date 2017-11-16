@@ -18,7 +18,7 @@ class SettingsPage extends Component {
     return(
       <span>
 				<NavBar/>
-				<div className="main-content">
+				<div>
 					<img src={working} alt="working" width="300vw" className="row center"/>
 					<p className="row"> Soon you will be able to personalize your settings! </p>
 					<Link to="/landing" className="center btn light-green row">Back to Landing Page </Link>

@@ -15,7 +15,7 @@ class HomePage extends Component {
 			redirectTo: "",
 			seUserId: "",
 		};
-		
+
 		this.handleSEProfileClick = this.handleSEProfileClick.bind(this);
 	}
 
@@ -43,9 +43,7 @@ class HomePage extends Component {
 			/* conditionally render form content depending on whether youve signed up or not */
 			return (
         <div id="home-content" className="row">
-				<NavBar logout={this.props.logout}/>
-            /* conditionally render form content depending on whether youve signed up or not */  
-
+				<NavBar logout={this.props.logout}/>  
 					{
 						this.props.isLoggedIn ?
 						<p className="logged-in-p">User Name: {this.props.userName}, UserID: {this.props.userId} </p>
