@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Redirect, BrowserRouter as Router } from 'react-router-dom';
 import Dimensions from 'react-dimensions';
+import io from 'socket.io-client';
 
 import './App.css';
 import HomePage from '../HomePage/HomePage';
@@ -22,8 +23,8 @@ import EditProfile from '../EditProfile/EditProfile';
 import SettingsPage from '../SettingsPage/SettingsPage';
 import HelpPage from '../HelpPage/HelpPage';
 import ChatPage from '../ChatPage/ChatPage';
-
 import Client from "../../Client";
+
 
 class App extends Component {
 
@@ -45,6 +46,8 @@ class App extends Component {
 			prof_present: "",
 			prof_future: "",
 			SE_profile: {},
+			chat_array: [],
+			socket: null,
 		};
 
 		this.footer = this.footer.bind(this);
@@ -60,6 +63,10 @@ class App extends Component {
 		this.handleSubmitProfileChange = this.handleSubmitProfileChange.bind(this);
 		this.fetchSEProfile = this.fetchSEProfile.bind(this);
 		this.handleMentorRequest = this.handleMentorRequest.bind(this);
+		this.handleOpenSocket = this.handleOpenSocket.bind(this);
+		this.handleRecieveMessage = this.handleRecieveMessage.bind(this);
+		this.handleSendMessage = this.handleSendMessage.bind(this);
+		this.fetchChat = this.fetchChat.bind(this);
 	}
 
 	handleCreateUser (password) {
@@ -67,10 +74,13 @@ class App extends Component {
 		var email = this.state.userEmail;
 		return Client.add_new_user(name, email, password)
 			.then(user_obj => {
+
+				var socket = io();
 				this.setState({
 					userId: user_obj.id,
 					isLoggedIn: true,
-				});
+					socket: socket,
+				});				
 				return user_obj;
 			})
 			.catch(err => {
@@ -84,6 +94,8 @@ class App extends Component {
 
 		return Client.login(email, password)
 			.then(user_obj => {
+
+				
 				this.setState({
 					userId: user_obj.id,
 					userName: user_obj.name,
@@ -91,7 +103,9 @@ class App extends Component {
 					prof_present: user_obj.present,
 					prof_future: user_obj.future,
 					isLoggedIn: true,
+					
 				});
+
 				return user_obj;
 			})
 			.catch(err => {
@@ -99,10 +113,92 @@ class App extends Component {
 			});
 	}
 
+
+	handleOpenSocket() {
+		console.log("Opening socket to server.");
+		var socket = io("http://localhost:3001/");
+		socket.on("new_message", data => {
+			this.handleRecieveMessage(data);
+		});
+		this.setState({
+			socket: socket,
+		});
+
+	}
+
+
+	handleRecieveMessage(message_obj) {
+		console.log("handleRecieveMessage called.");
+		var message = message_obj.message; 
+		var chat_id = message_obj.chat_id;
+
+		var chat_arr = this.state.chat_array;
+
+		//search by chat_id
+		var search_idx = chat_arr.findIndex( el => {
+			var c_id = el.conv_id;
+			if (c_id !== null) {
+				return c_id == chat_id;
+			}
+		});
+
+		var new_msg_obj = message;
+
+		//if not found, add new chat entry in chat array for this message
+		if (search_idx == -1) {
+			chat_arr.unshift({
+				conv_id: chat_id,
+				messages: [ new_msg_obj ],
+			});
+		}
+		//else chat already exists - just add message to it
+		else {
+			chat_arr[search_idx].messages.unshift(new_msg_obj);
+		}
+
+		this.setState({
+			chat_array: chat_arr,
+		});
+	}
+
+
+	handleSendMessage(message) {
+		return new Promise((resolve, reject) => {
+			if (!this.state.isLoggedIn ){
+				reject(new Error("Please login to send a message."));
+			} else {
+				var socket = this.state.socket;
+				//logged in
+				if (!socket){
+					//socket isnt established yet
+					this.handleOpenSocket();
+
+					if (!socket){
+						//socket failed to open
+						reject(new Error("Unable to connect to chat server."));
+					}
+				}
+
+				
+				
+				console.log("Emitting new_message on socket:");
+				console.log(socket);
+				socket.emit("new_message", message);
+				resolve();
+			}
+		});	
+	}
+
 	handleLogout(){
-		 return Client.logout().then(res => {
+		return Client.logout().then(res => {
+			if (this.state.socket) {
+				this.state.socket.disconnect(true);
+				this.setState({
+					socket: null
+				});
+			}
 			console.log("Session was destroyed and user should be logged out.");
-		 })
+		});
 	}
 
 	handleSubmitSI() {
@@ -148,7 +244,9 @@ class App extends Component {
 
 
 	fetchMentorship () {
-		return Client.get_mentorship_dash(this.state.userId)
+
+
+		var fetchMentorshipFn = Client.get_mentorship_dash(this.state.userId)
 			.then (dash_data => {
 				var mentees = dash_data["mentees"];
 				var mentors = dash_data["mentors"];
@@ -162,6 +260,46 @@ class App extends Component {
 					recommended: recommended,
 				});
 			});
+
+
+
+		if (!this.state.isLoggedIn) {
+			return this.fetchHome().then(fetchMentorshipFn); 
+		}
+		else {
+			return fetchMentorshipFn;
+		}
+	}
+
+
+	fetchChat() {
+		var fetchChatFn = function () {
+			return Client.get_active_chats()
+				.then(data =>{
+					if(!this.state.socket) {
+						this.handleOpenSocket();
+					}
+
+					console.log("Success getting chats: " + data);
+					this.setState({
+						chat_array: data
+					});
+				})
+				.catch(err => {
+					console.error(err);
+					alert("Error:" + err.message);
+				});
+		};
+
+		if (!this.state.isLoggedIn) {
+			return this.fetchHome()
+				.then(() => {
+					return fetchChatFn.bind(this)(); 
+				});
+		}
+		else {
+			return fetchChatFn.bind(this)();
+		}
 	}
 
 
@@ -171,18 +309,26 @@ class App extends Component {
 			var msg = "No user was specified";
 			throw new Error(msg);
 		}
-		return Client.get_user_by_uid(SEuserId)
+
+		var fetchSEProfileFn = Client.get_user_by_uid(SEuserId)
 			.then( SE_data => {
 				this.setState({
 					SE_profile: SE_data
 				});
-
 
 				console.log("MENTORSHIP DASH RECIEVED: ", SE_data);
 			})
 			.catch(err => {
 				throw err;
 			});
+
+		if (!this.state.loggedIn) {
+			return this.fetchHome()
+				.then(() => {return fetchSEProfileFn();});
+		}
+		else{
+			return fetchSEProfileFn();
+		}
 	}
 
 
@@ -242,11 +388,9 @@ class App extends Component {
 	}
 
 
-
 	handleSEProfileClick(se_uid) {
 		this.setStateAttr("SE_userId", se_uid);
 	}
-
 
 
 	setStateAttr(key, value) {
@@ -332,7 +476,7 @@ footer(){
 									userId={this.state.userId}
 									fetchData={this.fetchHome}
 									isLoggedIn={this.state.isLoggedIn}
-                  mentors={this.state.mentors}
+                  					mentors={this.state.mentors}
 									mentees={this.state.mentees}
 									recommended={this.state.recommended}
 									logout={this.handleLogout}
@@ -342,7 +486,7 @@ footer(){
 						/>
 
 
-            <Route
+		            	<Route
 							path="/mentorship"
 							render={ () =>
 								<MentorshipPage
@@ -377,8 +521,6 @@ footer(){
 									mentees={this.state.mentees}
 							  /> }
 						/>
-
-
 						<Route
 							path="/SEprofile/:id"
 							render={ ({ match }) =>
@@ -392,54 +534,61 @@ footer(){
 							}
 						/>
 
-              <Route
-                path="/stories"
-                render={ () => <StoriesPage /> }
-              />
-							<Route
-                path="/newstories"
-                render={ () => <StoriesNew /> }
-              />
-							<Route
-                path="/managestories"
-                render={ () => <StoriesManage /> }
-              />
-              <Route
-                path="/collabs"
-                render={ () => <CollabPage /> }
-              />
-              <Route
-                path="/editProfile"
-                render={ () => <EditProfile /> }
-              />
-              <Route
-                path="/about"
-                render={ () => <AboutPurposeful /> }
-              />
-              <Route
-                path="/team"
-                render={ () => <OurTeam /> }
-              />
-              <Route
-                path="/donate"
-                render={ () => <DonateForm /> }
-              />
-              <Route
-                path="/privacy"
-                render={ () => <PrivacyPolicy /> }
-              />
-							<Route
-								path="/settings"
-								render={ () => <SettingsPage /> }
-							/>
-							<Route
-								path="/help"
-								render={ () => <HelpPage /> }
-							/>
-							<Route
-							  path="/chat"
-								render={ () => <ChatPage /> }
-							/>
+						<Route
+							path="/stories"
+							render={ () => <StoriesPage /> }
+						/>
+						<Route
+							path="/newstories"
+							render={ () => <StoriesNew /> }
+						/>
+						<Route
+							path="/managestories"
+							render={ () => <StoriesManage /> }
+						/>
+						<Route
+							path="/collabs"
+							render={ () => <CollabPage /> }
+						/>
+						<Route
+							path="/editProfile"
+							render={ () => <EditProfile /> }
+						/>
+						<Route
+							path="/about"
+							render={ () => <AboutPurposeful /> }
+						/>
+						<Route
+							path="/team"
+							render={ () => <OurTeam /> }
+						/>
+						<Route
+							path="/donate"
+							render={ () => <DonateForm /> }
+						/>
+						<Route
+							path="/privacy"
+							render={ () => <PrivacyPolicy /> }
+						/>
+						<Route
+							path="/settings"
+							render={ () => <SettingsPage /> }
+						/>
+						<Route
+							path="/help"
+							render={ () => <HelpPage /> }
+						/>
+						<Route
+						  path="/chat"
+							render={ () => <ChatPage 
+								fetchData={this.fetchChat}
+								chatArray={this.state.chat_array}
+								handleSendMessage={this.handleSendMessage}
+								handleRecieveMessage={this.handleRecieveMessage}
+								handleOpenSocket={this.handleOpenSocket}
+
+							/> }
+						/>
 					</main>
 					{this.footer()}
 				</div>
