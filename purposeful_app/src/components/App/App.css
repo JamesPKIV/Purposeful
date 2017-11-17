@@ -9,17 +9,18 @@ main {
   width: 100vw;
 }
 
-a {
-  color: white;
+.the-footer{
+  height: 3vw;
 }
 
-.mobile-font{
-  font-size: 3vw;
+a {
+  color: white;
 }
 
 .desktop-font{
   display: block;
   padding-right: 4vw;
+  font-size: 2vh;;
 }
 
 .footer-links{
@@ -50,9 +51,7 @@ Styles we had since phase 1 BUT added stuff to App for materialize footer
   /*max-height: 12vh;*/
 }
 
-.page-content {
-  padding-top: 15vh;
-}
+
 
 .App-header {
   background-color: #222;

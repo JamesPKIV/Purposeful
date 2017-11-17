@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './DonateForm.css';
 import NavBar from '../NavBar/NavBar';
-import working from "../App/still_working.png";
 import interactionsImg from '../AboutPurposeful/interactions.jpg';
 import FaArrowLeft from 'react-icons/lib/fa/arrow-left';
 import FaArrowRight from 'react-icons/lib/fa/arrow-right';
@@ -64,6 +62,8 @@ class DonateForm extends Component {
 				return this.paymentContent();
 			case 'finalize':
 				return this.finalizeContent();
+			default:
+				break;
 		}
 	}
 
@@ -83,18 +83,18 @@ class DonateForm extends Component {
 						<button className="btn amounts" value="100.00" onClick={(e) => this.setAmount(e)}> $100 </button>
 					</div>
 					<div className="col s3 m3 l3">
-						<button className="btn amounts" > Other</button>
+						<button className="btn amounts" >Other</button>
 					</div>
 				</div>
 				<div className="row" >
 					<form onSubmit={() => this.proceed('details')}>
 						<div className="row">
-							<div className="col s4 m4 l4 offset-s8">
+							<div className="col s5 m4 l4">
 								<label className="label-radio"> One Time
 									<input type="radio" value="One time" name="selected" checked={this.state.selected === "One time"} onChange={(e) => this.handleChange(e)} />
 								</label>
 							</div>
-							<div className="col s4 m4 l4 offset-s4">
+							<div className="col s5 m4 l4">
 								<label className="label-radio"> Monthly Recurring
 									<input type="radio" value="Recurring" name="selected" checked={this.state.selected === "Recurring"} onChange={(e) => this.handleChange(e)} />
 								</label>
@@ -152,11 +152,11 @@ class DonateForm extends Component {
 		return (
 			<div> <span className="component-title"> Credit Card Info </span>
 				<div className="row">
-					<div className="col s4 m4 l4">
+					<div className="col s6">
 						<label className="input-label"> Cardholder Name </label>
 						<input type="text" className="input-style" name="creditcardholder" value={this.state.creditcardholder} onChange={(e) => this.handleChange(e)} />
 					</div>
-					<div className="col s4 m4 l4">
+					<div className="col s6">
 						<label className="input-label"> Credit/Debit Card Number </label>
 						<input type="text" className="input-style" name="creditNum" value={this.state.creditNum} onChange={(e) => this.handleChange(e)}/>
 					</div>
@@ -192,19 +192,17 @@ class DonateForm extends Component {
 			<div className="donate-container">
 				<NavBar />
 				<div className="container main-content">
-					<div className="row valign-wrapper ">
-						<div className="col s12 m12 l12">
-							<div className="col s6 m6 l6">
-								<img id="interactions-img" src={interactionsImg} />
+						<div className="row">
+							<div className="col s12 m6">
+								<img id="interactions-img" src={interactionsImg} alt=""/>
 								<div id="donation-desc">
 									Your donation will help continue to support the development and maintence of the website.
 								</div>
 							</div>
-							<div className="col s6 m6 l6">
+							<div className="col s12 m6">
 								{this.setContent(this.state.content)}
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		);

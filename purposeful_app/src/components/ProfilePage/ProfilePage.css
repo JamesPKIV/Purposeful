@@ -23,11 +23,11 @@
   max-height: 12vh;
 }
 
-div.row{
-  margin-bottom: 10;
+.placeholder{
+  font-style: italic;
+  color: #7d7d7d;
 }
 
-div.left-content{
-  padding-left:50px;
-  width: 100%;
+.textarea-class{
+  height: 15vh;
 }

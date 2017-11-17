@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './ChatPage.css';
 import NavBar from '../NavBar/NavBar';
 import FaClose from 'react-icons/lib/fa/close';
+import FaAngleDown from 'react-icons/lib/fa/angle-down';
+import FaAngleUp from 'react-icons/lib/fa/angle-up';
 
 class ChatPage extends Component {
 	constructor(props) {
@@ -32,6 +34,7 @@ class ChatPage extends Component {
 			],
 			curr_conv: "0",
 			message_out: "",
+      toggle: false,
 		};
 
 		this.handleSendMessage = this.handleSendMessage.bind(this);
@@ -44,47 +47,7 @@ componentDidMount() {
 	this.props.fetchData();
 }
 
-
-	render () {
-		var apos = "'"; /*to avoid editor complaining about non-closed apostrophe*/
-		
-		console.log("prop chatArray:");
-		console.log(this.props.chatArray);
-
-		return(
-			<span>
-				<span className="row">
-					<NavBar/>
-				</span>
-				<span className="row">
-					<div className="col s3 m3 l3">
-						<div className="col s10 m10 l10 push-l1">
-							<div className="row">
-								<h5>Find someone to chat with:</h5>
-								<div className="input-field inline">
-									<input id="chat_search" type="text"></input>
-									<label for="chat_search" className="active">Start typing someone{apos}s name:</label>
-								</div>
-							</div>
-							<div className="row">
-								<h5>Active conversations:</h5>
-								<div>
-									{this.conversation_list()}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="col s9 m9 l9">
-						<div className="col s12 m12 l12 card-panel">
-							{this.current_conversation(this.props.chatArray)}
-						</div>
-					</div>
-				</span>
-			</span>
-		);
-	}
-
-	conversation_list(){
+conversation_list(){
 		var i;
 		var array = this.props.chatArray;
 		let return_code = null;
@@ -121,120 +84,6 @@ componentDidMount() {
 		return (return_code);
 	}
 
-	change_conv(id, action){
-		if(action === "change"){
-			this.setState({
-				curr_conv: id
-			});
-		} else {
-			var array = this.state.active_array;
-			var index = array.indexOf(id);
-			array.splice(index, 1);
-
-			if(this.state.curr_conv === id){
-				var new_curr;
-				if(array.length === 0){
-					new_curr = "-1";
-				} else {
-					new_curr = array[(index+1)%array.length];
-				}
-				this.setState({
-					curr_conv: new_curr
-				});
-			}
-			/*NOTICE THAT this function removes the conversation from the
-				active_array but NOT from the conv_array! Therefore messages are
-				not lost.*/
-			this.setState({
-				active_array: array
-			});
-		}
-	}
-
-	current_conversation(conversations){
-		var conv_id = parseInt(this.state.curr_conv);
-		var array = conversations;
-		if((conv_id >= 0) && (typeof array === "object") 
-			&& (array.length > 0)) {
-
-			var conv = array[conv_id];
-			var your_style="col s5 m5 l5 left-align message light-green lighten-3";
-			var their_style="col s5 m5 l5 push-l6 left-align message blue-grey lighten-3";
-			var name = "";
-
-			if (conv["users"][0]["name"] === "me" ) {
-				name = conv["users"][1]["name"];
-			} else {
-				name = conv["users"][0]["name"];
-			}
-			
-			var message_array = conv["messages"];
-			let return_code = null;
-			if(message_array.length <= 0){
-				return_code =
-					<h4>Start a conversation with {name}!</h4>
-			} else {
-				var i;
-				for(i = 0; i < message_array.length; i++){
-					var style;
-					var message = message_array[i]["body"];
-					var time = message_array[i]["updatedAt"];
-					if(message_array[i]["author"] === "me") {
-						style = your_style;
-					} else {
-						style = their_style;
-					}
-					return_code =
-						<span>{return_code}
-							<div className="row">
-								<span className={style}>
-									<p className="row"> {message} </p>
-									<p className="row right-align"> {time} </p>
-								</span>
-							</div>
-						</span>
-				}
-			}
-
-
-			return(
-				<span>
-					<span className="row">
-						<h4 className="left-align">You are talking to {name}</h4>
-					</span>
-					<hr/>
-					<div className="row message_space">
-						{return_code}
-					</div>
-					<hr/>
-					<form className="row valign-wrapper">
-						<div className="col s10 m10 l10 input-field">
-							<textarea 
-								id="new_message" 
-								className="materialize-textarea" 
-								value={this.state.message_out}
-								onChange={this.handleNewMessageChange}
-							/>
-							<label htmlFor="new_message" className="active">Type your message here</label>
-						</div>
-						<button 
-							className="col s2 m2 l2 btn valign light-green"
-							onClick={this.handleSendMessage}
-						>Send
-						</button>
-					</form>
-				</span>
-			);
-		} else {
-			return (
-				<span>
-					<h4 className="left-align">You have no active conversations :( </h4>
-					<p> Start a new conversation or revive an old one by searching for someone in the left bar! </p>
-				</span>
-			);
-		}
-	}
-
 
 	handleNewMessageChange(ev) {
 		var text = ev.target.value;
@@ -256,11 +105,9 @@ componentDidMount() {
 			//do nothing
 			return null;
 		}
-
 		console.log("chatpage.js -> handling send message..1");
 
 		var chat_id = chat_arr[curr_conv].conv_id;
-
 		if (!chat_id) {
 			//do nothing
 			return null;
@@ -273,7 +120,7 @@ componentDidMount() {
 			chat_id: chat_id,
 		})
 		.then(result => {
-			console.log("chatpage.js -> handling send message..4");
+			console.log("chatpage.js -> handled send message..4");
 		})
 		.catch(err => {
 			console.error("chatpage.js -> Error handling send message:" + err);
@@ -281,6 +128,205 @@ componentDidMount() {
 
 
 	}
+
+  toggle = () => {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  }
+
+  side_panel(){
+    var apos = "'"; /*to avoid editor complaining about non-closed apostrophe*/
+    var desktopStyle = "col s10 m10 l10 push-l1 side"
+    var mobileStyle = "container side"
+    var style;
+    if(window.innerWidth >= 700){
+      style = desktopStyle;
+    } else {
+      style = mobileStyle;
+    }
+
+    let displayed =
+      <div className="col s12 m3 l3">
+        <div className={style}>
+
+          <div className="row">
+            <h5>Active conversations:</h5>
+            <div className="list-div">
+              {this.conversation_list()}
+            </div>
+          </div>
+          <div className="row">
+            <h5>Find someone to chat with:</h5>
+            <div className="row"> <p> </p> </div>
+            <div className="input-field inline">
+              <input id="chat_search" type="text"></input>
+              <label for="chat_search" className="active">Start typing someone{apos}s name:</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    if(window.innerWidth >= 700){
+			return(
+				{displayed}
+			);
+		} else { /*MOBILE*/
+      if(this.state.toggle){
+        return(
+          <span>
+            <button className="btn-flat right" onClick={()=>this.toggle()}>
+              Hide Conversations <FaAngleUp/>
+            </button>
+            <div className="container">
+              {displayed}
+            </div>
+          </span>
+  			);
+      } else {
+        return(
+          <button className="btn-flat right" onClick={()=>this.toggle()}>
+            Other Conversations <FaAngleDown/>
+          </button>
+        );
+      }
+		}
+  }
+
+  
+
+  
+  change_conv(id, action){
+    if(action === "change"){
+      this.setState({
+        curr_conv: id
+      });
+    } else {
+      var array = this.state.active_array;
+      var index = array.indexOf(id);
+      array.splice(index, 1);
+
+      if(this.state.curr_conv === id){
+        var new_curr;
+        if(array.length === 0){
+          new_curr = "-1";
+        } else {
+          new_curr = array[(index+1)%array.length];
+        }
+        this.setState({
+          curr_conv: new_curr
+        });
+      }
+      /*NOTICE THAT this function removes the conversation from the
+        active_array but NOT from the conv_array! Therefore messages are
+        not lost.*/
+      this.setState({
+        active_array: array
+      });
+    }
+  }
+
+  current_conversation(conversations){
+    var conv_id = parseInt(this.state.curr_conv, 10);
+    var new_message_id = "new_message_" + this.state.curr_conv;
+    if((conv_id >= 0) && (typeof array === "object") && (array.length > 0)) {
+      var array = conversations;
+      var conv = array[conv_id];
+      var your_style="col s9 m5 l5 left-align message light-green lighten-3";
+      var their_style="col s9 m5 l5 right left-align message blue-grey lighten-3";
+      var name;
+      if (conv["users"][0]["name"] === "me" ) {
+				name = conv["users"][1]["name"];
+			} else {
+				name = conv["users"][0]["name"];
+			}
+      var message_array = conv["messages"];
+      let return_code = null;
+      if(message_array.length <= 0){
+        return_code =
+          <h4>Start a conversation with {name}!</h4>
+      } else {
+        var i;
+        for(i = 0; i < message_array.length; i++){
+          var style;
+          var message = message_array[i]["body"];
+          var time = message_array[i]["updatedAt"];
+          if(message_array[i]["author"] === "1"){
+            style = your_style;
+          } else {
+            style = their_style;
+          }
+          return_code = (
+            <span>{return_code}
+              <div className="row">
+                <span className={style}>
+                  <p className="row"> {message} </p>
+                  <p className="row right-align"> {time} </p>
+                </span>
+              </div>
+            </span>
+					);
+        }
+      }
+      return(
+        <span>
+          <span className="row">
+            <h4 className="left-align">You are talking to {name}</h4>
+          </span>
+          <hr/>
+          <div className="row message_space">
+            {return_code}
+          </div>
+          <div className="divider"></div>
+          <div className="row"><p> </p></div>
+          <div className="row">
+            <form className="col s12 m12 l12 valign-wrapper">
+              <div className="col s10 m10 l10 input-field">
+                <textarea
+                  id={new_message_id}
+                  className="materialize-textarea"
+									value={this.state.message_out}
+									onChange={this.handleNewMessageChange}
+								/>
+                <label for={new_message_id} className="active">Type your message below</label>
+              </div>
+              <button
+								className="col s3 m2 l2 btn valign light-green"
+								onClick={this.handleSendMessage}
+							> Send
+              </button>
+            </form>
+          </div>
+        </span>
+      );
+    } else {
+      return (
+        <span>
+          <h4 className="left-align">You have no active conversations :( </h4>
+          <p> Start a new conversation or revive an old one by searching for someone in the left bar! </p>
+        </span>
+      );
+    }
+  }
+
+
+	render () {
+    return(
+      <span>
+        <span className="row">
+          <NavBar/>
+        </span>
+        <span className="row">
+          {this.side_panel()}
+          <div className="col s12 m9 l9">
+            <div className="col s12 m12 l12 card-panel">
+              {this.current_conversation(this.props.chatArray)}
+            </div>
+          </div>
+        </span>
+      </span>
+    );
+  }
 }
 
 export default ChatPage;

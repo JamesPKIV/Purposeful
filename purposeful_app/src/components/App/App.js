@@ -51,8 +51,6 @@ class App extends Component {
 		};
 
 		this.footer = this.footer.bind(this);
-		this.footerDesktop = this.footerDesktop.bind(this);
-		this.footerMobile = this.footerMobile.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleCreateUser = this.handleCreateUser.bind(this);
@@ -114,6 +112,7 @@ class App extends Component {
 				throw err;
 			});
 	}
+
 
 	handleOpenSocket() {
 		console.log("Opening socket to server.");
@@ -189,7 +188,6 @@ class App extends Component {
 			}
 		});	
 	}
-
 
 	handleLogout(){
 		return Client.logout().then(res => {
@@ -413,10 +411,10 @@ class App extends Component {
 		});
 	}
 
-footerDesktop(){
+footer(){
     return(
       <footer className="page-footer grey darken-4">
-        <div className = "row fullrow">
+        <div className = "row the-footer">
           <ul className="footer-links">
             <li><Link to="/about" className="desktop-font">About</Link></li>
             <li><Link to="/team" className="desktop-font">Our Team</Link></li>
@@ -426,39 +424,6 @@ footerDesktop(){
         </div>
       </footer>
     );
-  }
-
-  footerMobile(){
-    return(
-      <footer className="page-footer grey darken-4">
-        <div className = "row fullrow">
-          <div className = "col s3 left-align">
-            <Link to="/about" className="mobile-font">About_Purposeful</Link>
-          </div>
-          <div className="col s3 right-align">
-            <Link to="/team" className="mobile-font">Our_Team</Link>
-          </div>
-          <div className= "col s3">
-            <Link to="/donate" className="mobile-font">Donate</Link>
-          </div>
-          <div className="col s3">
-            <Link to="/privacy" className="mobile-font">Privacy_Policy</Link>
-          </div>
-        </div>
-      </footer>
-    );
-  }
-
-  footer(props){
-    if (this.props.containerWidth >= 700) {
-      return(
-        this.footerDesktop()
-      );
-    } else {
-      return (
-        this.footerMobile()
-      );
-    }
   }
 
 	render() {
@@ -515,8 +480,8 @@ footerDesktop(){
 									mentees={this.state.mentees}
 									recommended={this.state.recommended}
 									logout={this.handleLogout}
-                  					{...props}
-								/>	
+                  {...props}
+								/>
 							}
 						/>
 
@@ -539,7 +504,7 @@ footerDesktop(){
 
 						<Route
 							path="/profile"
-							render={ () => 
+							render={ () =>
 								<ProfilePage
 									isLoggedIn={this.state.isLoggedIn}
 									userName={this.state.userName}
@@ -556,18 +521,16 @@ footerDesktop(){
 									mentees={this.state.mentees}
 							  /> }
 						/>
-		                  
-		                  
 						<Route
 							path="/SEprofile/:id"
-							render={ ({ match }) => 
-								<SEProfilePage 
+							render={ ({ match }) =>
+								<SEProfilePage
 									fetchHome={this.fetchHome}
 									fetchSEProfile={this.fetchSEProfile}
 									match={match}
 									SEProfile={this.state.SE_profile}
 									handleMentorRequest={this.handleMentorRequest}
-								/> 
+								/>
 							}
 						/>
 

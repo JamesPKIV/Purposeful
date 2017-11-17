@@ -24,25 +24,29 @@ class DropDown extends Component{
 
     handleLogout = (ev) =>{
         ev.preventDefault();
-        this.props.logout();
-        this.props.history.push('/landing');
+        try{
+          this.props.logout();
+          this.props.history.push('/landing');
+        }catch(e){ // this.props.logout() is not defined if user is not logged in, 
+          this.props.history.push('landing');
+        }
     }
 
     dropDesktop(){
         if(this.state.toggle){
             return (
               <span className="settingsBtn">
-                <button className="col s6 m6 l6 settingsIcon" onClick={this.toggleSettings}> <FaCog size={28}/></button>
+                <button className="settingsIcon" onClick={this.toggleSettings}> <FaCog size={28}/></button>
               </span>
             );
         }else{
             return(
                 <span>
                     <span className="settingsBtn">
-                      <button className="settingsIcon col s2 m2 l2 push-l8" onClick={this.toggleSettings}><FaCog className="light-green-text" size={28}/></button>
+                      <button className="settingsIcon " onClick={this.toggleSettings}><FaCog className="light-green-text" size={28}/></button>
                     </span>
-                    <div className="div-dropdown row">
-                        <ul className="ul-dropdown col s12 m12 l12">
+                    <div>
+                        <ul className="ul-dropdown">
                             <li className="li-dropdown"><NavLink to='/donate' className="li-navs" >Donate</NavLink> </li>
                             <li className="li-dropdown"><NavLink to='/settings' className="li-navs">Settings</NavLink></li>
                             <li className="li-dropdown"><NavLink to='/help' className="li-navs">Help</NavLink></li>
@@ -58,7 +62,7 @@ class DropDown extends Component{
       if(this.state.toggle){
         return (
           <span className="settingsBtn">
-            <button className="col s6 m6 l6 settingsIcon" onClick={this.toggleSettings}> <FaAlignJustify className="white-text" size={23}/></button>
+            <button className="settingsIcon" onClick={this.toggleSettings}> <FaAlignJustify className="white-text" size={23}/></button>
           </span>
         );
       } else {
@@ -68,7 +72,7 @@ class DropDown extends Component{
               <button className="settingsIcon" onClick={this.toggleSettings}><FaAlignJustify className="light-green-text" size={23}/></button>
             </span>
             <div >
-              <ul>
+              <ul className="ul-dropdown">
                 <li className="li-dropdown"><NavLink to='/collabs' className="li-navs">Collaborations </NavLink></li>
                 <li className="li-dropdown"><NavLink to='/mentorship' className="li-navs">Mentorship </NavLink></li>
                 <li className="li-dropdown"><NavLink to='stories' className="li-navs">Stories </NavLink></li>
@@ -86,7 +90,7 @@ class DropDown extends Component{
     }
 
     render() {
-      if(window.innerWidth >= 700){
+       if(window.innerWidth >= 700){
         return(
           this.dropDesktop()
         );
@@ -94,7 +98,7 @@ class DropDown extends Component{
         return(
           this.dropMobile()
         );
-      }
+      } 
     }
 
 }
