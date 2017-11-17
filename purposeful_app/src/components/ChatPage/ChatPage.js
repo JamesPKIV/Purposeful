@@ -159,7 +159,7 @@ conversation_list(){
           <div className="row">
             <h5>Find someone to chat with:</h5>
             <div className="row"> <p> </p> </div>
-            <div className="input-field inline">
+            <div className="col s12 input-field inline">
               <input id="chat_search" type="text"></input>
               <label for="chat_search" className="active">Start typing someone{apos}s name:</label>
             </div>
@@ -191,10 +191,8 @@ conversation_list(){
         );
       }
 		}
-  }
-
-  
-
+  }  
+   
   
   change_conv(id, action){
     if(action === "change"){
@@ -282,7 +280,8 @@ conversation_list(){
           <div className="row">
             <form className="col s12 m12 l12 valign-wrapper">
               <div className="col s10 m10 l10 input-field">
-                <textarea
+
+                <textarea autoFocus
                   id={new_message_id}
                   className="materialize-textarea"
 									value={this.state.message_out}
@@ -309,8 +308,8 @@ conversation_list(){
     }
   }
 
-
-	render () {
+  render() {
+    window.scrollTo(0,0);
     return(
       <span>
         <span className="row">
@@ -321,7 +320,6 @@ conversation_list(){
           <div className="col s12 m9 l9">
             <div className="col s12 m12 l12 card-panel">
               {this.current_conversation(this.props.chatArray)}
-            </div>
           </div>
         </span>
       </span>

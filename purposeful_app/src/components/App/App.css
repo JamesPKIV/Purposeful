@@ -17,6 +17,21 @@ a {
   color: white;
 }
 
+input[type=text]{
+  font-size: 2vh !important;
+  text-align: center;
+}
+
+input[type=password]{
+  font-size: 2vh !important;
+  text-align: center;
+}
+
+input[type=email]{
+  font-size: 2vh !important;
+  text-align: center;
+}
+
 .desktop-font{
   display: block;
   padding-right: 4vw;
@@ -62,6 +77,17 @@ Styles we had since phase 1 BUT added stuff to App for materialize footer
 
 .App-intro {
   font-size: large;
+}
+
+textarea::placeholder{
+  font-style: italic;
+  color: #7d7d7d;
+}
+
+input::placeholder{
+  font-style: italic;
+  color: #7d7d7d;
+  text-align: left;
 }
 
 @keyframes App-logo-spin {

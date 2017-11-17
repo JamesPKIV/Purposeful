@@ -324,6 +324,7 @@ class SEProfilePage extends Component {
 			return(
 				<div className="input-field col s12 m10 l10 push-l1">
 					<textarea
+						autoFocus
 						id="ask_message"
 						value={this.state.message}
 						onChange={this.handleChangeMessage}
@@ -345,7 +346,7 @@ class SEProfilePage extends Component {
 		if(this.state.inviteCollab){
 			return(
 				<div className="input-field col s12 m10 l10 push-l1">
-					<textarea id="ask_message" className="materialize-textarea"></textarea>
+					<textarea autoFocus id="ask_message" className="materialize-textarea"></textarea>
 					<label for="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good part of your team?</label>
 					<button onClick={() => this.toggle("inviteSent")} className="btn-large waves-effect light-green"> Send Invitation! </button>
 				</div>
@@ -666,6 +667,7 @@ class SEProfilePage extends Component {
 	}
 
 	render(){
+		window.scrollTo(0,0);
 		if(window.innerWidth > 700){
 			return(
 				this.displayDesktop()

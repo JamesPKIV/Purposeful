@@ -35,7 +35,7 @@ class HomePage extends Component {
 	}
 
 	render () {
-
+		window.scrollTo(0,0);
 		if (this.state.redirectTo !== "") {
 			return ( <Redirect to={this.state.redirectTo} />);
 		}

@@ -60,6 +60,7 @@ class App extends Component {
 		this.searchBySkill = this.searchBySkill.bind(this);
 		this.setStateAttr = this.setStateAttr.bind(this);
 		this.pushToStateAttrArr = this.pushToStateAttrArr.bind(this);
+		this.popFromStateAttrArr = this.popFromStateAttrArr.bind(this);
 		this.handleSubmitProfileChange = this.handleSubmitProfileChange.bind(this);
 		this.fetchSEProfile = this.fetchSEProfile.bind(this);
 		this.handleMentorRequest = this.handleMentorRequest.bind(this);
@@ -411,6 +412,15 @@ class App extends Component {
 		});
 	}
 
+	popFromStateAttrArr(key, value){
+		var attr_arr = this.state[key];
+		console.log("popFromStateAttrArr", attr_arr);
+		attr_arr.splice(attr_arr.indexOf(value), 1);
+		this.setState({
+			[key]: attr_arr,
+		});
+	}
+
 footer(){
     return(
       <footer className="page-footer grey darken-4">
@@ -462,6 +472,8 @@ footer(){
 									skills={this.state.skills}
 									handleAddSkill={this.pushToStateAttrArr.bind(this, "skills") }
 									handleAddInterest={this.pushToStateAttrArr.bind(this, "interests") }
+									handleDeleteSkill={this.popFromStateAttrArr.bind(this, "skills") }
+									handleDeleteInterest={this.popFromStateAttrArr.bind(this, "interests") }
 									handleSubmit={this.handleSubmitSI}
 								/>
 							}

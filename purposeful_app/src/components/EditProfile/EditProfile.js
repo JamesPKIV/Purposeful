@@ -179,7 +179,7 @@ class EditProfile extends Component {
 						</div>
 
 						<div className="card-panel">
-							<h5 className="row">Edit Skills and Interests:</h5>
+							<h5 className="row" id="editcateg">Edit Skills and Interests:</h5>
 							<div className="row"> <p> </p> </div>
 							<div className="row">
 								<p className="col s1 m1 l1 push-l2 subtitle">Skills:</p>
@@ -235,6 +235,7 @@ class EditProfile extends Component {
   }
 
   render() {
+		window.scrollTo(0,0);
 		return(
 			this.Desktop()
 		);

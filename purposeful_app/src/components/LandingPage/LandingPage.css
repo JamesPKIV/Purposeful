@@ -20,16 +20,6 @@ h1 {
   height: 4vh;
 }
 
-input[type=text]{
-  font-size: 20px !important;
-  text-align: center;
-}
-
-input[type=password]{
-  font-size: 20px !important;
-  text-align: center;
-}
-
 .input-field{
   margin-bottom: 2vh;
   margin-top: 0vh;
