@@ -26,11 +26,10 @@ class DropDown extends Component{
         ev.preventDefault();
         try{
           this.props.logout();
-          this.props.history.push('/landing', this.props.history.location.state);
+          this.props.history.push('/landing');
         }catch(e){ // this.props.logout() is not defined if user is not logged in, 
-          this.props.history.push('landing', this.props.history.location.state);
+          this.props.history.push('landing');
         }
-        
     }
 
     dropDesktop(){

@@ -397,6 +397,37 @@ function update_profile(past_str, present_str, future_str) {
 
 }
 
+
+/* this function retrieves the chats for the logged in user.
+* Precondition: user must be logged in
+* Returns: an object with an entry for each active chat, with an
+* 	entry for each chat by Chat id containing the participating
+*	user's names and user ID's.
+*/
+function get_active_chats() {
+	console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) called. ");
+	return fetch(prepend_path + "/api/chats/get_active_chats", {
+		credentials: "same-origin",
+		headers: {
+			"Accept": "application/json",
+		},
+
+	})
+	.then(checkStatus)
+	.then(parseJSON)
+	.then(result => {
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Response OK with new user data obj: ", result.data);
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) responded with status OK"); 
+		return result.data;
+	})
+	.catch(error => {  
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Request Error:", error);
+		console.log("(CLIENT.JS->GET_MENTORSHIP_DASH) Request Failed with Errors.");
+		throw error;  
+	});
+}
+
+
 /** this middleware function is a adapted from: 
 https://github.com/fullstackreact/food-lookup-demo/blob/master/server.js
 */
@@ -430,6 +461,6 @@ function parseJSON(response) {
 module.exports = {  add_new_user, get_user_by_uid, add_mentorship, 
 	get_mentors, add_user_skill, get_user_skills, get_users_with_skill,
 	add_skills_and_interests, get_mentorship_dash, update_profile, 
-	login, logout, add_mentor_request
+	login, logout, add_mentor_request, get_active_chats,
 };
 

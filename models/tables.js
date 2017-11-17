@@ -62,13 +62,13 @@ const Chat = db.define('chats', {
 Chat.hasMany(Message);
 Message.belongsTo(Chat);
 
+
 const User_Chat_Map = db.define("users_chats_map", {
 	id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true},
+	active: {type: Sequelize.BOOLEAN, defaultValue: true},
 });
 User.belongsToMany(Chat, {through: User_Chat_Map, foreignKey: "userId"});
 Chat.belongsToMany(User, {through: User_Chat_Map, foreignKey: "chatId"});
-
-
 
 
 const User_Request_Map = db.define("users_requests_map", {
@@ -88,6 +88,7 @@ const Mentorship = db.define('mentorship_map', {
 */
 User.belongsToMany(User, { through: Mentorship, as: "Mentors", foreignKey: "menteeUid"});
 User.belongsToMany(User, { through: Mentorship, as: "Mentees", foreignKey: "mentorUid"});
+
 
 const User_Skill_Map = db.define('users_skills_map', {
 	level: {type: Sequelize.STRING}

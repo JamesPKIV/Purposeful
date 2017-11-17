@@ -31,6 +31,11 @@ router.post('/new', function(req, res, next) {
 			name: entry_name, 
 			email: entry_email, 
 			password:entry_pwd
+		},
+		{
+		    attributes: {
+		        exclude: ['password']
+		    }
 		})
 	  	.then( new_entry => { 
 			console.log("USERS.JS: New User inserted:", new_entry);

@@ -2,19 +2,18 @@ var fetch = require("node-fetch");
 var db = require("./pg_database.js").db;
 var VERBOSE = require("./pg_database.js").VERBOSE;
 /* required table definition imports */
-var tables = require ("./tables.js").db_tables;
+var db_tables = require ("./tables.js").db_tables;
 
 /* if this flag is set true, overwrite existing tables */
 var SHOULD_DROP_TABLES = true;
-
 
 
 /* this function creates all tables defined in tables.js 
 * if the overwrite flag is not passed as an argument, 
 * the existing tables will be dropped and recreated 
 * according to the SHOULD_DROP_TABLES flag */
-function create_tables(overwrite_flag = SHOULD_DROP_TABLES) {
-	return db.sync({force: overwrite_flag})
+function create_tables() {
+		return db.sync({force: SHOULD_DROP_TABLES})
 		.then(() => {
 			if(VERBOSE) 
 				console.log("Successfully created tables! ");
@@ -23,9 +22,36 @@ function create_tables(overwrite_flag = SHOULD_DROP_TABLES) {
 			if(VERBOSE) 
 				console.log("Error creating tables: ", error);
 			throw error;
-		});
+		})
+		.then(() => {db.close()});
 }
 
+
+function get_active_chats_by_uid(uid){
+	return db_tables.Users.findById(uid)
+	    .then(user => { 
+	    	if (! user)
+	    		throw new Error ("The user does not exist.");
+			
+			if (VERBOSE) 
+				console.log ("User found: ", JSON.stringify(user));
+
+    		return user.getChats({
+    			include: [
+    				{ 
+    					model: db_tables.Users,
+    					through: { 
+    						where: {active: true},
+							attributes: ["id", "name"],
+						}, 	
+					},
+					{ 
+    					model: db_tables.Messages
+					},
+				]
+    		})
+    	});
+}
 
 
 /** this middleware function is a adapted from: 
@@ -58,5 +84,4 @@ function parseJSON(response) {
 }
 
 
-module.exports = { create_tables, create_user, create_mentorship, 
-	get_user_by_uid, get_mentors, add_user_skill, get_user_skills};
+module.exports = { create_tables, get_active_chats_by_uid };

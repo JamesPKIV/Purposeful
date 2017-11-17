@@ -13,4 +13,37 @@ function restrict_access(req, res, next) {
 }
 
 
-module.exports = {restrict_access};
+function minify_chats (chats, uid, user_name) {
+	var chats_users = [];
+	var chat_obj = {};
+	//remove all unnecessary attributes
+	var return_chats = chats.map(function(chat) {
+		var users = chat.users.map(user => {
+
+			var sub_name = user.name;
+
+			// if name == user's name, change to "me"
+			if (user.id == uid) {
+				sub_name = "me";
+			}
+			return({
+				id: user.id,
+				name: sub_name,
+			});
+		});
+
+		chat_obj = {
+			conv_id: chat.id,
+			updatedAt: chat.updatedAt,
+			users: users,
+			messages: chat.messages,
+		};
+
+		return chat_obj;
+	});
+
+	return return_chats;
+}
+
+
+module.exports = {restrict_access, minify_chats};
