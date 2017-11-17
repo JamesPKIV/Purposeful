@@ -229,7 +229,7 @@ conversation_list(){
   current_conversation(conversations){
     var conv_id = parseInt(this.state.curr_conv, 10);
     var new_message_id = "new_message_" + this.state.curr_conv;
-    if((conv_id >= 0) && (typeof array === "object") && (array.length > 0)) {
+    if((conv_id >= 0) && (typeof conversations === "object") && (conversations.length > 0)) {
       var array = conversations;
       var conv = array[conv_id];
       var your_style="col s9 m5 l5 left-align message light-green lighten-3";
