@@ -598,7 +598,7 @@ footer(){
 								handleSendMessage={this.handleSendMessage}
 								handleRecieveMessage={this.handleRecieveMessage}
 								handleOpenSocket={this.handleOpenSocket}
-
+								userId={this.state.userId}
 							/> }
 						/>
 					</main>
