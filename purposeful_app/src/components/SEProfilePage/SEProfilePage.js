@@ -280,9 +280,11 @@ class SEProfilePage extends Component {
 							Thinking Sofas: We strive to build sofas that help you reach
 							those wonderful philosophical ideas.
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Learn More</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								LEARN MORE
+							</div>
+						</Link>
 					</div>
 				</div>
 
@@ -296,9 +298,11 @@ class SEProfilePage extends Component {
 							We created a community garden at our neighborhood, we can help
 							you start on at your neighborhood too!
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Learn More</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								LEARN MORE
+							</div>
+						</Link>
 					</div>
 				</div>
 
@@ -310,9 +314,11 @@ class SEProfilePage extends Component {
 						<div className="card-content collabCard-text">
 							Annyone who wants to quit smoking, we can do it together!
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Learn More</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								LEARN MORE
+							</div>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -332,7 +338,7 @@ class SEProfilePage extends Component {
 					/>
 
 					<label labelFor="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good mentor for you?</label>
-					<button onClick={this.handleSendMentorRequest} className="btn-large waves-effect light-green"> Send Request! </button>
+					<button onClick={this.handleSendMentorRequest} className="btn-large hoverable waves-effect light-green"> Send Request! </button>
 				</div>
 			);
 		} else {
@@ -348,7 +354,7 @@ class SEProfilePage extends Component {
 				<div className="input-field col s12 m10 l10 push-l1">
 					<textarea autoFocus id="ask_message" className="materialize-textarea"></textarea>
 					<label for="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good part of your team?</label>
-					<button onClick={() => this.toggle("inviteSent")} className="btn-large waves-effect light-green"> Send Invitation! </button>
+					<button onClick={() => this.toggle("inviteSent")} className="btn-large hoverable waves-effect light-green"> Send Invitation! </button>
 				</div>
 			);
 		} else {
@@ -359,10 +365,10 @@ class SEProfilePage extends Component {
 	}
 
 	follow(scr){
-		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
-		var desktopStyle = "btn-large waves-effect light-green";
-		var mobileStyleCancel = "btn waves-effect light-green darken-3";
-		var mobileStyle = "btn waves-effect light-green";
+		var desktopStyleCancel = "btn-large waves-effect hoverable light-green darken-3";
+		var desktopStyle = "btn-large waves-effect hoverable light-green";
+		var mobileStyleCancel = "btn waves-effect  light-green darken-3";
+		var mobileStyle = "btn waves-effect  light-green";
 		var style;
 		var cancel;
 		if (scr === "mobile"){
@@ -392,8 +398,8 @@ class SEProfilePage extends Component {
 	}
 
 	ask_button(scr){
-		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
-		var desktopStyle = "btn-large waves-effect light-green";
+		var desktopStyleCancel = "btn-large waves-effect hoverable light-green darken-3";
+		var desktopStyle = "btn-large waves-effect hoverable light-green";
 		var mobileStyleCancel = "btn waves-effect light-green darken-3";
 		var mobileStyle = "btn waves-effect light-green";
 		var disabledMobile = "btn waves-effect light-green disabled";
@@ -428,8 +434,8 @@ class SEProfilePage extends Component {
 	}
 
 	invite_button(scr){
-		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
-		var desktopStyle = "btn-large waves-effect light-green";
+		var desktopStyleCancel = "btn-large waves-effect hoverable light-green darken-3";
+		var desktopStyle = "btn-large waves-effect hoverable light-green";
 		var mobileStyleCancel = "btn waves-effect light-green darken-3";
 		var mobileStyle = "btn waves-effect light-green";
 		var disabledMobile = "btn waves-effect light-green disabled";

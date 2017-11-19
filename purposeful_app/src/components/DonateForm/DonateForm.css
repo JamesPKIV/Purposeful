@@ -24,7 +24,12 @@
 
 .btn.amounts{
   width: 80%;
-  background-color: #5c7a0a !important;
+  background-color: #5c7a0a ;
+}
+
+.btn.selected{
+  width: 80%;
+  background-color: #5c0000 ;
 }
 
 .label-radio{

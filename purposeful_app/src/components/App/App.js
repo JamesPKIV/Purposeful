@@ -81,7 +81,7 @@ class App extends Component {
 					userId: user_obj.id,
 					isLoggedIn: true,
 					socket: socket,
-				});				
+				});
 				return user_obj;
 			})
 			.catch(err => {
@@ -96,7 +96,7 @@ class App extends Component {
 		return Client.login(email, password)
 			.then(user_obj => {
 
-				
+
 				this.setState({
 					userId: user_obj.id,
 					userName: user_obj.name,
@@ -104,7 +104,7 @@ class App extends Component {
 					prof_present: user_obj.present,
 					prof_future: user_obj.future,
 					isLoggedIn: true,
-					
+
 				});
 
 				return user_obj;
@@ -130,7 +130,7 @@ class App extends Component {
 
 	handleRecieveMessage(message_obj) {
 		console.log("handleRecieveMessage called.");
-		var message = message_obj.message; 
+		var message = message_obj.message;
 		var chat_id = message_obj.chat_id;
 
 		var chat_arr = this.state.chat_array;
@@ -139,14 +139,14 @@ class App extends Component {
 		var search_idx = chat_arr.findIndex( el => {
 			var c_id = el.conv_id;
 			if (c_id !== null) {
-				return c_id == chat_id;
+				return c_id === chat_id;
 			}
 		});
 
 		var new_msg_obj = message;
 
 		//if not found, add new chat entry in chat array for this message
-		if (search_idx == -1) {
+		if (search_idx === -1) {
 			chat_arr.unshift({
 				conv_id: chat_id,
 				messages: [ new_msg_obj ],
@@ -180,14 +180,14 @@ class App extends Component {
 					}
 				}
 
-				
-				
+
+
 				console.log("Emitting new_message on socket:");
 				console.log(socket);
 				socket.emit("new_message", message);
 				resolve();
 			}
-		});	
+		});
 	}
 
 	handleLogout(){
@@ -265,7 +265,7 @@ class App extends Component {
 
 
 		if (!this.state.isLoggedIn) {
-			return this.fetchHome().then(fetchMentorshipFn); 
+			return this.fetchHome().then(fetchMentorshipFn);
 		}
 		else {
 			return fetchMentorshipFn;
@@ -295,7 +295,7 @@ class App extends Component {
 		if (!this.state.isLoggedIn) {
 			return this.fetchHome()
 				.then(() => {
-					return fetchChatFn.bind(this)(); 
+					return fetchChatFn.bind(this)();
 				});
 		}
 		else {
@@ -592,7 +592,7 @@ footer(){
 						/>
 						<Route
 						  path="/chat"
-							render={ () => <ChatPage 
+							render={ () => <ChatPage
 								fetchData={this.fetchChat}
 								chatArray={this.state.chat_array}
 								handleSendMessage={this.handleSendMessage}

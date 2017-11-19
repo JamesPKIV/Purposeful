@@ -70,20 +70,52 @@ class DonateForm extends Component {
 
 	// donation amount
 	amountContent() {
+		var selected = "btn selected z-depth-1";
+		var not_selected = "btn amounts z-depth-4";
+		var style25;
+		var style50;
+		var style100;
+		var style_other;
+		switch(this.state.amount){
+			case "25.00":
+			  style25 = selected;
+			  style50 = not_selected;
+			  style100 = not_selected;
+			  style_other = not_selected;
+				break;
+			case "50.00":
+				style25 = not_selected;
+		  	style50 = selected;
+			  style100 = not_selected;
+			  style_other = not_selected;
+				break;
+			case "100.00":
+				style25 = not_selected;
+				style50 = not_selected;
+				style100 = selected;
+				style_other = not_selected;
+				break;
+			default:
+				style25 = not_selected;
+				style50 = not_selected;
+				style100 = not_selected;
+				style_other = selected;
+				break;
+		}
 		return (
 			<div> <span className="component-title"> Your Support </span>
 				<div className="row">
 					<div className="col s3 m3 l3">
-						<button className="btn amounts" value="25.00" onClick={(e) => this.setAmount(e)}> $25 </button>
+						<button className={style25} value="25.00" onClick={(e) => this.setAmount(e)}> $25 </button>
 					</div>
 					<div className="col s3 m3 l3">
-						<button className="btn amounts" value="50.00" onClick={(e) => this.setAmount(e)}> $50 </button>
+						<button className={style50} value="50.00" onClick={(e) => this.setAmount(e)}> $50 </button>
 					</div>
 					<div className="col s3 m3 l3">
-						<button className="btn amounts" value="100.00" onClick={(e) => this.setAmount(e)}> $100 </button>
+						<button className={style100} value="100.00" onClick={(e) => this.setAmount(e)}> $100 </button>
 					</div>
 					<div className="col s3 m3 l3">
-						<button className="btn amounts" >Other</button>
+						<button className={style_other} value="0.00" onClick={(e) => this.setAmount(e)}>Other</button>
 					</div>
 				</div>
 				<div className="row" >
@@ -103,7 +135,7 @@ class DonateForm extends Component {
 						<div className="row">
 							<div className="amount col s6 m6 l6">
 								<FaDollar className="fa-dollar" />
-								<input className="amt-input" value={this.state.amount} />
+								<input className="amt-input active" value={this.state.amount} />
 							</div>
 							<button className="btn" type="submit" > Continue <FaArrowRight /></button>
 						</div>
