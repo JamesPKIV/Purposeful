@@ -395,6 +395,17 @@ class App extends Component {
 
 
 	setStateAttr(key, value) {
+		if(key === "prof_past"){
+			this.state.prof_past = value;
+			this.handleSubmitProfileChange();
+		} else if(key === "prof_present"){
+			this.state.prof_present = value;
+			this.handleSubmitProfileChange();
+		} else if(key === "prof_future"){
+			this.state.prof_future = value;
+			this.handleSubmitProfileChange();
+		}
+
 		this.setState({
 			[key]: value
 		});

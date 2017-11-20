@@ -36,6 +36,7 @@ class SEProfilePage extends Component {
 			follow: false,
 			requestSent: false,
 			inviteSent: false,
+			here: false,
 			message:"",
 			skills: ["skill1", "skill2", "skill3","skill4"],
 			interests: ["interest1", "interest2","interest3", "interest4", "interest5"]
@@ -70,7 +71,8 @@ class SEProfilePage extends Component {
 	handleChangeMessage(ev) {
 		var msg = ev.target.value;
 		this.setState({
-			message: msg
+			message: msg,
+			here: true
 		});
 	}
 
@@ -78,53 +80,64 @@ class SEProfilePage extends Component {
 		switch(to_toggle){
 			case "isLoggedIn":
 				this.setState({
-					isLoggedIn: !this.state.isLoggedIn
+					isLoggedIn: !this.state.isLoggedIn,
+					here: true
 				});
 				break;
 			case "purposeDisplay":
 				this.setState({
-					purposeDisplay: !this.state.purposeDisplay
+					purposeDisplay: !this.state.purposeDisplay,
+					here: true
 				});
 				break;
 			case "goalsDisplay":
 				this.setState({
-					goalsDisplay: !this.state.goalsDisplay
+					goalsDisplay: !this.state.goalsDisplay,
+					here: true
 				});
 				break;
 			case "accomplishDisplay":
 				this.setState({
-					accomplishDisplay: !this.state.accomplishDisplay
+					accomplishDisplay: !this.state.accomplishDisplay,
+					here: true
 				});
 				break;
 			case "askMentee":
 				this.setState({
-					askMentee: !this.state.askMentee
+					askMentee: !this.state.askMentee,
+					here: true
 				});
 				break;
 			case "inviteCollab":
 				this.setState({
-					inviteCollab: !this.state.inviteCollab
+					inviteCollab: !this.state.inviteCollab,
+					here: true
 				});
 				break;
 			case "follow":
 				this.setState({
-					follow: !this.state.follow
+					follow: !this.state.follow,
+					here: true
 				});
 				break;
 			case "requestSent":
 				this.setState({
-					requestSent: !this.state.requestSent
+					requestSent: !this.state.requestSent,
+					here: true
 				});
 				this.setState({
-					askMentee: !this.state.askMentee
+					askMentee: !this.state.askMentee,
+					here: true
 				});
 				break;
 			case "inviteSent":
 				this.setState({
-					inviteSent: !this.state.inviteSent
+					inviteSent: !this.state.inviteSent,
+					here: true
 				});
 				this.setState({
-					inviteCollab: !this.state.inviteCollab
+					inviteCollab: !this.state.inviteCollab,
+					here: true
 				});
 				break;
 			default:
@@ -673,7 +686,9 @@ class SEProfilePage extends Component {
 	}
 
 	render(){
-		window.scrollTo(0,0);
+		if(!this.state.here){
+			window.scrollTo(0,0);
+		}
 		if(window.innerWidth > 700){
 			return(
 				this.displayDesktop()

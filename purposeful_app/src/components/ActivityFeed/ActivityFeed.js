@@ -88,11 +88,6 @@ class ActivityFeed extends Component {
 	}
 
 	pressButton(style, e){
-		if (style === "btn light-green lighten-4 valign z-depth-3"){
-			console.log("onMouseUp");
-		} else {
-			console.log("onMouseDown");
-		}
 		e.currentTarget.className=style;
 	}
 

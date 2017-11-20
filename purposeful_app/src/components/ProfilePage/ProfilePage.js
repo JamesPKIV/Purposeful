@@ -15,6 +15,7 @@ import FaGroup from 'react-icons/lib/fa/group';
 import FaMagic from 'react-icons/lib/fa/magic';
 import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o';
 import FaFloppyO from 'react-icons/lib/fa/floppy-o';
+import FaClose from 'react-icons/lib/fa/close';
 
 class ProfilePage extends Component {
 
@@ -41,6 +42,7 @@ class ProfilePage extends Component {
 			userName: "",
 			userId: "",
 			isLoggedin : false,
+			input: "",
 			purposeDisplay : false,
 			goalsDisplay : false,
 			accomplishDisplay: false,
@@ -54,14 +56,16 @@ class ProfilePage extends Component {
 		};
 	}
 
-	handleSubmitChange(to_toggle) {
-		this.props.handleSubmitChange();
+
+
+
+	handleSubmitChange(to_toggle, updateFn) {
+		updateFn(this.state.input);
 		this.toggle(to_toggle);
 	}
 
-	handleInputChange (updateFn, event) {
-		var input = event.target.value;
-		updateFn(input);
+	handleInputChange (event) {
+		this.state.input = event.target.value;
   }
 
 	componentDidMount () {
@@ -91,18 +95,21 @@ class ProfilePage extends Component {
 			case "purposeEdit":
 				this.setState({
 					purposeEdit: !this.state.purposeEdit,
+					/*input: "",*/
 					here: true
 				});
 				break;
 			case "goalsEdit":
 				this.setState({
 					goalsEdit: !this.state.goalsEdit,
+					/*input: "",*/
 					here: true
 				});
 				break;
 			case "accomplishEdit":
 				this.setState({
 					accomplishEdit: !this.state.accomplishEdit,
+					/*input: "",*/
 					here: true
 				});
 				break;
@@ -165,18 +172,25 @@ class ProfilePage extends Component {
 		if(toggle_state){
 			if(button_or_text === "button"){
 				return(
-					<button onClick={() => this.handleSubmitChange(to_toggle) } className="btn-flat profile-text right">
-						Save <FaFloppyO className="profile-text"></FaFloppyO>
-					</button>
+					<span>
+						<button onClick={() => this.handleSubmitChange(to_toggle, onEdit) } className="btn-flat profile-text right">
+							Save <FaFloppyO className="profile-text"></FaFloppyO>
+						</button>
+						<button onClick={() => this.toggle(to_toggle) } className="btn-flat profile-text right">
+							Cancel <FaClose className="profile-text"></FaClose>
+						</button>
+
+					</span>
 				);
 			} else {
 				return(
 					<div className="input-field">
 						<textarea
+							autoFocus
 							defaultValue={value}
 							placeholder={text}
-							onChange={ ev => this.handleInputChange(onEdit, ev) }
-							editable="true"
+							onChange={ ev => this.handleInputChange(ev) }
+							/*editable="true"*/
 							rows={6}
 							className="active textarea-class profile-text">
 						</textarea>
@@ -205,7 +219,6 @@ class ProfilePage extends Component {
 						style = "profile-text valign";
 					}
 				}
-				console.log("value is: "+value);
 				return(
 					<p className={style}>{(value !== null) ? value : text}</p>
 				);
@@ -720,9 +733,7 @@ class ProfilePage extends Component {
 
 
 	render () {
-		console.log("=====HERE!!!:" + this.state.here);
 		if(!this.state.here){
-
 			window.scrollTo(0,0);
 		}
 		/* conditionally render form content depending on whether youve signed up or not */
