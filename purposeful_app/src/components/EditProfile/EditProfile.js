@@ -10,7 +10,8 @@ class EditProfile extends Component {
 		super();
 		this.state = {
 			skills: ["skill1", "skill2", "skill3", "skill4"],
-			interests: ["interst1", "interest2", "interest3"]
+			interests: ["interst1", "interest2", "interest3"],
+			here: false
 		};
 		/*bind functions here*/
 	}
@@ -50,10 +51,10 @@ class EditProfile extends Component {
 					<span>
 						{return_code}
 						<div className="col s5 m3 l3 chip light-green lighten-4">
-							{array[i]} <FaClose
+							{array[i]}<span className="close valign-wrapper"><FaClose
 							           id={array[i]}
 												 onClick={boundClick}
-												 />
+												 className="valign"/></span>
 						</div>
 					</span>
 		}
@@ -75,11 +76,13 @@ class EditProfile extends Component {
 		}
 		if(which_array === "interests"){
 			this.setState({
-				interests: array
+				interests: array,
+				here: true
 			});
 		} else {
 			this.setState({
-				skills: array
+				skills: array,
+				here: true
 			});
 		}
 	}
@@ -90,13 +93,15 @@ class EditProfile extends Component {
 			array = this.state.skills;
 			array.push(new_tag);
 			this.setState({
-				skills: array
+				skills: array,
+				here: true
 			});
 		} else {
 			array = this.state.interests;
 			array.push(new_tag);
 			this.setState({
-				interests: array
+				interests: array,
+				here: true
 			});
 		}
 	}
@@ -105,7 +110,8 @@ class EditProfile extends Component {
 		this.state.categories.push(new_categ);
 		var new_array = this.state.categories;
 		this.setState({
-		  categories: new_array
+		  categories: new_array,
+			here: true
 		});
 	}
 
@@ -141,11 +147,11 @@ class EditProfile extends Component {
 								</div>
 							</div>
 							<div className="row">
-								<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
-									<Link to="/profile">
+								<Link to="/profile">
+									<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
 										Back to profile
-									</Link>
-								</div>
+									</div>
+								</Link>
 								<button onClick={()=> this.handleSave("personal")} className="col s4 m3 l3 push-l4 push-s1 btn light-green">
 									Save Personal Info
 								</button>
@@ -167,11 +173,11 @@ class EditProfile extends Component {
 								</div>
 							</div>
 							<div className="row">
-								<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
-									<Link to="/profile">
+								<Link to="/profile">
+									<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
 										Back to profile
-									</Link>
-								</div>
+									</div>
+								</Link>
 								<button onClick={()=> this.handleSave("password")} className="col s4 m3 l3 push-l4 push-s1 btn light-green">
 									Save New Password
 								</button>
@@ -218,11 +224,11 @@ class EditProfile extends Component {
 							</div>
 							<div className="row"> <p> </p> </div>
 							<div className="row">
-								<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
-									<Link to="/profile">
+								<Link to="/profile">
+									<div className="btn light-green darken-3 col s4 m3 l3 push-l3">
 										Back to profile
-									</Link>
-								</div>
+									</div>
+								</Link>
 								<button onClick={()=> this.handleSave("interestSkills")} className="col s4 m3 l3 push-l4 push-s1 btn light-green">
 									Save Skills and Intersts
 								</button>
@@ -235,7 +241,9 @@ class EditProfile extends Component {
   }
 
   render() {
-		window.scrollTo(0,0);
+		if (!this.state.here){
+			window.scrollTo(0,0);
+		}
 		return(
 			this.Desktop()
 		);

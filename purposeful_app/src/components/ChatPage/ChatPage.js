@@ -54,7 +54,7 @@ conversation_list(){
 		for(i = 0; i < array.length; i++){
 			var conv = array[i];
 			var conv_id = conv["conv_id"];
-			//blindly ovverriding this for now- returned chats should all 
+			//blindly ovverriding this for now- returned chats should all
 			//be active
 			//if(this.state.active_array.indexOf(conv_id) >= 0){
 			if(conv) {
@@ -99,9 +99,9 @@ conversation_list(){
 		console.log("chatpage.js -> handling send message..0");
 		var msg = this.state.message_out;
 		var chat_arr = this.props.chatArray;
-		var curr_conv = parseInt(this.state.curr_conv);
+		var curr_conv = parseInt(this.state.curr_conv, 10);
 
-		if ((!msg) || (typeof chat_arr !== "object") 
+		if ((!msg) || (typeof chat_arr !== "object")
 			|| (curr_conv > chat_arr.length) ) {
 			//do nothing
 			return null;
@@ -192,9 +192,9 @@ conversation_list(){
 				);
 			}
 		}
-	}  
-	 
-	
+	}
+
+
 	change_conv(id, action){
 		if(action === "change"){
 			this.setState({

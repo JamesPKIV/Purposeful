@@ -15,6 +15,7 @@ import FaGroup from 'react-icons/lib/fa/group';
 import FaMagic from 'react-icons/lib/fa/magic';
 import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o';
 import FaFloppyO from 'react-icons/lib/fa/floppy-o';
+import FaClose from 'react-icons/lib/fa/close';
 
 class ProfilePage extends Component {
 
@@ -41,6 +42,7 @@ class ProfilePage extends Component {
 			userName: "",
 			userId: "",
 			isLoggedin : false,
+			input: "",
 			purposeDisplay : false,
 			goalsDisplay : false,
 			accomplishDisplay: false,
@@ -48,19 +50,22 @@ class ProfilePage extends Component {
 			goalsEdit: false,
 			accomplishEdit: false,
 			changePicture: false,
+			here: false,
 			skills: ["skill1", "skill2", "skill3", "skill4"],
 			interests: ["interest1", "interest2", "interest3", "interest4", "interest5"]
 		};
 	}
 
-	handleSubmitChange(to_toggle) {
-		this.props.handleSubmitChange();
+
+
+
+	handleSubmitChange(to_toggle, updateFn) {
+		updateFn(this.state.input);
 		this.toggle(to_toggle);
 	}
 
-	handleInputChange (updateFn, event) {
-		var input = event.target.value;
-		updateFn(input);
+	handleInputChange (event) {
+		this.state.input = event.target.value;
   }
 
 	componentDidMount () {
@@ -71,37 +76,47 @@ class ProfilePage extends Component {
 		switch(to_toggle){
 			case "purposeDisplay":
 				this.setState({
-					purposeDisplay: !this.state.purposeDisplay
+					purposeDisplay: !this.state.purposeDisplay,
+					here: true
 				});
 				break;
 			case "goalsDisplay":
 				this.setState({
-					goalsDisplay: !this.state.goalsDisplay
+					goalsDisplay: !this.state.goalsDisplay,
+					here: true
 				});
 				break;
 			case "accomplishDisplay":
 				this.setState({
-					accomplishDisplay: !this.state.accomplishDisplay
+					accomplishDisplay: !this.state.accomplishDisplay,
+					here: true
 				});
 				break;
 			case "purposeEdit":
 				this.setState({
-					purposeEdit: !this.state.purposeEdit
+					purposeEdit: !this.state.purposeEdit,
+					/*input: "",*/
+					here: true
 				});
 				break;
 			case "goalsEdit":
 				this.setState({
-					goalsEdit: !this.state.goalsEdit
+					goalsEdit: !this.state.goalsEdit,
+					/*input: "",*/
+					here: true
 				});
 				break;
 			case "accomplishEdit":
 				this.setState({
-					accomplishEdit: !this.state.accomplishEdit
+					accomplishEdit: !this.state.accomplishEdit,
+					/*input: "",*/
+					here: true
 				});
 				break;
 			case "changePicture":
 				this.setState({
-					changePicture: !this.state.changePicture
+					changePicture: !this.state.changePicture,
+					here: true
 				});
 				break;
 			default:
@@ -157,18 +172,25 @@ class ProfilePage extends Component {
 		if(toggle_state){
 			if(button_or_text === "button"){
 				return(
-					<button onClick={() => this.handleSubmitChange(to_toggle) } className="btn-flat profile-text right">
-						Save <FaFloppyO className="profile-text"></FaFloppyO>
-					</button>
+					<span>
+						<button onClick={() => this.handleSubmitChange(to_toggle, onEdit) } className="btn-flat profile-text right">
+							Save <FaFloppyO className="profile-text"></FaFloppyO>
+						</button>
+						<button onClick={() => this.toggle(to_toggle) } className="btn-flat profile-text right">
+							Cancel <FaClose className="profile-text"></FaClose>
+						</button>
+
+					</span>
 				);
 			} else {
 				return(
 					<div className="input-field">
 						<textarea
+							autoFocus
 							defaultValue={value}
 							placeholder={text}
-							onChange={ ev => this.handleInputChange(onEdit, ev) }
-							editable="true"
+							onChange={ ev => this.handleInputChange(ev) }
+							/*editable="true"*/
 							rows={6}
 							className="active textarea-class profile-text">
 						</textarea>
@@ -197,7 +219,6 @@ class ProfilePage extends Component {
 						style = "profile-text valign";
 					}
 				}
-				console.log("value is: "+value);
 				return(
 					<p className={style}>{(value !== null) ? value : text}</p>
 				);
@@ -347,9 +368,11 @@ class ProfilePage extends Component {
 							Thinking Sofas: We strive to build sofas that help you reach
 							those wonderful philosophical ideas.
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Manage</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								MANAGE
+							</div>
+						</Link>
 					</div>
 				</div>
 
@@ -363,9 +386,11 @@ class ProfilePage extends Component {
 							We created a community garden at our neighborhood, we can help
 							you start on at your neighborhood too!
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Manage</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								MANAGE
+							</div>
+						</Link>
 					</div>
 				</div>
 
@@ -377,9 +402,11 @@ class ProfilePage extends Component {
 						<div className="card-content collabCard-text">
 							Annyone who wants to quit smoking, we can do it together!
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Manage</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								MANAGE
+							</div>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -706,7 +733,9 @@ class ProfilePage extends Component {
 
 
 	render () {
-		window.scrollTo(0,0);
+		if(!this.state.here){
+			window.scrollTo(0,0);
+		}
 		/* conditionally render form content depending on whether youve signed up or not */
 		return (
 			<span>

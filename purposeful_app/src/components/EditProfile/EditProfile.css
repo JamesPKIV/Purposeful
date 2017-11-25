@@ -12,3 +12,10 @@
 .subtitle{
   font-size: 2.5vh;
 }
+
+.close{
+  cursor: pointer;
+  margin: 0vh;
+  padding: 0vh;
+  height: 1vh;
+}

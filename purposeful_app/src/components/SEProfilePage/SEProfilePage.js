@@ -36,6 +36,7 @@ class SEProfilePage extends Component {
 			follow: false,
 			requestSent: false,
 			inviteSent: false,
+			here: false,
 			message:"",
 			skills: ["skill1", "skill2", "skill3","skill4"],
 			interests: ["interest1", "interest2","interest3", "interest4", "interest5"]
@@ -70,7 +71,8 @@ class SEProfilePage extends Component {
 	handleChangeMessage(ev) {
 		var msg = ev.target.value;
 		this.setState({
-			message: msg
+			message: msg,
+			here: true
 		});
 	}
 
@@ -78,53 +80,64 @@ class SEProfilePage extends Component {
 		switch(to_toggle){
 			case "isLoggedIn":
 				this.setState({
-					isLoggedIn: !this.state.isLoggedIn
+					isLoggedIn: !this.state.isLoggedIn,
+					here: true
 				});
 				break;
 			case "purposeDisplay":
 				this.setState({
-					purposeDisplay: !this.state.purposeDisplay
+					purposeDisplay: !this.state.purposeDisplay,
+					here: true
 				});
 				break;
 			case "goalsDisplay":
 				this.setState({
-					goalsDisplay: !this.state.goalsDisplay
+					goalsDisplay: !this.state.goalsDisplay,
+					here: true
 				});
 				break;
 			case "accomplishDisplay":
 				this.setState({
-					accomplishDisplay: !this.state.accomplishDisplay
+					accomplishDisplay: !this.state.accomplishDisplay,
+					here: true
 				});
 				break;
 			case "askMentee":
 				this.setState({
-					askMentee: !this.state.askMentee
+					askMentee: !this.state.askMentee,
+					here: true
 				});
 				break;
 			case "inviteCollab":
 				this.setState({
-					inviteCollab: !this.state.inviteCollab
+					inviteCollab: !this.state.inviteCollab,
+					here: true
 				});
 				break;
 			case "follow":
 				this.setState({
-					follow: !this.state.follow
+					follow: !this.state.follow,
+					here: true
 				});
 				break;
 			case "requestSent":
 				this.setState({
-					requestSent: !this.state.requestSent
+					requestSent: !this.state.requestSent,
+					here: true
 				});
 				this.setState({
-					askMentee: !this.state.askMentee
+					askMentee: !this.state.askMentee,
+					here: true
 				});
 				break;
 			case "inviteSent":
 				this.setState({
-					inviteSent: !this.state.inviteSent
+					inviteSent: !this.state.inviteSent,
+					here: true
 				});
 				this.setState({
-					inviteCollab: !this.state.inviteCollab
+					inviteCollab: !this.state.inviteCollab,
+					here: true
 				});
 				break;
 			default:
@@ -280,9 +293,11 @@ class SEProfilePage extends Component {
 							Thinking Sofas: We strive to build sofas that help you reach
 							those wonderful philosophical ideas.
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Learn More</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								LEARN MORE
+							</div>
+						</Link>
 					</div>
 				</div>
 
@@ -296,9 +311,11 @@ class SEProfilePage extends Component {
 							We created a community garden at our neighborhood, we can help
 							you start on at your neighborhood too!
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Learn More</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								LEARN MORE
+							</div>
+						</Link>
 					</div>
 				</div>
 
@@ -310,9 +327,11 @@ class SEProfilePage extends Component {
 						<div className="card-content collabCard-text">
 							Annyone who wants to quit smoking, we can do it together!
 						</div>
-						<div className="card-action light-green">
-							<Link to="/collabs" className="white-text">Learn More</Link>
-						</div>
+						<Link to="/collabs" className="white-text">
+							<div className="card-action light-green">
+								LEARN MORE
+							</div>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -332,7 +351,7 @@ class SEProfilePage extends Component {
 					/>
 
 					<label labelFor="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good mentor for you?</label>
-					<button onClick={this.handleSendMentorRequest} className="btn-large waves-effect light-green"> Send Request! </button>
+					<button onClick={this.handleSendMentorRequest} className="btn-large hoverable waves-effect light-green"> Send Request! </button>
 				</div>
 			);
 		} else {
@@ -348,7 +367,7 @@ class SEProfilePage extends Component {
 				<div className="input-field col s12 m10 l10 push-l1">
 					<textarea autoFocus id="ask_message" className="materialize-textarea"></textarea>
 					<label for="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good part of your team?</label>
-					<button onClick={() => this.toggle("inviteSent")} className="btn-large waves-effect light-green"> Send Invitation! </button>
+					<button onClick={() => this.toggle("inviteSent")} className="btn-large hoverable waves-effect light-green"> Send Invitation! </button>
 				</div>
 			);
 		} else {
@@ -359,10 +378,10 @@ class SEProfilePage extends Component {
 	}
 
 	follow(scr){
-		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
-		var desktopStyle = "btn-large waves-effect light-green";
-		var mobileStyleCancel = "btn waves-effect light-green darken-3";
-		var mobileStyle = "btn waves-effect light-green";
+		var desktopStyleCancel = "btn-large waves-effect hoverable light-green darken-3";
+		var desktopStyle = "btn-large waves-effect hoverable light-green";
+		var mobileStyleCancel = "btn waves-effect  light-green darken-3";
+		var mobileStyle = "btn waves-effect  light-green";
 		var style;
 		var cancel;
 		if (scr === "mobile"){
@@ -392,8 +411,8 @@ class SEProfilePage extends Component {
 	}
 
 	ask_button(scr){
-		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
-		var desktopStyle = "btn-large waves-effect light-green";
+		var desktopStyleCancel = "btn-large waves-effect hoverable light-green darken-3";
+		var desktopStyle = "btn-large waves-effect hoverable light-green";
 		var mobileStyleCancel = "btn waves-effect light-green darken-3";
 		var mobileStyle = "btn waves-effect light-green";
 		var disabledMobile = "btn waves-effect light-green disabled";
@@ -428,8 +447,8 @@ class SEProfilePage extends Component {
 	}
 
 	invite_button(scr){
-		var desktopStyleCancel = "btn-large waves-effect light-green darken-3";
-		var desktopStyle = "btn-large waves-effect light-green";
+		var desktopStyleCancel = "btn-large waves-effect hoverable light-green darken-3";
+		var desktopStyle = "btn-large waves-effect hoverable light-green";
 		var mobileStyleCancel = "btn waves-effect light-green darken-3";
 		var mobileStyle = "btn waves-effect light-green";
 		var disabledMobile = "btn waves-effect light-green disabled";
@@ -667,7 +686,9 @@ class SEProfilePage extends Component {
 	}
 
 	render(){
-		window.scrollTo(0,0);
+		if(!this.state.here){
+			window.scrollTo(0,0);
+		}
 		if(window.innerWidth > 700){
 			return(
 				this.displayDesktop()
