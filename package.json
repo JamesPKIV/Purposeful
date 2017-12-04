@@ -21,6 +21,8 @@
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "react-icons": "^2.2.7",
+    "react-loading": "^1.0.2",
+    "react-modal": "^3.1.6",
     "react-tabs-navigation": "^0.4.4",
     "sequelize": "^4.11.0",
     "sequelize-cli": "^3.0.0",

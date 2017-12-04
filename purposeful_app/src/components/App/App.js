@@ -7,7 +7,6 @@ import './App.css';
 import HomePage from '../HomePage/HomePage';
 import MentorshipPage from '../MentorshipPage/MentorshipPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
-/*import SignupPage from '../SignupPage/SignupPage';*/
 import LandingPage from '../LandingPage/LandingPage';
 import SEProfilePage from '../SEProfilePage/SEProfilePage';
 import InterestSkills from '../InterestSkills/InterestSkills';

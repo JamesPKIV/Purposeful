@@ -5,6 +5,19 @@ import { Redirect, Link } from "react-router-dom";
 import FaFacebook from 'react-icons/lib/fa/facebook-square';
 import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
 import FaGoogle from 'react-icons/lib/fa/google-plus-square';
+import Modal from 'react-modal';
+
+//Style for modal messages!!
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 class LandingPage extends Component {
 
@@ -16,6 +29,7 @@ class LandingPage extends Component {
 			userPwd: "",
 			redirTo: "",
 			userLogin: false,
+			modalIsOpen_signup: false
 		};
 		this.handleUserLogin = this.handleUserLogin.bind(this);
 
@@ -28,8 +42,26 @@ class LandingPage extends Component {
 		this.handleContinue = this.handleContinue.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleKey = this.handleKey.bind(this);
+
+		this.toggleModal = this.toggleModal.bind(this);
+		this.afterOpenModal = this.afterOpenModal.bind(this);
 	}
 
+	componentWillMount(){
+		Modal.setAppElement('body');
+	}
+
+	afterOpenModal(){
+		// references are now sync'd and can be accessed.
+	}
+
+	toggleModal(to_toggle){
+		if(to_toggle === "signup"){
+			this.setState({
+				modalIsOpen_signup: !this.state.modalIsOpen_signup
+			});
+		}
+	}
 
 	// User sign up/login failed, handle reset
 	handleReset(){
@@ -85,33 +117,50 @@ class LandingPage extends Component {
 
 	handleSubmit(ev) {
 		ev.preventDefault();
-		const pwd = this.state.userPwd;
-		this.setState({	userPwd: "" });
-
-		if(!this.state.userLogin){
-			this.props.handleCreateUser(pwd)
-				.then((data) => {
-					console.log("(LandingPage) user account created! new user data: ", data);
-					/* programmatically navigate to interests & skills page, with state object */
-					this.setState({ redirTo: "skills" });
-				})
-				.catch(err => {
-					console.log("(LandingPage) user account creation failed with error: ", err);
-					alert("Error creating new user account: " + err);
-					this.handleReset();
-				});
+		console.log("here???");
+		var check1 = "";
+		var check2 = "";
+		if(this.state.userLogin){
+			console.log("login");
+			check1 = document.getElementById("pwd_login").value;
+			check2 = document.getElementById("email_login").value;
 		} else {
-			// fetch user profile from database
-			this.props.handleLogin(pwd)
-				.then((data) => {
-					console.log("(Landing Page) User has logged! User data is: ", data);
-					this.setState({	redirTo: "home" });
-				})
-				.catch(err => {
-					console.log("(LandingPage) user account login failed with error: ", err);
-					alert("Error logging user into app: " + err);
-					this.handleReset();
-				});
+			check1 = document.getElementById("pwd_signup").value;
+			check2 = document.getElementById("email_signup").value;
+		}
+		console.log("ch 1 " + check1);
+		console.log("ch 2 " + check2);
+		if(check1 === "" || check2 === ""){
+			this.toggleModal("signup");
+		} else {
+			const pwd = this.state.userPwd;
+			this.setState({	userPwd: "" });
+
+			if(!this.state.userLogin){
+				this.props.handleCreateUser(pwd)
+					.then((data) => {
+						console.log("(LandingPage) user account created! new user data: ", data);
+						/* programmatically navigate to interests & skills page, with state object */
+						this.setState({ redirTo: "skills" });
+					})
+					.catch(err => {
+						console.log("(LandingPage) user account creation failed with error: ", err);
+						alert("Error creating new user account: " + err);
+						this.handleReset();
+					});
+			} else {
+				// fetch user profile from database
+				this.props.handleLogin(pwd)
+					.then((data) => {
+						console.log("(Landing Page) User has logged! User data is: ", data);
+						this.setState({	redirTo: "home" });
+					})
+					.catch(err => {
+						console.log("(LandingPage) user account login failed with error: ", err);
+						alert("Error logging user into app: " + err);
+						this.handleReset();
+					});
+			}
 		}
 	}
 
@@ -154,12 +203,12 @@ class LandingPage extends Component {
 						<form>
 							<div className="row ">
 								<div className="input-field col s12 m12 l12">
-									<input autoFocus placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+									<input autoFocus placeholder="Email" id="email_signup" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 								</div>
 							</div>
 							<div className="row ">
 								<div className="input-field col s12 m12 l12">
-									<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate pwd" type="password" name="Password" required />
+									<input placeholder="Password" id="pwd_signup" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate pwd" type="password" name="Password" required />
 								</div><br />
 							</div>
 							<div className="row ">
@@ -189,12 +238,12 @@ class LandingPage extends Component {
 					<form>
 						<div className="row ">
 							<div className="input-field col s12 m12 l12">
-								<input autoFocus placeholder="Email" id="email" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
+								<input autoFocus placeholder="Email" id="email_login" onChange={this.handleEmailSet} type="text" name="Email" className="active validate" required />
 							</div>
 						</div>
 						<div className="row ">
 							<div className="input-field col s12 m12 l12">
-								<input placeholder="Password" id="pwd" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate" type="password" name="Password" required />
+								<input placeholder="Password" id="pwd_login" onChange={this.userPwdSet} onKeyPress={this.handleKey} className="active validate" type="password" name="Password" required />
 							</div><br />
 						</div>
 						<div className="row">
@@ -279,6 +328,17 @@ class LandingPage extends Component {
 					<h1 className="welcome-title">Welcome to Purposeful</h1>
 				</div>
 				<div className="row">
+					<Modal
+						isOpen={this.state.modalIsOpen_signup}
+						onAfterOpen={this.afterOpenModal}
+						onRequestClose={()=>this.toggleModal("signup")}
+						contentLabel="signup_modal"
+						style={customStyles}
+					>
+						<h5> Error </h5>
+						<p> Please fill in al required fields </p>
+						<div className="btn light-green" onClick={()=>this.toggleModal("signup")}>Got It</div>
+					</Modal>
 			  	{this.purposeful_Login(scr)}
 					{this.purposeful_Signup()}
 				</div>

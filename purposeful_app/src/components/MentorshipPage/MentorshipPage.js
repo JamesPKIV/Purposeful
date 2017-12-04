@@ -5,6 +5,20 @@ import MentorFeed from "../MentorFeed/MentorFeed";
 import Search from 'react-icons/lib/fa/search';
 import NavBar from '../NavBar/NavBar';
 import './MentorshipPage.css';
+import Modal from 'react-modal';
+
+//Style for modal messages!!
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
 
 class MentorshipPage extends Component {
 
@@ -14,9 +28,16 @@ class MentorshipPage extends Component {
 		this.state = {
 			searchInput: "",
 			show: "main",
+			modalIsOpen: false
 		};
 		this.handleSearchChange = this.handleSearchChange.bind(this);
 		this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+		this.toggleModal = this.toggleModal.bind(this);
+		this.afterOpenModal = this.afterOpenModal.bind(this);
+	}
+
+	componentWillMount(){
+		Modal.setAppElement('body');
 	}
 
 	componentDidMount() {
@@ -33,6 +54,15 @@ class MentorshipPage extends Component {
 		});
 	}
 
+	toggleModal(){
+		this.setState({
+			modalIsOpen: !this.state.modalIsOpen
+		});
+	}
+
+	afterOpenModal(){
+		// references are now sync'd and can be accessed.
+	}
 
 	handleSearchSubmit () {
 		if (this.state.searchInput !== "") {
@@ -49,8 +79,9 @@ class MentorshipPage extends Component {
 						show: "searchError",
 					});
 				});
+		} else {
+			this.toggleModal();
 		}
-
 	}
 
 
@@ -78,6 +109,17 @@ class MentorshipPage extends Component {
 								<button className="btn light-green" onClick={this.handleSearchSubmit}>
 									<Search /> {/*search icon */}
 								</button>
+								<Modal
+									isOpen={this.state.modalIsOpen}
+									onAfterOpen={this.afterOpenModal}
+									onRequestClose={()=>this.toggleModal()}
+									contentLabel="searchmodal"
+									style={customStyles}
+								>
+									<h5> Error </h5>
+									<p> Please enter a skill or interest before you search</p>
+									<div className="btn light-green" onClick={()=>this.toggleModal()}>Got It</div>
+								</Modal>
 							</div>
 							<div className="row">
 								<ActivityFeed linkTo="" title="My Mentorship Activity"/>
