@@ -65,6 +65,8 @@ class ProfilePage extends Component {
 	}
 
 	handleInputChange (event) {
+		 /*Intentionally mutating state directly (not using setState),
+		   please disregard console warning*/
 		this.state.input = event.target.value;
   }
 

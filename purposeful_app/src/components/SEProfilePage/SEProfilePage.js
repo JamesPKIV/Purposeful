@@ -344,13 +344,13 @@ class SEProfilePage extends Component {
 				<div className="input-field col s12 m10 l10 push-l1">
 					<textarea
 						autoFocus
-						id="ask_message"
+						id="ask_message_mentor"
 						value={this.state.message}
 						onChange={this.handleChangeMessage}
 						className="materialize-textarea"
 					/>
 
-					<label labelFor="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good mentor for you?</label>
+					<label htmlFor="ask_message_mentor" className="active">Why do you think {this.props.SEProfile.name} would be a good mentor for you?</label>
 					<button onClick={this.handleSendMentorRequest} className="btn-large hoverable waves-effect light-green"> Send Request! </button>
 				</div>
 			);
@@ -365,8 +365,8 @@ class SEProfilePage extends Component {
 		if(this.state.inviteCollab){
 			return(
 				<div className="input-field col s12 m10 l10 push-l1">
-					<textarea autoFocus id="ask_message" className="materialize-textarea"></textarea>
-					<label for="ask_message" className="active">Why do you think {this.props.SEProfile.name} would be a good part of your team?</label>
+					<textarea autoFocus id="ask_message_team" className="materialize-textarea"></textarea>
+					<label for="ask_message_team" className="active">Why do you think {this.props.SEProfile.name} would be a good part of your team?</label>
 					<button onClick={() => this.toggle("inviteSent")} className="btn-large hoverable waves-effect light-green"> Send Invitation! </button>
 				</div>
 			);
@@ -431,7 +431,7 @@ class SEProfilePage extends Component {
 		}
 		if(this.state.askMentee){
 			return(
-				<button onClick={() => this.toggle("askMentee")} className={cancel}> Cancel </button>
+				<button onClick={() => this.cancel_and_reset("askMentee")} className={cancel}> Cancel </button>
 			);
 		} else {
 			if(this.state.requestSent){
@@ -444,6 +444,13 @@ class SEProfilePage extends Component {
 				);
 			}
 		}
+	}
+
+	cancel_and_reset(to_toggle){
+		this.setState({
+			message: ""
+		});
+		this.toggle(to_toggle);
 	}
 
 	invite_button(scr){
@@ -467,7 +474,7 @@ class SEProfilePage extends Component {
 		}
 		if(this.state.inviteCollab){
 			return(
-				<button onClick={() => this.toggle("inviteCollab")} className={cancel}> Cancel </button>
+				<button onClick={() => this.cancel_and_reset("inviteCollab")} className={cancel}> Cancel </button>
 			);
 		} else {
 			if(this.state.inviteSent){
